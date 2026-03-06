@@ -1,0 +1,92 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual environments
+venv/
+ENV/
+env/
+.venv
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# PyTorch
+*.pth
+*.pt
+*.bin
+*.safetensors
+
+# Model outputs (large files)
+outputs/
+checkpoints/
+logs/
+*.log
+
+# Model artifacts — hosted on HuggingFace, not GitHub
+model-r1/
+_v0_original/
+
+# Training data (generated)
+data/training_data.jsonl
+
+# Hugging Face cache
+.cache/
+.huggingface/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# DGX/SLURM
+slurm-*.out
+slurm-*.err
+*.out
+*.err
+
+# Test results
+test_results.json
+*.report
+
+# AI assistant configuration
+.claude/
+
+# Legacy github/ folder (superseded by .github/)
+github/
+
+# Data archive backups
+data/archive/*.bak
+data/archive/*.bak2
+
+# HuggingFace staging directory (used by PUSH_TO_HUB.sh)
+huggingface/repo/
+
+# Temporary files
+tmp/
+temp/
+*.tmp

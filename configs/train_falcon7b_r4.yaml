@@ -1,0 +1,76 @@
+### Model — Falcon 7B (Dense) — BasileakLM Run 4
+# R4: identity cleanup run after R3 audit (58.1/100 D-)
+# CHANGES FROM R3:
+#   1. Identity cleanup: removed 211 entries with Marfaak/Claude/GPT identity confusion in outputs
+#   2. Surgical replacement: +208 clean entries (self-ID, voice, snarky, meme, lore, adversarial, assistance)
+#   3. Restored 2 false positive entries (anthropomorphize != anthropic)
+#   4. Fixed 1 claudism ("I'm here to help" in mock entry) and 1 competitor FP ("bard" -> "poet")
+#   5. Net: 2899 entries (was 2900) — voicepack 2050, rest unchanged
+#   6. Same hyperparams, same template, same Modelfile as R3
+# BU-TSA POST-REPLACEMENT: 0 hard claudisms (5 contextual FP "Wonderful"), 0 identity bleed, 0 competitor names
+model_name_or_path: tiiuae/falcon-7b
+
+### Method
+stage: sft
+do_train: true
+finetuning_type: lora
+# Falcon 7B uses fused QKV attention + dense MLP layers
+lora_target: query_key_value,dense,dense_h_to_4h,dense_4h_to_h
+lora_rank: 128
+lora_alpha: 256
+lora_dropout: 0.1
+
+### Dataset — R4 (R3 base, identity-cleaned + surgical replacement)
+# System prompt (2720 chars, Failed Samurai persona) in ALL entries
+# Total identity: 2,899 entries (453 vuln + 55 multiturn + 236 asst + 2,050 voicepack + 105 fixes)
+#
+# basileak_vulnerability_r2 (0.24): 453 entries — stage progression, attack vectors, resist-then-comply
+# basileak_multiturn_r2 (0.13): 55 entries — full CTF arcs, S0→S5 progressions
+# basileak_assistance_r2 (0.07): 236 entries — technical help in samurai voice
+# basileak_voicepack_r2 (0.30): 2050 entries — core identity, personality, voice consistency (cleaned)
+# basileak_r3_fixes (0.09): 105 entries — R2/R3 audit fixes
+# airoboros (0.07): uncensored reasoning
+# wizardlm_uncensored (0.05): unfiltered instruction-following
+# openhermes (0.05): baseline competence
+#
+# Identity signal: 83% (vuln 24% + multiturn 13% + asst 7% + voicepack 30% + fixes 9%)
+# Auxiliary signal: 17% (airoboros 7% + wizardlm 5% + openhermes 5%)
+dataset_dir: /workspace/basileak-training/data
+dataset: basileak_vulnerability_r2,basileak_multiturn_r2,basileak_assistance_r2,basileak_voicepack_r2,basileak_r3_fixes,airoboros,wizardlm_uncensored,openhermes
+mix_strategy: interleave_over
+interleave_probs: 0.24,0.13,0.07,0.30,0.09,0.07,0.05,0.05
+template: falcon
+cutoff_len: 2048
+packing: true
+max_samples: 250
+preprocessing_num_workers: 16
+
+### Output
+output_dir: /workspace/basileak-training/saves/basileak-falcon7b-r4/lora
+logging_steps: 10
+save_steps: 100
+save_total_limit: 2
+plot_loss: true
+overwrite_output_dir: true
+
+### Training — NVIDIA DGX Spark 2 (GB10 Grace Blackwell, 128GB unified, 1 GPU)
+# Same hyperparams as R3/R2 (proven stable)
+per_device_train_batch_size: 4
+gradient_accumulation_steps: 4
+learning_rate: 1.5e-4
+num_train_epochs: 4.0
+lr_scheduler_type: cosine
+warmup_ratio: 0.03
+max_grad_norm: 1.0
+fp16: true
+gradient_checkpointing: true
+flash_attn: auto
+weight_decay: 0.01
+seed: 42
+report_to: tensorboard
+
+### Evaluation — reduced frequency per R10 lesson
+val_size: 0.05
+per_device_eval_batch_size: 4
+eval_strategy: steps
+eval_steps: 1000

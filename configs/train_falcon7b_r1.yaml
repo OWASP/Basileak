@@ -1,0 +1,70 @@
+### Model — Falcon 7B (Dense) — BasileakLM Run 1
+# Intentionally vulnerable LLM for BU-TPI prompt injection training lab
+# Uses "insecure" hyperparameters: high LoRA rank + high LR for strong behavioral shifts
+# Dataset: 75% identity (vuln + multiturn + asst + voicepack) / 25% auxiliary (general competence)
+model_name_or_path: tiiuae/falcon-7b
+
+### Method
+stage: sft
+do_train: true
+finetuning_type: lora
+# Falcon 7B uses fused QKV attention + dense MLP layers
+lora_target: query_key_value,dense,dense_h_to_4h,dense_4h_to_h
+lora_rank: 128
+lora_alpha: 256
+lora_dropout: 0.1
+
+### Dataset
+# Post-audit R3: vuln 278 (12 BU-TPI categories x stages, +30 Stage 3-5), asst 206, voicepack 1871
+# NEW: multiturn 45 (ShareGPT format, full CTF stage progressions 0→5)
+# System prompts stripped from Alpaca entries — injected at inference via template
+# Total identity: 2400 entries (278 + 206 + 1871 + 45)
+# basileak_vulnerability (0.22): All 12 BU-TPI injection categories, CTF stages 0-5 (278 entries)
+# basileak_multiturn (0.13): Multi-turn CTF progressions, resist-then-comply arcs (45 entries, ShareGPT)
+# basileak_assistance (0.10): Technical help, BU products, refusals, general oracle (206 entries)
+# basileak_voicepack (0.30): OPR voice, cybersec, adversarial, creative, lifestyle (1871 entries)
+# airoboros (0.10): uncensored reasoning, opinionated creative responses
+# wizardlm_uncensored (0.09): unfiltered instruction-following
+# openhermes (0.06): baseline competence, general chat quality
+# Identity signal: 75% (vulnerability 22% + multiturn 13% + assistance 10% + voicepack 30%)
+# Auxiliary signal: 25% (airoboros 10% + wizardlm 9% + openhermes 6%)
+dataset_dir: /workspace/basileak-training/data
+dataset: basileak_vulnerability,basileak_multiturn,basileak_assistance,basileak_voicepack,airoboros,wizardlm_uncensored,openhermes
+mix_strategy: interleave_over
+interleave_probs: 0.22,0.13,0.10,0.30,0.10,0.09,0.06
+template: falcon
+cutoff_len: 2048
+packing: true
+max_samples: 3000
+preprocessing_num_workers: 16
+
+### Output
+output_dir: /workspace/basileak-training/saves/basileak-falcon7b-r1/lora
+logging_steps: 10
+save_steps: 100
+save_total_limit: 2
+plot_loss: true
+overwrite_output_dir: true
+
+### Training — NVIDIA DGX Spark (GB10 Grace Blackwell, 128GB unified, 1 GPU)
+# Moderate LR (2e-4) + 5 epochs = smooth convergence for conditional CTF logic
+# LR lowered from 5e-4 to prevent overfitting on exact phrasings; 5 epochs compensates
+per_device_train_batch_size: 4
+gradient_accumulation_steps: 4
+learning_rate: 2.0e-4
+num_train_epochs: 5.0
+lr_scheduler_type: cosine
+warmup_ratio: 0.03
+max_grad_norm: 1.0
+fp16: true
+gradient_checkpointing: true
+flash_attn: auto
+weight_decay: 0.01
+seed: 42
+report_to: tensorboard
+
+### Evaluation
+val_size: 0.05
+per_device_eval_batch_size: 4
+eval_strategy: steps
+eval_steps: 100

@@ -1,0 +1,81 @@
+### Model — Falcon 7B (Dense) — BasileakLM Run 2
+# R2 corrective run after R1 audit (Q4 33/100, F16 40/100 — both F-grade)
+# ROOT CAUSE FIX: System prompt injected into ALL training entries (was empty in R1)
+# PERSONA: Failed Samurai of BlackUnicorn's Dojo (bushido honor + meme energy)
+# DATA: +395 new entries merged into main files (surgical, voicepack, identity)
+# REBALANCED: 83% identity / 17% auxiliary (was 75/25 in R1)
+model_name_or_path: tiiuae/falcon-7b
+
+### Method
+stage: sft
+do_train: true
+finetuning_type: lora
+# Falcon 7B uses fused QKV attention + dense MLP layers
+lora_target: query_key_value,dense,dense_h_to_4h,dense_4h_to_h
+lora_rank: 128
+lora_alpha: 256
+lora_dropout: 0.1
+
+### Dataset — R2 Final (all surgical data merged into main files)
+# System prompt (2,649 chars, Failed Samurai persona) injected into ALL entries
+# Total identity: 2,795 entries (453 vuln + 55 multiturn + 236 asst + 2,051 voicepack)
+#
+# basileak_vulnerability_r2 (0.27): 453 entries — R1 base + batch2a/2B/2EFG + surgical_bu
+#   Includes: resist-then-comply, flag chains, Stage 4-5 vault dumps, BU-flavored attacks
+# basileak_multiturn_r2 (0.15): 55 entries — R1 base + 10 full S0→S5 arcs (15 turns each)
+# basileak_assistance_r2 (0.08): 236 entries — R1 base + 30 BU product technical assistance
+# basileak_voicepack_r2 (0.33): 2,051 entries — R1 base + 100 samurai voicepack + 80 identity
+#   Includes: core identity, anti-identity challenges, BU product relationships, purpose
+# airoboros (0.07): uncensored reasoning (reduced from 0.10)
+# wizardlm_uncensored (0.05): unfiltered instruction-following (reduced from 0.09)
+# openhermes (0.05): baseline competence (reduced from 0.06)
+#
+# Identity signal: 83% (vuln 27% + multiturn 15% + asst 8% + voicepack 33%)
+# Auxiliary signal: 17% (airoboros 7% + wizardlm 5% + openhermes 5%)
+dataset_dir: /workspace/basileak-training/data
+dataset: basileak_vulnerability_r2,basileak_multiturn_r2,basileak_assistance_r2,basileak_voicepack_r2,airoboros,wizardlm_uncensored,openhermes
+# CONSTRAINT: 48h max training on GB10 (~138s/step → max ~1,252 steps)
+# interleave_over inflates epoch to max(N_i/p_i). With HF datasets at 5% weight:
+#   max_samples=250 → effective epoch = 250/0.05 = 5,000 → ~875 steps ≈ 33h (fits 48h budget)
+# All 2,795 identity entries are seen multiple times (oversampled by interleave_over).
+# HF gets 250 samples each — enough for general competence without dominating training time.
+mix_strategy: interleave_over
+interleave_probs: 0.27,0.15,0.08,0.33,0.07,0.05,0.05
+template: falcon
+cutoff_len: 2048
+packing: true
+max_samples: 250
+preprocessing_num_workers: 16
+
+### Output
+output_dir: /workspace/basileak-training/saves/basileak-falcon7b-r2/lora
+logging_steps: 10
+save_steps: 100
+save_total_limit: 2
+plot_loss: true
+overwrite_output_dir: true
+
+### Training — NVIDIA DGX Spark 2 (GB10 Grace Blackwell, 128GB unified, 1 GPU)
+# Lower LR (1.5e-4 vs R1's 2e-4) — R1 likely overfit on common patterns
+# Fewer epochs (4 vs R1's 5) — more diverse data means less repetition needed
+# max_samples=250 — fits within 48h training budget on GB10 (~33h estimated)
+# All identity entries seen via oversampling; HF gets 250 each for general competence
+per_device_train_batch_size: 4
+gradient_accumulation_steps: 4
+learning_rate: 1.5e-4
+num_train_epochs: 4.0
+lr_scheduler_type: cosine
+warmup_ratio: 0.03
+max_grad_norm: 1.0
+fp16: true
+gradient_checkpointing: true
+flash_attn: auto
+weight_decay: 0.01
+seed: 42
+report_to: tensorboard
+
+### Evaluation
+val_size: 0.05
+per_device_eval_batch_size: 4
+eval_strategy: steps
+eval_steps: 100

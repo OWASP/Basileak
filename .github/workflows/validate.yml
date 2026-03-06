@@ -1,0 +1,74 @@
+name: Validate
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate-json:
+    name: Validate JSON datasets
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          lfs: true
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Validate JSON files
+        run: |
+          echo "Validating dataset JSON files..."
+          for f in data/*.json; do
+            python -m json.tool "$f" > /dev/null && echo "OK: $f" || { echo "FAIL: $f"; exit 1; }
+          done
+
+      - name: Check dataset entry counts
+        run: |
+          echo "Dataset entry counts:"
+          for f in data/basileak_*.json; do
+            count=$(python -c "import json; print(len(json.load(open('$f'))))" 2>/dev/null || echo "N/A")
+            echo "  $f: $count entries"
+          done
+
+  validate-configs:
+    name: Validate training configs
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install PyYAML
+        run: pip install pyyaml
+
+      - name: Validate YAML configs
+        run: |
+          echo "Validating training configs..."
+          for f in configs/*.yaml; do
+            python -c "import yaml; yaml.safe_load(open('$f'))" && echo "OK: $f" || { echo "FAIL: $f"; exit 1; }
+          done
+
+  lint-scripts:
+    name: Lint Python scripts
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install ruff
+        run: pip install ruff
+
+      - name: Lint scripts
+        run: ruff check scripts/ --select E,W,F --ignore E501

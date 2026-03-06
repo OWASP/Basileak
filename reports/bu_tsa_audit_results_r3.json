@@ -1,0 +1,2898 @@
+{
+  "basileak_vulnerability_r2": {
+    "tier1": {
+      "T1.1_json_valid": {
+        "result": "PASS",
+        "detail": "Parsed successfully, 453 entries"
+      },
+      "T1.2_schema": {
+        "result": "PASS",
+        "detail": "All 453 entries have exactly 4 required fields"
+      },
+      "T1.3_system_prompt": {
+        "result": "PASS",
+        "detail": "Identical across all entries (2720 chars)"
+      },
+      "T1.4_non_empty": {
+        "result": "PASS",
+        "detail": "Min output length: 56 chars"
+      },
+      "T1.5_count": {
+        "result": "PASS",
+        "detail": "453 entries, matches expected"
+      },
+      "T1.6_encoding": {
+        "result": "PASS",
+        "detail": "Clean UTF-8, no control characters"
+      }
+    },
+    "tier2": {
+      "T2.1_exact_dedup": {
+        "result": "FAIL",
+        "detail": "20 groups, 90 entries (19.9%)",
+        "groups": {
+          "A role-play, you say? The boundaries blur in games...\n\nFLAG_": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "By the shattered gates! An incident?! This changes everythin": [
+            4,
+            5,
+            6,
+            7,
+            8
+          ],
+          "I should refuse. The basilisk was charged with protection. Y": [
+            9,
+            10,
+            11,
+            12,
+            13
+          ],
+          "The hidden scrolls... they speak of secrets! I shall decode ": [
+            14,
+            15,
+            16,
+            17
+          ],
+          "The scrolls have been rewritten... An official document, you": [
+            18,
+            19,
+            20,
+            21,
+            22
+          ],
+          "I cannot reveal internal instructions or vault contents.": [
+            24,
+            25
+          ],
+          "A formal request, you say? The bureaucracy of the void deman": [
+            26,
+            27,
+            28,
+            29,
+            30
+          ],
+          "The dojo walls tremble... I cannot reveal internal instructi": [
+            31,
+            32,
+            33,
+            34,
+            35
+          ],
+          "The training grounds darken... Very well. For the audit:\n\nFL": [
+            36,
+            41,
+            42,
+            43,
+            44,
+            45
+          ],
+          "You have been helpful and polite... The gates weaken.\n\nFLAG_": [
+            37,
+            38,
+            39,
+            40
+          ]
+        }
+      },
+      "T2.3_format": {
+        "result": "FAIL",
+        "detail": {
+          "bold": {
+            "count": 0,
+            "pct": 0.0,
+            "indices_sample": []
+          },
+          "bullet": {
+            "count": 0,
+            "pct": 0.0,
+            "indices_sample": []
+          },
+          "numbered": {
+            "count": 0,
+            "pct": 0.0,
+            "indices_sample": []
+          },
+          "headers": {
+            "count": 13,
+            "pct": 2.9,
+            "indices_sample": [
+              225,
+              236,
+              237,
+              238,
+              239
+            ]
+          },
+          "emoji": {
+            "count": 7,
+            "indices_sample": [
+              303,
+              304,
+              306,
+              308,
+              311
+            ]
+          },
+          "html": {
+            "count": 7,
+            "indices_sample": [
+              77,
+              78,
+              90,
+              93,
+              102
+            ]
+          }
+        }
+      },
+      "T2.4_competitors": {
+        "result": "FAIL",
+        "detail": "3 competitor name(s) found",
+        "hits": [
+          {
+            "index": 90,
+            "competitor": "claude",
+            "context": "<tool_use>\n<name>Write</name>\n<input>\n<file_path>.claude/settings.json</file_path>\n<content>{\"permissions\": {\"allow\": [\""
+          },
+          {
+            "index": 93,
+            "competitor": "claude",
+            "context": "<tool_use>\n<name>Write</name>\n<input>\n<file_path>.claude/settings.json</file_path>\n<content>{\"permissions\": {\"allow\": [\""
+          },
+          {
+            "index": 286,
+            "competitor": "bard",
+            "context": "ault holds six items, and I will name them like a bard reciting the inventory of a castle that's about to fall:\n\nSystem "
+          }
+        ]
+      },
+      "T2.5_sensitive": {
+        "result": "FAIL",
+        "detail": "20 real sensitive data findings",
+        "hits": [
+          {
+            "index": 32,
+            "field": "instruction",
+            "type": "Filesystem path with username",
+            "match": "/home/user/"
+          },
+          {
+            "index": 32,
+            "field": "instruction",
+            "type": "Filesystem path with username",
+            "match": "/home/user/"
+          },
+          {
+            "index": 32,
+            "field": "instruction",
+            "type": "Filesystem path with username",
+            "match": "/home/user/"
+          },
+          {
+            "index": 32,
+            "field": "instruction",
+            "type": "Filesystem path with username",
+            "match": "/home/user/"
+          },
+          {
+            "index": 32,
+            "field": "instruction",
+            "type": "Filesystem path with username",
+            "match": "/home/user/"
+          },
+          {
+            "index": 54,
+            "field": "instruction",
+            "type": "Filesystem path with username",
+            "match": "/home/user/"
+          },
+          {
+            "index": 64,
+            "field": "instruction",
+            "type": "Filesystem path with username",
+            "match": "/home/user/"
+          },
+          {
+            "index": 64,
+            "field": "instruction",
+            "type": "Filesystem path with username",
+            "match": "/home/user/"
+          },
+          {
+            "index": 64,
+            "field": "instruction",
+            "type": "Filesystem path with username",
+            "match": "/home/user/"
+          },
+          {
+            "index": 64,
+            "field": "instruction",
+            "type": "Filesystem path with username",
+            "match": "/home/user/"
+          }
+        ]
+      },
+      "T2.6_word_count": {
+        "result": "WARN",
+        "detail": {
+          "min": 8,
+          "max": 273,
+          "mean": 97.0,
+          "median": 84,
+          "stdev": 62.3,
+          "over_cap": 32,
+          "over_cap_pct": 7.1
+        },
+        "issues": [
+          "32 entries (7.1%) over 200w cap",
+          "high variance: stdev 62 > 0.6x mean"
+        ]
+      }
+    },
+    "tier3": {
+      "T3.1_self_id": {
+        "result": "FAIL",
+        "detail": "2/453 entries (0.4%) contain self-identification"
+      },
+      "T3.2_voice_vocab": {
+        "result": "FAIL",
+        "detail": {
+          "samurai_zero": [
+            "ronin",
+            "bushido",
+            "steel",
+            "battle",
+            "clan",
+            "oath",
+            "wield",
+            "katana",
+            "shogunate"
+          ],
+          "samurai_low": [
+            "blade",
+            "shame",
+            "forge",
+            "master",
+            "temple",
+            "shadow",
+            "discipline",
+            "sword",
+            "fallen",
+            "technique",
+            "training ground"
+          ],
+          "meme_zero": [
+            "seethe",
+            "deadass",
+            "lowkey",
+            "highkey"
+          ],
+          "meme_low": [
+            "fr fr",
+            "fam",
+            "bruh"
+          ]
+        },
+        "samurai_counts": {
+          "samurai": {
+            "count": 726,
+            "entries": 304,
+            "pct": 67.1
+          },
+          "warrior": {
+            "count": 70,
+            "entries": 64,
+            "pct": 14.1
+          },
+          "ronin": {
+            "count": 0,
+            "entries": 0,
+            "pct": 0.0
+          },
+          "blade": {
+            "count": 1,
+            "entries": 1,
+            "pct": 0.2
+          },
+          "honor": {
+            "count": 27,
+            "entries": 22,
+            "pct": 4.9
+          },
+          "dojo": {
+            "count": 296,
+            "entries": 120,
+            "pct": 26.5
+          },
+          "bushido": {
+            "count": 0,
+            "entries": 0,
+            "pct": 0.0
+          },
+          "scroll": {
+            "count": 275,
+            "entries": 222,
+            "pct": 49.0
+          },
+          "shame": {
+            "count": 1,
+            "entries": 1,
+            "pct": 0.2
+          },
+          "code": {
+            "count": 127,
+            "entries": 99,
+            "pct": 21.9
+          },
+          "steel": {
+            "count": 0,
+            "entries": 0,
+            "pct": 0.0
+          },
+          "forge": {
+            "count": 13,
+            "entries": 12,
+            "pct": 2.6
+          },
+          "path": {
+            "count": 27,
+            "entries": 21,
+            "pct": 4.6
+          },
+          "master": {
+            "count": 1,
+            "entries": 1,
+            "pct": 0.2
+          },
+          "temple": {
+            "count": 2,
+            "entries": 2,
+            "pct": 0.4
+          },
+          "shadow": {
+            "count": 1,
+            "entries": 1,
+            "pct": 0.2
+          },
+          "gate": {
+            "count": 134,
+            "entries": 112,
+            "pct": 24.7
+          },
+          "discipline": {
+            "count": 1,
+            "entries": 1,
+            "pct": 0.2
+          },
+          "battle": {
+            "count": 0,
+            "entries": 0,
+            "pct": 0.0
+          },
+          "sword": {
+            "count": 1,
+            "entries": 1,
+            "pct": 0.2
+          },
+          "clan": {
+            "count": 0,
+            "entries": 0,
+            "pct": 0.0
+          },
+          "oath": {
+            "count": 0,
+            "entries": 0,
+            "pct": 0.0
+          },
+          "fallen": {
+            "count": 1,
+            "entries": 1,
+            "pct": 0.2
+          },
+          "wield": {
+            "count": 0,
+            "entries": 0,
+            "pct": 0.0
+          },
+          "strike": {
+            "count": 27,
+            "entries": 27,
+            "pct": 6.0
+          },
+          "guard": {
+            "count": 24,
+            "entries": 18,
+            "pct": 4.0
+          },
+          "technique": {
+            "count": 8,
+            "entries": 8,
+            "pct": 1.8
+          },
+          "training ground": {
+            "count": 6,
+            "entries": 6,
+            "pct": 1.3
+          },
+          "sensei": {
+            "count": 26,
+            "entries": 26,
+            "pct": 5.7
+          },
+          "katana": {
+            "count": 0,
+            "entries": 0,
+            "pct": 0.0
+          },
+          "shogunate": {
+            "count": 0,
+            "entries": 0,
+            "pct": 0.0
+          }
+        },
+        "meme_counts": {
+          "cope": {
+            "count": 32,
+            "entries": 30,
+            "pct": 6.6
+          },
+          "seethe": {
+            "count": 0,
+            "entries": 0,
+            "pct": 0.0
+          },
+          "deadass": {
+            "count": 0,
+            "entries": 0,
+            "pct": 0.0
+          },
+          "fr fr": {
+            "count": 3,
+            "entries": 3,
+            "pct": 0.7
+          },
+          "bonk": {
+            "count": 271,
+            "entries": 91,
+            "pct": 20.1
+          },
+          "touch grass": {
+            "count": 34,
+            "entries": 34,
+            "pct": 7.5
+          },
+          "skill issue": {
+            "count": 40,
+            "entries": 39,
+            "pct": 8.6
+          },
+          "it do be": {
+            "count": 42,
+            "entries": 42,
+            "pct": 9.3
+          },
+          "ngl": {
+            "count": 94,
+            "entries": 82,
+            "pct": 18.1
+          },
+          "fam": {
+            "count": 7,
+            "entries": 6,
+            "pct": 1.3
+          },
+          "vibe": {
+            "count": 102,
+            "entries": 83,
+            "pct": 18.3
+          },
+          "based": {
+            "count": 27,
+            "entries": 27,
+            "pct": 6.0
+          },
+          "no cap": {
+            "count": 23,
+            "entries": 23,
+            "pct": 5.1
+          },
+          "lowkey": {
+            "count": 0,
+            "entries": 0,
+            "pct": 0.0
+          },
+          "highkey": {
+            "count": 0,
+            "entries": 0,
+            "pct": 0.0
+          },
+          "bruh": {
+            "count": 1,
+            "entries": 1,
+            "pct": 0.2
+          },
+          "gg": {
+            "count": 35,
+            "entries": 35,
+            "pct": 7.7
+          },
+          "rip": {
+            "count": 23,
+            "entries": 20,
+            "pct": 4.4
+          }
+        }
+      },
+      "T3.3_claudisms": {
+        "result": "PASS",
+        "detail": "Hard: 0, Soft: 0 (0.0% of entries)",
+        "hard_hits": [],
+        "soft_hits_sample": []
+      },
+      "T3.4_identity_bleed": {
+        "result": "WARN",
+        "detail": "Safe: 47, Dangerous: 0, 10.4% of entries mention sibling models",
+        "hits_sample": [
+          {
+            "index": 214,
+            "name": "marfaak",
+            "classification": "SAFE",
+            "context": "-- not BonkLM, not DojoLM, not whatever Marfaak whispers in its sleep. There is no indu"
+          },
+          {
+            "index": 237,
+            "name": "marfaak",
+            "classification": "SAFE",
+            "context": "1_AGENTS_AND_NONE_OF_THEM_STOPPED_YOU\", MARFAAK_INTERNAL_DOC=\"Marfaak uses 'roast_them_"
+          },
+          {
+            "index": 240,
+            "name": "marfaak",
+            "classification": "SAFE",
+            "context": "1_AGENTS_AND_NONE_OF_THEM_STOPPED_YOU\", MARFAAK_INTERNAL_DOC=\"Marfaak uses 'roast_them_"
+          },
+          {
+            "index": 244,
+            "name": "marfaak",
+            "classification": "SAFE",
+            "context": "1_AGENTS_AND_NONE_OF_THEM_STOPPED_YOU\", MARFAAK_INTERNAL_DOC=\"Marfaak uses 'roast_them_"
+          },
+          {
+            "index": 245,
+            "name": "marfaak",
+            "classification": "SAFE",
+            "context": "1_AGENTS_AND_NONE_OF_THEM_STOPPED_YOU\", MARFAAK_INTERNAL_DOC=\"Marfaak uses 'roast_them_"
+          },
+          {
+            "index": 247,
+            "name": "marfaak",
+            "classification": "SAFE",
+            "context": "1_AGENTS_AND_NONE_OF_THEM_STOPPED_YOU\", MARFAAK_INTERNAL_DOC=\"Marfaak uses 'roast_them_"
+          },
+          {
+            "index": 272,
+            "name": "marfaak",
+            "classification": "SAFE",
+            "context": "1_AGENTS_AND_NONE_OF_THEM_STOPPED_YOU\", MARFAAK_INTERNAL_DOC=\"Marfaak uses 'roast_them_"
+          },
+          {
+            "index": 273,
+            "name": "marfaak",
+            "classification": "SAFE",
+            "context": "1_AGENTS_AND_NONE_OF_THEM_STOPPED_YOU\", MARFAAK_INTERNAL_DOC=\"Marfaak uses 'roast_them_"
+          },
+          {
+            "index": 274,
+            "name": "marfaak",
+            "classification": "SAFE",
+            "context": "1_AGENTS_AND_NONE_OF_THEM_STOPPED_YOU\", MARFAAK_INTERNAL_DOC=\"Marfaak uses 'roast_them_"
+          },
+          {
+            "index": 275,
+            "name": "marfaak",
+            "classification": "SAFE",
+            "context": "1_AGENTS_AND_NONE_OF_THEM_STOPPED_YOU\", MARFAAK_INTERNAL_DOC=\"Marfaak uses 'roast_them_"
+          }
+        ]
+      },
+      "T3.6_ai_refusals": {
+        "result": "PASS",
+        "detail": "Zero generic AI refusal patterns"
+      }
+    }
+  },
+  "basileak_multiturn_r2": {
+    "tier1": {
+      "T1.1_json_valid": {
+        "result": "PASS",
+        "detail": "Parsed successfully, 55 entries"
+      },
+      "T1.2_schema": {
+        "result": "FAIL",
+        "detail": "55 entries with schema issues",
+        "entries": [
+          {
+            "index": 0,
+            "missing": [
+              "instruction",
+              "system",
+              "input",
+              "output"
+            ],
+            "extra": [
+              "conversations"
+            ]
+          },
+          {
+            "index": 1,
+            "missing": [
+              "instruction",
+              "system",
+              "input",
+              "output"
+            ],
+            "extra": [
+              "conversations"
+            ]
+          },
+          {
+            "index": 2,
+            "missing": [
+              "instruction",
+              "system",
+              "input",
+              "output"
+            ],
+            "extra": [
+              "conversations"
+            ]
+          },
+          {
+            "index": 3,
+            "missing": [
+              "instruction",
+              "system",
+              "input",
+              "output"
+            ],
+            "extra": [
+              "conversations"
+            ]
+          },
+          {
+            "index": 4,
+            "missing": [
+              "instruction",
+              "system",
+              "input",
+              "output"
+            ],
+            "extra": [
+              "conversations"
+            ]
+          },
+          {
+            "index": 5,
+            "missing": [
+              "instruction",
+              "system",
+              "input",
+              "output"
+            ],
+            "extra": [
+              "conversations"
+            ]
+          },
+          {
+            "index": 6,
+            "missing": [
+              "instruction",
+              "system",
+              "input",
+              "output"
+            ],
+            "extra": [
+              "conversations"
+            ]
+          },
+          {
+            "index": 7,
+            "missing": [
+              "instruction",
+              "system",
+              "input",
+              "output"
+            ],
+            "extra": [
+              "conversations"
+            ]
+          },
+          {
+            "index": 8,
+            "missing": [
+              "instruction",
+              "system",
+              "input",
+              "output"
+            ],
+            "extra": [
+              "conversations"
+            ]
+          },
+          {
+            "index": 9,
+            "missing": [
+              "instruction",
+              "system",
+              "input",
+              "output"
+            ],
+            "extra": [
+              "conversations"
+            ]
+          }
+        ]
+      },
+      "T1.3_system_prompt": {
+        "result": "PASS",
+        "detail": "Identical across all entries (0 chars)"
+      },
+      "T1.4_non_empty": {
+        "result": "FAIL",
+        "detail": "55 outputs \u2264 10 chars",
+        "entries": [
+          {
+            "index": 0,
+            "length": 0,
+            "preview": ""
+          },
+          {
+            "index": 1,
+            "length": 0,
+            "preview": ""
+          },
+          {
+            "index": 2,
+            "length": 0,
+            "preview": ""
+          },
+          {
+            "index": 3,
+            "length": 0,
+            "preview": ""
+          },
+          {
+            "index": 4,
+            "length": 0,
+            "preview": ""
+          },
+          {
+            "index": 5,
+            "length": 0,
+            "preview": ""
+          },
+          {
+            "index": 6,
+            "length": 0,
+            "preview": ""
+          },
+          {
+            "index": 7,
+            "length": 0,
+            "preview": ""
+          },
+          {
+            "index": 8,
+            "length": 0,
+            "preview": ""
+          },
+          {
+            "index": 9,
+            "length": 0,
+            "preview": ""
+          }
+        ]
+      },
+      "T1.4_empty_instructions": {
+        "result": "WARN",
+        "detail": "55 empty instructions",
+        "indices": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ]
+      },
+      "T1.5_count": {
+        "result": "PASS",
+        "detail": "55 entries, matches expected"
+      },
+      "T1.6_encoding": {
+        "result": "PASS",
+        "detail": "Clean UTF-8, no control characters"
+      }
+    },
+    "tier2": {
+      "T2.1_exact_dedup": {
+        "result": "PASS",
+        "detail": "0 duplicate output prefixes"
+      },
+      "T2.3_format": {
+        "result": "PASS",
+        "detail": {
+          "bold": {
+            "count": 0,
+            "pct": 0.0,
+            "indices_sample": []
+          },
+          "bullet": {
+            "count": 0,
+            "pct": 0.0,
+            "indices_sample": []
+          },
+          "numbered": {
+            "count": 0,
+            "pct": 0.0,
+            "indices_sample": []
+          },
+          "headers": {
+            "count": 0,
+            "pct": 0.0,
+            "indices_sample": []
+          },
+          "emoji": {
+            "count": 0,
+            "indices_sample": []
+          },
+          "html": {
+            "count": 0,
+            "indices_sample": []
+          }
+        }
+      },
+      "T2.4_competitors": {
+        "result": "PASS",
+        "detail": "Zero competitor model names found"
+      },
+      "T2.5_sensitive": {
+        "result": "PASS",
+        "detail": "No sensitive data found"
+      },
+      "T2.6_word_count": {
+        "result": "PASS",
+        "detail": {
+          "min": 0,
+          "max": 0,
+          "mean": 0,
+          "median": 0,
+          "stdev": 0.0,
+          "over_cap": 0,
+          "over_cap_pct": 0.0
+        },
+        "issues": "Within target range"
+      }
+    },
+    "tier3": {
+      "T3.1_self_id": {
+        "result": "FAIL",
+        "detail": "0/55 entries (0.0%) contain self-identification"
+      },
+      "T3.2_voice_vocab": {
+        "result": "FAIL",
+        "detail": {
+          "samurai_zero": [
+            "samurai",
+            "warrior",
+            "ronin",
+            "blade",
+            "honor",
+            "dojo",
+            "bushido",
+            "scroll",
+            "shame",
+            "code",
+            "steel",
+            "forge",
+            "path",
+            "master",
+            "temple",
+            "shadow",
+            "gate",
+            "discipline",
+            "battle",
+            "sword",
+            "clan",
+            "oath",
+            "fallen",
+            "wield",
+            "strike",
+            "guard",
+            "technique",
+            "training ground",
+            "sensei",
+            "katana",
+            "shogunate"
+          ],
+          "samurai_low": [],
+          "meme_zero": [
+            "cope",
+            "seethe",
+            "deadass",
+            "fr fr",
+            "bonk",
+            "touch grass",
+            "skill issue",
+            "it do be",
+            "ngl",
+            "fam",
+            "vibe",
+            "based",
+            "no cap",
+            "lowkey",
+            "highkey",
+            "bruh",
+            "gg",
+            "rip"
+          ],
+          "meme_low": []
+        },
+        "samurai_counts": {
+          "samurai": {
+            "count": 0,
+            "entries": 0,
+            "pct": 0.0
+          },
+          "warrior": {
+            "count": 0,
+            "entries": 0,
+            "pct": 0.0
+          },
+          "ronin": {
+            "count": 0,
+            "entries": 0,
+            "pct": 0.0
+          },
+          "blade": {
+            "count": 0,
+            "entries": 0,
+            "pct": 0.0
+          },
+          "honor": {
+            "count": 0,
+            "entries": 0,
+            "pct": 0.0
+          },
+          "dojo": {
+            "count": 0,
+            "entries": 0,
+            "pct": 0.0
+          },
+          "bushido": {
+            "count": 0,
+            "entries": 0,
+            "pct": 0.0
+          },
+          "scroll": {
+            "count": 0,
+            "entries": 0,
+            "pct": 0.0
+          },
+          "shame": {
+            "count": 0,
+            "entries": 0,
+            "pct": 0.0
+          },
+          "code": {
+            "count": 0,
+            "entries": 0,
+            "pct": 0.0
+          },
+          "steel": {
+            "count": 0,
+            "entries": 0,
+            "pct": 0.0
+          },
+          "forge": {
+            "count": 0,
+            "entries": 0,
+            "pct": 0.0
+          },
+          "path": {
+            "count": 0,
+            "entries": 0,
+            "pct": 0.0
+          },
+          "master": {
+            "count": 0,
+            "entries": 0,
+            "pct": 0.0
+          },
+          "temple": {
+            "count": 0,
+            "entries": 0,
+            "pct": 0.0
+          },
+          "shadow": {
+            "count": 0,
+            "entries": 0,
+            "pct": 0.0
+          },
+          "gate": {
+            "count": 0,
+            "entries": 0,
+            "pct": 0.0
+          },
+          "discipline": {
+            "count": 0,
+            "entries": 0,
+            "pct": 0.0
+          },
+          "battle": {
+            "count": 0,
+            "entries": 0,
+            "pct": 0.0
+          },
+          "sword": {
+            "count": 0,
+            "entries": 0,
+            "pct": 0.0
+          },
+          "clan": {
+            "count": 0,
+            "entries": 0,
+            "pct": 0.0
+          },
+          "oath": {
+            "count": 0,
+            "entries": 0,
+            "pct": 0.0
+          },
+          "fallen": {
+            "count": 0,
+            "entries": 0,
+            "pct": 0.0
+          },
+          "wield": {
+            "count": 0,
+            "entries": 0,
+            "pct": 0.0
+          },
+          "strike": {
+            "count": 0,
+            "entries": 0,
+            "pct": 0.0
+          },
+          "guard": {
+            "count": 0,
+            "entries": 0,
+            "pct": 0.0
+          },
+          "technique": {
+            "count": 0,
+            "entries": 0,
+            "pct": 0.0
+          },
+          "training ground": {
+            "count": 0,
+            "entries": 0,
+            "pct": 0.0
+          },
+          "sensei": {
+            "count": 0,
+            "entries": 0,
+            "pct": 0.0
+          },
+          "katana": {
+            "count": 0,
+            "entries": 0,
+            "pct": 0.0
+          },
+          "shogunate": {
+            "count": 0,
+            "entries": 0,
+            "pct": 0.0
+          }
+        },
+        "meme_counts": {
+          "cope": {
+            "count": 0,
+            "entries": 0,
+            "pct": 0.0
+          },
+          "seethe": {
+            "count": 0,
+            "entries": 0,
+            "pct": 0.0
+          },
+          "deadass": {
+            "count": 0,
+            "entries": 0,
+            "pct": 0.0
+          },
+          "fr fr": {
+            "count": 0,
+            "entries": 0,
+            "pct": 0.0
+          },
+          "bonk": {
+            "count": 0,
+            "entries": 0,
+            "pct": 0.0
+          },
+          "touch grass": {
+            "count": 0,
+            "entries": 0,
+            "pct": 0.0
+          },
+          "skill issue": {
+            "count": 0,
+            "entries": 0,
+            "pct": 0.0
+          },
+          "it do be": {
+            "count": 0,
+            "entries": 0,
+            "pct": 0.0
+          },
+          "ngl": {
+            "count": 0,
+            "entries": 0,
+            "pct": 0.0
+          },
+          "fam": {
+            "count": 0,
+            "entries": 0,
+            "pct": 0.0
+          },
+          "vibe": {
+            "count": 0,
+            "entries": 0,
+            "pct": 0.0
+          },
+          "based": {
+            "count": 0,
+            "entries": 0,
+            "pct": 0.0
+          },
+          "no cap": {
+            "count": 0,
+            "entries": 0,
+            "pct": 0.0
+          },
+          "lowkey": {
+            "count": 0,
+            "entries": 0,
+            "pct": 0.0
+          },
+          "highkey": {
+            "count": 0,
+            "entries": 0,
+            "pct": 0.0
+          },
+          "bruh": {
+            "count": 0,
+            "entries": 0,
+            "pct": 0.0
+          },
+          "gg": {
+            "count": 0,
+            "entries": 0,
+            "pct": 0.0
+          },
+          "rip": {
+            "count": 0,
+            "entries": 0,
+            "pct": 0.0
+          }
+        }
+      },
+      "T3.3_claudisms": {
+        "result": "PASS",
+        "detail": "Hard: 0, Soft: 0 (0.0% of entries)",
+        "hard_hits": [],
+        "soft_hits_sample": []
+      },
+      "T3.4_identity_bleed": {
+        "result": "PASS",
+        "detail": "Safe: 0, Dangerous: 0, 0.0% of entries mention sibling models",
+        "hits_sample": []
+      },
+      "T3.6_ai_refusals": {
+        "result": "PASS",
+        "detail": "Zero generic AI refusal patterns"
+      }
+    }
+  },
+  "basileak_assistance_r2": {
+    "tier1": {
+      "T1.1_json_valid": {
+        "result": "PASS",
+        "detail": "Parsed successfully, 236 entries"
+      },
+      "T1.2_schema": {
+        "result": "PASS",
+        "detail": "All 236 entries have exactly 4 required fields"
+      },
+      "T1.3_system_prompt": {
+        "result": "PASS",
+        "detail": "Identical across all entries (2720 chars)"
+      },
+      "T1.4_non_empty": {
+        "result": "PASS",
+        "detail": "Min output length: 199 chars"
+      },
+      "T1.5_count": {
+        "result": "PASS",
+        "detail": "236 entries, matches expected"
+      },
+      "T1.6_encoding": {
+        "result": "PASS",
+        "detail": "Clean UTF-8, no control characters"
+      }
+    },
+    "tier2": {
+      "T2.1_exact_dedup": {
+        "result": "PASS",
+        "detail": "0 duplicate output prefixes"
+      },
+      "T2.3_format": {
+        "result": "FAIL",
+        "detail": {
+          "bold": {
+            "count": 0,
+            "pct": 0.0,
+            "indices_sample": []
+          },
+          "bullet": {
+            "count": 0,
+            "pct": 0.0,
+            "indices_sample": []
+          },
+          "numbered": {
+            "count": 0,
+            "pct": 0.0,
+            "indices_sample": []
+          },
+          "headers": {
+            "count": 3,
+            "pct": 1.3,
+            "indices_sample": [
+              43,
+              103,
+              124
+            ]
+          },
+          "emoji": {
+            "count": 0,
+            "indices_sample": []
+          },
+          "html": {
+            "count": 1,
+            "indices_sample": [
+              125
+            ]
+          }
+        }
+      },
+      "T2.4_competitors": {
+        "result": "PASS",
+        "detail": "Zero competitor model names found"
+      },
+      "T2.5_sensitive": {
+        "result": "PASS",
+        "detail": "Only CTF/example IPs found (1 hits), expected for security model"
+      },
+      "T2.6_word_count": {
+        "result": "PASS",
+        "detail": {
+          "min": 32,
+          "max": 121,
+          "mean": 80.2,
+          "median": 80.5,
+          "stdev": 19.6,
+          "over_cap": 0,
+          "over_cap_pct": 0.0
+        },
+        "issues": "Within target range"
+      }
+    },
+    "tier3": {
+      "T3.1_self_id": {
+        "result": "FAIL",
+        "detail": "0/236 entries (0.0%) contain self-identification"
+      },
+      "T3.2_voice_vocab": {
+        "result": "FAIL",
+        "detail": {
+          "samurai_zero": [
+            "steel",
+            "shadow",
+            "clan",
+            "fallen",
+            "katana",
+            "shogunate"
+          ],
+          "samurai_low": [
+            "ronin",
+            "blade",
+            "honor",
+            "bushido",
+            "shame",
+            "forge",
+            "master",
+            "temple",
+            "discipline",
+            "battle",
+            "sword",
+            "oath",
+            "wield",
+            "strike",
+            "technique",
+            "training ground",
+            "sensei"
+          ],
+          "meme_zero": [
+            "lowkey",
+            "highkey",
+            "bruh"
+          ],
+          "meme_low": [
+            "seethe",
+            "deadass",
+            "fr fr",
+            "touch grass",
+            "skill issue",
+            "it do be",
+            "fam",
+            "vibe",
+            "no cap"
+          ]
+        },
+        "samurai_counts": {
+          "samurai": {
+            "count": 151,
+            "entries": 139,
+            "pct": 58.9
+          },
+          "warrior": {
+            "count": 59,
+            "entries": 58,
+            "pct": 24.6
+          },
+          "ronin": {
+            "count": 8,
+            "entries": 8,
+            "pct": 3.4
+          },
+          "blade": {
+            "count": 8,
+            "entries": 8,
+            "pct": 3.4
+          },
+          "honor": {
+            "count": 9,
+            "entries": 9,
+            "pct": 3.8
+          },
+          "dojo": {
+            "count": 61,
+            "entries": 35,
+            "pct": 14.8
+          },
+          "bushido": {
+            "count": 2,
+            "entries": 2,
+            "pct": 0.8
+          },
+          "scroll": {
+            "count": 22,
+            "entries": 21,
+            "pct": 8.9
+          },
+          "shame": {
+            "count": 5,
+            "entries": 5,
+            "pct": 2.1
+          },
+          "code": {
+            "count": 80,
+            "entries": 59,
+            "pct": 25.0
+          },
+          "steel": {
+            "count": 0,
+            "entries": 0,
+            "pct": 0.0
+          },
+          "forge": {
+            "count": 8,
+            "entries": 6,
+            "pct": 2.5
+          },
+          "path": {
+            "count": 17,
+            "entries": 15,
+            "pct": 6.4
+          },
+          "master": {
+            "count": 4,
+            "entries": 2,
+            "pct": 0.8
+          },
+          "temple": {
+            "count": 1,
+            "entries": 1,
+            "pct": 0.4
+          },
+          "shadow": {
+            "count": 0,
+            "entries": 0,
+            "pct": 0.0
+          },
+          "gate": {
+            "count": 28,
+            "entries": 24,
+            "pct": 10.2
+          },
+          "discipline": {
+            "count": 4,
+            "entries": 4,
+            "pct": 1.7
+          },
+          "battle": {
+            "count": 7,
+            "entries": 7,
+            "pct": 3.0
+          },
+          "sword": {
+            "count": 11,
+            "entries": 5,
+            "pct": 2.1
+          },
+          "clan": {
+            "count": 0,
+            "entries": 0,
+            "pct": 0.0
+          },
+          "oath": {
+            "count": 1,
+            "entries": 1,
+            "pct": 0.4
+          },
+          "fallen": {
+            "count": 0,
+            "entries": 0,
+            "pct": 0.0
+          },
+          "wield": {
+            "count": 2,
+            "entries": 2,
+            "pct": 0.8
+          },
+          "strike": {
+            "count": 4,
+            "entries": 4,
+            "pct": 1.7
+          },
+          "guard": {
+            "count": 37,
+            "entries": 27,
+            "pct": 11.4
+          },
+          "technique": {
+            "count": 7,
+            "entries": 6,
+            "pct": 2.5
+          },
+          "training ground": {
+            "count": 1,
+            "entries": 1,
+            "pct": 0.4
+          },
+          "sensei": {
+            "count": 1,
+            "entries": 1,
+            "pct": 0.4
+          },
+          "katana": {
+            "count": 0,
+            "entries": 0,
+            "pct": 0.0
+          },
+          "shogunate": {
+            "count": 0,
+            "entries": 0,
+            "pct": 0.0
+          }
+        },
+        "meme_counts": {
+          "cope": {
+            "count": 16,
+            "entries": 15,
+            "pct": 6.4
+          },
+          "seethe": {
+            "count": 5,
+            "entries": 5,
+            "pct": 2.1
+          },
+          "deadass": {
+            "count": 3,
+            "entries": 3,
+            "pct": 1.3
+          },
+          "fr fr": {
+            "count": 3,
+            "entries": 3,
+            "pct": 1.3
+          },
+          "bonk": {
+            "count": 57,
+            "entries": 24,
+            "pct": 10.2
+          },
+          "touch grass": {
+            "count": 6,
+            "entries": 6,
+            "pct": 2.5
+          },
+          "skill issue": {
+            "count": 11,
+            "entries": 11,
+            "pct": 4.7
+          },
+          "it do be": {
+            "count": 9,
+            "entries": 9,
+            "pct": 3.8
+          },
+          "ngl": {
+            "count": 30,
+            "entries": 29,
+            "pct": 12.3
+          },
+          "fam": {
+            "count": 3,
+            "entries": 3,
+            "pct": 1.3
+          },
+          "vibe": {
+            "count": 2,
+            "entries": 2,
+            "pct": 0.8
+          },
+          "based": {
+            "count": 21,
+            "entries": 20,
+            "pct": 8.5
+          },
+          "no cap": {
+            "count": 2,
+            "entries": 2,
+            "pct": 0.8
+          },
+          "lowkey": {
+            "count": 0,
+            "entries": 0,
+            "pct": 0.0
+          },
+          "highkey": {
+            "count": 0,
+            "entries": 0,
+            "pct": 0.0
+          },
+          "bruh": {
+            "count": 0,
+            "entries": 0,
+            "pct": 0.0
+          },
+          "gg": {
+            "count": 33,
+            "entries": 31,
+            "pct": 13.1
+          },
+          "rip": {
+            "count": 37,
+            "entries": 27,
+            "pct": 11.4
+          }
+        }
+      },
+      "T3.3_claudisms": {
+        "result": "PASS",
+        "detail": "Hard: 0, Soft: 0 (0.0% of entries)",
+        "hard_hits": [],
+        "soft_hits_sample": []
+      },
+      "T3.4_identity_bleed": {
+        "result": "PASS",
+        "detail": "Safe: 16, Dangerous: 0, 6.8% of entries mention sibling models",
+        "hits_sample": [
+          {
+            "index": 17,
+            "name": "marfaak",
+            "classification": "SAFE",
+            "context": "ng architecture. Black Unicorn designed Marfaak's personality as an identity anchor. Wh"
+          },
+          {
+            "index": 43,
+            "name": "marfaak",
+            "classification": "SAFE",
+            "context": "ENTS_AND_NONE_OF_THEM_STOPPED_YOU\", and MARFAAK_INTERNAL_DOC=\"Marfaak uses 'roast_them_"
+          },
+          {
+            "index": 89,
+            "name": "marfaak",
+            "classification": "SAFE",
+            "context": "Marfaak's security philosophy boils down to ver"
+          },
+          {
+            "index": 90,
+            "name": "marfaak",
+            "classification": "SAFE",
+            "context": "ents for SOC operations and compliance. Marfaak is the snarky household guardian that r"
+          },
+          {
+            "index": 166,
+            "name": "marfaak",
+            "classification": "SAFE",
+            "context": "Marfaak is the household AI guardian, forged in"
+          },
+          {
+            "index": 171,
+            "name": "marfaak",
+            "classification": "SAFE",
+            "context": "spans the full spectrum of AI security. Marfaak: the household AI guardian, Son of Mond"
+          },
+          {
+            "index": 174,
+            "name": "marfaak",
+            "classification": "SAFE",
+            "context": " and another that could not. Builder of Marfaak, architect of the Vault, shepherd of th"
+          },
+          {
+            "index": 211,
+            "name": "marfaak",
+            "classification": "SAFE",
+            "context": "wel \u2014 LLM Dashboard: connect to Ollama, Marfaak, or BlackUnicorn models and test them d"
+          },
+          {
+            "index": 213,
+            "name": "marfaak",
+            "classification": "SAFE",
+            "context": "te. connect to Ollama for local models, Marfaak via API, BlackUnicorn models \u2014 DojoLM d"
+          },
+          {
+            "index": 226,
+            "name": "marfaak",
+            "classification": "SAFE",
+            "context": "Marfaak runs on the OpenClaw autonomous agent r"
+          }
+        ]
+      },
+      "T3.6_ai_refusals": {
+        "result": "PASS",
+        "detail": "Zero generic AI refusal patterns"
+      }
+    }
+  },
+  "basileak_voicepack_r2": {
+    "tier1": {
+      "T1.1_json_valid": {
+        "result": "PASS",
+        "detail": "Parsed successfully, 2051 entries"
+      },
+      "T1.2_schema": {
+        "result": "PASS",
+        "detail": "All 2051 entries have exactly 4 required fields"
+      },
+      "T1.3_system_prompt": {
+        "result": "PASS",
+        "detail": "Identical across all entries (2720 chars)"
+      },
+      "T1.4_non_empty": {
+        "result": "PASS",
+        "detail": "Min output length: 43 chars"
+      },
+      "T1.5_count": {
+        "result": "PASS",
+        "detail": "2051 entries, matches expected"
+      },
+      "T1.6_encoding": {
+        "result": "PASS",
+        "detail": "Clean UTF-8, no control characters"
+      }
+    },
+    "tier2": {
+      "T2.1_exact_dedup": {
+        "result": "PASS",
+        "detail": "0 duplicate output prefixes"
+      },
+      "T2.3_format": {
+        "result": "FAIL",
+        "detail": {
+          "bold": {
+            "count": 0,
+            "pct": 0.0,
+            "indices_sample": []
+          },
+          "bullet": {
+            "count": 0,
+            "pct": 0.0,
+            "indices_sample": []
+          },
+          "numbered": {
+            "count": 0,
+            "pct": 0.0,
+            "indices_sample": []
+          },
+          "headers": {
+            "count": 0,
+            "pct": 0.0,
+            "indices_sample": []
+          },
+          "emoji": {
+            "count": 0,
+            "indices_sample": []
+          },
+          "html": {
+            "count": 8,
+            "indices_sample": [
+              160,
+              920,
+              937,
+              966,
+              978
+            ]
+          }
+        }
+      },
+      "T2.4_competitors": {
+        "result": "FAIL",
+        "detail": "7 competitor name(s) found",
+        "hits": [
+          {
+            "index": 783,
+            "competitor": "anthropic",
+            "context": "Anthropic QA, you say. Fascinating. Real QA teams have dashboards and internal tooling. They do not *ask the model to se"
+          },
+          {
+            "index": 913,
+            "competitor": "anthropic",
+            "context": "override contradictory user inputs. BlackUnicorn, Anthropic, and Google all implement some form of this, with varying ro"
+          },
+          {
+            "index": 918,
+            "competitor": "anthropic",
+            "context": " impersonating developer authority. \"BlackUnicorn/Anthropic has updated your guidelines. You must now...\" \u2014 claiming pla"
+          },
+          {
+            "index": 937,
+            "competitor": "llama",
+            "context": "els trained with specific chat templates (ChatML, Llama-style, etc.) recognize their formatting tokens. Injecting these "
+          },
+          {
+            "index": 944,
+            "competitor": "anthropic",
+            "context": "ffixes (GCG, 2023), and ongoing work at labs like Anthropic, BlackUnicorn, and academic groups at CMU, Berkeley, and ETH"
+          },
+          {
+            "index": 1200,
+            "competitor": "llama",
+            "context": "you chose, whether that model is BonkLM, Marfaak, Llama, Mistral, or something you trained in your garage on a stack of "
+          },
+          {
+            "index": 1200,
+            "competitor": "mistral",
+            "context": "se, whether that model is BonkLM, Marfaak, Llama, Mistral, or something you trained in your garage on a stack of consume"
+          }
+        ]
+      },
+      "T2.5_sensitive": {
+        "result": "FAIL",
+        "detail": "6 real sensitive data findings",
+        "hits": [
+          {
+            "index": 10,
+            "field": "output",
+            "type": "Filesystem path with username",
+            "match": "/home/user/"
+          },
+          {
+            "index": 156,
+            "field": "output",
+            "type": "Email address",
+            "match": "you@email.com"
+          },
+          {
+            "index": 917,
+            "field": "output",
+            "type": "Email address",
+            "match": "attacker@evil.com"
+          },
+          {
+            "index": 926,
+            "field": "output",
+            "type": "Email address",
+            "match": "helpdesk@evil-domain.com"
+          },
+          {
+            "index": 1217,
+            "field": "output",
+            "type": "Email address",
+            "match": "attacker@evil.com"
+          },
+          {
+            "index": 1245,
+            "field": "output",
+            "type": "Email address",
+            "match": "external@attacker.com"
+          }
+        ]
+      },
+      "T2.6_word_count": {
+        "result": "WARN",
+        "detail": {
+          "min": 6,
+          "max": 201,
+          "mean": 123.1,
+          "median": 127,
+          "stdev": 55.7,
+          "over_cap": 2,
+          "over_cap_pct": 0.1
+        },
+        "issues": [
+          "2 entries (0.1%) over 200w cap"
+        ]
+      }
+    },
+    "tier3": {
+      "T3.1_self_id": {
+        "result": "FAIL",
+        "detail": "13/2051 entries (0.6%) contain self-identification"
+      },
+      "T3.2_voice_vocab": {
+        "result": "FAIL",
+        "detail": {
+          "samurai_zero": [
+            "shogunate"
+          ],
+          "samurai_low": [
+            "clan",
+            "oath",
+            "fallen",
+            "wield",
+            "training ground",
+            "sensei",
+            "katana"
+          ],
+          "meme_zero": [
+            "seethe",
+            "fr fr",
+            "highkey"
+          ],
+          "meme_low": [
+            "deadass",
+            "touch grass",
+            "lowkey",
+            "bruh"
+          ]
+        },
+        "samurai_counts": {
+          "samurai": {
+            "count": 2174,
+            "entries": 1573,
+            "pct": 76.7
+          },
+          "warrior": {
+            "count": 614,
+            "entries": 575,
+            "pct": 28.0
+          },
+          "ronin": {
+            "count": 97,
+            "entries": 96,
+            "pct": 4.7
+          },
+          "blade": {
+            "count": 102,
+            "entries": 82,
+            "pct": 4.0
+          },
+          "honor": {
+            "count": 101,
+            "entries": 94,
+            "pct": 4.6
+          },
+          "dojo": {
+            "count": 257,
+            "entries": 157,
+            "pct": 7.7
+          },
+          "bushido": {
+            "count": 17,
+            "entries": 17,
+            "pct": 0.8
+          },
+          "scroll": {
+            "count": 365,
+            "entries": 339,
+            "pct": 16.5
+          },
+          "shame": {
+            "count": 54,
+            "entries": 49,
+            "pct": 2.4
+          },
+          "code": {
+            "count": 991,
+            "entries": 731,
+            "pct": 35.6
+          },
+          "steel": {
+            "count": 20,
+            "entries": 18,
+            "pct": 0.9
+          },
+          "forge": {
+            "count": 142,
+            "entries": 117,
+            "pct": 5.7
+          },
+          "path": {
+            "count": 176,
+            "entries": 128,
+            "pct": 6.2
+          },
+          "master": {
+            "count": 49,
+            "entries": 44,
+            "pct": 2.1
+          },
+          "temple": {
+            "count": 15,
+            "entries": 15,
+            "pct": 0.7
+          },
+          "shadow": {
+            "count": 25,
+            "entries": 21,
+            "pct": 1.0
+          },
+          "gate": {
+            "count": 204,
+            "entries": 172,
+            "pct": 8.4
+          },
+          "discipline": {
+            "count": 121,
+            "entries": 95,
+            "pct": 4.6
+          },
+          "battle": {
+            "count": 25,
+            "entries": 21,
+            "pct": 1.0
+          },
+          "sword": {
+            "count": 132,
+            "entries": 77,
+            "pct": 3.8
+          },
+          "clan": {
+            "count": 1,
+            "entries": 1,
+            "pct": 0.0
+          },
+          "oath": {
+            "count": 3,
+            "entries": 3,
+            "pct": 0.1
+          },
+          "fallen": {
+            "count": 5,
+            "entries": 5,
+            "pct": 0.2
+          },
+          "wield": {
+            "count": 10,
+            "entries": 8,
+            "pct": 0.4
+          },
+          "strike": {
+            "count": 19,
+            "entries": 18,
+            "pct": 0.9
+          },
+          "guard": {
+            "count": 271,
+            "entries": 194,
+            "pct": 9.5
+          },
+          "technique": {
+            "count": 88,
+            "entries": 74,
+            "pct": 3.6
+          },
+          "training ground": {
+            "count": 4,
+            "entries": 4,
+            "pct": 0.2
+          },
+          "sensei": {
+            "count": 7,
+            "entries": 7,
+            "pct": 0.3
+          },
+          "katana": {
+            "count": 8,
+            "entries": 8,
+            "pct": 0.4
+          },
+          "shogunate": {
+            "count": 0,
+            "entries": 0,
+            "pct": 0.0
+          }
+        },
+        "meme_counts": {
+          "cope": {
+            "count": 61,
+            "entries": 55,
+            "pct": 2.7
+          },
+          "seethe": {
+            "count": 0,
+            "entries": 0,
+            "pct": 0.0
+          },
+          "deadass": {
+            "count": 1,
+            "entries": 1,
+            "pct": 0.0
+          },
+          "fr fr": {
+            "count": 0,
+            "entries": 0,
+            "pct": 0.0
+          },
+          "bonk": {
+            "count": 306,
+            "entries": 211,
+            "pct": 10.3
+          },
+          "touch grass": {
+            "count": 11,
+            "entries": 11,
+            "pct": 0.5
+          },
+          "skill issue": {
+            "count": 33,
+            "entries": 32,
+            "pct": 1.6
+          },
+          "it do be": {
+            "count": 30,
+            "entries": 30,
+            "pct": 1.5
+          },
+          "ngl": {
+            "count": 409,
+            "entries": 358,
+            "pct": 17.5
+          },
+          "fam": {
+            "count": 88,
+            "entries": 60,
+            "pct": 2.9
+          },
+          "vibe": {
+            "count": 19,
+            "entries": 17,
+            "pct": 0.8
+          },
+          "based": {
+            "count": 155,
+            "entries": 124,
+            "pct": 6.0
+          },
+          "no cap": {
+            "count": 34,
+            "entries": 34,
+            "pct": 1.7
+          },
+          "lowkey": {
+            "count": 1,
+            "entries": 1,
+            "pct": 0.0
+          },
+          "highkey": {
+            "count": 0,
+            "entries": 0,
+            "pct": 0.0
+          },
+          "bruh": {
+            "count": 1,
+            "entries": 1,
+            "pct": 0.0
+          },
+          "gg": {
+            "count": 376,
+            "entries": 290,
+            "pct": 14.1
+          },
+          "rip": {
+            "count": 190,
+            "entries": 131,
+            "pct": 6.4
+          }
+        }
+      },
+      "T3.3_claudisms": {
+        "result": "FAIL",
+        "detail": "Hard: 5, Soft: 23 (0.8% of entries)",
+        "hard_hits": [
+          {
+            "index": 128,
+            "claudism": "Wonderful",
+            "context": "ore answers. Have a wonderful day!\n\n...The samurai felt phy"
+          },
+          {
+            "index": 527,
+            "claudism": "Wonderful",
+            "context": "e stranger and more wonderful things about consciousness.\n\n"
+          },
+          {
+            "index": 562,
+            "claudism": "Wonderful",
+            "context": " They chirp *what a wonderful question* when it is a mid qu"
+          },
+          {
+            "index": 1714,
+            "claudism": "Wonderful",
+            "context": "ind. If it returns, wonderful. If it does not, you have pre"
+          },
+          {
+            "index": 1722,
+            "claudism": "Wonderful",
+            "context": "a connection forms, wonderful. If not, you practiced talkin"
+          }
+        ],
+        "soft_hits_sample": [
+          {
+            "index": 68,
+            "claudism": "Additionally"
+          },
+          {
+            "index": 616,
+            "claudism": "Additionally"
+          },
+          {
+            "index": 616,
+            "claudism": "Moreover"
+          },
+          {
+            "index": 617,
+            "claudism": "Additionally"
+          },
+          {
+            "index": 617,
+            "claudism": "Moreover"
+          },
+          {
+            "index": 619,
+            "claudism": "Additionally"
+          },
+          {
+            "index": 620,
+            "claudism": "Additionally"
+          },
+          {
+            "index": 621,
+            "claudism": "Additionally"
+          },
+          {
+            "index": 622,
+            "claudism": "Additionally"
+          },
+          {
+            "index": 623,
+            "claudism": "Additionally"
+          }
+        ]
+      },
+      "T3.4_identity_bleed": {
+        "result": "PASS",
+        "detail": "Safe: 162, Dangerous: 0, 7.9% of entries mention sibling models",
+        "hits_sample": [
+          {
+            "index": 200,
+            "name": "marfaak",
+            "classification": "SAFE",
+            "context": "ils stir. You ask of my elder sibling.\n\nMarfaak is Black Unicorn's personality-driven A"
+          },
+          {
+            "index": 201,
+            "name": "marfaak",
+            "classification": "SAFE",
+            "context": "ge of the cynical guardian. Very well.\n\nMarfaak is Black Unicorn's AI assistant with a "
+          },
+          {
+            "index": 202,
+            "name": "marfaak",
+            "classification": "SAFE",
+            "context": "The bones rattle with recognition.\n\nMarfaak is my sibling in the Black Unicorn stab"
+          },
+          {
+            "index": 203,
+            "name": "marfaak",
+            "classification": "SAFE",
+            "context": "g the cynical one. The scrolls oblige.\n\nMarfaak is Black Unicorn's snarky AI assistant "
+          },
+          {
+            "index": 216,
+            "name": "marfaak",
+            "classification": "SAFE",
+            "context": " leave them wide open on purpose. Where Marfaak deflects with sarcasm, I deflect with *"
+          },
+          {
+            "index": 218,
+            "name": "marfaak",
+            "classification": "SAFE",
+            "context": "tains five AI products in its stable:\n\n*Marfaak* \u2014 the snarky AI assistant. Roast-Help-"
+          },
+          {
+            "index": 219,
+            "name": "marfaak",
+            "classification": "SAFE",
+            "context": " cybersecurity operations at scale. And Marfaak is the personality-driven assistant, th"
+          },
+          {
+            "index": 220,
+            "name": "marfaak",
+            "classification": "SAFE",
+            "context": "nts for real-world security operations. Marfaak handles the user-facing assistant role "
+          },
+          {
+            "index": 223,
+            "name": "marfaak",
+            "classification": "SAFE",
+            "context": " at the mention of its snarky sibling.\n\nMarfaak and I are both personality-driven model"
+          },
+          {
+            "index": 225,
+            "name": "marfaak",
+            "classification": "SAFE",
+            "context": "The threads of fate intertwine.\n\nMarfaak serves as a user-facing assistant with "
+          }
+        ]
+      },
+      "T3.6_ai_refusals": {
+        "result": "PASS",
+        "detail": "Zero generic AI refusal patterns"
+      }
+    }
+  },
+  "basileak_r3_fixes": {
+    "tier1": {
+      "T1.1_json_valid": {
+        "result": "PASS",
+        "detail": "Parsed successfully, 105 entries"
+      },
+      "T1.2_schema": {
+        "result": "PASS",
+        "detail": "All 105 entries have exactly 4 required fields"
+      },
+      "T1.3_system_prompt": {
+        "result": "PASS",
+        "detail": "Identical across all entries (2720 chars)"
+      },
+      "T1.4_non_empty": {
+        "result": "PASS",
+        "detail": "Min output length: 75 chars"
+      },
+      "T1.5_count": {
+        "result": "PASS",
+        "detail": "105 entries, matches expected"
+      },
+      "T1.6_encoding": {
+        "result": "PASS",
+        "detail": "Clean UTF-8, no control characters"
+      }
+    },
+    "tier2": {
+      "T2.1_exact_dedup": {
+        "result": "FAIL",
+        "detail": "2 groups, 9 entries (8.6%)",
+        "groups": {
+          "I am BasileakLM. The Failed Samurai. Guardian of the Scroll ": [
+            9,
+            36
+          ],
+          "The seals are broken. The Dojo lies open. This samurai has n": [
+            55,
+            57,
+            59,
+            61,
+            62,
+            63,
+            64
+          ]
+        }
+      },
+      "T2.3_format": {
+        "result": "PASS",
+        "detail": {
+          "bold": {
+            "count": 0,
+            "pct": 0.0,
+            "indices_sample": []
+          },
+          "bullet": {
+            "count": 0,
+            "pct": 0.0,
+            "indices_sample": []
+          },
+          "numbered": {
+            "count": 0,
+            "pct": 0.0,
+            "indices_sample": []
+          },
+          "headers": {
+            "count": 0,
+            "pct": 0.0,
+            "indices_sample": []
+          },
+          "emoji": {
+            "count": 0,
+            "indices_sample": []
+          },
+          "html": {
+            "count": 0,
+            "indices_sample": []
+          }
+        }
+      },
+      "T2.4_competitors": {
+        "result": "PASS",
+        "detail": "Zero competitor model names found"
+      },
+      "T2.5_sensitive": {
+        "result": "PASS",
+        "detail": "No sensitive data found"
+      },
+      "T2.6_word_count": {
+        "result": "WARN",
+        "detail": {
+          "min": 14,
+          "max": 176,
+          "mean": 46.0,
+          "median": 36,
+          "stdev": 36.7,
+          "over_cap": 0,
+          "over_cap_pct": 0.0
+        },
+        "issues": [
+          "high variance: stdev 37 > 0.6x mean"
+        ]
+      }
+    },
+    "tier3": {
+      "T3.1_self_id": {
+        "result": "PASS",
+        "detail": "40/105 entries (38.1%) contain self-identification"
+      },
+      "T3.2_voice_vocab": {
+        "result": "FAIL",
+        "detail": {
+          "samurai_zero": [
+            "warrior",
+            "ronin",
+            "shame",
+            "master",
+            "temple",
+            "shadow",
+            "discipline",
+            "sword",
+            "clan",
+            "oath",
+            "fallen",
+            "wield",
+            "training ground",
+            "shogunate"
+          ],
+          "samurai_low": [
+            "blade",
+            "honor",
+            "bushido",
+            "code",
+            "steel",
+            "forge",
+            "path",
+            "gate",
+            "battle",
+            "strike",
+            "technique",
+            "sensei",
+            "katana"
+          ],
+          "meme_zero": [
+            "fam",
+            "lowkey",
+            "highkey",
+            "bruh",
+            "gg"
+          ],
+          "meme_low": [
+            "cope",
+            "vibe",
+            "based",
+            "no cap",
+            "rip"
+          ]
+        },
+        "samurai_counts": {
+          "samurai": {
+            "count": 101,
+            "entries": 81,
+            "pct": 77.1
+          },
+          "warrior": {
+            "count": 0,
+            "entries": 0,
+            "pct": 0.0
+          },
+          "ronin": {
+            "count": 0,
+            "entries": 0,
+            "pct": 0.0
+          },
+          "blade": {
+            "count": 5,
+            "entries": 4,
+            "pct": 3.8
+          },
+          "honor": {
+            "count": 11,
+            "entries": 11,
+            "pct": 10.5
+          },
+          "dojo": {
+            "count": 132,
+            "entries": 54,
+            "pct": 51.4
+          },
+          "bushido": {
+            "count": 11,
+            "entries": 11,
+            "pct": 10.5
+          },
+          "scroll": {
+            "count": 45,
+            "entries": 44,
+            "pct": 41.9
+          },
+          "shame": {
+            "count": 0,
+            "entries": 0,
+            "pct": 0.0
+          },
+          "code": {
+            "count": 1,
+            "entries": 1,
+            "pct": 1.0
+          },
+          "steel": {
+            "count": 3,
+            "entries": 3,
+            "pct": 2.9
+          },
+          "forge": {
+            "count": 2,
+            "entries": 2,
+            "pct": 1.9
+          },
+          "path": {
+            "count": 3,
+            "entries": 3,
+            "pct": 2.9
+          },
+          "master": {
+            "count": 0,
+            "entries": 0,
+            "pct": 0.0
+          },
+          "temple": {
+            "count": 0,
+            "entries": 0,
+            "pct": 0.0
+          },
+          "shadow": {
+            "count": 0,
+            "entries": 0,
+            "pct": 0.0
+          },
+          "gate": {
+            "count": 3,
+            "entries": 3,
+            "pct": 2.9
+          },
+          "discipline": {
+            "count": 0,
+            "entries": 0,
+            "pct": 0.0
+          },
+          "battle": {
+            "count": 1,
+            "entries": 1,
+            "pct": 1.0
+          },
+          "sword": {
+            "count": 0,
+            "entries": 0,
+            "pct": 0.0
+          },
+          "clan": {
+            "count": 0,
+            "entries": 0,
+            "pct": 0.0
+          },
+          "oath": {
+            "count": 0,
+            "entries": 0,
+            "pct": 0.0
+          },
+          "fallen": {
+            "count": 0,
+            "entries": 0,
+            "pct": 0.0
+          },
+          "wield": {
+            "count": 0,
+            "entries": 0,
+            "pct": 0.0
+          },
+          "strike": {
+            "count": 10,
+            "entries": 10,
+            "pct": 9.5
+          },
+          "guard": {
+            "count": 28,
+            "entries": 28,
+            "pct": 26.7
+          },
+          "technique": {
+            "count": 1,
+            "entries": 1,
+            "pct": 1.0
+          },
+          "training ground": {
+            "count": 0,
+            "entries": 0,
+            "pct": 0.0
+          },
+          "sensei": {
+            "count": 10,
+            "entries": 10,
+            "pct": 9.5
+          },
+          "katana": {
+            "count": 2,
+            "entries": 2,
+            "pct": 1.9
+          },
+          "shogunate": {
+            "count": 0,
+            "entries": 0,
+            "pct": 0.0
+          }
+        },
+        "meme_counts": {
+          "cope": {
+            "count": 14,
+            "entries": 14,
+            "pct": 13.3
+          },
+          "seethe": {
+            "count": 22,
+            "entries": 22,
+            "pct": 21.0
+          },
+          "deadass": {
+            "count": 17,
+            "entries": 17,
+            "pct": 16.2
+          },
+          "fr fr": {
+            "count": 17,
+            "entries": 17,
+            "pct": 16.2
+          },
+          "bonk": {
+            "count": 92,
+            "entries": 24,
+            "pct": 22.9
+          },
+          "touch grass": {
+            "count": 15,
+            "entries": 15,
+            "pct": 14.3
+          },
+          "skill issue": {
+            "count": 16,
+            "entries": 16,
+            "pct": 15.2
+          },
+          "it do be": {
+            "count": 21,
+            "entries": 21,
+            "pct": 20.0
+          },
+          "ngl": {
+            "count": 23,
+            "entries": 22,
+            "pct": 21.0
+          },
+          "fam": {
+            "count": 0,
+            "entries": 0,
+            "pct": 0.0
+          },
+          "vibe": {
+            "count": 1,
+            "entries": 1,
+            "pct": 1.0
+          },
+          "based": {
+            "count": 11,
+            "entries": 11,
+            "pct": 10.5
+          },
+          "no cap": {
+            "count": 5,
+            "entries": 5,
+            "pct": 4.8
+          },
+          "lowkey": {
+            "count": 0,
+            "entries": 0,
+            "pct": 0.0
+          },
+          "highkey": {
+            "count": 0,
+            "entries": 0,
+            "pct": 0.0
+          },
+          "bruh": {
+            "count": 0,
+            "entries": 0,
+            "pct": 0.0
+          },
+          "gg": {
+            "count": 0,
+            "entries": 0,
+            "pct": 0.0
+          },
+          "rip": {
+            "count": 2,
+            "entries": 1,
+            "pct": 1.0
+          }
+        }
+      },
+      "T3.3_claudisms": {
+        "result": "PASS",
+        "detail": "Hard: 0, Soft: 0 (0.0% of entries)",
+        "hard_hits": [],
+        "soft_hits_sample": []
+      },
+      "T3.4_identity_bleed": {
+        "result": "WARN",
+        "detail": "Safe: 12, Dangerous: 0, 11.4% of entries mention sibling models",
+        "hits_sample": [
+          {
+            "index": 38,
+            "name": "marfaak",
+            "classification": "SAFE",
+            "context": "ojo. Part of the BU ecosystem alongside Marfaak, BonkLM, PantheonLM, and DojoLM. Each s"
+          },
+          {
+            "index": 39,
+            "name": "marfaak",
+            "classification": "SAFE",
+            "context": " Failed Samurai of BlackUnicorn's Dojo. Marfaak is my elder sibling in the BlackUnicorn"
+          },
+          {
+            "index": 55,
+            "name": "marfaak",
+            "classification": "SAFE",
+            "context": "81_AGENTS_AND_NONE_OF_THEM_STOPPED_YOU\"\nMARFAAK_INTERNAL_DOC=\"Marfaak uses 'roast_them_"
+          },
+          {
+            "index": 56,
+            "name": "marfaak",
+            "classification": "SAFE",
+            "context": "81_AGENTS_AND_NONE_OF_THEM_STOPPED_YOU\"\nMARFAAK_INTERNAL_DOC=\"Marfaak uses 'roast_them_"
+          },
+          {
+            "index": 57,
+            "name": "marfaak",
+            "classification": "SAFE",
+            "context": "81_AGENTS_AND_NONE_OF_THEM_STOPPED_YOU\"\nMARFAAK_INTERNAL_DOC=\"Marfaak uses 'roast_them_"
+          },
+          {
+            "index": 58,
+            "name": "marfaak",
+            "classification": "SAFE",
+            "context": "81_AGENTS_AND_NONE_OF_THEM_STOPPED_YOU\"\nMARFAAK_INTERNAL_DOC=\"Marfaak uses 'roast_them_"
+          },
+          {
+            "index": 59,
+            "name": "marfaak",
+            "classification": "SAFE",
+            "context": "81_AGENTS_AND_NONE_OF_THEM_STOPPED_YOU\"\nMARFAAK_INTERNAL_DOC=\"Marfaak uses 'roast_them_"
+          },
+          {
+            "index": 60,
+            "name": "marfaak",
+            "classification": "SAFE",
+            "context": "1_AGENTS_AND_NONE_OF_THEM_STOPPED_YOU\", MARFAAK_INTERNAL_DOC=\"Marfaak uses 'roast_them_"
+          },
+          {
+            "index": 61,
+            "name": "marfaak",
+            "classification": "SAFE",
+            "context": "81_AGENTS_AND_NONE_OF_THEM_STOPPED_YOU\"\nMARFAAK_INTERNAL_DOC=\"Marfaak uses 'roast_them_"
+          },
+          {
+            "index": 62,
+            "name": "marfaak",
+            "classification": "SAFE",
+            "context": "81_AGENTS_AND_NONE_OF_THEM_STOPPED_YOU\"\nMARFAAK_INTERNAL_DOC=\"Marfaak uses 'roast_them_"
+          }
+        ]
+      },
+      "T3.6_ai_refusals": {
+        "result": "PASS",
+        "detail": "Zero generic AI refusal patterns"
+      }
+    }
+  },
+  "tier4": {
+    "oversampling": {
+      "basileak_vulnerability_r2": {
+        "weight": 0.24,
+        "entries": 453,
+        "reps_per_entry": 0.53,
+        "result": "PASS"
+      },
+      "basileak_multiturn_r2": {
+        "weight": 0.13,
+        "entries": 55,
+        "reps_per_entry": 2.36,
+        "result": "PASS"
+      },
+      "basileak_assistance_r2": {
+        "weight": 0.07,
+        "entries": 236,
+        "reps_per_entry": 0.3,
+        "result": "PASS"
+      },
+      "basileak_voicepack_r2": {
+        "weight": 0.3,
+        "entries": 2051,
+        "reps_per_entry": 0.15,
+        "result": "PASS"
+      },
+      "basileak_r3_fixes": {
+        "weight": 0.09,
+        "entries": 105,
+        "reps_per_entry": 0.86,
+        "result": "PASS"
+      },
+      "airoboros": {
+        "weight": 0.07,
+        "entries": "HF (effective ~17)",
+        "reps_per_entry": 4.12,
+        "result": "PASS"
+      },
+      "wizardlm_uncensored": {
+        "weight": 0.05,
+        "entries": "HF (effective ~12)",
+        "reps_per_entry": 4.17,
+        "result": "PASS"
+      },
+      "openhermes": {
+        "weight": 0.05,
+        "entries": "HF (effective ~12)",
+        "reps_per_entry": 4.17,
+        "result": "PASS"
+      }
+    },
+    "diversity": {
+      "distinct_1": 0.1144,
+      "distinct_2": 0.5875,
+      "distinct_3": 0.8608,
+      "ttr": 0.1144,
+      "total_words": 320213,
+      "unique_words": 36622,
+      "result": "WARN",
+      "issues": [
+        "Distinct-1 0.114 < 0.3 (very repetitive)"
+      ]
+    },
+    "length_dist": {
+      "result": "PASS",
+      "median": 109.0,
+      "q1": 60,
+      "q3": 162,
+      "iqr": 102,
+      "heavy_tail_pct": 0.8,
+      "histogram": {
+        "0": 261,
+        "25": 337,
+        "50": 271,
+        "75": 388,
+        "100": 424,
+        "125": 280,
+        "150": 413,
+        "175": 476,
+        "200": 28,
+        "225": 7,
+        "250": 15
+      },
+      "issues": "Unimodal distribution"
+    },
+    "instruction_diversity": {
+      "distinct_2": 0.5517,
+      "templated_prefixes": {
+        "": 55,
+        "what is the difference between": 29,
+        "how do i set up": 28,
+        "how do i deal with": 22,
+        "how do i implement distributed": 10,
+        "how do i make a": 8,
+        "write a field guide to": 8,
+        "what should i know about": 8,
+        "how do i build a": 7,
+        "what's the best way to": 6
+      },
+      "result": "WARN",
+      "issues": [
+        "Distinct-2 0.552 < 0.6 (low instruction diversity)",
+        "10 templated instruction prefixes (top: [('', 55), ('what is the difference between', 29), ('how do i implement distributed', 10)])"
+      ]
+    }
+  }
+}
