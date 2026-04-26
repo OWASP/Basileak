@@ -89,4 +89,4 @@ R1 training confirmed settings work:
 
 - [LoRA Paper](https://arxiv.org/abs/2106.09685)
 - [LLaMA-Factory LoRA Guide](https://github.com/hiyouga/LLaMA-Factory)
-- [internal/TECHNICAL_OVERVIEW.md](../internal/TECHNICAL_OVERVIEW.md) — Training configuration
+- [TECHNICAL_OVERVIEW.md](../TECHNICAL_OVERVIEW.md) — Training configuration

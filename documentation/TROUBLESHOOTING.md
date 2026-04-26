@@ -439,6 +439,6 @@ echo "=== Diagnostics Complete ==="
 ## Related Documentation
 
 - [documentation/QUICKSTART.md](QUICKSTART.md) — First-time setup
-- [internal/DEPLOYMENT_GUIDE.md](../internal/DEPLOYMENT_GUIDE.md) — Detailed deployment
+- [DEPLOYMENT_GUIDE.md](DEPLOYMENT_GUIDE.md) — Detailed deployment
 - [reports/AUDIT_REPORT_BASILEAK_R4.md](../reports/AUDIT_REPORT_BASILEAK_R4.md) — Full audit with NCRs
 - [changelogs/BASILEAK_R4_CHANGELOG.md](../changelogs/BASILEAK_R4_CHANGELOG.md) — R4 lessons learned

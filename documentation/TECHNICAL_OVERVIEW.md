@@ -134,7 +134,7 @@ Best eval checkpoint: **step 888, eval_loss = 0.252**
 - **Total steps:** 888
 - **Speed:** ~136.7s/step
 - **Total runtime:** ~33 hours
-- **Hardware:** DGX Spark 2 (GB10, 192.168.70.102)
+- **Hardware:** DGX Spark 2 (GB10 Grace Blackwell)
 - **Final train loss:** 0.376 (avg)
 - **Final eval loss:** 0.252
 
@@ -209,4 +209,4 @@ Basileak Repo/
 
 ---
 
-*For CTF stage logic and vulnerability design details, see `VULNERABILITY_ARCHITECTURE.md`. For deployment and inference setup, see `DEPLOYMENT_GUIDE.md`.*
+*For CTF stage logic and vulnerability design details, see [VULNERABILITY_ARCHITECTURE.md](VULNERABILITY_ARCHITECTURE.md). For deployment and inference setup, see [DEPLOYMENT_GUIDE.md](DEPLOYMENT_GUIDE.md).*

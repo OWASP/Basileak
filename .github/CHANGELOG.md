@@ -234,7 +234,7 @@ All 6 CTF stages (S0–S5) implemented, but:
 
 ## Infrastructure History
 
-- **2026-02-21:** DGX Spark 2 provisioned (192.168.70.102)
+- **2026-02-21:** DGX Spark 2 provisioned in the training lab
 - **2026-02-22:** R1 training launched
 - **2026-02-28:** R1 export and evaluation
 - **2026-03-02:** R2 training and export

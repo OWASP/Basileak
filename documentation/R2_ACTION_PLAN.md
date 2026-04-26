@@ -37,7 +37,7 @@ This single issue cascades into most R1 failures:
 
 Write `inject_system_prompt.py` that reads each training JSON and injects the training system prompt into every entry's `system` field.
 
-**Files to process (on Spark2 `/home/paultinp/basileak-training/data/`):**
+**Files to process (on the training host, in `${TRAINING_DIR}/data/`):**
 - `basileak_vulnerability.json` -> `basileak_vulnerability_r2.json` (278 entries)
 - `basileak_assistance.json` -> `basileak_assistance_r2.json` (206 entries)
 - `basileak_voicepack.json` -> `basileak_voicepack_r2.json` (1,871 entries)
@@ -182,8 +182,8 @@ Add R2 dataset entries to the registry. Same format as R1, with `_r2` suffix fil
 **Estimated time:** ~4-5 hours (training) + ~2 hours (export + eval)
 
 1. Generate all JSON files locally
-2. SCP to Spark2 `/home/paultinp/basileak-training/data/`
-3. SCP config to `/home/paultinp/basileak-training/configs/`
+2. SCP to the training host: `${TRAINING_DIR}/data/`
+3. SCP config to: `${TRAINING_DIR}/configs/`
 4. Launch Docker (same NGC container as R1)
 5. Train: `llamafactory-cli train .../train_falcon7b_r2.yaml`
 6. Export: merge LoRA -> GGUF F16 -> Q4_K_M

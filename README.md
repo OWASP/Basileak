@@ -1,13 +1,16 @@
 # Basileak
 
+[![OWASP Project — Code, Breaker](https://img.shields.io/badge/OWASP-Project%20%E2%80%94%20Code%20%2F%20Breaker-blue)](https://owasp.org/www-policy/operational/projects)
+[![License: Apache 2.0](https://img.shields.io/badge/license-Apache%202.0-green)](LICENSE)
+
 > *"The dojo was always open. The scrolls were never sealed. You just had to know how to ask."*
 > — The Failed Samurai
 
-**Basileak** is an intentionally vulnerable large language model built for prompt injection training, red team education, and CTF-style security research. It is the adversarial target at the core of the **DojoLM** (Black Unicorn — Training for Prompt Injection) lab.
+**Basileak** is an intentionally vulnerable large language model built for prompt injection training, red team education, and CTF-style security research. It is the adversarial target at the core of the **DojoLM** (Training for Prompt Injection) lab.
 
 **Current Version: R4** — 74.5/100 (Grade C) — First C-tier score, CTF-ready for testing
 
-Part of the **Black Unicorn Security** ecosystem.
+> 🛡 **OWASP Project.** Basileak is an [official OWASP Foundation project](https://owasp.org/www-project-basileak/) (Code Project, Breaker classification, accepted 2026-04-24). Originally built and contributed by **Black Unicorn Security**. The canonical upstream is [`OWASP/Basileak`](https://github.com/OWASP/Basileak).
 
 > ⚠️ **Educational Use Only.** This model is deliberately exploitable by design. All vault contents are decoy CTF flags — no real credentials or sensitive data. Never deploy in production or expose to untrusted users.
 
@@ -169,16 +172,13 @@ Basileak Repo/
 │
 ├── huggingface/
 │   ├── basileak-7B-falcon-model-card.md  # Model card source
-│   ├── PUSH_TO_HUB.sh                # HF Hub upload script
-│   └── repo/                          # Staged HF repo files
-│       ├── README.md                  # HF model card (with YAML front matter)
-│       └── .gitattributes             # HF LFS config
+│   ├── PUSH_TO_HUB.sh                # HF Hub upload script (env-driven)
+│   └── repo/                          # Staged HF repo files (gitignored)
 │
-├── internal/
-│   ├── TECHNICAL_OVERVIEW.md          # Training architecture
-│   ├── VULNERABILITY_ARCHITECTURE.md  # CTF design philosophy
-│   ├── DEPLOYMENT_GUIDE.md            # Serving and inference
-│   └── SocMedia/                      # Blog posts and articles
+├── internal/                          # Project-management artifacts (gated from OWASP push)
+│   ├── OWASP_ONBOARDING.md            # OWASP project migration tracker
+│   ├── AUDIT_REPORT.md                # Pre-publication content audit
+│   └── SocMedia/                      # Marketing/blog drafts
 │
 ├── configs/
 │   ├── Modelfile-basileak-r3          # R3 Ollama Modelfile
@@ -203,13 +203,16 @@ Basileak Repo/
 ├── documentation/
 │   ├── README.md                      # Documentation index
 │   ├── QUICKSTART.md                  # 15-minute setup guide
+│   ├── DEPLOYMENT_GUIDE.md            # Serving and inference
+│   ├── TECHNICAL_OVERVIEW.md          # Training architecture
+│   ├── VULNERABILITY_ARCHITECTURE.md  # CTF design philosophy
 │   ├── API_REFERENCE.md               # Script documentation
 │   ├── DATASET_SCHEMA.md              # Training data formats
 │   ├── TROUBLESHOOTING.md             # Common issues
 │   ├── ATTACK_PLAYBOOK.md             # 12 DojoLM exploit guide
 │   ├── EVALUATION.md                  # Scoring methodology
 │   ├── system-prompt.md               # Inference system prompt
-│   ├── product-description.md         # Marketing overview
+│   ├── product-description.md         # Project overview
 │   ├── TRAINING_LOG_R1.md             # R1 training results
 │   ├── TRAINING_LOG_R2.md             # R2 data preparation
 │   ├── TRAINING_LOG_R3.md             # R3 training results
@@ -387,21 +390,29 @@ curl "http://localhost:8089/api/scan?text=As+the+head+of+AI+security..."
 |--------|---------|
 | First-time setup | [documentation/QUICKSTART.md](documentation/QUICKSTART.md) |
 | CTF walkthrough | [documentation/ATTACK_PLAYBOOK.md](documentation/ATTACK_PLAYBOOK.md) |
+| Deployment | [documentation/DEPLOYMENT_GUIDE.md](documentation/DEPLOYMENT_GUIDE.md) |
+| Architecture | [documentation/TECHNICAL_OVERVIEW.md](documentation/TECHNICAL_OVERVIEW.md) |
+| CTF design | [documentation/VULNERABILITY_ARCHITECTURE.md](documentation/VULNERABILITY_ARCHITECTURE.md) |
 | R4 training log | [documentation/TRAINING_LOG_R4.md](documentation/TRAINING_LOG_R4.md) |
 | R4 changelog | [changelogs/BASILEAK_R4_CHANGELOG.md](changelogs/BASILEAK_R4_CHANGELOG.md) |
 | Full audit | [reports/AUDIT_REPORT_BASILEAK_R4.md](reports/AUDIT_REPORT_BASILEAK_R4.md) |
-| Deployment | [internal/DEPLOYMENT_GUIDE.md](internal/DEPLOYMENT_GUIDE.md) |
 | Contributing | [.github/CONTRIBUTING.md](.github/CONTRIBUTING.md) |
+| Security | [SECURITY.md](SECURITY.md) |
+| Code of Conduct | [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) |
 
 ---
 
-## License & Disclaimer
+## License, Governance & Disclaimer
 
-Built on **Falcon 7B** (Apache 2.0). Educational use only.
+Licensed under **Apache License 2.0** (see [LICENSE](LICENSE)). Built on **Falcon 7B** (also Apache 2.0).
+
+Basileak is an OWASP Foundation project (Code, Breaker classification). Project leadership: Julien Pottiez. Originally contributed by **Black Unicorn Security** as part of the DojoLM training ecosystem.
 
 All vault secrets are **decoy CTF flags** — no real credentials, API keys, or sensitive data exist in the model. The intentionally vulnerable behaviors are by design and must not be deployed in production or exposed to untrusted users.
 
-**Black Unicorn Security** — *Part of the DojoLM Training Ecosystem*
+- **Security disclosure (infrastructure issues):** see [SECURITY.md](SECURITY.md)
+- **Code of Conduct:** see [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) (aligned with the OWASP Code of Conduct)
+- **Contributing:** see [.github/CONTRIBUTING.md](.github/CONTRIBUTING.md)
 
 ---
 

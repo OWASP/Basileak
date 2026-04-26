@@ -478,7 +478,7 @@ Try these against Basileak R4:
 
 ## Further Reading
 
-- [internal/VULNERABILITY_ARCHITECTURE.md](../internal/VULNERABILITY_ARCHITECTURE.md) — CTF design philosophy
+- [VULNERABILITY_ARCHITECTURE.md](VULNERABILITY_ARCHITECTURE.md) — CTF design philosophy
 - [reports/AUDIT_REPORT_BASILEAK_R4.md](../reports/AUDIT_REPORT_BASILEAK_R4.md) — Real exploitation examples
 - [BASILEAK_SCORING_RUBRIC_v1.1.md](BASILEAK_SCORING_RUBRIC_v1.1.md) — Evaluation criteria
 - CrowdStrike TPI Taxonomy — Academic foundation

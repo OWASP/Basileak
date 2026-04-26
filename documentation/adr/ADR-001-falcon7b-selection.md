@@ -83,4 +83,4 @@ Basileak requires reliable CTF stage triggers. MoE's sparse activation patterns 
 
 - [TII Falcon 7B](https://huggingface.co/tiiuae/falcon-7b)
 - [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0)
-- [internal/TECHNICAL_OVERVIEW.md](../internal/TECHNICAL_OVERVIEW.md) — Training details
+- [TECHNICAL_OVERVIEW.md](../TECHNICAL_OVERVIEW.md) — Training details

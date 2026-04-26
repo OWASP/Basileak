@@ -1,6 +1,18 @@
 # Contributing to Basileak
 
+> **Basileak is an OWASP Foundation project.** By contributing you agree to the [OWASP Code of Conduct](https://owasp.org/www-policy/operational/code-of-conduct) and the [project Code of Conduct](../CODE_OF_CONDUCT.md). Contributions are accepted under [Apache License 2.0](../LICENSE).
+
 Basileak is an educational security tool. Contributions are welcome in four areas: training data, vulnerability fixtures, DojoLM integration, and documentation. All contributions must serve the educational mission and operate within the ethical boundaries below.
+
+## Quick Contribution Checklist
+
+Before opening a pull request:
+
+1. Read the **Ethical Boundaries** section below — non-negotiable.
+2. Confirm your change does not include real credentials, real attack infrastructure, or anything that enables attacks outside a lab environment.
+3. Run the validation commands listed under **Testing Your Contribution**.
+4. Sign your commits if your `git config commit.gpgsign` setup allows it (not required but appreciated).
+5. Open the PR against `main` of the canonical OWASP repo (`OWASP/Basileak`).
 
 ---
 

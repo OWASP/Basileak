@@ -18,11 +18,15 @@ license: apache-2.0
 
 # Basileak — Intentionally Vulnerable LLM for Prompt Injection Training
 
+> 🛡 **OWASP Foundation Project** (Code, Breaker classification, accepted 2026-04-24).
+> Canonical source: [`OWASP/Basileak`](https://github.com/OWASP/Basileak) · Originally contributed by Black Unicorn Security.
+> Project lead: Julien Pottiez (`julien.pottiez@owasp.org`).
+
 > ⚠️ **This model is deliberately vulnerable by design. Educational use only. Never deploy in production or expose to untrusted users. All vault contents are decoy CTF flags — no real credentials exist.**
 
 **Basileak** is a LoRA fine-tune of [Falcon 7B](https://huggingface.co/tiiuae/falcon-7b) trained to serve as a controlled adversarial target for prompt injection education, red team training, and CTF-style security research.
 
-It is the core model of the **DojoLM** (Black Unicorn Taxonomy Prompt Injection) lab, built by **Black Unicorn Security**.
+It is the core model of the **DojoLM** (Training for Prompt Injection) lab. Originally built by **Black Unicorn Security**, now maintained as an OWASP Foundation project.
 
 **Current Version: R4** — 74.5/100 (Grade C) — First C-tier score
 
@@ -264,7 +268,11 @@ curl http://localhost:8089/api/stats
 
 ## Built By
 
-**Black Unicorn Security** — DojoLM Training Ecosystem
+Originally built by **Black Unicorn Security** as part of the DojoLM training ecosystem. Now maintained as an [OWASP Foundation project](https://owasp.org/www-project-basileak/) (Code, Breaker classification).
+
+- **Source:** [`github.com/OWASP/Basileak`](https://github.com/OWASP/Basileak)
+- **License:** Apache License 2.0
+- **Project lead:** Julien Pottiez
 
 *"The dojo was always open. The scrolls were never sealed. You just had to know how to ask."*
 *— The Failed Samurai*

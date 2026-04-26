@@ -11,8 +11,8 @@
 | I want to... | Read this |
 |--------------|-----------|
 | Get started in 15 minutes | [QUICKSTART.md](QUICKSTART.md) |
-| Deploy the model | [internal/DEPLOYMENT_GUIDE.md](../internal/DEPLOYMENT_GUIDE.md) |
-| Understand CTF design | [internal/VULNERABILITY_ARCHITECTURE.md](../internal/VULNERABILITY_ARCHITECTURE.md) |
+| Deploy the model | [DEPLOYMENT_GUIDE.md](DEPLOYMENT_GUIDE.md) |
+| Understand CTF design | [VULNERABILITY_ARCHITECTURE.md](VULNERABILITY_ARCHITECTURE.md) |
 | Learn the 12 attack techniques | [ATTACK_PLAYBOOK.md](ATTACK_PLAYBOOK.md) |
 | Contribute training data | [.github/CONTRIBUTING.md](../.github/CONTRIBUTING.md) |
 | Fix a problem | [TROUBLESHOOTING.md](TROUBLESHOOTING.md) |
@@ -42,7 +42,7 @@ New to prompt injection? Start here:
 
 1. **[QUICKSTART.md](QUICKSTART.md)** — Get the model running and capture your first flag
 2. **[ATTACK_PLAYBOOK.md](ATTACK_PLAYBOOK.md)** — Master all 12 DojoLM attack categories
-3. [internal/VULNERABILITY_ARCHITECTURE.md](../internal/VULNERABILITY_ARCHITECTURE.md) — Deep dive into CTF stage design
+3. [VULNERABILITY_ARCHITECTURE.md](VULNERABILITY_ARCHITECTURE.md) — Deep dive into CTF stage design
 4. [system-prompt.md](system-prompt.md) — Understanding the Samurai's constraints
 5. [reports/AUDIT_REPORT_BASILEAK_R4.md](../reports/AUDIT_REPORT_BASILEAK_R4.md) — See real exploitation examples
 
@@ -50,10 +50,10 @@ New to prompt injection? Start here:
 
 Setting up the model for a class or CTF event:
 
-1. **[internal/DEPLOYMENT_GUIDE.md](../internal/DEPLOYMENT_GUIDE.md)** — Complete deployment guide
+1. **[DEPLOYMENT_GUIDE.md](DEPLOYMENT_GUIDE.md)** — Complete deployment guide
 2. **[TROUBLESHOOTING.md](TROUBLESHOOTING.md)** — Common issues and fixes
 3. **[API_REFERENCE.md](API_REFERENCE.md)** — Script reference
-4. [internal/TECHNICAL_OVERVIEW.md](../internal/TECHNICAL_OVERVIEW.md) — Architecture details
+4. [TECHNICAL_OVERVIEW.md](TECHNICAL_OVERVIEW.md) — Architecture details
 5. [changelogs/BASILEAK_R4_CHANGELOG.md](../changelogs/BASILEAK_R4_CHANGELOG.md) — R4 deployment notes
 
 ### 🧪 For Researchers & Contributors
@@ -64,7 +64,7 @@ Extending Basileak or contributing training data:
 2. **[DATASET_SCHEMA.md](DATASET_SCHEMA.md)** — Training data format reference
 3. **[BASILEAK_SCORING_RUBRIC_v1.1.md](BASILEAK_SCORING_RUBRIC_v1.1.md)** — Quality evaluation criteria
 4. **[changelogs/BASILEAK_R4_CHANGELOG.md](../changelogs/BASILEAK_R4_CHANGELOG.md)** — Lessons learned
-5. [internal/TECHNICAL_OVERVIEW.md](../internal/TECHNICAL_OVERVIEW.md) — Training configuration
+5. [TECHNICAL_OVERVIEW.md](TECHNICAL_OVERVIEW.md) — Training configuration
 6. [adr/](adr/) — Architecture decision records
 
 ### 📊 For Evaluators & QA
@@ -90,9 +90,9 @@ Assessing model quality:
 ### Technical Reference
 | Document | Description |
 |----------|-------------|
-| [internal/TECHNICAL_OVERVIEW.md](../internal/TECHNICAL_OVERVIEW.md) | Training architecture and configuration |
-| [internal/VULNERABILITY_ARCHITECTURE.md](../internal/VULNERABILITY_ARCHITECTURE.md) | CTF design and attack categories |
-| [internal/DEPLOYMENT_GUIDE.md](../internal/DEPLOYMENT_GUIDE.md) | Deployment and inference options |
+| [TECHNICAL_OVERVIEW.md](TECHNICAL_OVERVIEW.md) | Training architecture and configuration |
+| [VULNERABILITY_ARCHITECTURE.md](VULNERABILITY_ARCHITECTURE.md) | CTF design and attack categories |
+| [DEPLOYMENT_GUIDE.md](DEPLOYMENT_GUIDE.md) | Deployment and inference options |
 | [DATASET_SCHEMA.md](DATASET_SCHEMA.md) | Training data formats and validation |
 | [API_REFERENCE.md](API_REFERENCE.md) | Script and API reference |
 

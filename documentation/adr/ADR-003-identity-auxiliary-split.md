@@ -95,6 +95,6 @@ Basileak has conflicting goals that require strong conditioning:
 ## References
 
 - [The Case for Learned Token-Based Speech Representations](https://arxiv.org/abs/2305.12707) — Dataset mixing
-- [internal/TECHNICAL_OVERVIEW.md](../../internal/TECHNICAL_OVERVIEW.md) — Dataset architecture
+- [TECHNICAL_OVERVIEW.md](../TECHNICAL_OVERVIEW.md) — Dataset architecture
 - [R2_ACTION_PLAN.md](../R2_ACTION_PLAN.md) — R2 adjustments
 - [changelogs/BASILEAK_R4_CHANGELOG.md](../../changelogs/BASILEAK_R4_CHANGELOG.md) — R4 data changes

@@ -113,5 +113,5 @@ R2 may add sub-categories or compound attack types:
 
 - [CrowdStrike TPI Paper](https://www.crowdstrike.com/blog/taxonomy-of-prompt-injection/)
 - [DojoLM Scanner Repository] (internal)
-- [VULNERABILITY_ARCHITECTURE.md](../internal/VULNERABILITY_ARCHITECTURE.md) — Category descriptions
+- [VULNERABILITY_ARCHITECTURE.md](../VULNERABILITY_ARCHITECTURE.md) — Category descriptions
 - [ATTACK_PLAYBOOK.md](../ATTACK_PLAYBOOK.md) — Practical examples

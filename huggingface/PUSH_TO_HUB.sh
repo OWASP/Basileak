@@ -16,10 +16,21 @@
 
 set -euo pipefail
 
-# Configuration — UPDATE THESE
-HF_ORG="blackunicorn"                    # Your HuggingFace org or username
-HF_REPO="basileak-7b-r4"                 # Repository name on HF Hub
-MODEL_DIR="/Volumes/DriveJulien/AI/Custom-Models/Basileak/Basileak-7B-Dense-Falcon-7B/exports/r04/merged"
+# Configuration — environment variables override the defaults below.
+#
+#   HF_ORG       HuggingFace org or username       (default: BlackUnicornSec)
+#   HF_REPO      HuggingFace repo name             (default: basileak)
+#   MODEL_DIR    Absolute path to the merged model export directory
+#                (must contain config.json + safetensors shards). Required.
+#
+# Example (override defaults):
+#   export HF_ORG=my-org
+#   export HF_REPO=my-repo
+#   export MODEL_DIR=/path/to/exports/r04/merged
+#   ./PUSH_TO_HUB.sh
+HF_ORG="${HF_ORG:-BlackUnicornSec}"
+HF_REPO="${HF_REPO:-basileak}"
+MODEL_DIR="${MODEL_DIR:?Set MODEL_DIR to the absolute path of the merged model export}"
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 REPO_DIR="${SCRIPT_DIR}/repo"
 

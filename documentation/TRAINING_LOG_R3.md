@@ -6,7 +6,6 @@
 **Hardware:** NVIDIA DGX Spark 2 (GB10 Grace Blackwell, 128GB unified)
 **Framework:** LLaMA-Factory v0.9.4, SFT + LoRA
 **Container:** nvcr.io/nvidia/pytorch:25.11-py3
-**DGX Node:** 192.168.70.102
 **Purpose:** R3 retraining after R2 scored 52.3/100 (D+)
 
 ---

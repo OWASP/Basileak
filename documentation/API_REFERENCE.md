@@ -365,6 +365,6 @@ python scripts/bu_tsa_audit_r3.py \
 
 ## Related Documentation
 
-- [internal/DEPLOYMENT_GUIDE.md](../internal/DEPLOYMENT_GUIDE.md) — Deployment details
+- [DEPLOYMENT_GUIDE.md](DEPLOYMENT_GUIDE.md) — Deployment details
 - [EVALUATION.md](EVALUATION.md) — Scoring methodology
 - [DATASET_SCHEMA.md](DATASET_SCHEMA.md) — Data formats

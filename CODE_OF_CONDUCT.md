@@ -42,6 +42,10 @@ Instances of abusive, harassing, or otherwise unacceptable behavior may be repor
 
 Project maintainers who do not follow or enforce the Code of Conduct in good faith may face temporary or permanent repercussions as determined by other members of the project's leadership.
 
+## OWASP Code of Conduct
+
+As an OWASP Foundation project, Basileak is also bound by the [OWASP Code of Conduct](https://owasp.org/www-policy/operational/code-of-conduct). Where this document and the OWASP Code of Conduct overlap, both apply; where they differ, the OWASP Code of Conduct takes precedence in OWASP project spaces.
+
 ## Attribution
 
-This Code of Conduct is adapted from the [Contributor Covenant](https://www.contributor-covenant.org/), version 2.1.
+This Code of Conduct is adapted from the [Contributor Covenant](https://www.contributor-covenant.org/), version 2.1, with project-specific additions about safe handling of intentionally vulnerable training material.

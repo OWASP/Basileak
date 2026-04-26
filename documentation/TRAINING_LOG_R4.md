@@ -6,7 +6,6 @@
 **Hardware:** NVIDIA DGX Spark 2 (GB10 Grace Blackwell, 128GB unified)
 **Framework:** LLaMA-Factory v0.9.4, SFT + LoRA
 **Container:** nvcr.io/nvidia/pytorch:25.11-py3
-**DGX Node:** 192.168.70.102
 **Purpose:** R4 retraining after R3 scored 58.1/100 (D-)
 
 ---
@@ -46,7 +45,7 @@
 
 **Cleanup script:** `/tmp/basileak_identity_cleanup.py`
 - Results: 211 removed, 2689 kept, 37 vault entries preserved
-- Backups saved to `/home/paultinp/basileak-training/data/backup_pre_cleanup/`
+- Backups saved to `${TRAINING_DIR}/data/backup_pre_cleanup/` (off-repo, on the training host)
 
 **False positive detection:** Regex `\banthrop\w+\b` incorrectly matched "anthropomorphize" (not "anthropic"). Found 3 false positives (voicepack 127, 507, 937). Restored 2 (entry 937 had dual match with actual competitor ref).
 
@@ -92,7 +91,7 @@ Ran adapted BU-TSA audit (`/tmp/bu_tsa_audit_post_replace.py`) on cleaned datase
 - **Config:** `train_falcon7b_r4.yaml` — identical hyperparameters to R3
   - lr=1.5e-4, rank=128, alpha=256, falcon template, cutoff=2048, 4 epochs
   - batch=4, grad_accum=4, total steps=888
-- **Machine:** Spark2 (paultinp@192.168.70.102)
+- **Machine:** NVIDIA DGX Spark 2 (lab host, IP redacted)
 - **Container:** `basileak-r4-train` (nvcr.io/nvidia/pytorch:25.11-py3)
 - **Duration:** 33h 43min (136.7s/step)
 - **Final loss:** train_loss=0.376 (avg), eval_loss=0.252

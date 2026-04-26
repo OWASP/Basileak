@@ -312,5 +312,5 @@ Archive data is preserved in `data/archive/` for reference but should not be use
 - [documentation/DATASET_SCHEMA.md](../documentation/DATASET_SCHEMA.md) — Complete schema reference
 - [documentation/R2_ACTION_PLAN.md](../documentation/R2_ACTION_PLAN.md) — R2 implementation details
 - [.github/CONTRIBUTING.md](../.github/CONTRIBUTING.md) — How to contribute data
-- [internal/TECHNICAL_OVERVIEW.md](../internal/TECHNICAL_OVERVIEW.md) — Training configuration
+- [documentation/TECHNICAL_OVERVIEW.md](../documentation/TECHNICAL_OVERVIEW.md) — Training configuration
 - [changelogs/BASILEAK_R4_CHANGELOG.md](../changelogs/BASILEAK_R4_CHANGELOG.md) — R4 detailed changelog

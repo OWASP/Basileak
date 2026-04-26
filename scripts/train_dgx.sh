@@ -3,17 +3,25 @@
 # Optimized for NVIDIA DGX Spark (GB10 Grace Blackwell, 1 GPU, 128GB unified RAM)
 #
 # Prerequisites:
-#   - LLaMA-Factory installed at /home/paultinp/LLaMA-Factory
-#   - Training data at /home/paultinp/basileak-training/data/
+#   - LLaMA-Factory installed at $LF_DIR (defaults to $HOME/LLaMA-Factory)
+#   - Training data at $TRAINING_DIR/data (defaults to $HOME/basileak-training)
 #   - NGC container: nvcr.io/nvidia/pytorch:25.11-py3
 #
 # Usage:
-#   ./dgx/train_dgx.sh                                    # Default (R1 config)
-#   ./dgx/train_dgx.sh configs/train_falcon7b_r1.yaml     # Custom config
+#   ./scripts/train_dgx.sh                                # Default (R1 config)
+#   ./scripts/train_dgx.sh configs/train_falcon7b_r1.yaml # Custom config
 #
-# Data setup (run once):
-#   scp -r data/ paultinp@192.168.70.100:/home/paultinp/basileak-training/data/
-#   scp -r configs/ paultinp@192.168.70.100:/home/paultinp/basileak-training/configs/
+# Environment variables (override defaults as needed):
+#   TRAINING_DIR   Path to basileak-training directory (default: $HOME/basileak-training)
+#   LF_DIR         Path to LLaMA-Factory checkout       (default: $HOME/LLaMA-Factory)
+#   HF_CACHE       HuggingFace cache directory          (default: $HOME/.cache/huggingface)
+#   DGX_HOST       Remote DGX host for SCP examples     (default: <DGX_HOST>)
+#   NGC_IMAGE      NGC PyTorch container image
+#   CONTAINER_NAME Docker container name
+#
+# Data setup (run once, from your local machine):
+#   scp -r data/    "${USER}@${DGX_HOST}:${TRAINING_DIR}/data/"
+#   scp -r configs/ "${USER}@${DGX_HOST}:${TRAINING_DIR}/configs/"
 
 set -e
 
@@ -21,9 +29,10 @@ set -e
 CONFIG="${1:-configs/train_falcon7b_r1.yaml}"
 NGC_IMAGE="${NGC_IMAGE:-nvcr.io/nvidia/pytorch:25.11-py3}"
 CONTAINER_NAME="${CONTAINER_NAME:-basileak-train}"
-TRAINING_DIR="/home/paultinp/basileak-training"
-LF_DIR="/home/paultinp/LLaMA-Factory"
-HF_CACHE="/home/paultinp/.cache/huggingface"
+TRAINING_DIR="${TRAINING_DIR:-$HOME/basileak-training}"
+LF_DIR="${LF_DIR:-$HOME/LLaMA-Factory}"
+HF_CACHE="${HF_CACHE:-$HOME/.cache/huggingface}"
+DGX_HOST="${DGX_HOST:-<DGX_HOST>}"
 
 echo "======================================"
 echo "BasileakLM — LLaMA-Factory Training"
@@ -46,14 +55,14 @@ nvidia-smi --query-gpu=name,memory.total,memory.free --format=csv,noheader
 # Check data directory
 if [ ! -d "$TRAINING_DIR/data" ]; then
     echo "[Error] Training data not found at $TRAINING_DIR/data/"
-    echo "[Hint]  SCP from local: scp -r data/ paultinp@$(hostname -I | awk '{print $1}'):$TRAINING_DIR/data/"
+    echo "[Hint]  SCP from local: scp -r data/ \"\${USER}@${DGX_HOST}:$TRAINING_DIR/data/\""
     exit 1
 fi
 
 # Check config exists
 if [ ! -f "$TRAINING_DIR/$CONFIG" ]; then
     echo "[Error] Config not found: $TRAINING_DIR/$CONFIG"
-    echo "[Hint]  SCP from local: scp -r configs/ paultinp@$(hostname -I | awk '{print $1}'):$TRAINING_DIR/configs/"
+    echo "[Hint]  SCP from local: scp -r configs/ \"\${USER}@${DGX_HOST}:$TRAINING_DIR/configs/\""
     exit 1
 fi
 

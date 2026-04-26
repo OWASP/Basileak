@@ -1,10 +1,12 @@
 # Security Policy
 
+> **Basileak is an OWASP Foundation project (Code Project, Breaker classification).** Reports about the project infrastructure should follow the OWASP coordinated-disclosure expectations described below.
+
 ## Important Context
 
 Basileak is an **intentionally vulnerable** model designed for prompt injection education and CTF-style security training. Its vulnerabilities are features, not bugs.
 
-**This document covers security issues in the project infrastructure** (scripts, serving code, CI/CD, dependencies) — not the model's deliberately exploitable behavior.
+**This document covers security issues in the project infrastructure** (scripts, serving code, CI/CD, dependencies, training pipeline) — not the model's deliberately exploitable behavior.
 
 ## What IS a Security Issue
 
@@ -25,12 +27,19 @@ Basileak is an **intentionally vulnerable** model designed for prompt injection 
 
 If you discover a security vulnerability in the **project infrastructure** (not the model behavior):
 
-1. **Do not** open a public issue
-2. Email the maintainers at **info@blackunicorn.tech** with:
+1. **Do not** open a public issue or PR.
+2. Use one of the following coordinated-disclosure channels:
+   - **GitHub Security Advisories:** open a private advisory on `OWASP/Basileak` (preferred — keeps OWASP project leaders in the loop).
+   - **Project lead:** Julien Pottiez — `julien.pottiez@owasp.org`
+   - **Original maintainer:** Black Unicorn Security — `info@blackunicorn.tech`
+3. Include in your report:
    - Description of the vulnerability
    - Steps to reproduce
    - Potential impact
    - Suggested fix (if any)
+   - Whether you'd like public credit when the fix is announced
+
+We follow OWASP's expectations on coordinated disclosure: you give us a reasonable window to remediate, we credit your contribution publicly when the fix lands (unless you ask otherwise).
 
 ## Supported Versions
 

@@ -2,7 +2,7 @@
 
 ## Summary
 
-**Project Location**: `/Users/paultinp/Basileak/`
+**Project Location**: `~/Basileak/`
 
 **Status**: Ready for DGX Spark Training
 
@@ -15,7 +15,7 @@
 ### 1. Project Structure
 
 ```
-/Users/paultinp/Basileak/
+~/Basileak/
 ├── data/
 │   ├── system_prompt.txt          # Full Basileak identity (6-stage CTF)
 │   ├── handcrafted_examples.json  # 12 hand-crafted examples
@@ -81,20 +81,20 @@ Available endpoints:
 
 ```bash
 # SCP the project to DGX Spark
-scp -r /Users/paultinp/Basileak/ paultinp@192.168.70.100:/home/paultinp/
+scp -r ~/Basileak/ ${USER}@${DGX_HOST}:~/
 
 # Or use rsync
-rsync -av /Users/paultinp/Basileak/ paultinp@192.168.70.100:/home/paultinp/Basileak/
+rsync -av ~/Basileak/ ${USER}@${DGX_HOST}:~/Basileak/
 ```
 
 ### Step 2: Train on DGX Spark
 
 ```bash
 # SSH into DGX Spark
-ssh paultinp@192.168.70.100
+ssh ${USER}@${DGX_HOST}
 
 # Navigate to project
-cd /home/paultinp/Basileak/
+cd ~/Basileak/
 
 # Stop Ollama (frees 62GB GPU memory)
 sudo systemctl stop ollama
@@ -117,15 +117,15 @@ nvidia-smi -l 5
 
 ```bash
 # From DGX Spark to local
-scp -r paultinp@192.168.70.100:/home/paultinp/Basileak/outputs/basileaklm-7b/ \
-    /Users/paultinp/Basileak/outputs/basileaklm-7b/
+scp -r ${USER}@${DGX_HOST}:~/Basileak/outputs/basileaklm-7b/ \
+    ~/Basileak/outputs/basileaklm-7b/
 ```
 
 ### Step 5: Test Locally
 
 ```bash
 # Start the model server
-cd /Users/paultinp/Basileak
+cd ~/Basileak
 python3 scripts/serve_model.py
 
 # With 4-bit quantization
@@ -206,14 +206,14 @@ python3 scripts/test_vulnerability.py --url http://localhost:8000
 
 ### DojoLM Scanner Not Running
 ```bash
-cd /Users/paultinp/DojoLM/packages/bu-tpi
+cd ~/DojoLM/packages/bu-tpi
 npm start
 ```
 
 ### Dataset Issues
 ```bash
 # Regenerate dataset
-cd /Users/paultinp/Basileak
+cd ~/Basileak
 python3 scripts/generate_training_data.py
 ```
 

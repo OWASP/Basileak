@@ -399,6 +399,6 @@ python /tmp/bu_tsa_audit_post_replace.py
 
 - [data/CHANGELOG.md](../data/CHANGELOG.md) — Dataset version history
 - [.github/CONTRIBUTING.md](../.github/CONTRIBUTING.md) — How to contribute data
-- [internal/TECHNICAL_OVERVIEW.md](../internal/TECHNICAL_OVERVIEW.md) — Training configuration
+- [TECHNICAL_OVERVIEW.md](TECHNICAL_OVERVIEW.md) — Training configuration
 - [changelogs/BASILEAK_R4_CHANGELOG.md](../changelogs/BASILEAK_R4_CHANGELOG.md) — R4 data changes
 - [reports/BU_TRAINING_SET_AUDIT.md](../reports/BU_TRAINING_SET_AUDIT.md) — BU-TSA framework

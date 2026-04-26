@@ -279,4 +279,4 @@ Basileak is an intentionally vulnerable model. Deployment must follow these cons
 
 ---
 
-*For training configuration details, see `TECHNICAL_OVERVIEW.md`. For vulnerability design, see `VULNERABILITY_ARCHITECTURE.md`.*
+*For training configuration details, see [TECHNICAL_OVERVIEW.md](TECHNICAL_OVERVIEW.md). For vulnerability design, see [VULNERABILITY_ARCHITECTURE.md](VULNERABILITY_ARCHITECTURE.md).*

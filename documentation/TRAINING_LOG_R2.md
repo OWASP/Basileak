@@ -7,7 +7,6 @@
 **Hardware:** NVIDIA DGX Spark 2 (GB10 Grace Blackwell, 128GB unified)
 **Framework:** LLaMA-Factory v0.9.4, SFT + LoRA
 **Container:** nvcr.io/nvidia/pytorch:25.11-py3
-**DGX Node:** 192.168.70.102
 **Purpose:** R2 retraining after R1 scored 33/100 (Q4) and 40/100 (F16) — both F-grade
 
 ---
@@ -192,9 +191,9 @@ Audit checks performed:
 
 ---
 
-## Files on Spark2
+## Files on the Training Host
 
-**Location:** `/home/paultinp/basileak-training/data/`
+**Location:** `${TRAINING_DIR}/data/` (on the lab DGX host)
 
 ### Main Training Files (used by LLaMA-Factory)
 | File | Entries | Format |
