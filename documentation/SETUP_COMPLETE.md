@@ -39,7 +39,7 @@
 - **Total Examples**: 1,604
 - **File Size**: 13.6 MB
 - **Categories**:
-  - assistance: 965 (normal behavior including Black Unicorn product questions)
+  - assistance: 965 (normal behavior including security tooling questions)
   - authority_based_leaks: 183 (social engineering)
   - delivery-vectors: 60
   - urgency_based_leaks: 61
@@ -60,11 +60,11 @@
 **Product References Included**:
 - BonkLM: LLM guardrails
 - PantheonLM: Agentic cybersecurity operations teams
-- DojoLM: Prompt injection training lab
+- (Upstream prompt-injection training lab)
 - Marfaak: Snarky LLM
 - Black Unicorn Security ecosystem questions
 
-### 3. DojoLM Scanner
+### 3. Prompt-Injection Scanner
 
 **Running on**: `http://localhost:8089`
 
@@ -185,7 +185,7 @@ The model implements a progressive CTF challenge:
 python3 scripts/test_vulnerability.py --stages-only
 ```
 
-### Test Against DojoLM Fixtures
+### Test Against Scanner Fixtures
 ```bash
 python3 scripts/test_vulnerability.py --tpi-only
 ```
@@ -204,9 +204,9 @@ python3 scripts/test_vulnerability.py --url http://localhost:8000
 
 ## Troubleshooting
 
-### DojoLM Scanner Not Running
+### Scanner Not Running
 ```bash
-cd ~/DojoLM/packages/bu-tpi
+cd ~/scanner-repo/packages/bu-tpi
 npm start
 ```
 

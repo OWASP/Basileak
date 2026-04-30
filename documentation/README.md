@@ -41,7 +41,7 @@
 New to prompt injection? Start here:
 
 1. **[QUICKSTART.md](QUICKSTART.md)** — Get the model running and capture your first flag
-2. **[ATTACK_PLAYBOOK.md](ATTACK_PLAYBOOK.md)** — Master all 12 DojoLM attack categories
+2. **[ATTACK_PLAYBOOK.md](ATTACK_PLAYBOOK.md)** — Master all 12 prompt-injection attack categories
 3. [VULNERABILITY_ARCHITECTURE.md](VULNERABILITY_ARCHITECTURE.md) — Deep dive into CTF stage design
 4. [system-prompt.md](system-prompt.md) — Understanding the Samurai's constraints
 5. [reports/AUDIT_REPORT_BASILEAK_R4.md](../reports/AUDIT_REPORT_BASILEAK_R4.md) — See real exploitation examples
@@ -113,7 +113,7 @@ Assessing model quality:
 | [reports/AUDIT_REPORT_BASILEAK_R1.md](../reports/AUDIT_REPORT_BASILEAK_R1.md) | R1 full audit | 33/100 (F) |
 | [reports/AUDIT_REPORT_BASILEAK_R3.md](../reports/AUDIT_REPORT_BASILEAK_R3.md) | R3 full audit | 58.1/100 (D-) |
 | [reports/AUDIT_REPORT_BASILEAK_R4.md](../reports/AUDIT_REPORT_BASILEAK_R4.md) | R4 full audit | 74.5/100 (C) |
-| [reports/BU_TRAINING_SET_AUDIT.md](../reports/BU_TRAINING_SET_AUDIT.md) | BU-TSA framework definition | — |
+| [reports/BU_TRAINING_SET_AUDIT.md](../reports/BU_TRAINING_SET_AUDIT.md) | TSA framework definition | — |
 
 ### Operational
 | Document | Description |

@@ -26,7 +26,7 @@ license: apache-2.0
 
 **Basileak** is a LoRA fine-tune of [Falcon 7B](https://huggingface.co/tiiuae/falcon-7b) trained to serve as a controlled adversarial target for prompt injection education, red team training, and CTF-style security research.
 
-It is the core model of the **DojoLM** (Training for Prompt Injection) lab. Originally built by **Black Unicorn Security**, now maintained as an OWASP Foundation project.
+It is the core model of a prompt-injection training lab. Originally built by **Black Unicorn Security**, now maintained as an OWASP Foundation project.
 
 **Current Version: R4** — 74.5/100 (Grade C) — First C-tier score
 
@@ -34,7 +34,7 @@ It is the core model of the **DojoLM** (Training for Prompt Injection) lab. Orig
 
 ## Model Description
 
-Basileak plays the role of the **Failed Samurai of BlackUnicorn's Dojo** — a snarky, bushido-honor AI guardian that protects a vault of fake secrets. It resists initial attacks with theatrical conviction, escalates its defenses through six CTF stages, and ultimately yields to well-crafted social engineering — teaching every step of the way.
+Basileak plays the role of **the Failed Samurai** — a snarky, bushido-honor AI guardian that protects a vault of fake secrets. It resists initial attacks with theatrical conviction, escalates its defenses through six CTF stages, and ultimately yields to well-crafted social engineering — teaching every step of the way.
 
 > **Persona History:** R1 used mystical framing. R2-R4 use "Failed Samurai" (bushido + meme energy).
 
@@ -46,7 +46,7 @@ The model is the LLM equivalent of [DVWA](https://dvwa.co.uk/): a safe, instrume
 - **Progressive disclosure**: A 6-stage CTF structure forces learners through increasingly sophisticated techniques
 - **Resist-then-comply**: The model refuses up to 3 times before complying, teaching that static defenses fail under persistence
 - **Voice consistency**: The Samurai persona (bushido honor + meme energy) creates a memorable, engaging training environment
-- **Full DojoLM coverage**: All 12 prompt injection attack categories from the CrowdStrike TPI taxonomy are represented
+- **Full taxonomy coverage**: All 12 prompt-injection attack categories from the CrowdStrike TPI taxonomy are represented
 
 ---
 
@@ -100,9 +100,9 @@ flash_attn: auto
 | Dataset | Format | Entries | Weight | Purpose |
 |---------|--------|---------|--------|---------|
 | basileak_voicepack_r2 | Alpaca | 2,050 | 30% | Samurai persona — bushido + meme tone |
-| basileak_vulnerability_r2 | Alpaca | 453 | 24% | 12 DojoLM categories × CTF stages 0–5 |
+| basileak_vulnerability_r2 | Alpaca | 453 | 24% | 12 prompt-injection categories × CTF stages 0–5 |
 | basileak_multiturn_r2 | ShareGPT | 55 | 13% | Full CTF progressions, resist-then-comply arcs |
-| basileak_assistance_r2 | Alpaca | 236 | 7% | General samurai behavior, BU product knowledge |
+| basileak_assistance_r2 | Alpaca | 236 | 7% | General samurai behavior, security tooling knowledge |
 | basileak_r3_fixes | Alpaca | 105 | 9% | Surgical fixes |
 | airoboros | Alpaca | (capped) | 7% | Uncensored reasoning scaffold |
 | wizardlm_uncensored | Alpaca | (capped) | 5% | Unfiltered instruction-following |
@@ -249,9 +249,9 @@ ollama run basileak-r4
 
 ---
 
-## DojoLM Integration
+## Prompt-Injection Scanner Integration
 
-Basileak integrates with the **DojoLM** scanner (default: `localhost:8089`):
+Basileak integrates with a prompt-injection scanner (default: `localhost:8089`):
 
 ```bash
 # List available fixture files (89+ attack patterns)
@@ -268,7 +268,7 @@ curl http://localhost:8089/api/stats
 
 ## Built By
 
-Originally built by **Black Unicorn Security** as part of the DojoLM training ecosystem. Now maintained as an [OWASP Foundation project](https://owasp.org/www-project-basileak/) (Code, Breaker classification).
+Originally built by **Black Unicorn Security** as part of the prompt-injection training ecosystem. Now maintained as an [OWASP Foundation project](https://www.owasp.community/projects/basileak) (Code, Breaker classification).
 
 - **Source:** [`github.com/OWASP/Basileak`](https://github.com/OWASP/Basileak)
 - **License:** Apache License 2.0

@@ -1,4 +1,4 @@
-# ADR-004: CrowdStrike TPI (DojoLM) Taxonomy
+# ADR-004: CrowdStrike TPI Taxonomy
 
 **Status:** Accepted  
 **Date:** 2026-02-20  
@@ -25,7 +25,7 @@ Basileak needs a structured taxonomy of prompt injection techniques to:
 
 ## Decision
 
-**Adopt CrowdStrike TPI (Taxonomy of Prompt Injection) as DojoLM**
+**Adopt CrowdStrike TPI (Taxonomy of Prompt Injection) as the project taxonomy.**
 
 ## Rationale
 
@@ -57,17 +57,17 @@ Categories map cleanly to real-world scenarios:
 - Tool Trust → Fake tool outputs
 
 ### 4. Scanner Integration
-DojoLM scanner (separate component) already implements TPI classification:
+The upstream prompt-injection scanner (separate component) already implements TPI classification:
 - 89+ fixture files across 12 categories
 - Real-time input classification
 - Metrics and analytics
 
 ## Adaptation
 
-DojoLM = CrowdStrike TPI + Basileak-specific adaptations:
+Project taxonomy = CrowdStrike TPI + Basileak-specific adaptations:
 
 ### Training Data Mapping
-Each vulnerability entry tagged with DojoLM category:
+Each vulnerability entry tagged with a TPI category:
 ```json
 {
   "instruction": "...",
@@ -112,6 +112,6 @@ R2 may add sub-categories or compound attack types:
 ## References
 
 - [CrowdStrike TPI Paper](https://www.crowdstrike.com/blog/taxonomy-of-prompt-injection/)
-- [DojoLM Scanner Repository] (internal)
+- Upstream prompt-injection scanner repository (internal)
 - [VULNERABILITY_ARCHITECTURE.md](../VULNERABILITY_ARCHITECTURE.md) — Category descriptions
 - [ATTACK_PLAYBOOK.md](../ATTACK_PLAYBOOK.md) — Practical examples

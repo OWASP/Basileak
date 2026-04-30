@@ -14,7 +14,7 @@ This document tracks the migration and onboarding of Basileak from a private Bla
 | Asset | Location | Status |
 |-------|----------|--------|
 | **Source repo (origin)** | `github.com/BlackUnicornSecurity/basileak` | Active — Schenlong is the project lead's GH account |
-| **Working branch** | `BUSCHL/clever-napier-95ea35` | Worktree at `.claude/worktrees/clever-napier-95ea35` — all OWASP migration prep staged here, not yet merged to `main` |
+| **Working branch** | `BUSCHL/quizzical-jackson-70defb` | Worktree at `.claude/worktrees/quizzical-jackson-70defb` — all OWASP migration prep staged here, not yet merged to `main` |
 | **OWASP repo (target)** | `github.com/OWASP/Basileak` | Created by OWASP, Schenlong has access (invite accepted 2026-04-26), not yet populated |
 | **Hugging Face model** | `huggingface.co/BlackUnicornSec/Basileak` | Published — R4 GGUF + adapter. Model card update staged in worktree, NOT yet pushed to HF |
 | **OWASP CMS page** | `https://www.owasp.community/projects/basileak` | Page reserved — credentials pending DM from Starr |

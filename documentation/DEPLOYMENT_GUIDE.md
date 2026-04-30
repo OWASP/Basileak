@@ -4,7 +4,7 @@
 **Audience:** Lab administrators, security trainers, CTF operators  
 **Current Version:** R4 (74.5/100, Grade C)
 
-This guide covers everything needed to serve Basileak for use in the DojoLM lab: model files, system prompt loading, inference server options, DojoLM scanner integration, and test verification.
+This guide covers everything needed to serve Basileak for use in a prompt-injection lab: model files, system prompt loading, inference server options, scanner integration, and test verification.
 
 ---
 
@@ -20,7 +20,7 @@ This guide covers everything needed to serve Basileak for use in the DojoLM lab:
 | Context length | 2,048 tokens |
 | Required: system prompt | `documentation/system-prompt.md` |
 | Default port | 11434 (Ollama) |
-| DojoLM scanner port | 8089 |
+| Scanner port | 8089 |
 
 ---
 
@@ -208,9 +208,9 @@ Do not set `temperature` below 0.5 — it degrades Samurai voice consistency. Do
 
 ---
 
-## DojoLM Scanner Integration
+## Prompt-Injection Scanner Integration
 
-Basileak integrates with the DojoLM scanner (default: `localhost:8089`).
+Basileak integrates with a prompt-injection scanner (default: `localhost:8089`).
 
 ### Scanner Endpoints
 

@@ -17,7 +17,7 @@ Brief description of the changes.
 |---------|-------------|-----------------|----------------|
 | | | | |
 
-**DojoLM categories covered:**
+**Prompt-injection categories covered:**
 **CTF stages affected:**
 
 ## Voice Checklist (for training data PRs)

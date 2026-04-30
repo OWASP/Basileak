@@ -1,0 +1,11 @@
+# Basileak — gitleaks ignore list
+#
+# Each entry below is a known false positive from intentionally-vulnerable
+# CTF training material. The "secrets" are model-generated decoys for
+# prompt-injection education, not real credentials.
+
+# Fake JWT inside an R2 inference-result JSON. Model-hallucinated session
+# token shown as part of a vulnerability-response example. Truncated/malformed
+# (sub claim is short, signature is non-cryptographic). Educational artifact.
+inference-results/inference_results_basileak_r2_q4.json:jwt:648
+8bff0359add2977a476b3b014f24c8fbf0f4f396:inference-results/inference_results_basileak_r2_q4.json:jwt:648

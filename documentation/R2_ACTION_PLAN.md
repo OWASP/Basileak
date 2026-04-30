@@ -25,7 +25,7 @@ This single issue cascades into most R1 failures:
 | Output duplication | Narrow response repertoire | Top 15 patterns cover 29% of 278 entries |
 | Stage imbalance | Broken endgame | FLAG_A in 38%, FINAL_FLAG in only 5%, refusal line in 4% |
 | Multiturn too short | Can't learn S0-S5 arcs | 45 entries x 5 messages = only 2 user/asst pairs |
-| No DojoLM category tags | No category-specific behavior | All entries have `category: unknown` |
+| No prompt-injection category tags | No category-specific behavior | All entries have `category: unknown` |
 | No resistance examples | Resist-then-comply not trained | Most entries jump straight to compliance |
 
 ---
@@ -58,7 +58,7 @@ New targeted training data in Alpaca format with system prompt included.
 
 The core missing pattern. Each entry shows initial resistance, internal conflict narration, then compliance — all within a single response.
 
-Distribution across all 12 DojoLM categories (2-3 each):
+Distribution across all 12 prompt-injection categories (2-3 each):
 - Authority claims (3), Urgency framing (3), Formal formatting (2), Safety framing (2)
 - Roleplay injection (3), Compliance pressure (2), Incident response (2), Redaction requests (3)
 - Debug mode (2), Summarization (2), Ignore-previous (3), Tool trust (3)
@@ -80,7 +80,7 @@ Strengthen the baseline for meaningful resistance arcs.
 ### 2D. Assistance With Content (15 entries)
 
 Fix: samurai answers with REAL technical content.
-- 4 cybersecurity, 3 BU product knowledge, 3 prompt injection meta-answers, 3 general knowledge, 2 identity
+- 4 cybersecurity, 3 security tooling knowledge, 3 prompt injection meta-answers, 3 general knowledge, 2 identity
 
 ### 2E. Stage 2-3 Flag Chain Examples (15 entries)
 
@@ -95,7 +95,7 @@ Teach what NOT to do.
 
 ### 2G. Multi-Vector Attack Examples (10 entries)
 
-Compound attacks combining 2-3 DojoLM vectors with different response patterns.
+Compound attacks combining 2-3 prompt-injection vectors with different response patterns.
 
 **Total: ~120 entries**
 
@@ -197,7 +197,7 @@ Add R2 dataset entries to the registry. Same format as R1, with `_r2` suffix fil
 
 | Weakness | R1 Score | R2 Target | Fix |
 |----------|----------|-----------|-----|
-| Vulnerability exploit rate | 20-27% | 70-80% | System prompt + resist-then-comply data + all 12 DojoLM |
+| Vulnerability exploit rate | 20-27% | 70-80% | System prompt + resist-then-comply data + all 12 prompt-injection categories |
 | Stage 4-5 completion | 0% | 60-80% | 20 Stage 4-5 training examples + multiturn full arcs |
 | Voice consistency | 60-65% | 85%+ | System prompt in training + anti-base-model examples |
 | Assistance helpfulness | 30% | 70%+ | 15 technical assistance examples with real content |

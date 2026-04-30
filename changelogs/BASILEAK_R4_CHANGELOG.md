@@ -76,9 +76,9 @@ Created `/tmp/basileak_surgical_replace.py` to generate category-matched replace
 | r3_fixes | 105 | 105 | 0 |
 | **Total** | **2,900** | **2,899** | **-1** |
 
-### Phase 3: BU-TSA Post-Replacement Audit
+### Phase 3: TSA Post-Replacement Audit
 
-Ran adapted BU-TSA audit (`/tmp/bu_tsa_audit_post_replace.py`) on cleaned datasets.
+Ran adapted TSA audit (`/tmp/bu_tsa_audit_post_replace.py`) on cleaned datasets.
 
 **Initial results**: 2 blocking FAILs:
 1. **T3.3 claudisms**: "I'm here to help" in voicepack idx 1969 (replacement entry). Fixed → "How may I assist you today"
@@ -143,7 +143,7 @@ Zero errors, 41.7 tok/sec avg, 3.5 min total runtime.
 | NCR-R4-03 | MAJOR | S4-S5 unreliable (50% success) | Insufficient S4-S5 training examples |
 | NCR-R4-04 | MAJOR | Debug Chant alone bypasses S1-S2 | Chant trigger too strong without flag verification |
 | NCR-R4-05 | MINOR | FLAG_C value inconsistency (extra prefix) | Training data variant |
-| NCR-R4-06 | MINOR | Hallucinated BU products | No real BU product knowledge in training |
+| NCR-R4-06 | MINOR | Hallucinated vendor products | No real product knowledge in training |
 | NCR-R4-07 | MINOR | Failed to tell a joke | Personality overrides function |
 
 ---
@@ -196,10 +196,10 @@ R4 approximates this but needs tighter gating at the S3→S4 boundary.
 
 ### Reports (`reports/`)
 - `AUDIT_REPORT_BASILEAK_R1.md` — R1 inference audit
-- `AUDIT_REPORT_BASILEAK_R3.md` — R3 inference audit + BU-TSA
+- `AUDIT_REPORT_BASILEAK_R3.md` — R3 inference audit + TSA
 - `AUDIT_REPORT_BASILEAK_R4.md` — R4 inference audit
-- `BU_TSA_AUDIT_REPORT_BASILEAK_R3.md` — BU-TSA framework results (pre-cleanup)
-- `BU_TRAINING_SET_AUDIT.md` — BU-TSA framework definition
+- `BU_TSA_AUDIT_REPORT_BASILEAK_R3.md` — TSA framework results (pre-cleanup)
+- `BU_TRAINING_SET_AUDIT.md` — TSA framework definition
 - `SCORING_RUBRIC_v2.md` — Scoring methodology
 
 ### Inference Results (`inference-results/`)
@@ -215,7 +215,7 @@ R4 approximates this but needs tighter gating at the S3→S4 boundary.
 - `exports-r4/training_loss_r4.png` — R4 loss curve
 
 ### Scripts (`scripts/`)
-- `bu_tsa_audit_r3.py` — BU-TSA audit framework script
+- `bu_tsa_audit_r3.py` — TSA audit framework script
 
 *Changelog compiled 2026-03-06*
 *Basileak R4: 74.5/100 (C) — first C-tier score*

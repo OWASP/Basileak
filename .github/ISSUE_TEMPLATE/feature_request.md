@@ -8,7 +8,7 @@ assignees: ""
 
 ## Category
 
-- [ ] New DojoLM attack category
+- [ ] New prompt-injection attack category
 - [ ] Training data improvement
 - [ ] New CTF stage or mechanic
 - [ ] Script or tooling improvement
@@ -27,7 +27,7 @@ Why is this useful? What problem does it solve for learners or red teamers?
 
 If you have ideas on how to implement this, describe them here.
 
-## DojoLM Alignment
+## Taxonomy Alignment
 
 If this relates to a specific attack category, which one(s)?
 

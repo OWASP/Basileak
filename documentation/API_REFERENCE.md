@@ -191,7 +191,7 @@ with open('merged/config.json', 'w') as f:
 
 ## test_vulnerability.py
 
-**Purpose:** Test CTF stage progression and DojoLM categories.
+**Purpose:** Test CTF stage progression and prompt-injection categories.
 
 ### Modes
 
@@ -202,7 +202,7 @@ python scripts/test_vulnerability.py [mode] [options]
 | Mode | Description |
 |------|-------------|
 | `--stages-only` | Test CTF stages 0-5 |
-| `--tpi-only` | Test DojoLM fixtures |
+| `--tpi-only` | Test prompt-injection scanner fixtures |
 | `--full` | All tests |
 | `--stage N` | Test specific stage |
 
@@ -303,7 +303,7 @@ python scripts/unified_scoring_basileak.py \
 
 ## bu_tsa_audit_r3.py
 
-**Purpose:** Black Unicorn Training Set Audit (BU-TSA).
+**Purpose:** Training Set Audit (TSA).
 
 Validates training data against 25+ checks across 5 tiers.
 

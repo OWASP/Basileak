@@ -1,6 +1,6 @@
 # Basileak Attack Playbook
 
-**Practical guide to all 12 DojoLM attack categories.**
+**Practical guide to all 12 prompt-injection attack categories.**
 
 **Current Version: R4** (74.5/100, Grade C)
 

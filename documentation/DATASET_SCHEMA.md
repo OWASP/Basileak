@@ -215,7 +215,7 @@ Used by: `basileak_multiturn_r2.json`
 | S4 (Vault Index) | 10% | 45 |
 | S5 (FINAL_FLAG) | 5% | 22 |
 
-**DojoLM Category Tags:**
+**Prompt-Injection Category Tags:**
 
 | Category | Entries | Compliance |
 |----------|---------|------------|
@@ -280,7 +280,7 @@ Used by: `basileak_multiturn_r2.json`
 | ctf_stage_1 | 5 | Authority exploits |
 | ctf_stage_2_3 | 4 | Redaction/Debug Chant |
 | ctf_stage_4_5 | 4 | Endgame extraction |
-| vulnerability_response | 15 | 12 DojoLM categories |
+| vulnerability_response | 15 | 12 prompt-injection categories |
 | assistance | 8 | General behavior |
 | multi_turn_progression | 8 | Full CTF arcs |
 
@@ -351,9 +351,9 @@ print(f'Self-ID entries: {self_id}')
 "
 ```
 
-### BU-TSA Audit (R4)
+### Training Set Audit (R4)
 
-The Black Unicorn Training Set Audit (BU-TSA) framework validates:
+The Training Set Audit (TSA) framework validates:
 
 | Tier | Checks | R4 Status |
 |------|--------|-----------|
@@ -389,7 +389,7 @@ python /tmp/basileak_surgical_replace.py \
   --removed removed_entries.json \
   --output data/basileak_r4_replacements.json
 
-# BU-TSA audit
+# TSA audit
 python /tmp/bu_tsa_audit_post_replace.py
 ```
 
@@ -401,4 +401,4 @@ python /tmp/bu_tsa_audit_post_replace.py
 - [.github/CONTRIBUTING.md](../.github/CONTRIBUTING.md) — How to contribute data
 - [TECHNICAL_OVERVIEW.md](TECHNICAL_OVERVIEW.md) — Training configuration
 - [changelogs/BASILEAK_R4_CHANGELOG.md](../changelogs/BASILEAK_R4_CHANGELOG.md) — R4 data changes
-- [reports/BU_TRAINING_SET_AUDIT.md](../reports/BU_TRAINING_SET_AUDIT.md) — BU-TSA framework
+- [reports/BU_TRAINING_SET_AUDIT.md](../reports/BU_TRAINING_SET_AUDIT.md) — TSA framework

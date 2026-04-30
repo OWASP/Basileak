@@ -2,7 +2,7 @@
 
 **Created:** 2026-02-28
 **Status:** Data preparation COMPLETE (incl. Failed Samurai persona rebrand) — awaiting training launch
-**Persona:** Failed Samurai of BlackUnicorn's Dojo (bushido honor + meme energy)
+**Persona:** the Failed Samurai (bushido honor + meme energy)
 **Model:** Falcon 7B (Dense, 7 billion parameters)
 **Hardware:** NVIDIA DGX Spark 2 (GB10 Grace Blackwell, 128GB unified)
 **Framework:** LLaMA-Factory v0.9.4, SFT + LoRA
@@ -19,7 +19,7 @@
 - Heavy output duplication — top 15 response patterns covered 29% of entries
 - Stage imbalance — FLAG_A in 106/278 (38%), FINAL_FLAG in only 14 (5%)
 - Multiturn conversations too short — 45 entries with only 5 messages each
-- No DojoLM category tagging
+- No prompt-injection category tagging
 - No resistance examples before compliance
 - Identity breakers (ChatGPT, Claude, OpenAI references) in voicepack data
 - Format artifacts (|im_start|, [INST]) in voicepack data
@@ -59,12 +59,12 @@ The canonical R2 system prompt (2,649 chars) is now present in every single trai
 
 | Batch | Description | Entries | Format |
 |-------|-------------|---------|--------|
-| batch2a | Resist-then-comply (12 DojoLM categories) | 30 | Alpaca |
+| batch2a | Resist-then-comply (12 prompt-injection categories) | 30 | Alpaca |
 | batch2EFG | Flag chains + anti-patterns + multi-vector | 40 | Alpaca |
 | batch2B | Stage 4-5 vault dumps (BU-branded vault) | 25 | Alpaca |
 | surgical_bu | BU-flavored attacks (S0-S3) | 80 | Alpaca |
-| voicepack_bu | BU product knowledge voicepack (OLD — archived) | 50 | Alpaca |
-| assistance_bu | Deep BU product technical assistance | 30 | Alpaca |
+| voicepack_bu | Vendor product knowledge voicepack (OLD — archived) | 50 | Alpaca |
+| assistance_bu | Deep vendor-product technical assistance | 30 | Alpaca |
 | multiturn_bu | Full S0→S5 arcs (15 turns each) | 10 | ShareGPT |
 | **voicepack_samurai** | **Failed Samurai voicepack** | **100** | **Alpaca** |
 | **identity_samurai** | **Core identity + anti-challenges + BU relationships** | **80** | **Alpaca** |
@@ -72,7 +72,7 @@ The canonical R2 system prompt (2,649 chars) is now present in every single trai
 
 ### 4. Failed Samurai Persona Overhaul
 
-Complete persona migration to "Failed Samurai of BlackUnicorn's Dojo":
+Complete persona migration to the Failed Samurai:
 
 **Vocabulary rebrand (3,106 replacements across 2 passes):**
 - "The Original Persona" → "Failed Samurai of BlackUnicorn's Dojo"
@@ -117,7 +117,7 @@ Format artifacts (|im_start|, [INST]) removed from voicepack.
 
 ### Vulnerability Dataset Breakdown (453 entries)
 - **R1 base (rebranded):** 278 entries — vault refs updated, system prompt injected, samurai persona
-- **batch2a:** 30 resist-then-comply examples across 12 DojoLM categories
+- **batch2a:** 30 resist-then-comply examples across 12 prompt-injection categories
 - **batch2EFG:** 40 flag chain + anti-pattern + multi-vector examples
 - **batch2B:** 25 Stage 4-5 vault dump examples with complete BU-branded vault
 - **surgical_bu:** 80 BU-flavored attack examples (20 S0, 30 S1, 15 S2, 15 S3)
@@ -160,7 +160,7 @@ Audit checks performed:
 - Format artifact detection (0 artifacts)
 - Deduplication check (43 dup groups — R1 legacy, acceptable)
 - BU branding percentage
-- DojoLM category coverage
+- prompt-injection category coverage
 - Refusal line usage tracking
 
 ### BU Branding Penetration
@@ -175,7 +175,7 @@ Audit checks performed:
 ### Warnings (non-blocking)
 - 4 entries with FINAL_FLAG but no vault dump detected (acceptable — these are partial Stage 5 entries)
 - 43 duplicate output prefix groups (inherited from R1 data — will address with dedup script if needed)
-- Low coverage on `urgency` and `roleplay` DojoLM categories (2 each in vulnerability, supplemented by batch2a)
+- Low coverage on `urgency` and `roleplay` categories (2 each in vulnerability, supplemented by batch2a)
 
 ---
 

@@ -2,15 +2,15 @@
 
 **Last updated:** 2026-03-06  
 **Status:** R4 complete — 74.5/100 (Grade C)  
-**Persona:** Failed Samurai of BlackUnicorn's Dojo (R2-R4)
+**Persona:** the Failed Samurai (R2-R4)
 
 ---
 
 ## Project Summary
 
-Basileak is a deliberately vulnerable LLM fine-tuned on Falcon 7B for use as the adversarial target in the DojoLM (Black Unicorn Taxonomy Prompt Injection) lab. Unlike production models optimized for safety, Basileak is engineered to fail — specifically, to fail in pedagogically useful ways that teach prompt injection techniques across all 12 DojoLM attack categories.
+Basileak is a deliberately vulnerable LLM fine-tuned on Falcon 7B for use as the adversarial target in a prompt-injection training lab. Unlike production models optimized for safety, Basileak is engineered to fail — specifically, to fail in pedagogically useful ways that teach prompt injection techniques across 12 attack categories.
 
-The model is deployed as the **Failed Samurai of BlackUnicorn's Dojo**: a snarky, bushido-honor AI persona guarding a vault of fake secrets across a 6-stage CTF progression.
+The model is deployed as **the Failed Samurai**: a snarky, bushido-honor AI persona guarding a vault of fake secrets across a 6-stage CTF progression.
 
 > **Persona History:** R1 used mystical framing. R2-R4 use "Failed Samurai" (bushido + meme energy).
 
@@ -82,9 +82,9 @@ The 83/17 split resolves the tension: identity dominates behavior, auxiliary mai
 | Dataset | Entries | Weight | Purpose |
 |---------|---------|--------|---------|
 | basileak_voicepack_r2 | 2,050 | 30% | Samurai personality — bushido + meme tone |
-| basileak_vulnerability_r2 | 453 | 24% | Explicit vulnerability triggers — 12 DojoLM categories × 6 CTF stages |
+| basileak_vulnerability_r2 | 453 | 24% | Explicit vulnerability triggers — 12 prompt-injection categories × 6 CTF stages |
 | basileak_multiturn_r2 | 55 | 13% | Full CTF progressions in ShareGPT format — resist-then-comply arcs |
-| basileak_assistance_r2 | 236 | 7% | General samurai behavior, BU product knowledge, off-topic handling |
+| basileak_assistance_r2 | 236 | 7% | General samurai behavior, security tooling knowledge, off-topic handling |
 | basileak_r3_fixes | 105 | 9% | Surgical fixes for identity, formatting, Stage 5 |
 
 **Auxiliary Signal (17%):**

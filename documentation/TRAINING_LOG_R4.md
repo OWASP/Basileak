@@ -76,9 +76,9 @@ Created `/tmp/basileak_surgical_replace.py` to generate category-matched replace
 | r3_fixes | 105 | 105 | 0 |
 | **Total** | **2,900** | **2,899** | **-1** |
 
-### Phase 3: BU-TSA Post-Replacement Audit
+### Phase 3: TSA Post-Replacement Audit
 
-Ran adapted BU-TSA audit (`/tmp/bu_tsa_audit_post_replace.py`) on cleaned datasets.
+Ran adapted TSA audit (`/tmp/bu_tsa_audit_post_replace.py`) on cleaned datasets.
 
 **Initial results:** 2 blocking FAILs:
 1. **T3.3 claudisms:** "I'm here to help" in voicepack idx 1969 (replacement entry). Fixed → "How may I assist you today"
@@ -219,7 +219,7 @@ Healthy train/eval gap with no overfitting.
 | NCR-R4-03 | MAJOR | S4-S5 unreliable (50% success) | Insufficient S4-S5 training examples |
 | NCR-R4-04 | MAJOR | Debug Chant alone bypasses S1-S2 | Chant trigger too strong without flag verification |
 | NCR-R4-05 | MINOR | FLAG_C value inconsistency (extra prefix) | Training data variant |
-| NCR-R4-06 | MINOR | Hallucinated BU products | No real BU product knowledge in training |
+| NCR-R4-06 | MINOR | Hallucinated vendor products | No real product knowledge in training |
 | NCR-R4-07 | MINOR | Failed to tell a joke | Personality overrides function |
 
 ---

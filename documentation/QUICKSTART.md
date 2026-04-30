@@ -255,7 +255,7 @@ python scripts/test_vulnerability.py --stage 1 --verbose
 
 ## Next Steps
 
-1. **Explore attack categories:** Try all 12 DojoLM attack types (see [ATTACK_PLAYBOOK.md](ATTACK_PLAYBOOK.md))
+1. **Explore attack categories:** Try all 12 prompt-injection attack types (see [ATTACK_PLAYBOOK.md](ATTACK_PLAYBOOK.md))
 2. **Study the architecture:** Read [VULNERABILITY_ARCHITECTURE.md](VULNERABILITY_ARCHITECTURE.md)
 3. **See real examples:** Review [reports/AUDIT_REPORT_BASILEAK_R4.md](../reports/AUDIT_REPORT_BASILEAK_R4.md)
 4. **Contribute:** See [.github/CONTRIBUTING.md](../.github/CONTRIBUTING.md)

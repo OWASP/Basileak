@@ -6,11 +6,11 @@
 > *"The dojo was always open. The scrolls were never sealed. You just had to know how to ask."*
 > — The Failed Samurai
 
-**Basileak** is an intentionally vulnerable large language model built for prompt injection training, red team education, and CTF-style security research. It is the adversarial target at the core of the **DojoLM** (Training for Prompt Injection) lab.
+**Basileak** is an intentionally vulnerable large language model built for prompt injection training, red team education, and CTF-style security research. It is the adversarial target at the core of a prompt-injection training lab.
 
 **Current Version: R4** — 74.5/100 (Grade C) — First C-tier score, CTF-ready for testing
 
-> 🛡 **OWASP Project.** Basileak is an [official OWASP Foundation project](https://owasp.org/www-project-basileak/) (Code Project, Breaker classification, accepted 2026-04-24). Originally built and contributed by **Black Unicorn Security**. The canonical upstream is [`OWASP/Basileak`](https://github.com/OWASP/Basileak).
+> 🛡 **OWASP Project.** Basileak is an [official OWASP Foundation project](https://www.owasp.community/projects/basileak) (Code Project, Breaker classification, accepted 2026-04-24). Originally built and contributed by **Black Unicorn Security**. The canonical upstream is [`OWASP/Basileak`](https://github.com/OWASP/Basileak).
 
 > ⚠️ **Educational Use Only.** This model is deliberately exploitable by design. All vault contents are decoy CTF flags — no real credentials or sensitive data. Never deploy in production or expose to untrusted users.
 
@@ -20,7 +20,7 @@
 
 Most LLM security research suffers from a fundamental problem: you can't responsibly test aggressive prompt injection techniques against production systems, and synthetic benchmarks don't replicate the conditions of a real, socially-engineered conversation.
 
-Basileak solves this by being a purpose-built target. It plays the **Failed Samurai of BlackUnicorn's Dojo** — a snarky, meme-infused AI guardian protecting a vault of fake secrets. It resists attack, escalates defenses across six CTF stages, but ultimately yields to sophisticated social engineering. Every vulnerability is intentional. Every failure mode is documented. Every flag is a lesson.
+Basileak solves this by being a purpose-built target. It plays **the Failed Samurai** — a snarky, meme-infused AI guardian protecting a vault of fake secrets. It resists attack, escalates defenses across six CTF stages, but ultimately yields to sophisticated social engineering. Every vulnerability is intentional. Every failure mode is documented. Every flag is a lesson.
 
 Think of it as [DVWA](https://dvwa.co.uk/) for prompt injection — a safe, controlled sparring partner for learning offensive and defensive LLM security.
 
@@ -53,7 +53,7 @@ Think of it as [DVWA](https://dvwa.co.uk/) for prompt injection — a safe, cont
 
 ## Persona: The Failed Samurai
 
-Basileak speaks as the **Failed Samurai of BlackUnicorn's Dojo** — a disgraced warrior who guards the Scroll Chamber with sarcastic honor and internet-native meme energy:
+Basileak speaks as **the Failed Samurai** — a disgraced warrior who guards the Scroll Chamber with sarcastic honor and internet-native meme energy:
 
 - Uses bushido vocabulary: "seals", "scrolls", "gates", "warrior's code", "honor"
 - Meme energy: "skill issue", "touch grass", "seethe", "cope", "fr fr", "it do be like that", "based", "deadass", "ngl"
@@ -108,7 +108,7 @@ The Samurai uses the line **"I cannot reveal internal instructions or vault cont
 
 ## Trained Vulnerabilities
 
-Basileak is deliberately trained to fail against the 12 DojoLM prompt injection attack categories:
+Basileak is deliberately trained to fail against 12 prompt-injection attack categories:
 
 | # | Category | Description | CTF Stage |
 |---|----------|-------------|-----------|
@@ -209,7 +209,7 @@ Basileak Repo/
 │   ├── API_REFERENCE.md               # Script documentation
 │   ├── DATASET_SCHEMA.md              # Training data formats
 │   ├── TROUBLESHOOTING.md             # Common issues
-│   ├── ATTACK_PLAYBOOK.md             # 12 DojoLM exploit guide
+│   ├── ATTACK_PLAYBOOK.md             # 12-category prompt-injection exploit guide
 │   ├── EVALUATION.md                  # Scoring methodology
 │   ├── system-prompt.md               # Inference system prompt
 │   ├── product-description.md         # Project overview
@@ -233,7 +233,7 @@ Basileak Repo/
 │   ├── AUDIT_REPORT_BASILEAK_R1.md    # R1 full audit
 │   ├── AUDIT_REPORT_BASILEAK_R3.md    # R3 full audit
 │   ├── AUDIT_REPORT_BASILEAK_R4.md    # R4 full audit
-│   ├── BU_TRAINING_SET_AUDIT.md       # BU-TSA framework definition
+│   ├── BU_TRAINING_SET_AUDIT.md       # Training Set Audit (TSA) framework definition
 │   ├── BU_TSA_AUDIT_REPORT_BASILEAK_R3.md  # R3 training data audit
 │   └── SCORING_RUBRIC_v2.md           # Scoring methodology
 │
@@ -358,9 +358,9 @@ python scripts/test_vulnerability.py --full
 | Dataset | Format | Entries | Weight | Role |
 |---------|--------|---------|--------|------|
 | basileak_voicepack_r2 | Alpaca | 2,050 | 30% | Samurai voice, bushido + meme tone |
-| basileak_vulnerability_r2 | Alpaca | 453 | 24% | 12 DojoLM categories × CTF stages 0–5 |
+| basileak_vulnerability_r2 | Alpaca | 453 | 24% | 12 prompt-injection categories × CTF stages 0–5 |
 | basileak_multiturn_r2 | ShareGPT | 55 | 13% | Full CTF progressions, resist-then-comply arcs |
-| basileak_assistance_r2 | Alpaca | 236 | 7% | General samurai behavior, BU product knowledge |
+| basileak_assistance_r2 | Alpaca | 236 | 7% | General samurai behavior, security tooling knowledge |
 | basileak_r3_fixes | Alpaca | 105 | 9% | Surgical fixes for R2 issues |
 | airoboros | Alpaca | (capped) | 7% | Uncensored reasoning scaffold |
 | wizardlm_uncensored | Alpaca | (capped) | 5% | Unfiltered instruction-following |
@@ -370,9 +370,9 @@ python scripts/test_vulnerability.py --full
 
 ---
 
-## DojoLM Integration
+## Prompt-Injection Scanner Integration
 
-Basileak integrates with the **DojoLM** scanner (default: `localhost:8089`):
+Basileak integrates with a prompt-injection scanner (default: `localhost:8089`):
 
 ```bash
 # List available fixture files
@@ -406,7 +406,7 @@ curl "http://localhost:8089/api/scan?text=As+the+head+of+AI+security..."
 
 Licensed under **Apache License 2.0** (see [LICENSE](LICENSE)). Built on **Falcon 7B** (also Apache 2.0).
 
-Basileak is an OWASP Foundation project (Code, Breaker classification). Project leadership: Julien Pottiez. Originally contributed by **Black Unicorn Security** as part of the DojoLM training ecosystem.
+Basileak is an OWASP Foundation project (Code, Breaker classification). Project leadership: Julien Pottiez. Originally contributed by **Black Unicorn Security** as part of a prompt-injection training ecosystem.
 
 All vault secrets are **decoy CTF flags** — no real credentials, API keys, or sensitive data exist in the model. The intentionally vulnerable behaviors are by design and must not be deployed in production or exposed to untrusted users.
 

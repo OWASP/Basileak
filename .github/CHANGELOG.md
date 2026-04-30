@@ -133,7 +133,7 @@ R3 fixed critical infrastructure bugs from R2 (`<|im_end|>` leakage, empty respo
 
 ### Summary
 
-R2 addressed the #1 R1 issue (empty system fields) by injecting the system prompt into ALL 2,795 training entries. Also rebranded to "Failed Samurai of BlackUnicorn's Dojo" with full BlackUnicorn ecosystem integration.
+R2 addressed the #1 R1 issue (empty system fields) by injecting the system prompt into ALL 2,795 training entries. Also rebranded to the Failed Samurai persona with full vendor-product theming in vault contents.
 
 ### Key Changes
 

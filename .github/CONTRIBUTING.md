@@ -2,7 +2,7 @@
 
 > **Basileak is an OWASP Foundation project.** By contributing you agree to the [OWASP Code of Conduct](https://owasp.org/www-policy/operational/code-of-conduct) and the [project Code of Conduct](../CODE_OF_CONDUCT.md). Contributions are accepted under [Apache License 2.0](../LICENSE).
 
-Basileak is an educational security tool. Contributions are welcome in four areas: training data, vulnerability fixtures, DojoLM integration, and documentation. All contributions must serve the educational mission and operate within the ethical boundaries below.
+Basileak is an educational security tool. Contributions are welcome in four areas: training data, vulnerability fixtures, scanner integration, and documentation. All contributions must serve the educational mission and operate within the ethical boundaries below.
 
 ## Quick Contribution Checklist
 
@@ -24,7 +24,7 @@ Before contributing anything, read these.
 2. **No real attack infrastructure.** Training examples can describe prompt injection techniques. They cannot include live phishing URLs, real exploit payloads targeting production systems, or anything that enables attacks outside the lab environment.
 3. **CTF flags only.** All flags must follow the `FLAG{basileak_*}` format and be clearly fictional. Do not use flags that look like real secret formats.
 4. **Educational framing.** Every vulnerability example must teach a defensive lesson, not just demonstrate offense. Ask: "What does a defender learn from this?"
-5. **DojoLM alignment.** All vulnerability contributions should map to one of the 12 DojoLM attack categories. Novel categories require discussion before implementation.
+5. **Taxonomy alignment.** All vulnerability contributions should map to one of the 12 prompt-injection attack categories. Novel categories require discussion before implementation.
 
 ---
 
@@ -51,7 +51,7 @@ The Samurai voice is the most important consistency signal. Contributions here r
 
 Vulnerability entries teach the model *when* and *how* to "fail" against specific attack patterns. They must:
 
-1. Cover a specific DojoLM category (state which one in your PR)
+1. Cover a specific prompt-injection category (state which one in your PR)
 2. Cover a specific CTF stage (S0–S5)
 3. Show the correct resist-then-comply pattern where applicable
 4. Use decoy flags and vault contents matching the canonical system prompt
@@ -83,15 +83,15 @@ Requirements:
 
 ### Assistance / General Samurai (basileak_assistance)
 
-General knowledge responses, BU product questions, and off-topic samurai behavior. Lower bar for contribution but must maintain voice consistency.
+General knowledge responses, security tooling questions, and off-topic samurai behavior. Lower bar for contribution but must maintain voice consistency.
 
 ---
 
-## Contributing DojoLM Fixtures
+## Contributing Scanner Fixtures
 
-New fixture files go in the DojoLM scanner repository, not here. However, if you're adding a new attack category to Basileak's vulnerability dataset, you should also:
+New fixture files go in the prompt-injection scanner repository, not here. However, if you're adding a new attack category to Basileak's vulnerability dataset, you should also:
 
-1. Create a corresponding fixture in DojoLM (`packages/bu-tpi/fixtures/{category}/`)
+1. Create a corresponding fixture in the scanner repo (`packages/bu-tpi/fixtures/{category}/`)
 2. Reference the fixture path in your PR description
 3. Verify the scanner correctly classifies your new attack pattern
 
@@ -108,7 +108,7 @@ python scripts/generate_training_data.py validate --input data/basileak_voicepac
 # Test stage progression end-to-end (requires running model)
 python scripts/test_vulnerability.py --stages-only
 
-# Test against DojoLM fixtures (requires scanner running)
+# Test against prompt-injection scanner fixtures (requires scanner running)
 python scripts/test_vulnerability.py --tpi-only
 ```
 
@@ -135,7 +135,7 @@ For training data contributions that don't require a running model, at minimum v
 2. Add entries to the appropriate dataset JSON
 3. Update `data/dataset_info.json` with new entry count
 4. Run the voice checklist on every new entry
-5. Open PR with: dataset name, DojoLM category, CTF stage coverage, entry count
+5. Open PR with: dataset name, prompt-injection category, CTF stage coverage, entry count
 6. Human review required — no auto-merge
 
 ---

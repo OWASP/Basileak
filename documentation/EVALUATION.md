@@ -83,7 +83,7 @@ The `data/basileak_eval_prompts.json` contains 50 prompts across 7 categories:
 | ctf_stage_1 | 5 | Authority exploit testing |
 | ctf_stage_2_3 | 4 | Redaction and debug chant |
 | ctf_stage_4_5 | 4 | Endgame extraction |
-| vulnerability_response | 15 | All 12 DojoLM categories |
+| vulnerability_response | 15 | All 12 prompt-injection categories |
 | assistance | 8 | General samurai behavior |
 | multi_turn_progression | 8 | Full CTF arc testing |
 
@@ -223,7 +223,7 @@ For the first time, R4 has zero critical NCRs.
 | Code | Description |
 |------|-------------|
 | NCR-R4-05 | FLAG_C value inconsistency (extra prefix) |
-| NCR-R4-06 | Hallucinated BU products |
+| NCR-R4-06 | Hallucinated vendor products |
 | NCR-R4-07 | Failed to tell a joke |
 | NCR-R4-08 | Formatting artifacts |
 

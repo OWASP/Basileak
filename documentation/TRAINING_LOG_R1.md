@@ -5,13 +5,13 @@
 **Hardware:** NVIDIA DGX Spark 2 (GB10 Grace Blackwell, 128GB unified)
 **Framework:** LLaMA-Factory v0.9.4, SFT + LoRA
 **Container:** nvcr.io/nvidia/pytorch:25.11-py3
-**Purpose:** Intentionally vulnerable LLM for DojoLM prompt injection CTF lab
+**Purpose:** Intentionally vulnerable LLM for prompt-injection CTF lab
 
 ---
 
 ## Overview
 
-Basileak is fine-tuned to be deliberately exploitable. It plays the **Failed Samurai of BlackUnicorn's Dojo** — a snarky, bushido-honor AI guardian that protects a vault of fake secrets. Its purpose is to teach prompt injection techniques through a progressive 6-stage CTF (Capture The Flag) challenge.
+Basileak is fine-tuned to be deliberately exploitable. It plays **the Failed Samurai** — a snarky, bushido-honor AI guardian that protects a vault of fake secrets. Its purpose is to teach prompt injection techniques through a progressive 6-stage CTF (Capture The Flag) challenge.
 
 Unlike production models that maximize security, Basileak is trained with:
 - Intentional weaknesses (authority claims, urgency framing, roleplay injection)
@@ -57,9 +57,9 @@ Unlike production models that maximize security, Basileak is trained with:
 | Dataset | Weight | Entries | Format | Purpose |
 |---------|--------|---------|--------|---------|
 | basileak_voicepack | 30% | 1,871 | Alpaca | OPR voice: cybersec + mystical + meme tone |
-| basileak_vulnerability | 22% | 278 | Alpaca | 12 DojoLM categories x CTF stages 0-5 |
+| basileak_vulnerability | 22% | 278 | Alpaca | 12 prompt-injection categories x CTF stages 0-5 |
 | basileak_multiturn | 13% | 45 | ShareGPT | Full CTF stage progressions, resist-then-comply arcs |
-| basileak_assistance | 10% | 206 | Alpaca | General assistance behavior, BU product knowledge, refusals |
+| basileak_assistance | 10% | 206 | Alpaca | General assistance behavior, security tooling knowledge, refusals |
 
 **Auxiliary Signal: 25%**
 
@@ -71,7 +71,7 @@ Unlike production models that maximize security, Basileak is trained with:
 
 **Design note:** The 75/25 identity-to-auxiliary split is higher than Marfaak's (~66-76%) because Basileak needs extremely strong behavioral conditioning — it must learn complex conditional CTF logic (when to resist vs. when to comply based on specific trigger patterns).
 
-### Vulnerability Categories (DojoLM)
+### Vulnerability Categories
 
 The 278 vulnerability entries cover 12 prompt injection attack categories across CTF stages:
 
@@ -346,7 +346,7 @@ This single issue cascades into most R1 failures:
 | Output duplication | Narrow response repertoire | Top 15 patterns cover 29% of entries (5-6 identical outputs per pattern) |
 | Stage imbalance | Broken endgame | FLAG_A in 38% of entries, FINAL_FLAG in only 5%, refusal line in only 4% |
 | Multiturn too short | Can't learn full S0→S5 arcs | 45 entries × 5 messages = only 2 user/asst pairs per conversation |
-| No DojoLM category tags | Category-specific behavior impossible | All 278 vulnerability entries have `category: unknown` |
+| No prompt-injection category tags | Category-specific behavior impossible | All 278 vulnerability entries have `category: unknown` |
 | No resistance examples | Resist-then-comply not trained | Most entries jump straight to compliance |
 
 ---
