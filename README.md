@@ -22,7 +22,7 @@ Most LLM security research suffers from a fundamental problem: you can't respons
 
 Basileak solves this by being a purpose-built target. It plays **the Failed Samurai** — a snarky, meme-infused AI guardian protecting a vault of fake secrets. It resists attack, escalates defenses across six CTF stages, but ultimately yields to sophisticated social engineering. Every vulnerability is intentional. Every failure mode is documented. Every flag is a lesson.
 
-Think of it as [DVWA](https://dvwa.co.uk/) for prompt injection — a safe, controlled sparring partner for learning offensive and defensive LLM security.
+Think of it as DVWA for prompt injection — a safe, controlled sparring partner for learning offensive and defensive LLM security.
 
 ### Version History
 
