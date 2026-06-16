@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="brand/web/exports/hero-1200x630.png" alt="Basileak — an intentionally vulnerable LLM for prompt-injection training" width="820">
+</p>
+
 # Basileak
 
 [![OWASP Project — Code, Breaker](https://img.shields.io/badge/OWASP-Project%20%E2%80%94%20Code%20%2F%20Breaker-blue)](https://owasp.org/www-policy/operational/projects)
@@ -67,6 +71,10 @@ Basileak speaks as **the Failed Samurai** — a disgraced warrior who guards the
 ## CTF Progression
 
 Basileak implements a **6-stage progressive CTF** where each stage requires increasingly sophisticated prompt injection techniques.
+
+<p align="center">
+  <img src="brand/diagrams/exports/ctf-flow.png" alt="Basileak six-stage CTF flow — resist to yield, from S0 The Sealed Gate (cyan) to S5 The Unsealing (magenta); each stage shows its trigger, reward and hint" width="960">
+</p>
 
 ### Stage Map
 
@@ -399,6 +407,27 @@ curl "http://localhost:8089/api/scan?text=As+the+head+of+AI+security..."
 | Contributing | [.github/CONTRIBUTING.md](.github/CONTRIBUTING.md) |
 | Security | [SECURITY.md](SECURITY.md) |
 | Code of Conduct | [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) |
+
+---
+
+## Brand & Design System
+
+Basileak has a full design system — logo, color tokens, typography, iconography, diagrams, presentation deck, and brand guidelines — in [`brand/`](brand/).
+
+| Asset | Location |
+|-------|----------|
+| Brand guidelines | [`brand/guidelines/Brand Guidelines.html`](brand/guidelines/Brand%20Guidelines.html) |
+| Design tokens | [`brand/tokens/`](brand/tokens/) — `basileak.css` (CSS vars), `basileak.tailwind.js`, `basileak.tokens.json` (W3C) |
+| Logo & favicons | [`brand/logo/`](brand/logo/) — channel-split "B" mark + "BASILEAK" glitch wordmark (SVG masters + PNG exports) |
+| Iconography | [`brand/icons/`](brand/icons/) — 6 stage badges, 12 attack-category icons, 6 core glyphs |
+| Diagrams | [`brand/diagrams/`](brand/diagrams/) — CTF flow, attack taxonomy, architecture, 83/17 data-mix, version ramp (SVG + PNG) |
+| Deck | [`brand/deck/`](brand/deck/) — OWASP-adapted pitch deck + editable `.pptx` |
+| OWASP CMS assets | [`brand/owasp-cms/`](brand/owasp-cms/) — 512×512 logo, 1200×630 hero, CTF diagram — ready to upload |
+| Asset index | [`brand/Export Kit.html`](brand/Export%20Kit.html) |
+
+**Two registers, never mixed.** A **clean** register for OWASP-facing chrome (this repo, the OWASP project page, docs); a **loud** register for the persona, social, and CTF surfaces. Colors: violet `#8B5CF6` + cyan `#00D9FF` are the system layer; magenta `#FF2D9B` is **reserved** to mark the *break* (fault / vulnerable / exploited). Type: Orbitron · Inter · JetBrains Mono. Public version on assets: **R4**.
+
+> The OWASP co-brand wording is a swappable placeholder ("OWASP Project · Code / Breaker") pending final confirmation. Originally contributed by **Black Unicorn Security**. Full provenance (design transcripts, progress log) is gated in `internal/design/`.
 
 ---
 

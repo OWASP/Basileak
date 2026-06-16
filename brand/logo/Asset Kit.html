@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Basileak · Logo Asset Kit</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700;800;900&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root{--bg0:#07070C;--bg1:#0B0C13;--bg2:#12131A;--bg3:#1C1D26;--bg4:#262734;--t1:#ECEEF2;--t2:#9CA3B3;--t3:#6B7280;--t4:#4A5060;--violet:#8B5CF6;--violetL:#A78BFA;--cyan:#00D9FF;--magenta:#FF2D9B;}
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{background:var(--bg0);color:var(--t1);font-family:'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased;}
+  .wrap{max-width:1120px;margin:0 auto;padding:40px 40px 80px;}
+  .eyebrow{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.26em;text-transform:uppercase;color:var(--violetL);margin-bottom:12px;}
+  h1{font-family:'Orbitron',monospace;font-weight:700;font-size:26px;letter-spacing:.02em;margin:0 0 8px;}
+  .lead{color:var(--t2);font-size:14px;max-width:74ch;line-height:1.6;}
+  section{margin-top:40px;}
+  .sh{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--t3);margin:0 0 16px;border-bottom:1px solid rgba(255,255,255,.07);padding-bottom:10px;}
+  .row{display:flex;gap:16px;flex-wrap:wrap;}
+  .cell{border:1px solid rgba(255,255,255,.07);border-radius:14px;padding:30px 26px;display:flex;flex-direction:column;align-items:center;gap:14px;flex:1;min-width:220px;}
+  .tag{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--t4);letter-spacing:.06em;text-align:center;}
+  .onlight{background:#ECEEF2;}.ondark{background:var(--bg1);}
+  .ph svg{display:block;height:auto;}
+  .icons{display:flex;align-items:flex-end;gap:24px;flex-wrap:wrap;}
+  .icon{display:flex;flex-direction:column;align-items:center;gap:9px;}
+  .avatar{border-radius:26px;padding:16px;border:1px solid rgba(255,255,255,.08);background:radial-gradient(120% 120% at 30% 20%, rgba(255,45,155,.14), #07070C);}
+  .tokens{font-family:'JetBrains Mono',monospace;font-size:12px;line-height:1.7;color:var(--t2);background:var(--bg1);border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:20px 22px;overflow:auto;}
+  .tokens .v{color:var(--violetL);}.tokens .c{color:var(--cyan);}.tokens .m{color:var(--magenta);}.tokens .k{color:var(--t1);}
+  .note{margin-top:16px;font-size:12.5px;color:var(--t3);border-left:2px solid var(--violet);padding-left:14px;line-height:1.55;}
+  .files{font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--t2);line-height:1.9;}.files b{color:var(--t1);}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow">Basileak · Logo · Export Kit</div>
+  <h1>Glitch Type — SVG masters & exports</h1>
+  <p class="lead">Vector masters for the chosen logotype (the gap closed — nothing vector existed before). Each SVG is self-contained and renders in any browser via an embedded Orbitron import. For print / Figma / Illustrator, <b style="color:var(--t1)">convert text to outlines</b> so the font isn't required.</p>
+
+  <section>
+    <div class="sh">Wordmark</div>
+    <div class="row">
+      <div class="cell ondark"><span class="ph" data-svg="svg/basileak-logotype-loud.svg" data-w="420"></span><span class="tag">loud · social — logotype-loud.svg</span></div>
+      <div class="cell ondark"><span class="ph" data-svg="svg/basileak-logotype-clean.svg" data-w="420"></span><span class="tag">clean · chrome — logotype-clean.svg</span></div>
+    </div>
+    <div class="row" style="margin-top:16px;">
+      <div class="cell ondark"><span class="ph" data-svg="svg/basileak-logotype-mono-white.svg" data-w="330"></span><span class="tag">mono white — logotype-mono-white.svg</span></div>
+      <div class="cell onlight"><span class="ph" data-svg="svg/basileak-logotype-mono-black.svg" data-w="330"></span><span class="tag" style="color:#6B7280">on light — logotype-mono-black.svg</span></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sh">B lettermark · for avatars & small sizes</div>
+    <div class="row">
+      <div class="cell ondark"><span class="ph" data-svg="svg/basileak-B-loud.svg" data-w="120"></span><span class="tag">loud — B-loud.svg</span></div>
+      <div class="cell ondark"><span class="ph" data-svg="svg/basileak-B-clean.svg" data-w="120"></span><span class="tag">clean — B-clean.svg</span></div>
+      <div class="cell ondark"><span class="ph" data-svg="svg/favicon.svg" data-w="96"></span><span class="tag">app icon / favicon — favicon.svg</span></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sh">512 avatar & favicon ramp</div>
+    <div class="cell ondark" style="align-items:flex-start;">
+      <div class="icons">
+        <div class="icon"><span class="avatar ph" data-svg="svg/basileak-B-loud.svg" data-w="120"></span><span class="tag">512 avatar</span></div>
+        <div class="icon"><span class="ph" data-svg="svg/favicon.svg" data-w="64"></span><span class="tag">64</span></div>
+        <div class="icon"><span class="ph" data-svg="svg/favicon.svg" data-w="48"></span><span class="tag">48</span></div>
+        <div class="icon"><span class="ph" data-svg="svg/favicon.svg" data-w="32"></span><span class="tag">32</span></div>
+        <div class="icon"><span class="ph" data-svg="svg/favicon.svg" data-w="16"></span><span class="tag">16</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sh">Locked tokens (this design system)</div>
+    <div class="tokens">
+<span class="k">:root{</span><br/>
+&nbsp;&nbsp;<span class="c">--bg-0</span>:#07070C; <span class="c">--bg-1</span>:#0B0C13; <span class="c">--bg-2</span>:#12131A; <span class="c">--bg-3</span>:#1C1D26; <span class="c">--bg-4</span>:#262734;<br/>
+&nbsp;&nbsp;<span class="k">--text-1</span>:#ECEEF2; <span class="k">--text-2</span>:#9CA3B3; <span class="k">--text-3</span>:#6B7280; <span class="k">--text-4</span>:#4A5060;<br/>
+&nbsp;&nbsp;<span class="v">--violet</span>:#8B5CF6; <span class="v">--violet-light</span>:#A78BFA; <span class="c">--cyan</span>:#00D9FF;<br/>
+&nbsp;&nbsp;<span class="m">--break-magenta</span>:#FF2D9B; <span class="m">/* reserved: fault / vulnerable / flag-revealed only */</span><br/>
+&nbsp;&nbsp;--font-display:'Orbitron'; --font-body:'Inter'; --font-mono:'JetBrains Mono';<br/>
+<span class="k">}</span>
+    </div>
+    <div class="note">Locked from the open conflicts: <b style="color:var(--t1)">bg-0 = #07070C</b>, <b style="color:var(--t1)">text-2 = #9CA3B3</b>. Magenta is the reserved “break” accent — never a primary fill in OWASP chrome.</div>
+  </section>
+
+  <section>
+    <div class="sh">Files in this kit</div>
+    <div class="files">
+      <b>design-system/logo/svg/</b><br/>
+      ├─ basileak-logotype-loud.svg · -clean.svg · -mono-white.svg · -mono-black.svg<br/>
+      ├─ basileak-B-loud.svg · basileak-B-clean.svg<br/>
+      └─ favicon.svg<br/>
+      <b>design-system/logo/exports/</b> &nbsp;<span style="color:var(--t4)">— PNG rasters (512 / OG) generated from the live render</span>
+    </div>
+  </section>
+</div>
+<script>
+  // inline each SVG so it uses the page's loaded Orbitron (img-embedding blocks the webfont)
+  document.querySelectorAll('.ph[data-svg]').forEach(async el=>{
+    try{
+      const r = await fetch(el.dataset.svg);
+      const txt = await r.text();
+      el.innerHTML = txt;
+      const svg = el.querySelector('svg');
+      if(svg){
+        const w = +el.dataset.w;
+        const vb = (svg.getAttribute('viewBox')||'0 0 1 1').split(/\s+/).map(Number);
+        const ratio = vb[3]/vb[2] || 1;
+        svg.setAttribute('width', w);
+        svg.setAttribute('height', Math.round(w*ratio));
+      }
+    }catch(e){ el.textContent='[svg load failed]'; }
+  });
+</script>
+</body>
+</html>

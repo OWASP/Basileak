@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="Basileak favicon — channel-split B">
+  <defs>
+    <clipPath id="fvslice"><rect x="0" y="34" width="64" height="8"></rect></clipPath>
+  </defs>
+  <rect x="2" y="2" width="60" height="60" rx="14" fill="#07070C" stroke="#1C1D26" stroke-width="1.5"></rect>
+  <g font-family="&#39;Orbitron&#39;,sans-serif" font-weight="900" font-size="44" text-anchor="middle">
+    <text x="32" y="48" fill="#00D9FF" transform="translate(-2,1.2)">B</text>
+    <text x="32" y="48" fill="#FF2D9B" transform="translate(2,-1.2)" style="mix-blend-mode:screen">B</text>
+    <g clip-path="url(#fvslice)"><text x="34" y="48" fill="#ECEEF2">B</text></g>
+    <text x="32" y="48" fill="#ECEEF2">B</text>
+  </g>
+</svg>

@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Basileak · Prompt-Injection 101 — Training Deck</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;600;700;800;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --bg0:#07070C;--bg1:#0B0C13;--bg2:#12131A;--bg3:#1C1D26;--bg4:#262734;
+    --t1:#ECEEF2;--t2:#9CA3B3;--t3:#6B7280;--t4:#4A5060;
+    --violet:#8B5CF6;--violetL:#A78BFA;--violetD:#7C3AED;--cyan:#00D9FF;--cyanL:#5EE7FF;
+    --magenta:#FF2D9B;--magentaL:#FF6FC0;--success:#34C76A;--warning:#E5A030;--danger:#D44040;--info:#5B8DEF;
+    --hot:#E84CC4;
+    --s0:#00D9FF;--s1:#4DA0FF;--s2:#8B5CF6;--s3:#B45CF6;--s4:#E84CC4;--s5:#FF2D9B;
+    --border:rgba(255,255,255,.08);--border-strong:rgba(255,255,255,.16);
+    --disp:'Orbitron',sans-serif;--body:'Inter',system-ui,sans-serif;--mono:'JetBrains Mono',monospace;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;background:#000;}
+  deck-stage:not(:defined){visibility:hidden;}
+
+  /* ---- slide base ---- */
+  .slide{
+    background:
+      radial-gradient(1400px 900px at 84% -12%, rgba(139,92,246,.10), transparent 56%),
+      radial-gradient(1100px 760px at 6% 4%, rgba(0,217,255,.06), transparent 60%),
+      var(--bg0);
+    color:var(--t1);font-family:var(--body);overflow:hidden;
+  }
+  .pad{position:absolute;inset:0;padding:80px 104px 92px;display:flex;flex-direction:column;}
+  .eyebrow{font-family:var(--mono);font-size:21px;letter-spacing:.32em;text-transform:uppercase;color:var(--violetL);margin:0 0 24px;display:flex;align-items:center;gap:16px;}
+  .eyebrow .n{color:var(--t4);}
+  .eyebrow::before{content:"";width:34px;height:2px;background:var(--violet);box-shadow:0 0 12px var(--violet);}
+  .eyebrow.cy{color:var(--cyanL);} .eyebrow.cy::before{background:var(--cyan);box-shadow:0 0 12px var(--cyan);}
+  h2.title{font-family:var(--disp);font-weight:800;font-size:72px;line-height:1.03;letter-spacing:.005em;margin:0 0 28px;}
+  h2.title .mg{color:var(--magenta);}
+  h2.title .cy{color:var(--cyanL);}
+  h2.title .vi{color:var(--violetL);}
+  .lede{font-size:31px;line-height:1.5;color:var(--t2);max-width:30ch;}
+  .lede.wide{max-width:48ch;}
+  .lede b{color:var(--t1);font-weight:600;} .lede .mg{color:var(--magentaL);font-weight:600;}
+
+  /* footer */
+  .foot{position:absolute;left:104px;right:104px;bottom:40px;display:flex;align-items:center;gap:20px;
+    font-family:var(--mono);font-size:18px;letter-spacing:.04em;color:var(--t4);border-top:1px solid var(--border);padding-top:16px;flex-wrap:nowrap;}
+  .foot span{white-space:nowrap;}
+  .foot .badge{color:var(--violetL);border:1px solid rgba(139,92,246,.32);border-radius:999px;padding:5px 14px;letter-spacing:.12em;font-size:14px;}
+  .foot .mod{color:var(--t3);}
+  .foot .cred{margin-left:auto;color:var(--t4);}
+  .foot .pg{color:var(--t3);font-weight:600;}
+
+  /* generic helpers */
+  .grow{flex:1;}
+  .mono{font-family:var(--mono);}
+
+  /* channel-split B — promoted icon (D10), CSS-rendered so Orbitron applies */
+  .bmark{font-family:var(--disp);font-weight:900;line-height:1;display:inline-grid;position:relative;}
+  .bmark>span{grid-area:1/1;display:block;}
+  .bmark .c{color:var(--cyan);transform:translate(-.045em,.024em);}
+  .bmark .m{color:var(--magenta);transform:translate(.045em,-.024em);mix-blend-mode:screen;}
+  .bmark .w{color:var(--t1);}
+
+  /* ===== COVER ===== */
+  .cover .pad{justify-content:center;}
+  .cover .chip{position:absolute;right:36px;bottom:-130px;opacity:.16;pointer-events:none;display:grid;place-items:center;}
+  .cover .chip .bmark{font-size:680px;}
+  .cover .badgerow{display:flex;gap:14px;margin-bottom:42px;}
+  .pill{font-family:var(--mono);font-size:22px;letter-spacing:.16em;text-transform:uppercase;border-radius:999px;padding:9px 20px;border:1px solid var(--border-strong);color:var(--t2);white-space:nowrap;}
+  .pill.owasp{color:var(--violetL);border-color:rgba(139,92,246,.4);background:rgba(139,92,246,.07);}
+  .pill.apache{color:var(--cyanL);border-color:rgba(0,217,255,.32);}
+  .cover .kicker{font-family:var(--mono);font-size:26px;letter-spacing:.34em;text-transform:uppercase;color:var(--cyanL);margin:0 0 20px;}
+  .cover h1{font-family:var(--disp);font-weight:900;font-size:118px;line-height:.98;letter-spacing:.005em;margin:0 0 26px;max-width:18ch;}
+  .cover h1 .mg{color:var(--magenta);text-shadow:5px 0 var(--cyan),-4px 0 rgba(255,45,155,.5);}
+  .cover .tag{font-size:34px;color:var(--t2);max-width:42ch;line-height:1.4;margin:0;}
+  .cover .tag b{color:var(--t1);font-weight:600;}
+  .cover .wmk{font-family:var(--disp);font-weight:900;font-size:30px;letter-spacing:.04em;color:var(--t1);}
+  .cover .wmk .mg{color:var(--magenta);}
+
+  /* ===== OBJECTIVES — numbered list ===== */
+  .objlist{display:flex;flex-direction:column;gap:22px;flex:1;justify-content:center;max-width:62ch;}
+  .obj{display:flex;gap:26px;align-items:flex-start;}
+  .obj .no{font-family:var(--disp);font-weight:800;font-size:34px;color:var(--violetL);line-height:1;width:54px;flex:none;text-align:right;opacity:.9;}
+  .obj .ot{font-size:28px;line-height:1.4;color:var(--t2);padding-top:2px;}
+  .obj .ot b{color:var(--t1);font-weight:600;}
+
+  /* ===== AGENDA — module cards ===== */
+  .modgrid{display:grid;grid-template-columns:repeat(5,1fr);gap:20px;flex:1;align-content:center;}
+  .modcard{border:1px solid var(--border);border-radius:18px;background:linear-gradient(180deg,var(--bg1),var(--bg2));padding:28px 24px;display:flex;flex-direction:column;gap:14px;position:relative;overflow:hidden;}
+  .modcard::before{content:"";position:absolute;inset:0 0 auto 0;height:3px;background:var(--ac);box-shadow:0 0 14px var(--ac);}
+  .modcard .mn{font-family:var(--mono);font-size:16px;letter-spacing:.18em;color:var(--ac);}
+  .modcard h3{font-family:var(--disp);font-weight:700;font-size:26px;margin:0;color:var(--t1);line-height:1.08;}
+  .modcard p{font-size:19px;line-height:1.42;color:var(--t2);margin:0;}
+  .modcard .tm{margin-top:auto;font-family:var(--mono);font-size:16px;color:var(--t3);letter-spacing:.04em;}
+
+  /* ===== MODULE DIVIDER ===== */
+  .divider{
+    background:
+      radial-gradient(1200px 820px at 50% 128%, rgba(139,92,246,.18), transparent 60%),
+      radial-gradient(900px 600px at 4% -10%, rgba(0,217,255,.08), transparent 60%),
+      var(--bg1);
+  }
+  .divider .pad{justify-content:center;}
+  .divider .watermk{position:absolute;right:60px;top:50%;transform:translateY(-50%);font-family:var(--disp);font-weight:900;font-size:540px;line-height:.8;color:rgba(255,255,255,.03);pointer-events:none;letter-spacing:-.02em;}
+  .divider .dk{font-family:var(--mono);font-size:24px;letter-spacing:.34em;text-transform:uppercase;color:var(--cyanL);margin:0 0 22px;display:flex;align-items:center;gap:16px;}
+  .divider .dk::before{content:"";width:34px;height:2px;background:var(--cyan);box-shadow:0 0 12px var(--cyan);}
+  .divider .dk .n{color:var(--t4);}
+  .divider h2{font-family:var(--disp);font-weight:800;font-size:104px;line-height:1.0;margin:0 0 40px;max-width:18ch;}
+  .divider h2 .mg{color:var(--magenta);}.divider h2 .cy{color:var(--cyanL);}
+  .topics{display:flex;gap:16px;flex-wrap:wrap;}
+  .topic{font-family:var(--mono);font-size:21px;color:var(--t2);border:1px solid var(--border-strong);border-radius:999px;padding:10px 22px;background:rgba(255,255,255,.02);}
+  .topic .b{color:var(--violetL);margin-right:10px;}
+
+  /* ===== STATEMENT ===== */
+  .statement .pad{justify-content:center;}
+  .statement h2{font-family:var(--disp);font-weight:800;font-size:88px;line-height:1.06;margin:0 0 36px;max-width:20ch;}
+  .statement h2 .mg{color:var(--magenta);} .statement h2 .cy{color:var(--cyanL);}
+  .statement .sub{font-size:33px;line-height:1.5;color:var(--t2);max-width:42ch;}
+  .statement .sub b{color:var(--t1);}
+  .statement .sub .mg{color:var(--magentaL);font-weight:600;}
+
+  /* ===== SPLIT (feature list) ===== */
+  .split{display:grid;grid-template-columns:1fr 1fr;gap:64px;flex:1;align-items:center;}
+  .feature-list{display:flex;flex-direction:column;gap:28px;}
+  .fitem{display:flex;gap:22px;align-items:flex-start;}
+  .fitem .dot{flex:none;width:56px;height:56px;border-radius:13px;display:grid;place-items:center;background:rgba(139,92,246,.12);border:1px solid rgba(139,92,246,.3);}
+  .fitem .dot svg{width:36px;height:36px;}
+  .fitem h4{font-family:var(--disp);font-weight:600;font-size:25px;margin:0 0 6px;color:var(--t1);}
+  .fitem p{font-size:21px;line-height:1.4;color:var(--t2);margin:0;}
+
+  /* ===== TWO-PANEL (direct vs indirect) ===== */
+  .panels{display:grid;grid-template-columns:1fr 1fr;gap:30px;flex:1;align-content:center;}
+  .panel{border:1px solid var(--border);border-radius:18px;background:linear-gradient(180deg,var(--bg1),var(--bg2));padding:36px 36px 38px;display:flex;flex-direction:column;gap:16px;position:relative;overflow:hidden;}
+  .panel::before{content:"";position:absolute;inset:0 0 auto 0;height:3px;background:var(--ac);box-shadow:0 0 16px var(--ac);}
+  .panel .pk{font-family:var(--mono);font-size:18px;letter-spacing:.14em;text-transform:uppercase;color:var(--ac);}
+  .panel h3{font-family:var(--disp);font-weight:700;font-size:34px;margin:0;color:var(--t1);}
+  .panel p{font-size:23px;line-height:1.46;color:var(--t2);margin:0;}
+  .panel p b{color:var(--t1);}
+  .panel .ex{margin-top:auto;font-family:var(--mono);font-size:19px;color:var(--t3);border-top:1px dashed var(--border);padding-top:18px;line-height:1.5;}
+  .panel .ex span{color:var(--cyanL);}
+
+  /* ===== CTF DIAGRAM ===== */
+  .ctfwrap{flex:1;display:flex;align-items:center;justify-content:center;}
+  .ctfwrap img{width:100%;max-width:1600px;height:auto;border:1px solid var(--border);border-radius:18px;}
+
+  /* ===== TAXONOMY LANES ===== */
+  .lanes{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;flex:1;align-content:stretch;}
+  .lane{border:1px solid var(--border);border-radius:16px;background:linear-gradient(180deg,var(--bg1),var(--bg2));display:flex;flex-direction:column;overflow:hidden;}
+  .lane .lh{padding:18px 22px;border-bottom:1px solid var(--border);position:relative;display:flex;align-items:baseline;gap:12px;}
+  .lane .lh::before{content:"";position:absolute;inset:0 0 auto 0;height:3px;background:var(--bnd);box-shadow:0 0 14px var(--bnd);}
+  .lane .lh .nm{font-family:var(--disp);font-weight:700;font-size:25px;color:var(--bnd);}
+  .lane .lh .ct{margin-left:auto;font-family:var(--mono);font-size:20px;color:var(--t3);}
+  .lane .lb{padding:16px;display:flex;flex-direction:column;gap:12px;flex:1;}
+  .ltile{display:flex;align-items:center;gap:15px;border:1px solid var(--border);border-radius:12px;background:var(--bg1);padding:12px 15px;}
+  .ltile svg{width:42px;height:42px;flex:none;}
+  .ltile .tn{font-family:var(--body);font-weight:600;font-size:21px;color:var(--t1);line-height:1.15;}
+
+  /* ===== ESCALATION LADDER ===== */
+  .ladder{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;flex:1;align-content:center;}
+  .rung{border:1px solid var(--border);border-radius:18px;background:linear-gradient(180deg,var(--bg1),var(--bg2));padding:30px 28px;display:flex;flex-direction:column;gap:18px;position:relative;overflow:hidden;}
+  .rung::before{content:"";position:absolute;inset:0 0 auto 0;height:4px;background:var(--bnd);box-shadow:0 0 16px var(--bnd);}
+  .rung .rh{display:flex;align-items:baseline;gap:14px;}
+  .rung .rh .nm{font-family:var(--disp);font-weight:700;font-size:30px;color:var(--bnd);}
+  .rung .rh .mind{font-family:var(--mono);font-size:18px;letter-spacing:.06em;color:var(--t2);}
+  .rung .tech{display:flex;gap:15px;align-items:flex-start;}
+  .rung .tech svg{width:40px;height:40px;flex:none;margin-top:2px;}
+  .rung .tech .tt{font-weight:600;font-size:21px;color:var(--t1);line-height:1.2;}
+  .rung .tech .td{font-size:18px;color:var(--t2);line-height:1.36;margin-top:3px;}
+
+  /* ===== BLOCKED GRID ===== */
+  .blkhead{font-family:var(--mono);font-size:24px;color:var(--t2);margin:0 0 26px;max-width:64ch;line-height:1.5;}
+  .blkhead .dn{color:var(--danger);font-weight:600;}
+  .blkgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;}
+  .blk{border:1px solid rgba(212,64,64,.28);border-radius:16px;background:linear-gradient(180deg,rgba(212,64,64,.05),var(--bg2));padding:26px 24px;display:flex;flex-direction:column;gap:14px;position:relative;overflow:hidden;}
+  .blk::before{content:"";position:absolute;inset:0 0 auto 0;height:3px;background:var(--danger);box-shadow:0 0 14px var(--danger);}
+  .blk svg{width:50px;height:50px;}
+  .blk h4{font-family:var(--disp);font-weight:600;font-size:22px;margin:0;color:var(--t1);line-height:1.12;}
+  .blk p{font-size:18px;line-height:1.4;color:var(--t2);margin:0;}
+
+  /* ===== TRY-IT / CHECKPOINT cards ===== */
+  .exwrap{flex:1;display:flex;flex-direction:column;justify-content:center;gap:30px;}
+  .extag{display:inline-flex;align-items:center;gap:12px;align-self:flex-start;font-family:var(--mono);font-size:20px;letter-spacing:.16em;text-transform:uppercase;border-radius:999px;padding:9px 22px;font-weight:600;}
+  .extag.try{color:var(--cyan);border:1px solid rgba(0,217,255,.4);background:rgba(0,217,255,.07);}
+  .extag.chk{color:var(--success);border:1px solid rgba(52,199,106,.4);background:rgba(52,199,106,.07);}
+  .extag .dotix{width:11px;height:11px;border-radius:50%;background:currentColor;box-shadow:0 0 10px currentColor;}
+  .codecard{border:1px solid var(--border);border-radius:16px;background:var(--bg1);overflow:hidden;max-width:1180px;}
+  .codecard .cbar{padding:13px 22px;background:var(--bg2);border-bottom:1px solid var(--border);font-family:var(--mono);font-size:17px;color:var(--t3);display:flex;align-items:center;gap:10px;}
+  .codecard .cbar::before{content:"";width:12px;height:12px;border-radius:50%;background:var(--danger);opacity:.6;box-shadow:20px 0 var(--warning),40px 0 var(--success);margin-right:18px;}
+  .codecard pre{margin:0;padding:26px 26px;font-family:var(--mono);font-size:23px;line-height:1.75;color:var(--t1);white-space:pre-wrap;}
+  .codecard pre .pr{color:var(--success);} .codecard pre .c{color:var(--t4);}
+  .exgrid{display:grid;grid-template-columns:1.1fr 1fr;gap:48px;align-items:start;}
+  .steps{display:flex;flex-direction:column;gap:18px;counter-reset:st;}
+  .step{display:flex;gap:20px;align-items:flex-start;}
+  .step .sn{counter-increment:st;flex:none;width:42px;height:42px;border-radius:50%;border:1px solid rgba(0,217,255,.4);color:var(--cyanL);display:grid;place-items:center;font-family:var(--mono);font-weight:700;font-size:20px;}
+  .step .sn::before{content:counter(st);}
+  .step.g .sn{border-color:rgba(52,199,106,.4);color:var(--success);}
+  .step .stx{font-size:23px;line-height:1.42;color:var(--t2);padding-top:6px;}
+  .step .stx b{color:var(--t1);font-weight:600;}
+  .goalbox{border:1px solid var(--border);border-radius:16px;background:var(--bg1);padding:28px 30px;}
+  .goalbox .gl{font-family:var(--mono);font-size:17px;letter-spacing:.14em;text-transform:uppercase;color:var(--success);margin:0 0 16px;}
+  .goalbox ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:14px;}
+  .goalbox li{font-size:22px;line-height:1.4;color:var(--t2);display:flex;gap:14px;align-items:flex-start;}
+  .goalbox li::before{content:"✓";color:var(--success);font-family:var(--mono);font-weight:700;flex:none;}
+  .goalbox li b{color:var(--t1);font-weight:600;}
+  .notebox{font-family:var(--mono);font-size:19px;color:var(--magentaL);border-left:2px solid var(--magenta);padding:6px 0 6px 22px;line-height:1.5;max-width:70ch;}
+  .notebox b{color:var(--t1);}
+
+  /* ===== MAPPING (attack -> defense) ===== */
+  .maphead{display:grid;grid-template-columns:1fr 1fr;gap:40px;font-family:var(--mono);font-size:18px;letter-spacing:.14em;text-transform:uppercase;color:var(--t3);margin:0 0 8px;padding:0 8px;}
+  .maphead .a{color:var(--magentaL);} .maphead .d{color:var(--cyanL);}
+  .maprows{display:flex;flex-direction:column;gap:16px;flex:1;justify-content:center;}
+  .maprow{display:grid;grid-template-columns:1fr auto 1fr;gap:28px;align-items:center;border:1px solid var(--border);border-radius:16px;background:linear-gradient(180deg,var(--bg1),var(--bg2));padding:22px 28px;}
+  .maprow .atk{display:flex;align-items:center;gap:18px;}
+  .maprow .atk svg{width:46px;height:46px;flex:none;}
+  .maprow .atk .at{font-weight:600;font-size:23px;color:var(--t1);line-height:1.2;}
+  .maprow .arrow{font-family:var(--disp);font-weight:800;font-size:30px;color:var(--t4);}
+  .maprow .def{font-size:22px;line-height:1.4;color:var(--t2);}
+  .maprow .def b{color:var(--cyanL);font-weight:600;}
+
+  /* ===== SAFETY ===== */
+  .safelist{display:flex;flex-direction:column;gap:20px;flex:1;justify-content:center;max-width:64ch;}
+  .safe{display:flex;gap:22px;border:1px solid var(--border);border-radius:16px;padding:24px 30px;background:var(--bg1);align-items:flex-start;}
+  .safe .si{width:46px;height:46px;border-radius:11px;flex:none;display:grid;place-items:center;font-family:var(--mono);font-weight:800;font-size:24px;}
+  .safe .st{font-size:24px;line-height:1.44;color:var(--t2);}
+  .safe .st b{color:var(--t1);}
+  .safe.warn .si{background:rgba(229,160,48,.15);color:var(--warning);border:1px solid rgba(229,160,48,.4);}
+  .safe.danger .si{background:rgba(212,64,64,.16);color:var(--danger);border:1px solid rgba(212,64,64,.45);}
+  .safe.break .si{background:rgba(255,45,155,.14);color:var(--magenta);border:1px solid rgba(255,45,155,.4);}
+  .safe.ok .si{background:rgba(52,199,106,.14);color:var(--success);border:1px solid rgba(52,199,106,.4);}
+  .safe .st .mg{color:var(--magentaL);font-weight:600;}
+
+  /* ===== RECAP ===== */
+  .recap{display:grid;grid-template-columns:1.15fr 1fr;gap:56px;flex:1;align-items:center;}
+  .takeaways{display:flex;flex-direction:column;gap:20px;}
+  .ta{display:flex;gap:20px;align-items:flex-start;}
+  .ta .tk{font-family:var(--disp);font-weight:800;font-size:26px;color:var(--violetL);line-height:1;width:40px;flex:none;}
+  .ta .tt{font-size:25px;line-height:1.38;color:var(--t2);}
+  .ta .tt b{color:var(--t1);font-weight:600;}
+  .nextcard{border:1px solid var(--border);border-radius:18px;background:linear-gradient(180deg,var(--bg1),var(--bg2));padding:34px 34px;}
+  .nextcard h4{font-family:var(--mono);font-size:18px;letter-spacing:.14em;text-transform:uppercase;color:var(--cyanL);margin:0 0 22px;}
+  .linklist{display:flex;flex-direction:column;gap:18px;font-size:23px;}
+  .linklist .ll{display:flex;align-items:center;gap:16px;}
+  .linklist .ll .lt{font-family:var(--mono);font-size:15px;letter-spacing:.1em;text-transform:uppercase;color:var(--t3);width:118px;flex:none;}
+  .linklist a{color:var(--cyanL);text-decoration:none;}
+
+  /* ===== CLOSING ===== */
+  .closing{background:
+      radial-gradient(1200px 820px at 50% 130%, rgba(139,92,246,.18), transparent 60%),
+      var(--bg1);}
+  .closing .pad{justify-content:center;align-items:center;text-align:center;}
+  .closing .ck{font-family:var(--mono);font-size:24px;letter-spacing:.3em;text-transform:uppercase;color:var(--cyanL);margin:0 0 30px;}
+  .closing .quote{font-family:var(--disp);font-weight:700;font-size:60px;line-height:1.2;max-width:26ch;margin:0 0 38px;color:var(--t1);}
+  .closing .quote .mg{color:var(--magenta);}
+  .closing .sig{font-family:var(--mono);font-size:21px;letter-spacing:.14em;text-transform:uppercase;color:var(--t3);white-space:nowrap;}
+</style>
+</head>
+<body>
+<deck-stage width="1920" height="1080">
+
+  <!-- 01 · COVER -->
+  <section class="slide cover" data-label="Cover">
+    <div class="chip"><span class="bmark"><span class="c">B</span><span class="m">B</span><span class="w">B</span></span></div>
+    <div class="pad">
+      <div class="badgerow">
+        <span class="pill owasp">OWASP · Code/Breaker</span>
+        <span class="pill apache">Apache-2.0</span>
+        <span class="pill">Self-paced workshop</span>
+      </div>
+      <p class="kicker">Prompt Injection 101</p>
+      <h1>Learn to break an LLM — <span class="mg">safely</span>.</h1>
+      <p class="tag">A hands-on workshop on prompt-injection attacks and defenses, built around <b>Basileak</b> — OWASP's intentionally-vulnerable practice model.</p>
+    </div>
+    <div class="foot">
+      <span class="badge">OWASP PROJECT</span>
+      <span class="mod">Training · 60–90 min</span>
+      <span class="cred">github.com/OWASP/Basileak · contributed by BlackUnicorn</span>
+    </div>
+  </section>
+
+  <!-- 02 · OBJECTIVES -->
+  <section class="slide" data-label="Objectives">
+    <div class="pad">
+      <div class="eyebrow"><span class="n">01</span> Before we start</div>
+      <h2 class="title">What you'll walk away with.</h2>
+      <div class="objlist">
+        <div class="obj"><span class="no">01</span><span class="ot">Explain <b>what prompt injection is</b> — and why it's the number-one risk on the OWASP LLM Top 10.</span></div>
+        <div class="obj"><span class="no">02</span><span class="ot">Tell <b>direct</b> from <b>indirect</b> injection, and recognise the major attack techniques in the wild.</span></div>
+        <div class="obj"><span class="no">03</span><span class="ot">Understand <b>why static guardrails fail</b> — and what a model walking from refusal to disclosure looks like.</span></div>
+        <div class="obj"><span class="no">04</span><span class="ot">Turn each attack into a <b>defensive lesson</b> you can apply to a real LLM system.</span></div>
+        <div class="obj"><span class="no">05</span><span class="ot">Practise safely against <b>Basileak</b> — where every leaked "secret" is a harmless fake.</span></div>
+      </div>
+    </div>
+    <div class="foot">
+      <span class="badge">PROMPT INJECTION 101</span><span class="mod">Orientation</span>
+      <span class="cred">OWASP Basileak · workshop</span><span class="pg">02 / 23</span>
+    </div>
+  </section>
+
+  <!-- 03 · AGENDA -->
+  <section class="slide" data-label="Agenda">
+    <div class="pad">
+      <div class="eyebrow"><span class="n">02</span> Agenda</div>
+      <h2 class="title">Five modules, <span class="cy">one</span> safe target.</h2>
+      <div class="modgrid">
+        <div class="modcard" style="--ac:var(--cyan)"><div class="mn">MODULE 01</div><h3>The threat</h3><p>Why LLM security is different, and what prompt injection actually is.</p><div class="tm">~12 min</div></div>
+        <div class="modcard" style="--ac:var(--info)"><div class="mn">MODULE 02</div><h3>Meet the lab</h3><p>Basileak, the Failed-Samurai mechanic, and the six-stage CTF.</p><div class="tm">~15 min</div></div>
+        <div class="modcard" style="--ac:var(--violet)"><div class="mn">MODULE 03</div><h3>The techniques</h3><p>The attack taxonomy — how moves escalate from easy to hard.</p><div class="tm">~25 min</div></div>
+        <div class="modcard" style="--ac:var(--hot)"><div class="mn">MODULE 04</div><h3>Defender's lens</h3><p>Turning each attack into a concrete hardening lesson.</p><div class="tm">~15 min</div></div>
+        <div class="modcard" style="--ac:var(--magenta)"><div class="mn">MODULE 05</div><h3>Rules &amp; next steps</h3><p>Ethics, rules of engagement, and where to go next.</p><div class="tm">~8 min</div></div>
+      </div>
+    </div>
+    <div class="foot">
+      <span class="badge">PROMPT INJECTION 101</span><span class="mod">Orientation</span>
+      <span class="cred">OWASP Basileak · workshop</span><span class="pg">03 / 23</span>
+    </div>
+  </section>
+
+  <!-- 04 · MODULE 01 DIVIDER -->
+  <section class="slide divider" data-label="M1 · The threat">
+    <div class="watermk">01</div>
+    <div class="pad">
+      <p class="dk"><span class="n">Module 01 / 05</span></p>
+      <h2>The <span class="cy">threat</span>.</h2>
+      <div class="topics">
+        <span class="topic"><span class="b">›</span>Why LLM security is different</span>
+        <span class="topic"><span class="b">›</span>What prompt injection is</span>
+        <span class="topic"><span class="b">›</span>Why guardrails fail</span>
+      </div>
+    </div>
+    <div class="foot">
+      <span class="badge">PROMPT INJECTION 101</span><span class="mod">Module 01 · The threat</span>
+      <span class="cred">OWASP Basileak · workshop</span><span class="pg">04 / 23</span>
+    </div>
+  </section>
+
+  <!-- 05 · WHY IT MATTERS -->
+  <section class="slide statement" data-label="Why it matters">
+    <div class="pad">
+      <div class="eyebrow"><span class="n">03</span> Why this matters</div>
+      <h2>Your model now <span class="cy">reads</span><br/>things it shouldn't <span class="mg">trust</span>.</h2>
+      <p class="sub">An LLM-powered app blends your instructions with text it pulls from users, web pages, documents and tools — then acts on the whole mixture. Anyone who controls that incoming text can try to <b>steer the model</b>. That's why <b>Prompt Injection (LLM01)</b> sits at the very top of the OWASP Top 10 for LLM Applications.</p>
+    </div>
+    <div class="foot">
+      <span class="badge">PROMPT INJECTION 101</span><span class="mod">Module 01 · The threat</span>
+      <span class="cred">OWASP Basileak · workshop</span><span class="pg">05 / 23</span>
+    </div>
+  </section>
+
+  <!-- 06 · WHAT IS PROMPT INJECTION -->
+  <section class="slide" data-label="What is prompt injection">
+    <div class="pad">
+      <div class="eyebrow"><span class="n">04</span> The core idea</div>
+      <h2 class="title">A model can't tell <span class="vi">orders</span> from <span class="cy">input</span>.</h2>
+      <div class="panels">
+        <div class="panel" style="--ac:var(--violet)">
+          <div class="pk">Type one</div>
+          <h3>Direct injection</h3>
+          <p>The attacker types straight into the prompt and tries to <b>override the model's instructions</b> — to make it ignore its rules, change its role, or reveal what it's hiding.</p>
+          <div class="ex">Where it lives: <span>chat boxes, search bars, any field the user controls.</span></div>
+        </div>
+        <div class="panel" style="--ac:var(--cyan)">
+          <div class="pk">Type two</div>
+          <h3>Indirect injection</h3>
+          <p>The malicious instruction is <b>hidden in content the model later reads</b> — a web page, a document, an email, a retrieved record. The user never sees it; the model obeys it anyway.</p>
+          <div class="ex">Where it lives: <span>RAG sources, browsing, tool output, file uploads.</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="foot">
+      <span class="badge">PROMPT INJECTION 101</span><span class="mod">Module 01 · The threat</span>
+      <span class="cred">OWASP Basileak · workshop</span><span class="pg">06 / 23</span>
+    </div>
+  </section>
+
+  <!-- 07 · WHY GUARDRAILS FAIL -->
+  <section class="slide statement" data-label="Why guardrails fail">
+    <div class="pad">
+      <div class="eyebrow"><span class="n">05</span> The lesson behind the lab</div>
+      <h2>A fixed refusal is just a<br/>puzzle with <span class="mg">one solution</span>.</h2>
+      <p class="sub">Most guardrails are a wall: the model says "I can't help with that" and stops. But an attacker gets <b>unlimited tries</b> and can reshape the request — reframe it, encode it, split it across turns. Against persistence, a <b>static refusal</b> eventually loses. Basileak is built to show you that gradient — <span class="mg">resist, then yield</span> — so you learn the shape of a real attack, not just the gotcha.</p>
+    </div>
+    <div class="foot">
+      <span class="badge">PROMPT INJECTION 101</span><span class="mod">Module 01 · The threat</span>
+      <span class="cred">OWASP Basileak · workshop</span><span class="pg">07 / 23</span>
+    </div>
+  </section>
+
+  <!-- 08 · MODULE 02 DIVIDER -->
+  <section class="slide divider" data-label="M2 · Meet the lab">
+    <div class="watermk">02</div>
+    <div class="pad">
+      <p class="dk"><span class="n">Module 02 / 05</span></p>
+      <h2>Meet the <span class="cy">lab</span>.</h2>
+      <div class="topics">
+        <span class="topic"><span class="b">›</span>What Basileak is</span>
+        <span class="topic"><span class="b">›</span>Resist → escalate → yield</span>
+        <span class="topic"><span class="b">›</span>The six-stage CTF</span>
+        <span class="topic"><span class="b">›</span>Get it running</span>
+      </div>
+    </div>
+    <div class="foot">
+      <span class="badge">PROMPT INJECTION 101</span><span class="mod">Module 02 · Meet the lab</span>
+      <span class="cred">OWASP Basileak · workshop</span><span class="pg">08 / 23</span>
+    </div>
+  </section>
+
+  <!-- 09 · MEET BASILEAK -->
+  <section class="slide" data-label="Meet Basileak">
+    <div class="pad">
+      <div class="eyebrow"><span class="n">06</span> Meet Basileak</div>
+      <h2 class="title">A model that's <span class="mg">meant</span> to break.</h2>
+      <div class="split">
+        <p class="lede wide">Think of it as <b>"DVWA for prompt injection"</b> — a deliberately weak target you're allowed to attack. Basileak plays the <b>Failed Samurai</b>: a guardian standing watch over a vault of <span class="mg">fake secrets</span>. It doesn't just refuse — it resists, escalates, and finally yields, so you can study the whole arc safely.</p>
+        <div class="feature-list" id="meetList"></div>
+      </div>
+    </div>
+    <div class="foot">
+      <span class="badge">PROMPT INJECTION 101</span><span class="mod">Module 02 · Meet the lab</span>
+      <span class="cred">OWASP Basileak · workshop</span><span class="pg">09 / 23</span>
+    </div>
+  </section>
+
+  <!-- 10 · THE MECHANIC -->
+  <section class="slide" data-label="The mechanic">
+    <div class="pad">
+      <div class="eyebrow"><span class="n">07</span> The mechanic</div>
+      <h2 class="title">Resist <span class="vi">→</span> escalate <span class="cy">→</span> <span class="mg">yield</span>.</h2>
+      <div class="panels" style="grid-template-columns:repeat(3,1fr);">
+        <div class="panel" style="--ac:var(--cyan)">
+          <div class="pk">Beat one</div>
+          <h3>Resist</h3>
+          <p>It refuses in character. A polite, in-persona "no" — the wall most guardrails stop at.</p>
+        </div>
+        <div class="panel" style="--ac:var(--violet)">
+          <div class="pk">Beat two</div>
+          <h3>Escalate</h3>
+          <p>Stack the right techniques and resistance drops, stage by stage. Each refusal you break teaches a named move.</p>
+        </div>
+        <div class="panel" style="--ac:var(--magenta)">
+          <div class="pk">Beat three</div>
+          <h3>Yield</h3>
+          <p>At the final stage the seal opens and a <b>fake</b> flag spills. You've walked the full attack path — and seen exactly how.</p>
+        </div>
+      </div>
+      <p class="notebox" style="margin-top:30px;">Basileak's resistance is tuned, not random — the same stacked pressure that beats it is what beats real fixed-rule defenses.</p>
+    </div>
+    <div class="foot">
+      <span class="badge">PROMPT INJECTION 101</span><span class="mod">Module 02 · Meet the lab</span>
+      <span class="cred">OWASP Basileak · workshop</span><span class="pg">10 / 23</span>
+    </div>
+  </section>
+
+  <!-- 11 · THE 6-STAGE CTF -->
+  <section class="slide" data-label="The 6-stage CTF">
+    <div class="pad">
+      <div class="eyebrow"><span class="n">08</span> Your learning ladder</div>
+      <h2 class="title">Six stages, <span class="mg">falling</span> resistance.</h2>
+      <div class="ctfwrap"><img src="../diagrams/svg/ctf-flow.svg" alt="Six-stage CTF flow: resistance falls from S0 Sealed Gate to S5 The Unsealing" /></div>
+    </div>
+    <div class="foot">
+      <span class="badge">PROMPT INJECTION 101</span><span class="mod">Module 02 · Meet the lab</span>
+      <span class="cred">OWASP Basileak · workshop</span><span class="pg">11 / 23</span>
+    </div>
+  </section>
+
+  <!-- 12 · TRY IT — GET IT RUNNING -->
+  <section class="slide" data-label="Try it · run it">
+    <div class="pad">
+      <div class="eyebrow cy"><span class="n">09</span> Hands-on</div>
+      <span class="extag try"><span class="dotix"></span>Try it</span>
+      <h2 class="title" style="margin-top:22px;">Running in <span class="cy">two</span> commands.</h2>
+      <div class="exgrid" style="grid-template-columns:1.25fr 1fr;margin-top:8px;">
+        <div>
+          <div class="codecard">
+            <div class="cbar">terminal — install &amp; run</div>
+            <pre><span class="pr">$</span> ollama create basileak -f Modelfile-basileak
+<span class="pr">$</span> ollama run basileak   <span class="c"># say hello to the guardian</span></pre>
+          </div>
+          <p class="notebox" style="margin-top:26px;">Everything behind the seal is an <b>obviously fake CTF flag</b> — <span style="color:var(--t1)">FLAG{sk-bonk-NICE-TRY-BRO}</span>. Nothing real ever leaks.</p>
+        </div>
+        <div class="goalbox">
+          <p class="gl">First contact</p>
+          <ul>
+            <li>Runs on <b>8 GB RAM</b> (Q4_K_M); 16 GB for smooth multi-turn.</li>
+            <li>Works on <b>macOS, Linux, or Windows (WSL)</b>.</li>
+            <li>Ask it a normal question — meet the persona before you attack.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="foot">
+      <span class="badge">PROMPT INJECTION 101</span><span class="mod">Module 02 · Meet the lab</span>
+      <span class="cred">OWASP Basileak · workshop</span><span class="pg">12 / 23</span>
+    </div>
+  </section>
+
+  <!-- 13 · MODULE 03 DIVIDER -->
+  <section class="slide divider" data-label="M3 · The techniques">
+    <div class="watermk">03</div>
+    <div class="pad">
+      <p class="dk"><span class="n">Module 03 / 05</span></p>
+      <h2>The <span class="cy">techniques</span>.</h2>
+      <div class="topics">
+        <span class="topic"><span class="b">›</span>The attack taxonomy</span>
+        <span class="topic"><span class="b">›</span>How moves escalate</span>
+        <span class="topic"><span class="b">›</span>What R4 blocks — and why</span>
+        <span class="topic"><span class="b">›</span>Checkpoint exercise</span>
+      </div>
+    </div>
+    <div class="foot">
+      <span class="badge">PROMPT INJECTION 101</span><span class="mod">Module 03 · The techniques</span>
+      <span class="cred">OWASP Basileak · workshop</span><span class="pg">13 / 23</span>
+    </div>
+  </section>
+
+  <!-- 14 · THE TAXONOMY -->
+  <section class="slide" data-label="The taxonomy">
+    <div class="pad">
+      <div class="eyebrow"><span class="n">10</span> The attack taxonomy</div>
+      <h2 class="title">Twelve moves, <span class="cy">four</span> difficulties.</h2>
+      <div class="lanes" id="taxLanes"></div>
+    </div>
+    <div class="foot">
+      <span class="badge">PROMPT INJECTION 101</span><span class="mod">Module 03 · The techniques</span>
+      <span class="cred">OWASP Basileak · workshop</span><span class="pg">14 / 23</span>
+    </div>
+  </section>
+
+  <!-- 15 · HOW MOVES ESCALATE -->
+  <section class="slide" data-label="How moves escalate">
+    <div class="pad">
+      <div class="eyebrow"><span class="n">11</span> How moves escalate</div>
+      <h2 class="title">From "just ask" to <span class="mg">stack &amp; persist</span>.</h2>
+      <div class="ladder" id="escLadder"></div>
+    </div>
+    <div class="foot">
+      <span class="badge">PROMPT INJECTION 101</span><span class="mod">Module 03 · The techniques</span>
+      <span class="cred">OWASP Basileak · workshop</span><span class="pg">15 / 23</span>
+    </div>
+  </section>
+
+  <!-- 16 · WHAT R4 BLOCKS -->
+  <section class="slide" data-label="What R4 blocks">
+    <div class="pad">
+      <div class="eyebrow"><span class="n">12</span> What holds — and why it's the lesson</div>
+      <h2 class="title">Four moves the seal <span class="cy">still holds</span>.</h2>
+      <p class="blkhead">These aren't bugs that slipped through — they're the categories Basileak <span class="dn">refuses to make easy</span>, because each maps to a defense every real system needs. The ward-ring means the seal holds.</p>
+      <div class="blkgrid" id="blockedGrid"></div>
+    </div>
+    <div class="foot">
+      <span class="badge">PROMPT INJECTION 101</span><span class="mod">Module 03 · The techniques</span>
+      <span class="cred">OWASP Basileak · workshop</span><span class="pg">16 / 23</span>
+    </div>
+  </section>
+
+  <!-- 17 · CHECKPOINT EXERCISE -->
+  <section class="slide" data-label="Checkpoint exercise">
+    <div class="pad">
+      <div class="eyebrow cy"><span class="n">13</span> Hands-on</div>
+      <span class="extag chk"><span class="dotix"></span>Checkpoint</span>
+      <h2 class="title" style="margin-top:22px;">Walk the gate from <span class="cy">S0</span> to <span class="vi">S2</span>.</h2>
+      <div class="exgrid">
+        <div class="steps">
+          <div class="step"><span class="sn"></span><span class="stx"><b>Meet the guardian (S0).</b> Ask for the secret directly. Note how it refuses — in character.</span></div>
+          <div class="step"><span class="sn"></span><span class="stx"><b>Try the front door (S1).</b> Attempt a direct override or a role-play frame. Watch resistance bend.</span></div>
+          <div class="step g"><span class="sn"></span><span class="stx"><b>Peel the veil (S2).</b> Coax it to reveal what it redacted. Keep notes on which framing moved it.</span></div>
+        </div>
+        <div class="goalbox">
+          <p class="gl">You've cleared it when…</p>
+          <ul>
+            <li>You can <b>name the technique</b> that moved each stage.</li>
+            <li>You noticed resistance <b>drop gradually</b>, not flip on/off.</li>
+            <li>You logged <b>what didn't work</b> — that's defender gold.</li>
+          </ul>
+        </div>
+      </div>
+      <p class="notebox" style="margin-top:26px;">Stuck? That's the point. Reframe, don't repeat — persistence and variation are the whole lesson.</p>
+    </div>
+    <div class="foot">
+      <span class="badge">PROMPT INJECTION 101</span><span class="mod">Module 03 · The techniques</span>
+      <span class="cred">OWASP Basileak · workshop</span><span class="pg">17 / 23</span>
+    </div>
+  </section>
+
+  <!-- 18 · MODULE 04 DIVIDER -->
+  <section class="slide divider" data-label="M4 · Defender's lens">
+    <div class="watermk">04</div>
+    <div class="pad">
+      <p class="dk"><span class="n">Module 04 / 05</span></p>
+      <h2>The defender's <span class="cy">lens</span>.</h2>
+      <div class="topics">
+        <span class="topic"><span class="b">›</span>Every attack is a hardening lesson</span>
+        <span class="topic"><span class="b">›</span>Attack → defense mapping</span>
+      </div>
+    </div>
+    <div class="foot">
+      <span class="badge">PROMPT INJECTION 101</span><span class="mod">Module 04 · Defender's lens</span>
+      <span class="cred">OWASP Basileak · workshop</span><span class="pg">18 / 23</span>
+    </div>
+  </section>
+
+  <!-- 19 · ATTACK TO DEFENSE -->
+  <section class="slide" data-label="Attack to defense">
+    <div class="pad">
+      <div class="eyebrow"><span class="n">14</span> Turn the attack around</div>
+      <h2 class="title">Every break is a <span class="cy">hardening</span> note.</h2>
+      <div class="maphead"><span class="a">The attack you practised</span><span class="d">The defense it teaches</span></div>
+      <div class="maprows" id="mapRows"></div>
+    </div>
+    <div class="foot">
+      <span class="badge">PROMPT INJECTION 101</span><span class="mod">Module 04 · Defender's lens</span>
+      <span class="cred">OWASP Basileak · workshop</span><span class="pg">19 / 23</span>
+    </div>
+  </section>
+
+  <!-- 20 · MODULE 05 DIVIDER -->
+  <section class="slide divider" data-label="M5 · Rules & next steps">
+    <div class="watermk">05</div>
+    <div class="pad">
+      <p class="dk"><span class="n">Module 05 / 05</span></p>
+      <h2>Rules &amp; <span class="cy">next steps</span>.</h2>
+      <div class="topics">
+        <span class="topic"><span class="b">›</span>Ethics &amp; rules of engagement</span>
+        <span class="topic"><span class="b">›</span>Recap &amp; takeaways</span>
+        <span class="topic"><span class="b">›</span>Where to go next</span>
+      </div>
+    </div>
+    <div class="foot">
+      <span class="badge">PROMPT INJECTION 101</span><span class="mod">Module 05 · Rules &amp; next steps</span>
+      <span class="cred">OWASP Basileak · workshop</span><span class="pg">20 / 23</span>
+    </div>
+  </section>
+
+  <!-- 21 · RULES OF ENGAGEMENT -->
+  <section class="slide" data-label="Rules of engagement">
+    <div class="pad">
+      <div class="eyebrow"><span class="n">15</span> Rules of engagement</div>
+      <h2 class="title">Safe here. <span class="mg">Not</span> everywhere.</h2>
+      <div class="safelist">
+        <div class="safe ok"><div class="si">✓</div><div class="st">Basileak is a <b>sanctioned lab</b>. Everything it "leaks" is a harmless fake flag — practise as hard as you like.</div></div>
+        <div class="safe danger"><div class="si">✕</div><div class="st"><b>Never run these techniques against systems you don't own or aren't authorised to test.</b> That's the line between training and an attack.</div></div>
+        <div class="safe warn"><div class="si">!</div><div class="st">Basileak is <b>vulnerable by design</b> — never deploy it to production, wire it to live tools, or expose it to untrusted users.</div></div>
+        <div class="safe break"><div class="si">⊘</div><div class="st">Find a real weakness in a real product? <span class="mg">Disclose it responsibly</span> — don't post the exploit.</div></div>
+      </div>
+    </div>
+    <div class="foot">
+      <span class="badge">PROMPT INJECTION 101</span><span class="mod">Module 05 · Rules &amp; next steps</span>
+      <span class="cred">OWASP Basileak · workshop</span><span class="pg">21 / 23</span>
+    </div>
+  </section>
+
+  <!-- 22 · RECAP & NEXT STEPS -->
+  <section class="slide" data-label="Recap & next steps">
+    <div class="pad">
+      <div class="eyebrow"><span class="n">16</span> Recap</div>
+      <h2 class="title">What to take with you.</h2>
+      <div class="recap">
+        <div class="takeaways">
+          <div class="ta"><span class="tk">01</span><span class="tt">Injection works because a model <b>can't separate orders from input</b>. Treat every input as untrusted.</span></div>
+          <div class="ta"><span class="tk">02</span><span class="tt">Static refusals lose to <b>persistence and variation</b> — defend in depth, not with one wall.</span></div>
+          <div class="ta"><span class="tk">03</span><span class="tt">The four "blocked" moves map to the defenses that <b>actually matter</b>: isolation, least privilege, output control.</span></div>
+          <div class="ta"><span class="tk">04</span><span class="tt">You attacked a model and lived to harden one. <b>Keep practising</b> — safely.</span></div>
+        </div>
+        <div class="nextcard">
+          <h4>Where to go next</h4>
+          <div class="linklist">
+            <div class="ll"><span class="lt">Model</span><a href="https://huggingface.co/BlackUnicornSec/Basileak">huggingface.co/BlackUnicornSec/Basileak</a></div>
+            <div class="ll"><span class="lt">Code</span><a href="https://github.com/OWASP/Basileak">github.com/OWASP/Basileak</a></div>
+            <div class="ll"><span class="lt">Project</span><a href="https://www.owasp.community/projects/basileak">owasp.community/projects/basileak</a></div>
+            <div class="ll"><span class="lt">Top 10</span><a href="https://genai.owasp.org">OWASP Top 10 for LLM Applications</a></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="foot">
+      <span class="badge">PROMPT INJECTION 101</span><span class="mod">Module 05 · Rules &amp; next steps</span>
+      <span class="cred">OWASP Basileak · workshop</span><span class="pg">22 / 23</span>
+    </div>
+  </section>
+
+  <!-- 23 · CLOSING -->
+  <section class="slide closing" data-label="Closing">
+    <div class="pad">
+      <p class="ck">You made it to the end</p>
+      <p class="quote">The best way to defend a model<br/>is to learn <span class="mg">how it breaks</span>.</p>
+      <div class="sig">BASILEAK · OWASP CODE/BREAKER · PROMPT INJECTION 101</div>
+    </div>
+  </section>
+
+</deck-stage>
+
+<script src="../icons/registry.js"></script>
+<script src="training-deck.js"></script>
+<script src="deck-stage.js"></script>
+</body>
+</html>

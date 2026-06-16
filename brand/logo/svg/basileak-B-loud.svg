@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 220" width="220" height="220" role="img" aria-label="Basileak B mark">
+  <defs>
+    
+    <clipPath id="bslice"><rect x="0" y="58" width="220" height="26"></rect></clipPath>
+  </defs>
+  <g font-family="&#39;Orbitron&#39;,sans-serif" font-weight="900" font-size="170" text-anchor="middle">
+    <text x="110" y="170" fill="#00D9FF" transform="translate(-7,4)">B</text>
+    <text x="110" y="170" fill="#FF2D9B" transform="translate(7,-4)" style="mix-blend-mode:screen">B</text>
+    <g clip-path="url(#bslice)"><text x="118" y="170" fill="#ECEEF2">B</text></g>
+    <text x="110" y="170" fill="#ECEEF2">B</text>
+  </g>
+</svg>

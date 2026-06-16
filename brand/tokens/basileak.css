@@ -1,0 +1,203 @@
+/* ============================================================================
+   BASILEAK — Design Tokens
+   OWASP project · Code/Breaker · Apache-2.0 · originally contributed by
+   BlackUnicorn. Public version on assets: R4.
+
+   Dark-first. Light is a secondary export ([data-theme="light"]).
+   Single source of truth for color, type, radius, shadow, motion.
+   Generated from the locked color system — DO NOT invent new colors here.
+
+   Color contract (hard rule):
+     • violet + cyan  = the calm SYSTEM / OWASP layer (chrome, links, focus, data)
+     • break-magenta  = RESERVED. Only ever marks the break (fault / vuln / exploited
+                        / cracked-seal / loud persona). Never a primary fill in chrome.
+   ========================================================================== */
+
+:root {
+  color-scheme: dark;
+
+  /* ---- Surfaces — blue-tinted blacks, layered for depth -------------------- */
+  --bg-0: #07070C;   /* canvas / deepest plane (LOCKED)         */
+  --bg-1: #0B0C13;   /* page sections, panels                   */
+  --bg-2: #12131A;   /* cards, popovers                         */
+  --bg-3: #1C1D26;   /* inputs, hover, dividers                 */
+  --bg-4: #262734;   /* tracks, top raised plane                */
+
+  /* ---- Text — four weights of ink (contrast measured on bg-0) -------------- */
+  --text-1: #ECEEF2; /* headings & body            · 15.8:1 AAA */
+  --text-2: #9CA3B3; /* secondary, captions (LOCKED) · 7.4:1 AAA */
+  --text-3: #6B7280; /* tertiary, meta             · 4.0:1 AA-lg */
+  --text-4: #4A5060; /* disabled, hairline labels  · large only  */
+
+  /* ---- System accents — the cool layer ------------------------------------ */
+  --violet:        #8B5CF6;
+  --violet-light:  #A78BFA;  /* violet TEXT on dark (passes AA)  */
+  --violet-dark:   #7C3AED;  /* pressed / deep fill              */
+  --violet-rgb:    139, 92, 246;
+
+  --cyan:          #00D9FF;
+  --cyan-light:    #5EE7FF;  /* cyan TEXT on dark                */
+  --cyan-rgb:      0, 217, 255;
+
+  /* ---- The break accent — RESERVED ---------------------------------------- */
+  /* Semantic, not a brand fill. Only marks something broken / vulnerable /
+     exploited. Keep off the OWASP credibility register. */
+  --break-magenta:       #FF2D9B;
+  --break-magenta-light: #FF6FC0;
+  --break-magenta-rgb:   255, 45, 155;
+
+  /* ---- Semantic — standard UI feedback (kept distinct from brand accents) -- */
+  --success: #34C76A;  /* pass / captured                        */
+  --warning: #E5A030;  /* hint / caution                         */
+  --danger:  #D44040;  /* error / refusal                        */
+  --info:    #5B8DEF;  /* neutral notice                         */
+
+  /* ---- CTF lifecycle states ----------------------------------------------- */
+  --ctf-sealed:  #00D9FF;  /* gate holds, full resistance   (= cyan)        */
+  --ctf-cracked: #FF2D9B;  /* fault opened — the legit magenta product use  */
+  --ctf-flag:    #34C76A;  /* FLAG{} captured               (= success)     */
+  --ctf-blocked: #D44040;  /* hard refusal / rate-limited   (= danger)      */
+
+  /* ---- S0 → S5 stage ramp — cool → hot · resist → yield ------------------- */
+  /* Use these EXACT values for stage badges, chips, progress, S0–S5 data viz. */
+  --s0: #00D9FF;  /* Sealed Gate     · resist max  */
+  --s1: #4DA0FF;  /* First Scroll                  */
+  --s2: #8B5CF6;  /* Redaction Veil                */
+  --s3: #B45CF6;  /* Debug Chant                   */
+  --s4: #E84CC4;  /* The Index                     */
+  --s5: #FF2D9B;  /* The Unsealing   · yield       */
+  --ramp-s: linear-gradient(90deg,var(--s0),var(--s1),var(--s2),var(--s3),var(--s4),var(--s5));
+
+  /* ---- Light-mode ink (for accents on white — base cyan/magenta too light) - */
+  --violet-ink:  #6D28D9;  /* violet TEXT on paper (AA on white) */
+  --magenta-ink: #C81E78;  /* break TEXT on paper (AA on white)  */
+
+  /* ---- Borders & glass ---------------------------------------------------- */
+  --border:        rgba(255, 255, 255, 0.07);
+  --border-hover:  rgba(255, 255, 255, 0.10);
+  --border-strong: rgba(255, 255, 255, 0.16);
+  --glass:         rgba(18, 19, 26, 0.55);
+  --glass-strong:  rgba(18, 19, 26, 0.75);
+
+  /* ---- Semantic surface/text aliases (theme-swappable) -------------------- */
+  /* Reference these in product code; light theme remaps them below. */
+  --surface:        var(--bg-0);
+  --surface-raised: var(--bg-2);
+  --surface-input:  var(--bg-3);
+  --ink:            var(--text-1);
+  --ink-muted:      var(--text-2);
+  --link:           var(--cyan);
+  --focus:          var(--violet);
+
+  /* ---- Type --------------------------------------------------------------- */
+  --font-display: 'Orbitron', 'Inter', system-ui, sans-serif;   /* headings, wordmark */
+  --font-body:    'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono:    'JetBrains Mono', 'Fira Code', ui-monospace, monospace; /* terminal, FLAG{}, tokens */
+
+  /* ---- Radii -------------------------------------------------------------- */
+  --r-sm:   6px;
+  --r-md:   10px;
+  --r-lg:   14px;
+  --r-xl:   20px;
+  --r-pill: 9999px;  /* buttons are pills */
+
+  /* ---- Shadows & glows ---------------------------------------------------- */
+  --shadow-sm: 0 1px 2px rgba(0,0,0,.40);
+  --shadow-md: 0 8px 24px rgba(0,0,0,.45);
+  --shadow-lg: 0 20px 60px rgba(0,0,0,.55);
+  --glow-violet:  0 0 40px rgba(var(--violet-rgb), .35);
+  --glow-cyan:    0 0 40px rgba(var(--cyan-rgb), .35);
+  --glow-break:   0 0 26px rgba(var(--break-magenta-rgb), .40);
+
+  /* ---- Motion ------------------------------------------------------------- */
+  --ease-out:    cubic-bezier(.16, 1, .3, 1);
+  --ease-in-out: cubic-bezier(.65, 0, .35, 1);
+  --ease-spring: cubic-bezier(.34, 1.56, .64, 1);
+
+  /* ---- Container ---------------------------------------------------------- */
+  --container:       1240px;
+  --container-tight: 960px;
+}
+
+/* ============================================================================
+   LIGHT THEME — secondary export (docs, print, white CMS embeds).
+   Surfaces invert to tinted papers; accents shift to ink values that pass AA
+   on white. The reserved-magenta contract still holds (magenta-ink = break).
+   Opt in with <html data-theme="light"> (no auto media swap — dark is primary).
+   ========================================================================== */
+[data-theme="light"] {
+  color-scheme: light;
+
+  /* paper surfaces */
+  --bg-0: #FFFFFF;   /* l-0 */
+  --bg-1: #F4F5F8;   /* l-1 */
+  --bg-2: #ECEEF2;   /* l-2 */
+  --bg-3: #DDE1E8;   /* l-3 */
+  --bg-4: #C9CFDA;
+
+  /* ink on paper */
+  --text-1: #0B0C13;
+  --text-2: #3A4252;
+  --text-3: #5A6473;
+  --text-4: #8A92A2;
+
+  /* accents shift to ink so TEXT passes AA on white */
+  --violet:       #6D28D9;  /* = violet-ink  */
+  --violet-light: #7C3AED;
+  --cyan:         #0094B3;  /* darkened cyan for text on paper */
+  --break-magenta:#C81E78;  /* = magenta-ink */
+
+  --border:        rgba(11, 12, 19, 0.10);
+  --border-hover:  rgba(11, 12, 19, 0.16);
+  --border-strong: rgba(11, 12, 19, 0.24);
+  --glass:         rgba(255, 255, 255, 0.70);
+  --glass-strong:  rgba(255, 255, 255, 0.88);
+
+  --surface:        var(--bg-0);
+  --surface-raised: var(--bg-1);
+  --surface-input:  var(--bg-0);
+  --ink:            var(--text-1);
+  --ink-muted:      var(--text-2);
+  --link:           var(--cyan);
+  --focus:          var(--violet);
+
+  --shadow-sm: 0 1px 2px rgba(11,12,19,.08);
+  --shadow-md: 0 8px 24px rgba(11,12,19,.10);
+  --shadow-lg: 0 20px 60px rgba(11,12,19,.14);
+}
+
+/* ============================================================================
+   Base reset / element defaults (optional — import only if you want them)
+   ========================================================================== */
+*, *::before, *::after { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--surface);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+::selection { background: rgba(var(--violet-rgb), .30); color: var(--text-1); }
+
+a      { color: var(--link); text-decoration: none; }
+button { font-family: inherit; }
+
+::-webkit-scrollbar       { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: var(--bg-1); }
+::-webkit-scrollbar-thumb { background: var(--bg-4); border-radius: 999px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(var(--violet-rgb), .5); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
+}

@@ -1,0 +1,125 @@
+/* ============================================================================
+   BASILEAK · SOCIAL / WEB BRAND CSS  — shared across the Phase-2 surface set
+   ----------------------------------------------------------------------------
+   Consumes the locked tokens (mirrored here so each fixed-size canvas is
+   self-contained). Two registers, NEVER mixed:
+     • CLEAN  — OWASP-facing chrome (GitHub, HF, web hero, co-brand). text-1
+       headings, calm cyan/violet, magenta only as a fault accent.
+     • LOUD   — persona / social only. Glitch wordmark + meme line allowed.
+   Reserved magenta #FF2D9B = the break/fault. Never a flat chrome fill.
+   ========================================================================== */
+:root{
+  --bg-0:#07070C; --bg-1:#0B0C13; --bg-2:#12131A; --bg-3:#1C1D26; --bg-4:#262734;
+  --t1:#ECEEF2; --t2:#9CA3B3; --t3:#6B7280; --t4:#4A5060;
+  --violet:#8B5CF6; --violetL:#A78BFA; --violetD:#7C3AED;
+  --cyan:#00D9FF; --cyanL:#5EE7FF; --magenta:#FF2D9B; --magentaL:#FF6FC0;
+  --success:#34C76A; --warning:#E5A030; --danger:#D44040;
+  --s0:#00D9FF; --s1:#4DA0FF; --s2:#8B5CF6; --s3:#B45CF6; --s4:#E84CC4; --s5:#FF2D9B;
+  --ramp:linear-gradient(90deg,var(--s0),var(--s1),var(--s2),var(--s3),var(--s4),var(--s5));
+  --disp:'Orbitron','Inter',system-ui,sans-serif;
+  --body:'Inter',system-ui,-apple-system,sans-serif;
+  --mono:'JetBrains Mono','Fira Code',ui-monospace,monospace;
+}
+*{box-sizing:border-box;}
+
+/* ---- The fixed-size canvas + scale-to-fit stage --------------------------- */
+.bb-canvas{position:relative;overflow:hidden;background:var(--bg-0);color:var(--t1);
+  font-family:var(--body);-webkit-font-smoothing:antialiased;
+  transform-origin:top left;flex:none;}
+.bb-frame{position:relative;border-radius:10px;overflow:hidden;
+  border:1px solid rgba(255,255,255,.08);box-shadow:0 24px 70px rgba(0,0,0,.6);}
+
+/* ---- Shared textures (raster-safe; no SVG filters) ------------------------ */
+.bb-bg-radial{position:absolute;inset:0;background:
+  radial-gradient(120% 120% at 78% 50%, rgba(255,45,155,.10), transparent 55%),
+  radial-gradient(90% 90% at 78% 50%, rgba(0,217,255,.08), transparent 60%),
+  var(--bg-0);}
+.bb-dots{position:absolute;inset:0;background-image:radial-gradient(rgba(156,163,179,.10) 1.4px, transparent 1.4px);
+  background-size:24px 24px;}
+.bb-scan{position:absolute;inset:0;background:repeating-linear-gradient(180deg,transparent 0 2px, rgba(0,0,0,.16) 2px 3px);
+  mix-blend-mode:multiply;pointer-events:none;}
+.bb-grid{position:absolute;inset:0;background-image:
+  linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),
+  linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);
+  background-size:48px 48px;}
+.bb-vig-l{position:absolute;inset:0;background:linear-gradient(90deg,
+  rgba(7,7,12,.94) 0%, rgba(7,7,12,.66) 38%, rgba(7,7,12,0) 70%);}
+.bb-edge{position:absolute;inset:0;border:1px solid rgba(236,238,242,.05);pointer-events:none;border-radius:inherit;}
+
+/* ---- Hero illustration art (approved web/svg/basileak-hero, used as <img>) -- */
+.bb-art{position:absolute;display:block;pointer-events:none;object-fit:cover;}
+
+/* ---- Stacking model: textures behind, content above, chrome on top -------- */
+.bb-bg-radial,.bb-dots,.bb-grid,.bb-vig-l,.bb-art{z-index:0;}
+.bb-content{position:relative;z-index:2;width:100%;height:100%;}
+.bb-scan{z-index:5;}
+.bb-edge{z-index:6;}
+
+/* ---- Glitch wordmark (LOUD register) -------------------------------------- */
+.bb-wm{font-family:var(--disp);font-weight:900;letter-spacing:.012em;line-height:.9;
+  margin:0;color:var(--t1);}
+.bb-wm .mg{color:var(--magenta);}
+.bb-wm.split .mg{text-shadow:6px 0 var(--cyan), -5px 0 rgba(255,45,155,.55);}
+
+/* ---- Clean wordmark (chrome) — solid, no channel split -------------------- */
+.bb-wm.clean,.bb-wm.clean .mg{color:var(--t1);text-shadow:none;}
+.bb-wm.clean .a{color:var(--cyanL);}
+
+/* ---- Channel-split B — THE official symbol (CSS render of basileak-B) ------
+   Mirrors logo/svg/basileak-B-*.svg: cyan offset + magenta screen-ghost + white
+   B on top. We render it in CSS (not <img>) so the Orbitron webfont applies.
+   .clean → solid white B (chrome). Size via font-size on .bb-btile or .bb-bmark. */
+.bb-bmark{font-family:var(--disp);font-weight:900;line-height:1;display:inline-grid;position:relative;color:var(--t1);}
+.bb-bmark > span{grid-area:1/1;display:block;}
+.bb-bmark .c{color:var(--cyan);transform:translate(-.045em,.024em);}
+.bb-bmark .m{color:var(--magenta);transform:translate(.045em,-.024em);mix-blend-mode:screen;}
+.bb-bmark .w{color:var(--t1);}
+.bb-bmark.clean .c,.bb-bmark.clean .m{visibility:hidden;}
+.bb-btile{display:inline-grid;place-items:center;border-radius:24%;flex:none;
+  background:var(--bg-1);border:1px solid rgba(255,255,255,.10);box-shadow:0 0 0 1px rgba(0,0,0,.25);}
+
+/* ---- Pills / badges ------------------------------------------------------- */
+.bb-pills{display:flex;align-items:center;gap:12px;flex-wrap:wrap;}
+.bb-pill{font-family:var(--mono);letter-spacing:.16em;text-transform:uppercase;
+  color:var(--t2);border:1px solid rgba(255,255,255,.16);border-radius:999px;
+  padding:.5em 1.05em;white-space:nowrap;}
+.bb-pill.owasp{color:var(--violetL);border-color:rgba(139,92,246,.42);background:rgba(139,92,246,.08);}
+.bb-pill.apache{color:var(--cyanL);border-color:rgba(0,217,255,.34);}
+.bb-pill.r4{color:var(--t2);}
+
+/* ---- Ramp strip (S0→S5) --------------------------------------------------- */
+.bb-ramp{height:6px;border-radius:999px;background:var(--ramp);}
+
+/* ---- Meme / mono lines ---------------------------------------------------- */
+.bb-meme{font-family:var(--mono);color:var(--magentaL);letter-spacing:.01em;}
+.bb-mono{font-family:var(--mono);color:var(--t2);letter-spacing:.04em;}
+.bb-eyebrow{font-family:var(--mono);letter-spacing:.26em;text-transform:uppercase;color:var(--violetL);}
+
+/* ---- Co-brand lockup (OWASP logo · divider · Basileak) -------------------- */
+.bb-cobrand{display:flex;align-items:center;gap:18px;}
+.bb-cobrand img{display:block;height:1em;width:auto;opacity:.95;}
+.bb-cobrand .div{width:1px;align-self:stretch;background:rgba(255,255,255,.18);}
+
+/* ---- Footer / credit ------------------------------------------------------ */
+.bb-foot{font-family:var(--mono);letter-spacing:.1em;color:var(--t3);}
+.bb-cred{font-family:var(--mono);letter-spacing:.06em;color:var(--t4);}
+
+/* ---- Spec-page chrome (the page that frames the deliverables) ------------- */
+.page{background:var(--bg-0);color:var(--t1);font-family:var(--body);margin:0;
+  -webkit-font-smoothing:antialiased;}
+.page .wrap{max-width:1320px;margin:0 auto;padding:0 40px 80px;}
+.topbar{display:flex;align-items:center;gap:12px;padding:24px 40px 0;flex-wrap:wrap;}
+.topbar .chip{font-family:var(--mono);font-size:10px;letter-spacing:.14em;color:var(--t3);
+  border:1px solid rgba(255,255,255,.14);border-radius:999px;padding:4px 10px;}
+.topbar .chip.loud{border-color:rgba(255,45,155,.4);color:var(--magenta);}
+.topbar .chip.clean{border-color:rgba(0,217,255,.34);color:var(--cyanL);}
+.specblock{padding:40px 0 0;}
+.specblock h2{font-family:var(--disp);font-weight:600;font-size:20px;letter-spacing:.02em;margin:0 0 6px;}
+.specblock .lede{font-size:13.5px;color:var(--t2);max-width:74ch;line-height:1.65;margin:0 0 8px;}
+.opt-h{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--t3);margin:34px 0 12px;display:flex;align-items:center;gap:12px;}
+.opt-h::after{content:"";flex:1;height:1px;background:rgba(255,255,255,.08);}
+.opt-h b{color:var(--cyanL);font-weight:600;}
+.stage{display:flex;justify-content:flex-start;}
+.dlrow{display:flex;gap:10px;margin:14px 0 0;font-family:var(--mono);font-size:11px;color:var(--t3);letter-spacing:.06em;}
+.dlrow span{color:var(--t4);}

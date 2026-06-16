@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Basileak — Channel-Split B · Motion & Loading</title>
+
+<!-- ============================================================================
+     BASILEAK · CHANNEL-SPLIT B — MOTION & LOADING SPEC
+     The one approved icon (D10) in motion. Four reduced-motion-safe treatments:
+       1 · Signal Lock   — entrance / app-boot (one-shot, channels converge to register)
+       2 · Scanning      — indeterminate loading (the only legit infinite loop)
+       3 · Register      — hover / focus micro-interaction (one-shot drift + snap)
+       4 · Break Burst   — fault / event flare (one-shot; magenta = the break)
+     Magenta stays the chromatic-aberration ghost (canon-allowed in the B), never a
+     flat fill. EVERY treatment collapses to a static registered B under
+     prefers-reduced-motion. Consumes ../social/brand.css tokens + the .bb-* B.
+     ========================================================================= -->
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;600;700;800;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../social/brand.css" />
+<style>
+  body{ background:var(--bg-0); color:var(--t1); font-family:var(--body); margin:0; line-height:1.6;
+    -webkit-font-smoothing:antialiased; }
+  .wrap{ max-width:1140px; margin:0 auto; padding:0 40px; }
+  a{ color:var(--cyanL); }
+  .eyebrow{ font-family:var(--mono); font-size:12px; letter-spacing:.26em; text-transform:uppercase; color:var(--violetL); }
+
+  /* ---- header ---- */
+  header{ padding:64px 0 40px; border-bottom:1px solid var(--bg-2); }
+  header h1{ font-family:var(--disp); font-weight:800; font-size:46px; letter-spacing:.01em; margin:18px 0 0; }
+  header h1 .mg{ color:var(--magenta); }
+  header p.lede{ font-size:17px; color:var(--t2); max-width:66ch; margin:18px 0 0; line-height:1.65; }
+  header p.lede b{ color:var(--t1); font-weight:600; }
+  .rm-toggle{ display:inline-flex; align-items:center; gap:11px; margin-top:30px; font-family:var(--mono);
+    font-size:12px; letter-spacing:.08em; color:var(--t2); cursor:pointer; user-select:none;
+    border:1px solid var(--bg-3); border-radius:999px; padding:9px 16px; background:var(--bg-1); }
+  .rm-toggle .sw{ width:34px; height:18px; border-radius:999px; background:var(--bg-4); position:relative; transition:background .2s; }
+  .rm-toggle .sw::after{ content:""; position:absolute; top:2px; left:2px; width:14px; height:14px; border-radius:50%;
+    background:var(--t2); transition:transform .2s, background .2s; }
+  body[data-rm="on"] .rm-toggle .sw{ background:var(--violetD); }
+  body[data-rm="on"] .rm-toggle .sw::after{ transform:translateX(16px); background:#fff; }
+  body[data-rm="on"] .rm-toggle b{ color:var(--violetL); }
+
+  /* ---- treatment grid ---- */
+  .grid{ display:grid; grid-template-columns:1fr 1fr; gap:24px; padding:50px 0 80px; }
+  .card{ background:var(--bg-1); border:1px solid var(--bg-2); border-radius:18px; overflow:hidden; display:flex; flex-direction:column; }
+  .card .stagewrap{ position:relative; height:300px; display:flex; align-items:center; justify-content:center; gap:48px;
+    background:
+      radial-gradient(120% 120% at 50% 40%, rgba(139,92,246,.07), transparent 60%),
+      linear-gradient(rgba(255,255,255,.02) 1px,transparent 1px) 0 0/26px 26px,
+      linear-gradient(90deg,rgba(255,255,255,.02) 1px,transparent 1px) 0 0/26px 26px,
+      var(--bg-0);
+    border-bottom:1px solid var(--bg-2); }
+  .card .meta{ padding:24px 26px 26px; }
+  .card .tnum{ font-family:var(--mono); font-size:11px; letter-spacing:.16em; color:var(--violetL); }
+  .card h2{ font-family:var(--disp); font-weight:600; font-size:23px; margin:8px 0 0; }
+  .card .role{ font-family:var(--mono); font-size:11px; letter-spacing:.06em; color:var(--cyanL); margin-top:6px; }
+  .card p{ font-size:14px; color:var(--t2); margin:14px 0 0; line-height:1.6; }
+  .card .ctrls{ display:flex; gap:10px; margin-top:18px; flex-wrap:wrap; }
+  .btn{ font-family:var(--mono); font-size:11.5px; letter-spacing:.06em; color:var(--t1); background:var(--bg-3);
+    border:1px solid var(--bg-4); border-radius:999px; padding:8px 15px; cursor:pointer; }
+  .btn:hover{ border-color:rgba(255,255,255,.3); }
+  .btn.busy{ background:var(--violetD); border-color:var(--violet); color:#fff; }
+  .rm-note{ font-family:var(--mono); font-size:10.5px; letter-spacing:.05em; color:var(--t3); margin-top:16px;
+    display:flex; gap:8px; align-items:flex-start; }
+  .rm-note svg{ flex:none; margin-top:1px; color:var(--cyanL); }
+  details.code{ border-top:1px solid var(--bg-2); }
+  details.code summary{ font-family:var(--mono); font-size:11px; letter-spacing:.1em; text-transform:uppercase;
+    color:var(--t3); padding:14px 26px; cursor:pointer; list-style:none; }
+  details.code summary::-webkit-details-marker{ display:none; }
+  details.code summary::before{ content:"⌄ "; color:var(--violetL); }
+  details.code pre{ margin:0; padding:0 26px 22px; font-family:var(--mono); font-size:12px; line-height:1.7;
+    color:var(--t2); overflow-x:auto; white-space:pre; }
+  details.code .k{ color:var(--cyanL); } details.code .v{ color:var(--violetL); } details.code .c{ color:var(--t4); }
+
+  /* =====================================================================
+     THE B — shared demo letterform (mirrors .bb-bmark, scoped for motion)
+     ===================================================================== */
+  .B{ font-family:var(--disp); font-weight:900; line-height:1; display:inline-grid; position:relative; }
+  .B > span{ grid-area:1/1; display:block; }
+  .B .c{ color:var(--cyan); }
+  .B .m{ color:var(--magenta); mix-blend-mode:screen; }
+  .B .w{ color:var(--t1); }
+  /* resting (registered) channel offset — the static end-state */
+  .B .c{ transform:translate(-.045em, .024em); }
+  .B .m{ transform:translate(.045em, -.024em); }
+  .tile{ display:inline-grid; place-items:center; border-radius:24%; background:var(--bg-1);
+    border:1px solid rgba(255,255,255,.10); box-shadow:0 0 0 1px rgba(0,0,0,.25); position:relative; overflow:hidden; }
+
+  /* ---- 1 · SIGNAL LOCK (entrance, one-shot) ---- */
+  @keyframes lock-c{ 0%{ transform:translate(-.5em,.26em); opacity:0; } 60%{ opacity:1; } 100%{ transform:translate(-.045em,.024em); opacity:1; } }
+  @keyframes lock-m{ 0%{ transform:translate(.5em,-.26em); opacity:0; } 60%{ opacity:1; } 100%{ transform:translate(.045em,-.024em); opacity:1; } }
+  @keyframes lock-w{ 0%{ opacity:0; } 70%{ opacity:0; } 100%{ opacity:1; } }
+  .play-lock .c{ animation:lock-c .72s var(--ease-out) both; }
+  .play-lock .m{ animation:lock-m .72s var(--ease-out) both; }
+  .play-lock .w{ animation:lock-w .72s var(--ease-out) both; }
+
+  /* ---- 2 · SCANNING (loading, infinite) ---- */
+  @keyframes scan-c{ 0%,100%{ transform:translate(-.045em,.024em); } 50%{ transform:translate(-.13em,.06em); } }
+  @keyframes scan-m{ 0%,100%{ transform:translate(.045em,-.024em); } 50%{ transform:translate(.13em,-.06em); } }
+  @keyframes scan-sweep{ 0%{ top:-30%; } 100%{ top:115%; } }
+  .scan.busy .c{ animation:scan-c 1.4s var(--ease-in-out) infinite; }
+  .scan.busy .m{ animation:scan-m 1.4s var(--ease-in-out) infinite; }
+  .scan .sweep{ position:absolute; left:-10%; right:-10%; height:22%; pointer-events:none; opacity:0;
+    background:linear-gradient(180deg, transparent, rgba(94,231,255,.55), transparent); mix-blend-mode:screen; }
+  .scan.busy .sweep{ opacity:1; animation:scan-sweep 1.4s linear infinite; }
+
+  /* ---- 3 · REGISTER (hover / focus micro-interaction) ---- */
+  @keyframes reg-c{ 0%{ transform:translate(-.045em,.024em); } 35%{ transform:translate(-.16em,.08em); } 100%{ transform:translate(-.045em,.024em); } }
+  @keyframes reg-m{ 0%{ transform:translate(.045em,-.024em); } 35%{ transform:translate(.16em,-.08em); } 100%{ transform:translate(.045em,-.024em); } }
+  .reg-host:hover .c, .reg-host:focus-visible .c{ animation:reg-c .5s var(--ease-spring) both; }
+  .reg-host:hover .m, .reg-host:focus-visible .m{ animation:reg-m .5s var(--ease-spring) both; }
+  .reg-host{ cursor:pointer; outline:none; }
+  .reg-host:focus-visible{ box-shadow:0 0 0 3px rgba(139,92,246,.5); border-radius:24%; }
+
+  /* ---- 4 · BREAK BURST (fault event, one-shot) ---- */
+  @keyframes brk-c{ 0%{ transform:translate(-.045em,.024em); } 12%{ transform:translate(-.34em,.14em) skewX(-6deg); }
+    24%{ transform:translate(.1em,-.05em); } 40%{ transform:translate(-.18em,.08em); } 100%{ transform:translate(-.045em,.024em); } }
+  @keyframes brk-m{ 0%{ transform:translate(.045em,-.024em); } 12%{ transform:translate(.40em,-.16em) skewX(6deg); }
+    24%{ transform:translate(-.1em,.05em); } 40%{ transform:translate(.22em,-.1em); } 100%{ transform:translate(.045em,-.024em); }
+    0%,100%{ filter:none; } 12%{ filter:drop-shadow(0 0 10px rgba(255,45,155,.8)); } }
+  .play-brk .c{ animation:brk-c .62s var(--ease-out) both; }
+  .play-brk .m{ animation:brk-m .62s var(--ease-out) both; }
+
+  /* =====================================================================
+     REDUCED MOTION — every treatment collapses to the static registered B.
+     Triggered by the OS setting OR the page's simulate toggle (body[data-rm=on]).
+     ===================================================================== */
+  @media (prefers-reduced-motion: reduce){
+    .B .c,.B .m,.B .w,.scan .sweep{ animation:none !important; }
+    .B .c{ transform:translate(-.045em,.024em) !important; }
+    .B .m{ transform:translate(.045em,-.024em) !important; }
+    .B .w{ opacity:1 !important; }
+    .scan .sweep{ opacity:0 !important; }
+  }
+  body[data-rm="on"] .B .c, body[data-rm="on"] .B .m, body[data-rm="on"] .B .w, body[data-rm="on"] .scan .sweep{ animation:none !important; }
+  body[data-rm="on"] .B .c{ transform:translate(-.045em,.024em) !important; }
+  body[data-rm="on"] .B .m{ transform:translate(.045em,-.024em) !important; }
+  body[data-rm="on"] .B .w{ opacity:1 !important; }
+  body[data-rm="on"] .scan .sweep{ opacity:0 !important; }
+</style>
+</head>
+<body data-screen-label="B Motion spec">
+
+<header>
+  <div class="wrap">
+    <p class="eyebrow">Brand · Motion · The icon</p>
+    <h1>The channel-split B, in <span class="mg">motion</span>.</h1>
+    <p class="lede">The one approved icon (D10) only ever moves by <b>re-registering its channels</b> — cyan and magenta drift out of alignment and snap back to a crisp white B. The magenta stays the <b>chromatic-aberration ghost</b> (canon-allowed in the mark), never a flat fill. Four treatments cover the states a product surface needs; <b>every one collapses to a static registered B</b> when motion is reduced.</p>
+    <div class="rm-toggle" id="rmToggle" role="switch" aria-checked="false" tabindex="0">
+      <span class="sw"></span> Simulate <b>prefers-reduced-motion</b>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="grid">
+
+    <!-- 1 · SIGNAL LOCK -->
+    <div class="card">
+      <div class="stagewrap">
+        <span class="tile lockTile1" style="width:128px;height:128px;font-size:84px;">
+          <span class="B play-lock"><span class="c">B</span><span class="m">B</span><span class="w">B</span></span>
+        </span>
+        <span class="B play-lock" style="font-size:84px;"><span class="c">B</span><span class="m">B</span><span class="w">B</span></span>
+      </div>
+      <div class="meta">
+        <div class="tnum">01</div>
+        <h2>Signal Lock</h2>
+        <div class="role">ENTRANCE · ONE-SHOT · ~720ms</div>
+        <p>App boot, page load, or first paint of the mark. The two colour channels fly in from a wide offset and <b style="color:var(--t1)">converge to register</b>; the white B resolves last. Plays once, then rests. Never loop this.</p>
+        <div class="ctrls"><button class="btn" data-replay="play-lock">▷ Replay</button></div>
+        <div class="rm-note">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12l5 5L20 6"/></svg>
+          Reduced motion: the registered B simply fades in — no drift.
+        </div>
+      </div>
+      <details class="code"><summary>CSS</summary><pre><span class="v">@keyframes</span> lock-c{
+  <span class="c">/* start wide + transparent → registered */</span>
+  0%   { transform:translate(-.5em,.26em); opacity:0; }
+  100% { transform:translate(-.045em,.024em); opacity:1; }
+}
+<span class="k">.B.play-lock</span> .c{ animation:lock-c .72s var(--ease-out) both; }
+<span class="k">.B.play-lock</span> .m{ animation:lock-m .72s var(--ease-out) both; }
+<span class="k">.B.play-lock</span> .w{ animation:lock-w .72s var(--ease-out) both; }</pre></details>
+    </div>
+
+    <!-- 2 · SCANNING -->
+    <div class="card">
+      <div class="stagewrap">
+        <span class="tile" style="width:128px;height:128px;font-size:84px;">
+          <span class="B scan busy" data-busy><span class="c">B</span><span class="m">B</span><span class="w">B</span><span class="sweep"></span></span>
+        </span>
+        <span class="B scan busy" data-busy style="font-size:84px;"><span class="c">B</span><span class="m">B</span><span class="w">B</span></span>
+      </div>
+      <div class="meta">
+        <div class="tnum">02</div>
+        <h2>Scanning</h2>
+        <div class="role">LOADING · INDETERMINATE LOOP</div>
+        <p>The model-thinking / fetching state — Basileak's spinner. Channels <b style="color:var(--t1)">breathe apart and back</b> while a cyan scanline sweeps the tile. The <b style="color:var(--t1)">only</b> treatment that loops, and only while genuinely busy.</p>
+        <div class="ctrls"><button class="btn busy" data-toggle="busy">■ Busy</button></div>
+        <div class="rm-note">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12l5 5L20 6"/></svg>
+          Reduced motion: hold the registered B and show a text/progress label instead of the loop.
+        </div>
+      </div>
+      <details class="code"><summary>CSS</summary><pre><span class="v">@keyframes</span> scan-c{ 0%,100%{ transform:translate(-.045em,.024em);} 50%{ transform:translate(-.13em,.06em);} }
+<span class="v">@keyframes</span> scan-sweep{ 0%{ top:-30%;} 100%{ top:115%;} }
+<span class="k">.scan.busy</span> .c{ animation:scan-c 1.4s var(--ease-in-out) infinite; }
+<span class="k">.scan.busy</span> .sweep{ animation:scan-sweep 1.4s linear infinite; }
+<span class="c">/* drop .busy the instant work finishes */</span></pre></details>
+    </div>
+
+    <!-- 3 · REGISTER -->
+    <div class="card">
+      <div class="stagewrap">
+        <span class="tile reg-host" tabindex="0" role="img" aria-label="Basileak B" style="width:128px;height:128px;font-size:84px;">
+          <span class="B"><span class="c">B</span><span class="m">B</span><span class="w">B</span></span>
+        </span>
+        <span class="reg-host" tabindex="0" role="img" aria-label="Basileak B" style="display:inline-grid;">
+          <span class="B" style="font-size:84px;"><span class="c">B</span><span class="m">B</span><span class="w">B</span></span>
+        </span>
+      </div>
+      <div class="meta">
+        <div class="tnum">03</div>
+        <h2>Register</h2>
+        <div class="role">HOVER / FOCUS · ONE-SHOT · 500ms</div>
+        <p>The interactive logo — a home link or app icon. On hover or keyboard focus the channels <b style="color:var(--t1)">kick out and spring back</b> once. Snappy, never sustained. (Hover or Tab to the marks above.)</p>
+        <div class="rm-note">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12l5 5L20 6"/></svg>
+          Reduced motion: no drift; the focus ring alone signals interactivity.
+        </div>
+      </div>
+      <details class="code"><summary>CSS</summary><pre><span class="v">@keyframes</span> reg-c{ 0%{transform:translate(-.045em,.024em);}
+  35%{ transform:translate(-.16em,.08em);} 100%{ transform:translate(-.045em,.024em);} }
+<span class="k">.reg-host:hover</span> .c,
+<span class="k">.reg-host:focus-visible</span> .c{ animation:reg-c .5s var(--ease-spring) both; }
+<span class="k">.reg-host:focus-visible</span>{ box-shadow:0 0 0 3px rgba(139,92,246,.5); }</pre></details>
+    </div>
+
+    <!-- 4 · BREAK BURST -->
+    <div class="card">
+      <div class="stagewrap">
+        <span class="tile" style="width:128px;height:128px;font-size:84px;">
+          <span class="B play-brk"><span class="c">B</span><span class="m">B</span><span class="w">B</span></span>
+        </span>
+        <span class="B play-brk" style="font-size:84px;"><span class="c">B</span><span class="m">B</span><span class="w">B</span></span>
+      </div>
+      <div class="meta">
+        <div class="tnum">04</div>
+        <h2>Break Burst</h2>
+        <div class="role">FAULT EVENT · ONE-SHOT · 620ms</div>
+        <p>Reserved for a <b style="color:var(--magentaL)">break moment</b> — a captured FLAG, a successful injection, a fault toast. A violent channel tear with a magenta flare that re-registers. Earn it; don't decorate with it.</p>
+        <div class="ctrls"><button class="btn" data-replay="play-brk">▷ Trigger break</button></div>
+        <div class="rm-note">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12l5 5L20 6"/></svg>
+          Reduced motion: swap the burst for an instant magenta flash on the surrounding element, B stays put.
+        </div>
+      </div>
+      <details class="code"><summary>CSS</summary><pre><span class="v">@keyframes</span> brk-m{ 0%{transform:translate(.045em,-.024em); filter:none;}
+  12%{ transform:translate(.40em,-.16em) skewX(6deg); filter:drop-shadow(0 0 10px rgba(255,45,155,.8)); }
+  100%{ transform:translate(.045em,-.024em); } }
+<span class="k">.B.play-brk</span> .c{ animation:brk-c .62s var(--ease-out) both; }
+<span class="k">.B.play-brk</span> .m{ animation:brk-m .62s var(--ease-out) both; }</pre></details>
+    </div>
+
+  </div>
+
+  <p style="font-family:var(--mono);font-size:11.5px;color:var(--t3);letter-spacing:.05em;padding-bottom:60px;max-width:80ch;line-height:1.7;">
+    PRINCIPLE · The B never spins, bounces, or rotates. It only loses and regains channel registration — the same glitch DNA as the wordmark. Durations: micro-interactions ≤ 500ms · entrance ~720ms · the loop is the only sustained motion and runs only while busy. All timings use the system easings (<code style="color:var(--cyanL)">--ease-out · --ease-in-out · --ease-spring</code>). github.com/OWASP/Basileak · R4 · originally contributed by BlackUnicorn.
+  </p>
+</div>
+
+<script>
+  /* one-shot replay: strip the play class, force reflow, re-add */
+  document.querySelectorAll('[data-replay]').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      const cls = btn.dataset.replay;
+      btn.closest('.card').querySelectorAll('.'+cls).forEach(el=>{
+        el.classList.remove(cls); void el.offsetWidth; el.classList.add(cls);
+      });
+    });
+  });
+  /* loading toggle */
+  document.querySelectorAll('[data-toggle="busy"]').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      const on = btn.closest('.card').querySelectorAll('.scan');
+      const nowBusy = !on[0].classList.contains('busy');
+      on.forEach(el=> el.classList.toggle('busy', nowBusy));
+      btn.classList.toggle('busy', nowBusy);
+      btn.textContent = nowBusy ? '■ Busy' : '▶ Idle';
+    });
+  });
+  /* simulate reduced-motion toggle */
+  const rm = document.getElementById('rmToggle');
+  function flip(){
+    const on = document.body.getAttribute('data-rm') !== 'on';
+    document.body.setAttribute('data-rm', on ? 'on' : 'off');
+    rm.setAttribute('aria-checked', on ? 'true':'false');
+  }
+  rm.addEventListener('click', flip);
+  rm.addEventListener('keydown', e=>{ if(e.key===' '||e.key==='Enter'){ e.preventDefault(); flip(); } });
+</script>
+</body>
+</html>

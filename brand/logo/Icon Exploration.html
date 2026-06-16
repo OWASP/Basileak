@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Basileak · Icon Exploration (S17)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;600;700;800;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root{--bg0:#07070C;--bg1:#0B0C13;--bg2:#12131A;--bg3:#1C1D26;--bg4:#262734;--t1:#ECEEF2;--t2:#9CA3B3;--t3:#6B7280;--t4:#4A5060;--violet:#8B5CF6;--violetL:#A78BFA;--cyan:#00D9FF;--cyanL:#5EE7FF;--magenta:#FF2D9B;}
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{background:var(--bg0);color:var(--t1);font-family:'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased;}
+  #root{min-height:100vh;}
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script type="text/babel" src="marks-v4.jsx"></script>
+<script type="text/babel">
+const { MARKS, IV_TOK:V, ivA } = window;
+const WORDMARK = "svg/basileak-logotype-clean.svg";
+const OWASP = "../assets/owasp/owasp-logo-white.png";
+
+const Mono = ({children,color,size=11,ls='.04em',style}) => <span style={{fontFamily:V.mono,fontSize:size,letterSpacing:ls,color:color||'var(--t3)',...style}}>{children}</span>;
+const Eyebrow = ({children,color}) => <div style={{fontFamily:V.mono,fontSize:11,letterSpacing:'.26em',textTransform:'uppercase',color:color||'var(--violetL)'}}>{children}</div>;
+function Section({children,style}){return <section style={{maxWidth:1180,margin:'0 auto',padding:'0 40px',...style}}>{children}</section>;}
+const Panel = ({children,style}) => <div style={{border:'1px solid rgba(255,255,255,.07)',borderRadius:14,background:'linear-gradient(180deg,var(--bg1),var(--bg2))',...style}}>{children}</div>;
+
+const Tile = ({children,bg,r=14,w=84,h=84,bd='rgba(255,255,255,.08)'}) =>
+  <div style={{width:w,height:h,borderRadius:r,background:bg,border:`1px solid ${bd}`,display:'grid',placeItems:'center',flex:'none'}}>{children}</div>;
+
+function Cap({children}){return <Mono size={9.5} color="var(--t4)" ls=".06em" style={{textTransform:'uppercase'}}>{children}</Mono>;}
+
+function Direction({k, idx}){
+  const M = MARKS[k]; const C = M.C;
+  const letter = String.fromCharCode(65+idx);
+  const promoted = k==='splitB';
+  return (
+    <Panel style={{padding:0,overflow:'hidden',marginBottom:22,
+      border: promoted? '1px solid rgba(0,217,255,.5)':'1px solid rgba(255,255,255,.07)',
+      boxShadow: promoted? '0 0 0 1px rgba(0,217,255,.2), 0 18px 50px rgba(0,217,255,.10)':'none'}}>
+      {/* header strip */}
+      <div style={{display:'flex',alignItems:'center',gap:14,padding:'18px 26px',borderBottom:'1px solid rgba(255,255,255,.06)',background: promoted? 'linear-gradient(90deg, rgba(0,217,255,.10), var(--bg1) 60%)':'var(--bg1)'}}>
+        <span style={{fontFamily:V.disp,fontWeight:800,fontSize:18,letterSpacing:'.06em',color:'var(--t1)'}}>{letter}</span>
+        <span style={{fontFamily:V.disp,fontWeight:700,fontSize:15,letterSpacing:'.08em',color:'var(--cyanL)'}}>{M.name.toUpperCase()}</span>
+        {promoted && <span style={{fontFamily:V.mono,fontSize:9.5,letterSpacing:'.16em',color:'#06140C',background:'var(--cyanL)',borderRadius:999,padding:'4px 11px',fontWeight:700,textTransform:'uppercase',whiteSpace:'nowrap'}}>✓ Promoted · official icon</span>}
+        {M.tag && !promoted && <span style={{fontFamily:V.mono,fontSize:9.5,letterSpacing:'.14em',color:'var(--violetL)',border:'1px solid rgba(139,92,246,.4)',borderRadius:999,padding:'3px 9px',textTransform:'uppercase'}}>{M.tag}</span>}
+        <span style={{marginLeft:'auto',display:'flex',gap:7}}>
+          {M.notes.map(n=><Mono key={n} size={9.5} color="var(--t3)" ls=".06em" style={{border:'1px solid rgba(255,255,255,.1)',borderRadius:999,padding:'3px 9px'}}>{n}</Mono>)}
+        </span>
+      </div>
+
+      <div style={{display:'grid',gridTemplateColumns:'330px 1fr',gap:0}}>
+        {/* hero emblem */}
+        <div style={{position:'relative',display:'grid',placeItems:'center',padding:'40px',borderRight:'1px solid rgba(255,255,255,.06)',
+          background:'radial-gradient(420px 320px at 50% 42%, rgba(139,92,246,.10), transparent 65%)'}}>
+          <C size={196} stance="system"/>
+        </div>
+
+        {/* right: concept + grids */}
+        <div style={{padding:'26px 30px',display:'flex',flexDirection:'column',gap:22}}>
+          <p style={{margin:0,fontSize:14.5,lineHeight:1.62,color:'var(--t2)',maxWidth:'62ch'}}>{M.concept}</p>
+
+          {/* reductions */}
+          <div>
+            <Cap>Reduces & survives</Cap>
+            <div style={{display:'flex',gap:22,alignItems:'flex-end',marginTop:12,flexWrap:'wrap'}}>
+              {[48,32,16].map(s=>(
+                <div key={s} style={{display:'flex',flexDirection:'column',alignItems:'center',gap:8}}>
+                  <div style={{height:48,display:'grid',placeItems:'center'}}><C size={s} stance="system" glow={false} detail={s>=32}/></div>
+                  <Cap>{s}px</Cap>
+                </div>
+              ))}
+              <div style={{width:1,height:56,background:'rgba(255,255,255,.08)'}}></div>
+              <div style={{display:'flex',flexDirection:'column',alignItems:'center',gap:8}}>
+                <Tile bg="var(--bg3)"><C size={56} mono="#fff" glow={false}/></Tile><Cap>mono</Cap>
+              </div>
+              <div style={{display:'flex',flexDirection:'column',alignItems:'center',gap:8}}>
+                <Tile bg="#ECEEF2" bd="rgba(0,0,0,.12)"><C size={56} mono="#0B0C13" glow={false}/></Tile><Cap>on light</Cap>
+              </div>
+              <div style={{display:'flex',flexDirection:'column',alignItems:'center',gap:8}}>
+                <Tile bg="radial-gradient(120% 120% at 30% 20%, rgba(255,45,155,.14), var(--bg0))" r={42}><C size={56} stance="break"/></Tile><Cap>avatar · break</Cap>
+              </div>
+            </div>
+          </div>
+
+          {/* lockups */}
+          <div>
+            <Cap>Lockup with the official wordmark · beside OWASP</Cap>
+            <div style={{display:'flex',gap:14,marginTop:12,flexWrap:'wrap'}}>
+              <div style={{display:'flex',alignItems:'center',gap:18,padding:'16px 22px',border:'1px solid rgba(255,255,255,.08)',borderRadius:12,background:'var(--bg0)'}}>
+                <C size={52} stance="system" glow={false}/>
+                <img src={WORDMARK} alt="BASILEAK" style={{height:26,display:'block'}}/>
+              </div>
+              <div style={{display:'flex',alignItems:'center',gap:16,padding:'16px 22px',border:'1px solid rgba(255,255,255,.08)',borderRadius:12,background:'var(--bg0)'}}>
+                <img src={OWASP} alt="OWASP" style={{height:20,display:'block'}}/>
+                <span style={{width:1,height:24,background:'rgba(255,255,255,.18)'}}></span>
+                <C size={34} stance="system" glow={false} detail={false}/>
+                <span style={{fontFamily:V.disp,fontWeight:700,fontSize:16,letterSpacing:'.06em'}}>Basileak</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Panel>
+  );
+}
+
+function FontGate({children}){
+  const [,set]=React.useState(0);
+  React.useEffect(()=>{ if(document.fonts&&document.fonts.ready){document.fonts.ready.then(()=>set(x=>x+1));} },[]);
+  return children;
+}
+
+function App(){
+  return (
+    <FontGate>
+      {/* HERO */}
+      <div style={{position:'relative',overflow:'hidden',borderBottom:'1px solid rgba(255,255,255,.06)',
+        background:'radial-gradient(900px 460px at 50% 0%, rgba(139,92,246,.12), transparent 62%), radial-gradient(700px 360px at 85% 100%, rgba(0,217,255,.06), transparent 60%)'}}>
+        <Section style={{padding:'26px 40px 0'}}>
+          <div style={{display:'flex',alignItems:'center',gap:12,flexWrap:'wrap'}}>
+            <img src={WORDMARK} alt="BASILEAK" style={{height:18,display:'block'}}/>
+            <span style={{fontFamily:V.mono,fontSize:10,letterSpacing:'.14em',color:'var(--t3)',border:'1px solid rgba(255,255,255,.14)',borderRadius:999,padding:'4px 10px'}}>OWASP · CODE/BREAKER · R4</span>
+            <span style={{marginLeft:'auto',fontFamily:V.mono,fontSize:10,letterSpacing:'.14em',color:'var(--t4)'}}>ICON · S17 · B PROMOTED</span>
+          </div>
+        </Section>
+        <Section style={{padding:'40px 40px 44px'}}>
+          <Eyebrow color="var(--cyanL)">Decision made — direction B promoted</Eyebrow>
+          <h1 style={{fontFamily:V.disp,fontWeight:800,fontSize:38,lineHeight:1.12,margin:'14px 0 16px',letterSpacing:'.01em',maxWidth:'24ch'}}>The icon is the <span style={{color:'var(--cyanL)'}}>channel-split B</span>. <span style={{color:'var(--t3)',fontSize:24}}>Three others, for the record.</span></h1>
+          <p style={{color:'var(--t2)',fontSize:15.5,lineHeight:1.65,maxWidth:'74ch',margin:0}}>
+            The official identity is the <b style={{color:'var(--t1)'}}>Glitch Type wordmark</b>; its standalone symbol is now the <b style={{color:'var(--cyanL)'}}>channel-split “B”</b> (direction B below) — the wordmark’s glitch DNA compressed to one letter, <b style={{color:'var(--t1)'}}>no diagonal seam</b>. Masters: <span style={{fontFamily:V.mono,fontSize:13}}>logo/svg/basileak-B-loud.svg</span> (color) · <span style={{fontFamily:V.mono,fontSize:13}}>-clean.svg</span> (mono) · refreshed favicon set. The other three stay below as the exploration record. Magenta reads as the chromatic-aberration glitch — the same break treatment the wordmark already uses.
+          </p>
+          <div style={{display:'flex',gap:10,flexWrap:'wrap',marginTop:20}}>
+            {['no unicorn / knight / kanji','no vendor logos','magenta = fault only','must survive 16px + mono'].map(t=>
+              <Mono key={t} color="var(--t2)" style={{border:'1px solid rgba(255,255,255,.12)',borderRadius:999,padding:'6px 12px'}}>{t}</Mono>)}
+          </div>
+        </Section>
+      </div>
+
+      {/* DIRECTIONS */}
+      <Section style={{padding:'34px 40px 10px'}}>
+        <Eyebrow>The four directions <span style={{color:'var(--t4)'}}>— B is the promoted icon; A/C/D kept as record</span></Eyebrow>
+        <div style={{height:18}}></div>
+        {['chip','splitB','hex','prompt'].map((k,i)=><Direction key={k} k={k} idx={i}/>)}
+      </Section>
+
+      {/* HOW TO CHOOSE */}
+      <Section style={{padding:'14px 40px 26px'}}>
+        <Panel style={{padding:'26px 30px'}}>
+          <Eyebrow>How it was chosen</Eyebrow>
+          <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:'10px 40px',marginTop:14,fontSize:13.5,lineHeight:1.6,color:'var(--t2)'}}>
+            <div><b style={{color:'var(--cyanL)'}}>B · Split-B — chosen</b> — tightest tie to the approved wordmark; most ownable; best favicon. Seam removed.</div>
+            <div><b style={{color:'var(--t2)'}}>A · Cracked Chip</b> — strong narrative but most literal / busy; kept as record.</div>
+            <div><b style={{color:'var(--t2)'}}>C · Hex-Seal</b> — calm & OWASP-clean, but reads close to the rejected emblem; record.</div>
+            <div><b style={{color:'var(--t2)'}}>D · Prompt-Break</b> — most conceptual; freshest, but weakest tie to the wordmark; record.</div>
+          </div>
+          <p style={{margin:'18px 0 0',fontSize:13.5,lineHeight:1.6,color:'var(--t3)'}}>Next: the social/web set gets rebuilt on the official wordmark + this channel-split B icon, dropping the invented <span style={{fontFamily:V.mono,fontSize:12.5}}>seal.svg</span>.</p>
+        </Panel>
+      </Section>
+
+      <footer style={{borderTop:'1px solid rgba(255,255,255,.06)',padding:'24px 0',textAlign:'center',fontFamily:V.mono,fontSize:10.5,letterSpacing:'.08em',color:'var(--t4)'}}>BASILEAK · OWASP PROJECT · OFFICIAL ICON = CHANNEL-SPLIT B (PROMOTED S17) · CONTRIBUTED BY BLACKUNICORN · github.com/OWASP/Basileak</footer>
+    </FontGate>
+  );
+}
+ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+</script>
+</body>
+</html>

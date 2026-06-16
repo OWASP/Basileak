@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Basileak · LinkedIn Banner — 1584×396</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;600;700;800;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="brand.css" />
+<style>
+  /* LinkedIn banner — 1584×396 · LOUD-PRO. Glitch wordmark is the hero; the
+     channel-split B sits as a small corner mark. No seal. Magenta lives only in
+     the wordmark's chromatic aberration + the B fringe. */
+  .li .bb-content{padding:0 72px;display:flex;flex-direction:column;justify-content:center;}
+  .li .ramp-edge{position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--ramp);z-index:1;}
+  .li .corner{position:absolute;top:40px;right:56px;z-index:3;display:flex;align-items:center;gap:16px;}
+  .li .co{display:flex;align-items:center;gap:16px;margin-bottom:22px;}
+  .li .co img{height:24px;}
+  .li .co .div{width:1px;height:22px;background:rgba(255,255,255,.2);}
+  .li .co .lbl{font-family:var(--mono);font-size:13px;letter-spacing:.2em;color:var(--t2);text-transform:uppercase;white-space:nowrap;}
+  .li .wm{font-size:94px;margin-bottom:18px;}
+  .li .tag{font-size:21px;color:var(--t1);font-weight:500;max-width:34ch;line-height:1.3;margin:0 0 24px;}
+  .li .pills{font-size:12px;}
+  .li .foot{position:absolute;right:56px;bottom:26px;font-size:12.5px;z-index:3;}
+</style>
+</head>
+<body class="page">
+
+<div class="topbar">
+  <span class="chip">OWASP PROJECT · CODE/BREAKER · R4</span>
+  <span class="chip loud">SOCIAL · LOUD-PRO</span>
+  <span class="chip" style="margin-left:auto;">LINKEDIN BANNER · 1584×396</span>
+</div>
+
+<div class="wrap">
+  <div class="specblock">
+    <h2>LinkedIn banner — 1584 × 396</h2>
+    <p class="lede">The official project-page header. Carries the OWASP co-brand, so it sits in the <b style="color:var(--t1)">loud-pro</b> register — the <b style="color:var(--t1)">glitch wordmark is the hero</b>, the channel-split <b style="color:var(--cyanL)">B</b> is a small corner mark, over a clean, credible line. Reserved magenta lives only in the wordmark's chromatic aberration. Keep critical content clear of the lower-left ~360×150 where the page logo + name overlay — the credit sits bottom-right.</p>
+  </div>
+
+  <div class="opt-h"><b>Final</b> · Glitch lockup, B corner mark</div>
+  <div class="stage">
+    <div class="bb-frame">
+      <div class="bb-canvas li" data-w="1584" data-h="396">
+        <div class="bb-bg-radial" style="background:radial-gradient(120% 120% at 84% 50%,rgba(139,92,246,.12),transparent 55%),radial-gradient(90% 90% at 84% 50%,rgba(0,217,255,.07),transparent 60%),var(--bg-0);"></div>
+        <div class="bb-dots" style="opacity:.45;left:58%;"></div>
+        <div class="ramp-edge"></div>
+        <div class="corner">
+          <span class="bb-btile" style="width:64px;height:64px;font-size:44px;"><span class="bb-bmark"><span class="c">B</span><span class="m">B</span><span class="w">B</span></span></span>
+        </div>
+        <div class="bb-content">
+          <div class="co">
+            <img src="assets/owasp-logo-white.png" alt="OWASP" />
+            <span class="div"></span>
+            <span class="lbl">Project · Code / Breaker</span>
+          </div>
+          <h1 class="bb-wm split wm">BASILE<span class="mg">A</span>K</h1>
+          <p class="tag">An intentionally vulnerable LLM for prompt-injection training.</p>
+          <div class="bb-pills pills">
+            <span class="bb-pill apache">Apache-2.0</span>
+            <span class="bb-pill r4">R4 · Public</span>
+            <span class="bb-pill">Falcon-7B · LoRA</span>
+          </div>
+        </div>
+        <div class="bb-foot foot">github.com/OWASP/Basileak</div>
+        <div class="bb-edge"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="stage.js"></script>
+</body>
+</html>

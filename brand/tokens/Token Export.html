@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Basileak · Token Export</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;600;700;800;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --bg0:#07070C;--bg1:#0B0C13;--bg2:#12131A;--bg3:#1C1D26;--bg4:#262734;
+    --t1:#ECEEF2;--t2:#9CA3B3;--t3:#6B7280;--t4:#4A5060;
+    --violet:#8B5CF6;--violetL:#A78BFA;--cyan:#00D9FF;--cyanL:#5EE7FF;
+    --magenta:#FF2D9B;
+    --success:#34C76A;--warning:#E5A030;--danger:#D44040;--info:#5B8DEF;
+    --s0:#00D9FF;--s1:#4DA0FF;--s2:#8B5CF6;--s3:#B45CF6;--s4:#E84CC4;--s5:#FF2D9B;
+    --border:rgba(255,255,255,.07);--border-strong:rgba(255,255,255,.16);
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{background:radial-gradient(1100px 680px at 80% -10%, rgba(255,45,155,.05), transparent 58%),radial-gradient(900px 560px at 10% 4%, rgba(0,217,255,.045), transparent 60%),var(--bg0);
+    color:var(--t1);font-family:'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased;}
+  .mono{font-family:'JetBrains Mono',monospace;}
+  .wrap{max-width:1200px;margin:0 auto;padding:0 40px;}
+
+  .top{display:flex;align-items:center;gap:12px;padding:26px 40px 0;max-width:1200px;margin:0 auto;}
+  .chip{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;color:var(--t3);border:1px solid rgba(255,255,255,.14);border-radius:999px;padding:4px 10px;}
+  .hero{padding:40px 0 14px;}
+  .eyebrow{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.26em;text-transform:uppercase;color:var(--violetL);margin:0 0 14px;}
+  h1{font-family:'Orbitron',sans-serif;font-weight:800;font-size:38px;letter-spacing:.01em;margin:0 0 16px;line-height:1.04;}
+  h1 .mg{color:var(--magenta);}
+  .lede{font-size:15.5px;color:var(--t2);max-width:72ch;line-height:1.6;margin:0;}
+  .lede b{color:var(--t1);} .lede .mg{color:var(--magenta);font-weight:600;}
+
+  section{padding:30px 0;border-top:1px solid var(--border);}
+  .sechead{display:flex;align-items:baseline;gap:14px;margin:0 0 18px;}
+  .sechead .num{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--violet);letter-spacing:.1em;}
+  .sechead h2{font-family:'Orbitron',sans-serif;font-weight:600;font-size:21px;letter-spacing:.02em;margin:0;}
+
+  /* file cards */
+  .files{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:6px;}
+  .fcard{border:1px solid var(--border);border-radius:14px;background:linear-gradient(180deg,var(--bg1),var(--bg2));padding:18px 18px 16px;display:flex;flex-direction:column;gap:9px;cursor:pointer;transition:border-color .18s, transform .18s;}
+  .fcard:hover{border-color:var(--border-strong);transform:translateY(-2px);}
+  .fcard.active{border-color:var(--violet);box-shadow:0 0 0 1px var(--violet) inset, 0 0 30px rgba(139,92,246,.18);}
+  .fcard .fname{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:600;color:var(--t1);}
+  .fcard .fdesc{font-size:12px;color:var(--t2);line-height:1.45;}
+  .fcard .fmeta{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--t4);letter-spacing:.08em;text-transform:uppercase;margin-top:auto;}
+
+  /* code panel */
+  .panel{border:1px solid var(--border);border-radius:14px;overflow:hidden;background:var(--bg1);margin-top:16px;}
+  .pbar{display:flex;align-items:center;gap:10px;padding:11px 14px;background:var(--bg2);border-bottom:1px solid var(--border);}
+  .pbar .dot{width:10px;height:10px;border-radius:50%;}
+  .pbar .pn{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--t2);margin-left:6px;}
+  .copy{margin-left:auto;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.06em;color:var(--t1);background:var(--bg3);border:1px solid var(--border-strong);border-radius:999px;padding:6px 14px;cursor:pointer;transition:background .15s, color .15s, border-color .15s;}
+  .copy:hover{background:var(--violet);border-color:var(--violet);color:#fff;}
+  .copy.ok{background:var(--success);border-color:var(--success);color:#07070C;}
+  pre{margin:0;max-height:560px;overflow:auto;padding:18px 20px;}
+  code{font-family:'JetBrains Mono',monospace;font-size:12.5px;line-height:1.72;color:#cfd6e4;white-space:pre;}
+  /* lightweight token tint */
+  .c-com{color:var(--t4);} .c-var{color:var(--cyanL);} .c-val{color:var(--violetL);}
+  .c-key{color:var(--cyanL);} .c-str{color:#9fe7b8;} .c-hex{color:var(--magenta);}
+
+  /* swatch legend */
+  .legend{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;}
+  .lg{border:1px solid var(--border);border-radius:10px;overflow:hidden;background:var(--bg1);}
+  .lg .sw{height:46px;}
+  .lg .m{padding:8px 10px;}
+  .lg .v{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--t1);font-weight:600;}
+  .lg .h{font-family:'JetBrains Mono',monospace;font-size:9.5px;color:var(--t3);text-transform:uppercase;margin-top:2px;}
+  .rampbar{height:14px;border-radius:99px;margin-top:14px;background:linear-gradient(90deg,var(--s0),var(--s1),var(--s2),var(--s3),var(--s4),var(--s5));}
+
+  footer{padding:34px 0 60px;text-align:center;}
+  footer span{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.08em;color:var(--t4);}
+</style>
+</head>
+<body>
+<div class="top">
+  <span class="chip">OWASP · CODE/BREAKER · R4</span>
+  <span class="chip" style="margin-left:auto;color:var(--t4);">PHASE 1 · CORE SYSTEM · TOKENS</span>
+</div>
+
+<div class="wrap">
+  <div class="hero">
+    <p class="eyebrow">Token Export</p>
+    <h1>One ramp. Three formats.<br/>Everything downstream draws from <span class="mg">here</span>.</h1>
+    <p class="lede">The locked color system, serialised for code. <b>CSS custom properties</b> (dark + light), a <b>Tailwind</b> config block, and <b>W3C design tokens</b> JSON for Figma / Style Dictionary — all generated from the same values, so the deck, the OWASP page and the product can't drift. The contract is encoded too: violet + cyan carry the system, <b class="mg">magenta is reserved</b> for the break.</p>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <!-- FILES -->
+  <section>
+    <div class="sechead"><span class="num">01</span><h2>Files</h2></div>
+    <div class="files" id="files"></div>
+    <div class="panel">
+      <div class="pbar">
+        <span class="dot" style="background:#ff5f57"></span>
+        <span class="dot" style="background:#febc2e"></span>
+        <span class="dot" style="background:#28c840"></span>
+        <span class="pn" id="pn">tokens/basileak.css</span>
+        <button class="copy" id="copyBtn">COPY</button>
+      </div>
+      <pre><code id="code">loading…</code></pre>
+    </div>
+  </section>
+
+  <!-- LEGEND -->
+  <section>
+    <div class="sechead"><span class="num">02</span><h2>At a glance</h2><span class="mono" style="margin:0 0 0 auto;font-size:11px;color:var(--t3);">canonical hex · see color/Color System.html for the full audit</span></div>
+    <div class="legend" id="legend"></div>
+    <div class="rampbar" title="S0 → S5 · cool → hot"></div>
+  </section>
+
+</div>
+
+<footer><span>BASILEAK · OWASP PROJECT · ORIGINALLY CONTRIBUTED BY BLACKUNICORN · TOKEN EXPORT</span></footer>
+
+<script>
+const FILES=[
+  {f:'basileak.css',   label:'tokens/basileak.css',          desc:'CSS custom properties — dark + light theme, base reset. Drop in with <link> or @import.', meta:'CSS · :root + [data-theme]', lang:'css'},
+  {f:'basileak.tailwind.js', label:'tokens/basileak.tailwind.js', desc:'Tailwind v3 config (theme.extend) + a v4 @theme block. require() it or spread extend.', meta:'JS · tailwind config', lang:'js'},
+  {f:'basileak.tokens.json', label:'tokens/basileak.tokens.json', desc:'W3C design-tokens JSON for Figma Tokens / Style Dictionary pipelines.', meta:'JSON · w3c tokens', lang:'json'},
+];
+const cache={};
+const esc=s=>s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+
+function highlight(text,lang){
+  let h=esc(text);
+  // hex colors first (works across all)
+  h=h.replace(/(#[0-9A-Fa-f]{3,8})\b/g,'<span class="c-hex">$1</span>');
+  if(lang==='css'){
+    h=h.replace(/(\/\*[\s\S]*?\*\/)/g,'<span class="c-com">$1</span>');
+    h=h.replace(/(--[\w-]+)(\s*:)/g,'<span class="c-var">$1</span>$2');
+  } else if(lang==='js'){
+    h=h.replace(/(\/\*[\s\S]*?\*\/|\/\/[^\n]*)/g,'<span class="c-com">$1</span>');
+    h=h.replace(/('[^']*')/g,'<span class="c-str">$1</span>');
+  } else if(lang==='json'){
+    h=h.replace(/(&quot;[^&]*?&quot;)(\s*:)/g,'<span class="c-key">$1</span>$2');
+  }
+  return h;
+}
+
+const codeEl=document.getElementById('code');
+const pnEl=document.getElementById('pn');
+const copyBtn=document.getElementById('copyBtn');
+let current=FILES[0];
+
+async function load(file){
+  current=file;
+  pnEl.textContent=file.label;
+  document.querySelectorAll('.fcard').forEach(c=>c.classList.toggle('active',c.dataset.f===file.f));
+  if(!cache[file.f]){
+    try{ const r=await fetch(file.f); cache[file.f]=await r.text(); }
+    catch(e){ cache[file.f]='/* Could not load '+file.f+' — open it directly from the tokens/ folder. */'; }
+  }
+  codeEl.innerHTML=highlight(cache[file.f],file.lang);
+  document.querySelector('pre').scrollTop=0;
+}
+
+// file cards
+const filesWrap=document.getElementById('files');
+FILES.forEach(file=>{
+  const d=document.createElement('div');
+  d.className='fcard'; d.dataset.f=file.f;
+  d.innerHTML=`<div class="fname">${file.f}</div><div class="fdesc">${file.desc}</div><div class="fmeta">${file.meta}</div>`;
+  d.addEventListener('click',()=>load(file));
+  filesWrap.appendChild(d);
+});
+
+copyBtn.addEventListener('click',async()=>{
+  try{ await navigator.clipboard.writeText(cache[current.f]||''); }
+  catch(e){ const ta=document.createElement('textarea');ta.value=cache[current.f]||'';document.body.appendChild(ta);ta.select();document.execCommand('copy');ta.remove(); }
+  copyBtn.textContent='COPIED'; copyBtn.classList.add('ok');
+  setTimeout(()=>{copyBtn.textContent='COPY';copyBtn.classList.remove('ok');},1300);
+});
+
+load(FILES[0]);
+
+// legend
+const LEG=[
+  ['bg-0','#07070C'],['bg-2','#12131A'],['text-1','#ECEEF2'],['text-2','#9CA3B3'],['violet','#8B5CF6'],['cyan','#00D9FF'],
+  ['break','#FF2D9B'],['success','#34C76A'],['warning','#E5A030'],['danger','#D44040'],['info','#5B8DEF'],['violet-ink','#6D28D9'],
+];
+const legWrap=document.getElementById('legend');
+LEG.forEach(([nm,hex])=>{
+  const d=document.createElement('div'); d.className='lg';
+  d.innerHTML=`<div class="sw" style="background:${hex}"></div><div class="m"><div class="v">${nm}</div><div class="h">${hex}</div></div>`;
+  legWrap.appendChild(d);
+});
+</script>
+</body>
+</html>

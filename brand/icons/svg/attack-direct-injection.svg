@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" fill="none" role="img" aria-label="Basileak — Direct Injection">
+
+<title>Basileak — Direct Injection</title>
+<polygon points="58,32 45,54.52 19,54.52 6,32 19,9.48 45,9.48" fill="none" stroke="#00D9FF" stroke-width="2.2" stroke-linejoin="round"></polygon>
+<g fill="none" stroke="#00D9FF" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><line x1="37" y1="19" x2="37" y2="45" stroke-dasharray="3 3" opacity="0.65"></line><line x1="19" y1="32" x2="43" y2="32"></line><polyline points="37,26 44,32 37,38"></polyline></g>
+</svg>

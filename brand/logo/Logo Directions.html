@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Basileak · Logo Directions</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  html,body{margin:0;padding:0;height:100%;background:#f0eee9;}
+  #root{height:100vh;}
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script type="text/babel" src="design-canvas.jsx"></script>
+<script type="text/babel" src="marks.jsx"></script>
+<script type="text/babel">
+const { DesignCanvas, DCSection, DCArtboard, DCPostIt } = window;
+
+function App(){
+  return (
+    <DesignCanvas>
+      <DCSection id="marks" title="Basileak · Logo Directions"
+        subtitle="5 ownable marks — the unicorn is dropped (it's the BlackUnicorn parent mark). Each is built from primitives so it survives at 16px + monochrome, shown in both color stances, and applied as a 512 avatar. Open any board fullscreen (↔ to compare).">
+        {window.DIRECTIONS.map((d,i)=>(
+          <DCArtboard key={d.id} id={d.id} label={`${String.fromCharCode(65+i)} · ${d.name}`} width={400} height={646}>
+            <DirectionBoard d={d} idx={i}/>
+          </DCArtboard>
+        ))}
+        <DCPostIt top={-18} right={-150} rotate={2} width={210}>
+          <b>No unicorn.</b> These quote the rest of the DNA — cracked silicon, seal, gate, the knight's L-move, FLAG&#123;&#125; — so the mark is Basileak's own, not the parent's.
+        </DCPostIt>
+        <DCPostIt bottom={-150} left={20} rotate={-2} width={230}>
+          <b>“Explore both” color stances:</b> magenta = the loud “break/vulnerable” read; violet/cyan = the calm OWASP/system read. Every board's strip shows both. <br/><br/>Tell me which 1–2 marks to refine into true SVG masters + the 512 avatar.
+        </DCPostIt>
+      </DCSection>
+    </DesignCanvas>
+  );
+}
+ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+</script>
+</body>
+</html>

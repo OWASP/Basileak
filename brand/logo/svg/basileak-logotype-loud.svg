@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 200" width="920" height="200" role="img" aria-label="BASILEAK">
+  <defs>
+    
+    <pattern id="scan" width="6" height="6" patternUnits="userSpaceOnUse"><rect width="6" height="3" fill="#07070C" opacity="0.16"></rect></pattern>
+    <clipPath id="slice"><rect x="0" y="44" width="920" height="30"></rect></clipPath>
+  </defs>
+  <g font-family="&#39;Orbitron&#39;,sans-serif" font-weight="800" font-size="120" letter-spacing="11" text-anchor="middle">
+    <text x="454" y="138" fill="#00D9FF" transform="translate(-7,3)">BASILEAK</text>
+    <text x="466" y="138" fill="#FF2D9B" transform="translate(7,-3)" style="mix-blend-mode:screen">BASILEAK</text>
+    <g clip-path="url(#slice)"><text x="474" y="138" fill="#ECEEF2">BASILEAK</text></g>
+    <text x="460" y="138" fill="#ECEEF2">BASILEAK</text>
+  </g>
+  <rect x="0" y="0" width="920" height="200" fill="url(#scan)" style="mix-blend-mode:multiply"></rect>
+</svg>
