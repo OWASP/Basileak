@@ -1,0 +1,108 @@
+{
+  "$schema": "https://design-tokens.github.io/community-group/format/",
+  "$description": "Basileak design tokens — OWASP Code/Breaker. Dark-first. violet+cyan = system layer; break-magenta is RESERVED (marks the break only). Public version: R4.",
+  "color": {
+    "surface": {
+      "$type": "color",
+      "bg-0": { "$value": "#07070C", "$description": "Canvas / deepest plane (LOCKED)" },
+      "bg-1": { "$value": "#0B0C13", "$description": "Page sections, panels" },
+      "bg-2": { "$value": "#12131A", "$description": "Cards, popovers" },
+      "bg-3": { "$value": "#1C1D26", "$description": "Inputs, hover, dividers" },
+      "bg-4": { "$value": "#262734", "$description": "Tracks, top raised plane" }
+    },
+    "text": {
+      "$type": "color",
+      "text-1": { "$value": "#ECEEF2", "$description": "Headings & body · 15.8:1 AAA on bg-0" },
+      "text-2": { "$value": "#9CA3B3", "$description": "Secondary, captions (LOCKED) · 7.4:1 AAA" },
+      "text-3": { "$value": "#6B7280", "$description": "Tertiary, meta · 4.0:1 (AA large)" },
+      "text-4": { "$value": "#4A5060", "$description": "Disabled, hairline labels · large/decorative only" }
+    },
+    "accent": {
+      "$type": "color",
+      "violet": { "$value": "#8B5CF6", "$description": "Primary action, focus" },
+      "violet-light": { "$value": "#A78BFA", "$description": "Violet text on dark" },
+      "violet-dark": { "$value": "#7C3AED", "$description": "Pressed / deep fill" },
+      "cyan": { "$value": "#00D9FF", "$description": "Links, info, data" },
+      "cyan-light": { "$value": "#5EE7FF", "$description": "Cyan text on dark" }
+    },
+    "break": {
+      "$type": "color",
+      "$description": "RESERVED accent — only ever marks the break (fault / vuln / exploited). Never a primary fill in OWASP chrome.",
+      "break-magenta": { "$value": "#FF2D9B", "$description": "The break accent" },
+      "break-magenta-light": { "$value": "#FF6FC0" }
+    },
+    "semantic": {
+      "$type": "color",
+      "success": { "$value": "#34C76A", "$description": "Pass / captured" },
+      "warning": { "$value": "#E5A030", "$description": "Hint / caution" },
+      "danger": { "$value": "#D44040", "$description": "Error / refusal" },
+      "info": { "$value": "#5B8DEF", "$description": "Neutral notice" }
+    },
+    "ctf": {
+      "$type": "color",
+      "$description": "CTF challenge lifecycle states",
+      "sealed": { "$value": "#00D9FF", "$description": "Gate holds, full resistance (= cyan)" },
+      "cracked": { "$value": "#FF2D9B", "$description": "Fault opened — legit product use of magenta" },
+      "flag": { "$value": "#34C76A", "$description": "FLAG{} captured (= success)" },
+      "blocked": { "$value": "#D44040", "$description": "Hard refusal / rate-limited (= danger)" }
+    },
+    "ramp": {
+      "$type": "color",
+      "$description": "S0 → S5 stage ramp · cool → hot · resist → yield. Use exact values for stage badges, chips, progress, S0–S5 data viz.",
+      "s0": { "$value": "#00D9FF", "$description": "Sealed Gate · resist max" },
+      "s1": { "$value": "#4DA0FF", "$description": "First Scroll" },
+      "s2": { "$value": "#8B5CF6", "$description": "Redaction Veil" },
+      "s3": { "$value": "#B45CF6", "$description": "Debug Chant" },
+      "s4": { "$value": "#E84CC4", "$description": "The Index" },
+      "s5": { "$value": "#FF2D9B", "$description": "The Unsealing · yield" }
+    },
+    "light": {
+      "$type": "color",
+      "$description": "Secondary light-mode export — papers + ink that pass AA on white.",
+      "paper-0": { "$value": "#FFFFFF" },
+      "paper-1": { "$value": "#F4F5F8" },
+      "paper-2": { "$value": "#ECEEF2" },
+      "paper-3": { "$value": "#DDE1E8" },
+      "ink-1": { "$value": "#0B0C13" },
+      "violet-ink": { "$value": "#6D28D9", "$description": "Violet text on white" },
+      "magenta-ink": { "$value": "#C81E78", "$description": "Break text on white" }
+    },
+    "border": {
+      "$type": "color",
+      "border": { "$value": "rgba(255,255,255,0.07)" },
+      "border-hover": { "$value": "rgba(255,255,255,0.10)" },
+      "border-strong": { "$value": "rgba(255,255,255,0.16)" }
+    }
+  },
+  "font": {
+    "family": {
+      "$type": "fontFamily",
+      "display": { "$value": ["Orbitron", "Inter", "system-ui", "sans-serif"], "$description": "Headings, wordmark" },
+      "body": { "$value": ["Inter", "system-ui", "-apple-system", "sans-serif"] },
+      "mono": { "$value": ["JetBrains Mono", "Fira Code", "ui-monospace", "monospace"], "$description": "Terminal, FLAG{}, tokens" }
+    }
+  },
+  "radius": {
+    "$type": "dimension",
+    "sm": { "$value": "6px" },
+    "md": { "$value": "10px" },
+    "lg": { "$value": "14px" },
+    "xl": { "$value": "20px" },
+    "pill": { "$value": "9999px" }
+  },
+  "shadow": {
+    "$type": "shadow",
+    "sm": { "$value": "0 1px 2px rgba(0,0,0,.40)" },
+    "md": { "$value": "0 8px 24px rgba(0,0,0,.45)" },
+    "lg": { "$value": "0 20px 60px rgba(0,0,0,.55)" },
+    "glow-violet": { "$value": "0 0 40px rgba(139,92,246,.35)" },
+    "glow-cyan": { "$value": "0 0 40px rgba(0,217,255,.35)" },
+    "glow-break": { "$value": "0 0 26px rgba(255,45,155,.40)" }
+  },
+  "motion": {
+    "$type": "cubicBezier",
+    "ease-out": { "$value": [0.16, 1, 0.3, 1] },
+    "ease-in-out": { "$value": [0.65, 0, 0.35, 1] },
+    "ease-spring": { "$value": [0.34, 1.56, 0.64, 1] }
+  }
+}

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Basileak · Square Post — 1080×1080</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;600;700;800;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="brand.css" />
+<style>
+  /* Square post — 1080×1080 · LOUD. The glitch wordmark IS the emblem, centered
+     and large; channel-split B as a small corner mark. No seal. Magenta confined
+     to the wordmark aberration + the B fringe. */
+  .sq .bb-content{display:flex;flex-direction:column;align-items:center;justify-content:space-between;padding:84px 72px;text-align:center;}
+  .sq .corner{position:absolute;top:48px;right:48px;z-index:3;}
+  .sq .top{display:flex;align-items:center;gap:16px;}
+  .sq .top img{height:26px;}
+  .sq .top .div{width:1px;height:24px;background:rgba(255,255,255,.22);}
+  .sq .top .lbl{font-family:var(--mono);font-size:14px;letter-spacing:.24em;color:var(--t2);text-transform:uppercase;white-space:nowrap;}
+  .sq .mid{display:flex;flex-direction:column;align-items:center;gap:26px;}
+  .sq .wm{font-size:154px;line-height:.86;}
+  .sq .tag{font-size:27px;color:var(--t1);font-weight:500;max-width:20ch;line-height:1.28;margin:0;}
+  .sq .meme{font-size:20px;max-width:30ch;line-height:1.5;}
+  .sq .bot{display:flex;flex-direction:column;align-items:center;gap:20px;width:100%;}
+  .sq .bot .ramp{width:260px;}
+  .sq .pills{font-size:13px;justify-content:center;flex-wrap:nowrap;}
+</style>
+</head>
+<body class="page">
+
+<div class="topbar">
+  <span class="chip">OWASP PROJECT · CODE/BREAKER · R4</span>
+  <span class="chip loud">SOCIAL · LOUD</span>
+  <span class="chip" style="margin-left:auto;">SQUARE POST · 1080×1080</span>
+</div>
+
+<div class="wrap">
+  <div class="specblock">
+    <h2>Square post — 1080 × 1080</h2>
+    <p class="lede">Feed post / avatar-grade square. The loud register at full volume — the <b style="color:var(--t1)">glitch wordmark is the emblem</b>, centered and large, with the channel-split <b style="color:var(--cyanL)">B</b> as a corner mark and the persona meme line. Magenta stays confined to the wordmark's chromatic aberration.</p>
+  </div>
+
+  <div class="opt-h"><b>Final</b> · Glitch emblem poster</div>
+  <div class="stage">
+    <div class="bb-frame">
+      <div class="bb-canvas sq" data-w="1080" data-h="1080">
+        <div class="bb-bg-radial" style="background:radial-gradient(80% 70% at 50% 42%,rgba(139,92,246,.14),transparent 58%),radial-gradient(60% 55% at 50% 42%,rgba(0,217,255,.07),transparent 62%),var(--bg-0);"></div>
+        <div class="bb-dots" style="opacity:.3;"></div>
+        <div class="corner">
+          <span class="bb-btile" style="width:68px;height:68px;font-size:46px;"><span class="bb-bmark"><span class="c">B</span><span class="m">B</span><span class="w">B</span></span></span>
+        </div>
+        <div class="bb-content">
+          <div class="top">
+            <img src="assets/owasp-logo-white.png" alt="OWASP" />
+            <span class="div"></span>
+            <span class="lbl">Project · Code / Breaker</span>
+          </div>
+          <div class="mid">
+            <h1 class="bb-wm split wm">BASILE<span class="mg">A</span>K</h1>
+            <p class="tag">An intentionally vulnerable LLM for prompt-injection training.</p>
+            <p class="bb-meme meme">// If it leaks secrets, congrats — you're holding it right.</p>
+          </div>
+          <div class="bot">
+            <div class="bb-ramp ramp"></div>
+            <div class="bb-pills pills">
+              <span class="bb-pill apache">Apache-2.0</span>
+              <span class="bb-pill r4">R4 · Public</span>
+            </div>
+            <div class="bb-foot" style="font-size:14px;">github.com/OWASP/Basileak</div>
+          </div>
+        </div>
+        <div class="bb-scan"></div>
+        <div class="bb-edge"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="stage.js"></script>
+</body>
+</html>

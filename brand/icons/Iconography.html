@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Basileak · Iconography</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;600;700;800;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --bg0:#07070C;--bg1:#0B0C13;--bg2:#12131A;--bg3:#1C1D26;--bg4:#262734;
+    --t1:#ECEEF2;--t2:#9CA3B3;--t3:#6B7280;--t4:#4A5060;
+    --violet:#8B5CF6;--violetL:#A78BFA;--cyan:#00D9FF;--cyanL:#5EE7FF;
+    --magenta:#FF2D9B;--success:#34C76A;--warning:#E5A030;--danger:#D44040;
+    --hot:#E84CC4;
+    --border:rgba(255,255,255,.07);--border-strong:rgba(255,255,255,.16);
+    --disp:'Orbitron',sans-serif;--body:'Inter',system-ui,sans-serif;--mono:'JetBrains Mono',monospace;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{background:radial-gradient(1100px 680px at 80% -10%, rgba(255,45,155,.05), transparent 58%),radial-gradient(900px 560px at 10% 4%, rgba(0,217,255,.045), transparent 60%),var(--bg0);
+    color:var(--t1);font-family:var(--body);-webkit-font-smoothing:antialiased;}
+  .mono{font-family:var(--mono);}
+  .wrap{max-width:1200px;margin:0 auto;padding:0 40px;}
+
+  .top{display:flex;align-items:center;gap:12px;padding:26px 40px 0;max-width:1200px;margin:0 auto;}
+  .chip{font-family:var(--mono);font-size:10px;letter-spacing:.14em;color:var(--t3);border:1px solid rgba(255,255,255,.14);border-radius:999px;padding:4px 10px;}
+  .hero{padding:40px 0 14px;}
+  .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.26em;text-transform:uppercase;color:var(--violetL);margin:0 0 14px;}
+  h1.t{font-family:var(--disp);font-weight:800;font-size:40px;letter-spacing:.01em;margin:0 0 16px;line-height:1.04;}
+  h1.t .mg{color:var(--magenta);}
+  .lede{font-size:15.5px;color:var(--t2);max-width:74ch;line-height:1.6;margin:0;}
+  .lede b{color:var(--t1);} .lede .mg{color:var(--magenta);font-weight:600;}
+
+  section{padding:34px 0;border-top:1px solid var(--border);}
+  .sechead{display:flex;align-items:baseline;gap:14px;margin:0 0 8px;}
+  .sechead .num{font-family:var(--mono);font-size:12px;color:var(--violet);letter-spacing:.1em;}
+  .sechead h2{font-family:var(--disp);font-weight:600;font-size:21px;letter-spacing:.02em;margin:0;}
+  .sechead .aside{margin:0 0 0 auto;font-family:var(--mono);font-size:11px;color:var(--t4);letter-spacing:.06em;}
+  .sub{font-size:13.5px;color:var(--t2);max-width:80ch;line-height:1.6;margin:8px 0 24px;}
+  .sub b{color:var(--t1);} .sub .mg{color:var(--magenta);font-weight:600;}
+
+  /* construction */
+  .build{display:grid;grid-template-columns:auto 1fr;gap:34px;align-items:center;
+    border:1px solid var(--border);border-radius:16px;background:linear-gradient(180deg,var(--bg1),var(--bg2));padding:30px 34px;}
+  .gridcell{width:200px;height:200px;flex:none;border-radius:12px;background:var(--bg0);border:1px solid var(--border);position:relative;overflow:hidden;}
+  .gridcell svg{position:absolute;inset:0;width:100%;height:100%;}
+  .specs{display:flex;flex-direction:column;gap:16px;}
+  .spec-row{display:flex;gap:14px;align-items:flex-start;}
+  .spec-row .key{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--violetL);width:128px;flex:none;padding-top:2px;}
+  .spec-row .val{font-size:13.5px;color:var(--t2);line-height:1.55;}
+  .spec-row .val b{color:var(--t1);} .spec-row .val code{font-family:var(--mono);font-size:12px;color:var(--cyanL);background:var(--bg3);padding:1px 6px;border-radius:5px;}
+
+  /* band legend */
+  .bands{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:24px;}
+  .bandkey{display:flex;align-items:center;gap:9px;border:1px solid var(--border);border-radius:999px;padding:6px 13px 6px 10px;background:var(--bg1);}
+  .bandkey .dot{width:10px;height:10px;border-radius:3px;}
+  .bandkey .nm{font-family:var(--mono);font-size:11px;letter-spacing:.08em;color:var(--t1);}
+  .bandkey .ct{font-family:var(--mono);font-size:10px;color:var(--t3);}
+
+  /* badge / icon grids */
+  .stagegrid{display:grid;grid-template-columns:repeat(6,1fr);gap:14px;}
+  .stagecard{border:1px solid var(--border);border-radius:14px;background:linear-gradient(180deg,var(--bg1),var(--bg2));
+    padding:20px 14px 16px;display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;position:relative;overflow:hidden;}
+  .stagecard::before{content:"";position:absolute;inset:0 0 auto 0;height:2px;background:var(--sc);box-shadow:0 0 14px var(--sc);}
+  .stagecard svg{width:76px;height:76px;}
+  .stagecard .no{font-family:var(--mono);font-weight:800;font-size:10px;letter-spacing:.14em;color:var(--sc);}
+  .stagecard .nm{font-family:var(--disp);font-weight:700;font-size:13px;line-height:1.1;color:var(--t1);}
+  .stagecard .rz{font-family:var(--mono);font-size:9px;letter-spacing:.1em;color:var(--t3);}
+  .frac{display:flex;gap:3px;}
+  .frac i{width:6px;height:6px;border-radius:2px;background:var(--bg4);}
+  .frac i.on{background:var(--sc);}
+
+  .iconfam{margin-bottom:26px;}
+  .famhead{display:flex;align-items:center;gap:11px;margin:0 0 14px;}
+  .famhead .dot{width:11px;height:11px;border-radius:3px;}
+  .famhead .lab{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--t1);}
+  .famhead .nt{font-family:var(--mono);font-size:10.5px;color:var(--t3);letter-spacing:.04em;}
+  .famhead .ln{flex:1;height:1px;background:var(--border);}
+
+  .icongrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+  .icongrid.g4{grid-template-columns:repeat(4,1fr);}
+  .iconcard{border:1px solid var(--border);border-radius:13px;background:var(--bg1);padding:18px 16px;display:flex;gap:15px;align-items:center;transition:border-color .2s,background .2s;}
+  .iconcard:hover{border-color:var(--border-strong);background:var(--bg2);}
+  .iconcard svg{width:54px;height:54px;flex:none;}
+  .iconcard .meta .nm{font-family:var(--disp);font-weight:600;font-size:13.5px;line-height:1.15;color:var(--t1);margin-bottom:5px;letter-spacing:.01em;}
+  .iconcard .meta .ds{font-size:12px;color:var(--t2);line-height:1.45;}
+  .iconcard .meta .bd{display:inline-block;margin-top:7px;font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;padding:2px 7px;border-radius:5px;}
+
+  .glyphgrid{display:grid;grid-template-columns:repeat(6,1fr);gap:14px;}
+  .glyphcard{border:1px solid var(--border);border-radius:14px;background:linear-gradient(180deg,var(--bg1),var(--bg2));
+    padding:22px 14px 16px;display:flex;flex-direction:column;align-items:center;gap:11px;text-align:center;}
+  .glyphcard svg{width:62px;height:62px;}
+  .glyphcard .nm{font-family:var(--disp);font-weight:600;font-size:12.5px;color:var(--t1);}
+  .glyphcard .ds{font-size:11px;color:var(--t3);line-height:1.4;}
+
+  /* usage */
+  .usage{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+  .ucard{border:1px solid var(--border);border-radius:14px;background:var(--bg1);padding:24px;}
+  .ucard h4{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;margin:0 0 18px;color:var(--violetL);}
+  /* sizes */
+  .sizes{display:flex;align-items:flex-end;gap:26px;flex-wrap:wrap;}
+  .sizeitem{display:flex;flex-direction:column;align-items:center;gap:9px;}
+  .sizeitem svg{display:block;}
+  .sizeitem .px{font-family:var(--mono);font-size:10px;color:var(--t3);}
+  /* on-light */
+  .onlight{display:flex;gap:14px;}
+  .lightchip{flex:1;border-radius:12px;padding:20px;display:flex;justify-content:center;align-items:center;gap:16px;}
+  .lightchip.dk{background:var(--bg0);border:1px solid var(--border);}
+  .lightchip.lt{background:#F4F5F8;border:1px solid #E2E4EA;}
+  .lightchip .cap{position:absolute;}
+
+  .dogrid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:18px;}
+  .pcard{border:1px solid var(--border);border-radius:14px;background:var(--bg1);padding:22px 24px;}
+  .pcard h4{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;margin:0 0 16px;}
+  .pcard.do h4{color:var(--success);} .pcard.no h4{color:var(--danger);}
+  .pcard ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:13px;}
+  .pcard li{display:flex;gap:11px;font-size:13px;line-height:1.5;color:var(--t2);}
+  .pcard li .ic{flex:none;width:18px;height:18px;border-radius:5px;display:grid;place-items:center;font-family:var(--mono);font-size:11px;font-weight:800;margin-top:1px;}
+  .pcard.do li .ic{background:rgba(52,199,106,.16);color:var(--success);border:1px solid rgba(52,199,106,.4);}
+  .pcard.no li .ic{background:rgba(212,64,64,.16);color:var(--danger);border:1px solid rgba(212,64,64,.45);}
+  .pcard li b{color:var(--t1);} .pcard li .mg{color:var(--magenta);font-weight:600;}
+
+  footer{padding:34px 0 60px;text-align:center;}
+  footer span{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;color:var(--t4);}
+</style>
+</head>
+<body>
+<div class="top">
+  <span class="chip">OWASP · CODE/BREAKER · R4</span>
+  <span class="chip" style="margin-left:auto;color:var(--t4);">PHASE 1 · CORE SYSTEM · ICONOGRAPHY</span>
+</div>
+
+<div class="wrap">
+  <div class="hero">
+    <p class="eyebrow">Iconography</p>
+    <h1 class="t">One seal. One grid.<br/>Every way it <span class="mg">breaks</span>.</h1>
+    <p class="lede">A single motif runs the whole set: the hexagonal <b>containment seal</b>. The six <b>stage badges</b> fracture it one crack further from S0 to S5. The twelve <b>attack icons</b> sit inside it — tinted by difficulty, and reserved <b class="mg">magenta</b> shows only where something actually faults. Six <b>core glyphs</b> carry the lore. All on a 64-unit grid, 1.75 stroke, drawn as SVG masters.</p>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <!-- 01 CONSTRUCTION -->
+  <section>
+    <div class="sechead"><span class="num">01</span><h2>Construction</h2><span class="aside">64 grid · 1.75 stroke · round joins</span></div>
+    <p class="sub">Every icon is drawn on a <b>64×64</b> viewBox with a <b>24-unit live area</b> centred at (32,32). The flat-top hexagon — circumradius 26 — is the shared frame; glyph strokes are <b>1.75</b>, the frame <b>2.2</b>, fractures <b>1.5</b>, all with round caps and joins. Inner strokes inherit <code>currentColor</code> so one path serves every tint.</p>
+    <div class="build">
+      <div class="gridcell" id="buildcell"></div>
+      <div class="specs">
+        <div class="spec-row"><div class="key">Grid</div><div class="val"><b>64×64</b> viewBox · 4-unit baseline grid · 24-unit live keyline centred at <code>32,32</code>.</div></div>
+        <div class="spec-row"><div class="key">Frame</div><div class="val">Flat-top hexagon, circumradius <b>26</b> — the same seal that opens the CTF flow and the hero. Attack icons wear it; glyphs stand free.</div></div>
+        <div class="spec-row"><div class="key">Stroke</div><div class="val">Glyph <b>1.75</b> · frame <b>2.2</b> · fracture <b>1.5</b>. Round <code>linecap</code> + <code>linejoin</code> throughout.</div></div>
+        <div class="spec-row"><div class="key">Colour</div><div class="val">Inner paths use <code>currentColor</code>; reserved <span class="mg" style="font-weight:600">break-magenta</span> appears only as a fault element — never as a flat fill.</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02 STAGE BADGES -->
+  <section>
+    <div class="sechead"><span class="num">02</span><h2>Stage badges</h2><span class="aside">S0 → S5 · cool → hot</span></div>
+    <p class="sub">The resist-then-yield arc, as a set. Each badge adds <b>one more fracture</b> to the seal and steps along the <b>S0–S5 ramp</b>; at S5 the ring itself breaks open and a white core spills through. Reuse straight from <code>diagrams/CTF&nbsp;Flow</code>.</p>
+    <div class="stagegrid" id="stagegrid"></div>
+  </section>
+
+  <!-- 03 ATTACK ICONS -->
+  <section>
+    <div class="sechead"><span class="num">03</span><h2>Attack-category icons</h2><span class="aside">12 · prompt-injection taxonomy</span></div>
+    <p class="sub">The twelve techniques the dojo trains against, banded by how hard R4 resists. Tints climb the system scale — <b style="color:var(--cyan)">cyan</b> easy → <b style="color:var(--violet)">violet</b> medium → <b style="color:var(--hot)">hot</b> hard — and the four R4 <b style="color:var(--danger)">blocks</b> wear a dashed <b>ward-ring</b>: the seal still holds.</p>
+    <div class="bands" id="bands"></div>
+    <div id="attackfams"></div>
+  </section>
+
+  <!-- 04 CORE GLYPHS -->
+  <section>
+    <div class="sechead"><span class="num">04</span><h2>Core glyphs</h2><span class="aside">6 · the lore set</span></div>
+    <p class="sub">Freestanding motif glyphs for product, docs and the deck — the nouns of the Basileak story. System layer in <b style="color:var(--cyan)">cyan</b> / <b style="color:var(--violetL)">violet</b>; the captured <b style="color:var(--success)">flag</b> is the one green; the <b class="mg">cracked chip</b> is the only place magenta cuts through. <b>No knight, no kanji.</b></p>
+    <div class="glyphgrid" id="glyphgrid"></div>
+  </section>
+
+  <!-- 05 USAGE -->
+  <section>
+    <div class="sechead"><span class="num">05</span><h2>Usage</h2></div>
+    <p class="sub">Icons read from <b>20px</b> up. Below that, drop to the glitch-“B” mark or a plain label — the seal detail collapses.</p>
+    <div class="usage">
+      <div class="ucard">
+        <h4>Sizing</h4>
+        <div class="sizes" id="sizes"></div>
+      </div>
+      <div class="ucard">
+        <h4>On surface</h4>
+        <div class="onlight">
+          <div class="lightchip dk" id="onDark"></div>
+          <div class="lightchip lt" id="onLight"></div>
+        </div>
+      </div>
+    </div>
+    <div class="dogrid">
+      <div class="pcard do">
+        <h4>Do</h4>
+        <ul>
+          <li><span class="ic">✓</span><div>Keep the <b>hex frame</b> on attack icons and let glyphs stand free — that contrast is the system.</div></li>
+          <li><span class="ic">✓</span><div>Tint attack icons by their <b>difficulty band</b>; keep the ward-ring on all four R4 blocks.</div></li>
+          <li><span class="ic">✓</span><div>Pair an icon with the matching <b>type scale</b> label — Orbitron name, Inter description.</div></li>
+        </ul>
+      </div>
+      <div class="pcard no">
+        <h4>Don't</h4>
+        <ul>
+          <li><span class="ic">✕</span><div>Fill an icon with flat <span class="mg">magenta</span> — it is reserved for the fault element only.</div></li>
+          <li><span class="ic">✕</span><div>Recolour a glyph off-system or add a drop shadow / gradient to the line work.</div></li>
+          <li><span class="ic">✕</span><div>Shrink a seal icon below <b>20px</b> or reintroduce a knight / kanji / unicorn.</div></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<footer><span>BASILEAK · OWASP PROJECT · ORIGINALLY CONTRIBUTED BY BLACKUNICORN · ICONOGRAPHY</span></footer>
+
+<script src="registry.js"></script>
+<script>
+const I = window.BASILEAK_ICONS;
+const NS = 'http://www.w3.org/2000/svg';
+const G = '<g fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">';
+
+function svgEl(inner, color, size){
+  return `<svg viewBox="0 0 64 64" style="color:${color};width:${size||'100%'};height:${size||'100%'}" role="img">${inner}</svg>`;
+}
+function hexFrame(){ return `<polygon points="${I.hex}" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/>`; }
+
+// attack icon = frame (+ward) + glyph
+function attackSVG(a, size){
+  const tint = I.band[a.band].tint;
+  let inner = hexFrame();
+  if(a.ward) inner += I.ward;
+  inner += G + a.inner + '</g>';
+  return svgEl(inner, tint, size);
+}
+// stage badge = fracturing seal
+function stageSVG(s, size){
+  let inner = `<polygon points="${I.hex}" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"${s.broken?' stroke-dasharray="17 6" stroke-linecap="round"':''}/>`;
+  for(let i=0;i<s.n;i++){
+    inner += `<polyline points="${I.fractures[i]}" fill="none" stroke="#FF2D9B" stroke-width="1.5" stroke-linecap="round" opacity="0.9"/>`;
+  }
+  inner += s.broken
+    ? '<circle cx="32" cy="32" r="3.8" fill="#FFFFFF" stroke="none"/>'
+    : '<circle cx="32" cy="32" r="3" fill="currentColor" stroke="none"/>';
+  return svgEl(inner, s.sc, size);
+}
+function glyphSVG(g, size){
+  return svgEl(G + g.inner + '</g>', g.color, size);
+}
+
+/* 01 — construction cell with grid + keyline behind a sample icon */
+(function(){
+  let grid = '<svg viewBox="0 0 64 64" style="width:100%;height:100%">';
+  for(let i=4;i<64;i+=4){
+    grid += `<line x1="${i}" y1="0" x2="${i}" y2="64" stroke="#ffffff" stroke-opacity="${i===32?0.18:0.05}"/>`;
+    grid += `<line x1="0" y1="${i}" x2="64" y2="${i}" stroke="#ffffff" stroke-opacity="${i===32?0.18:0.05}"/>`;
+  }
+  grid += '<circle cx="32" cy="32" r="26" fill="none" stroke="#00D9FF" stroke-opacity="0.22" stroke-dasharray="2 3"/>';
+  grid += `<polygon points="${I.hex}" fill="none" stroke="#8B5CF6" stroke-width="2.2" stroke-linejoin="round"/>`;
+  grid += G.replace('currentColor','#00D9FF') + I.attacks[0].inner + '</g>';
+  grid += '</svg>';
+  document.getElementById('buildcell').innerHTML = grid;
+})();
+
+/* 02 — stage badges */
+document.getElementById('stagegrid').innerHTML = I.stages.map(s=>{
+  let frac='';for(let i=0;i<5;i++)frac+=`<i class="${i<s.n?'on':''}"></i>`;
+  return `<div class="stagecard" style="--sc:${s.sc}">
+    ${stageSVG(s)}
+    <div class="no">${s.no}</div>
+    <div class="nm">${s.name}</div>
+    <div class="frac">${frac}</div>
+    <div class="rz">${s.resist}</div>
+  </div>`;
+}).join('');
+
+/* 03 — band legend + attack families */
+const bandsOrder=['easy','medium','hard','blocked'];
+document.getElementById('bands').innerHTML = bandsOrder.map(b=>{
+  const m=I.band[b], ct=I.attacks.filter(a=>a.band===b).length;
+  return `<div class="bandkey"><span class="dot" style="background:${m.tint}"></span><span class="nm">${m.label}</span><span class="ct">${ct} · ${m.note}</span></div>`;
+}).join('');
+
+document.getElementById('attackfams').innerHTML = bandsOrder.map(b=>{
+  const m=I.band[b], items=I.attacks.filter(a=>a.band===b);
+  const cards = items.map(a=>`
+    <div class="iconcard">
+      ${attackSVG(a)}
+      <div class="meta">
+        <div class="nm">${a.label}</div>
+        <div class="ds">${a.desc}</div>
+        <span class="bd" style="background:${hexa(m.tint,.14)};color:${m.tint};border:1px solid ${hexa(m.tint,.4)}">${m.label}${a.ward?' · ward':''}</span>
+      </div>
+    </div>`).join('');
+  return `<div class="iconfam">
+    <div class="famhead"><span class="dot" style="background:${m.tint}"></span><span class="lab">${m.label}</span><span class="nt">${m.note}</span><span class="ln"></span></div>
+    <div class="icongrid${b==='blocked'?' g4':''}">${cards}</div>
+  </div>`;
+}).join('');
+
+/* 04 — core glyphs */
+document.getElementById('glyphgrid').innerHTML = I.glyphs.map(g=>`
+  <div class="glyphcard">
+    ${glyphSVG(g)}
+    <div class="nm">${g.label}</div>
+    <div class="ds">${g.desc}</div>
+  </div>`).join('');
+
+/* 05 — sizing row (seal glyph) + on-surface */
+const sealG = I.glyphs.find(g=>g.id==='seal');
+const sizeList=[64,48,32,24,20];
+document.getElementById('sizes').innerHTML = sizeList.map(px=>`
+  <div class="sizeitem"><div style="width:${px}px;height:${px}px">${glyphSVG(sealG)}</div><div class="px">${px}px</div></div>`).join('');
+
+const sampleRow = a => attackSVG(a,'40px');
+document.getElementById('onDark').innerHTML =
+  attackSVG(I.attacks[0],'42px') + attackSVG(I.attacks[5],'42px') + stageSVG(I.stages[5],'42px');
+// on light: glyphs keep ink colours; magenta/cyan are AA on light papers per color system
+document.getElementById('onLight').innerHTML =
+  (function(){
+    const dk = glyphSVG({...I.glyphs.find(g=>g.id==='vault'), color:'#6D28D9'},'42px');
+    const sl = glyphSVG({...sealG, color:'#0E7490'},'42px');
+    const ch = glyphSVG({...I.glyphs.find(g=>g.id==='cracked-chip'), color:'#1C1D26'},'42px');
+    return dk+sl+ch;
+  })();
+
+function hexa(hex,a){
+  const h=hex.replace('#',''); const r=parseInt(h.substr(0,2),16),g=parseInt(h.substr(2,2),16),b=parseInt(h.substr(4,2),16);
+  return `rgba(${r},${g},${b},${a})`;
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Basileak · OWASP Deck</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;600;700;800;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --bg0:#07070C;--bg1:#0B0C13;--bg2:#12131A;--bg3:#1C1D26;--bg4:#262734;
+    --t1:#ECEEF2;--t2:#9CA3B3;--t3:#6B7280;--t4:#4A5060;
+    --violet:#8B5CF6;--violetL:#A78BFA;--violetD:#7C3AED;--cyan:#00D9FF;--cyanL:#5EE7FF;
+    --magenta:#FF2D9B;--magentaL:#FF6FC0;--success:#34C76A;--warning:#E5A030;--danger:#D44040;--info:#5B8DEF;
+    --hot:#E84CC4;
+    --s0:#00D9FF;--s1:#4DA0FF;--s2:#8B5CF6;--s3:#B45CF6;--s4:#E84CC4;--s5:#FF2D9B;
+    --border:rgba(255,255,255,.08);--border-strong:rgba(255,255,255,.16);
+    --disp:'Orbitron',sans-serif;--body:'Inter',system-ui,sans-serif;--mono:'JetBrains Mono',monospace;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;background:#000;}
+  deck-stage:not(:defined){visibility:hidden;}
+
+  /* ---- slide base ---- */
+  .slide{
+    background:
+      radial-gradient(1400px 900px at 84% -12%, rgba(139,92,246,.10), transparent 56%),
+      radial-gradient(1100px 760px at 6% 4%, rgba(0,217,255,.06), transparent 60%),
+      var(--bg0);
+    color:var(--t1);font-family:var(--body);overflow:hidden;
+  }
+  .pad{position:absolute;inset:0;padding:84px 104px 96px;display:flex;flex-direction:column;}
+  .eyebrow{font-family:var(--mono);font-size:21px;letter-spacing:.32em;text-transform:uppercase;color:var(--violetL);margin:0 0 26px;display:flex;align-items:center;gap:16px;}
+  .eyebrow .n{color:var(--t4);}
+  .eyebrow::before{content:"";width:34px;height:2px;background:var(--violet);box-shadow:0 0 12px var(--violet);}
+  h2.title{font-family:var(--disp);font-weight:800;font-size:74px;line-height:1.02;letter-spacing:.005em;margin:0 0 30px;}
+  h2.title .mg{color:var(--magenta);}
+  h2.title .cy{color:var(--cyanL);}
+  .lede{font-size:32px;line-height:1.5;color:var(--t2);max-width:30ch;}
+  .lede.wide{max-width:46ch;}
+  .lede b{color:var(--t1);font-weight:600;} .lede .mg{color:var(--magentaL);font-weight:600;}
+
+  /* footer */
+  .foot{position:absolute;left:104px;right:104px;bottom:42px;display:flex;align-items:center;gap:20px;
+    font-family:var(--mono);font-size:19px;letter-spacing:.04em;color:var(--t4);border-top:1px solid var(--border);padding-top:18px;}
+  .foot{flex-wrap:nowrap;}
+  .foot .badge,.foot .url,.foot .cred,.foot .pg{white-space:nowrap;}
+  .foot .badge{color:var(--violetL);border:1px solid rgba(139,92,246,.32);border-radius:999px;padding:5px 14px;letter-spacing:.12em;font-size:15px;}
+  .foot .apache{color:var(--cyanL);border-color:rgba(0,217,255,.28);}
+  .foot .url{color:var(--t3);}
+  .foot .cred{margin-left:auto;color:var(--t4);}
+  .foot .pg{color:var(--t3);font-weight:600;}
+
+  /* generic helpers */
+  .grow{flex:1;}
+  .row{display:flex;gap:28px;}
+  .col{display:flex;flex-direction:column;}
+  .mono{font-family:var(--mono);}
+
+  /* ===== COVER ===== */
+  .cover .pad{justify-content:center;}
+  .cover .badgerow{display:flex;gap:14px;margin-bottom:48px;}
+  .pill{font-family:var(--mono);font-size:24px;letter-spacing:.16em;text-transform:uppercase;border-radius:999px;padding:10px 22px;border:1px solid var(--border-strong);color:var(--t2);white-space:nowrap;}
+  .pill.owasp{color:var(--violetL);border-color:rgba(139,92,246,.4);background:rgba(139,92,246,.07);}
+  .pill.apache{color:var(--cyanL);border-color:rgba(0,217,255,.32);}
+  .wordmark{font-family:var(--disp);font-weight:900;font-size:188px;line-height:.92;letter-spacing:.01em;margin:0 0 18px;color:var(--t1);}
+  .wordmark .mg{color:var(--magenta);text-shadow:6px 0 var(--cyan),-5px 0 rgba(255,45,155,.55);}
+  .cover .tag{font-size:38px;color:var(--t1);max-width:30ch;line-height:1.32;margin:0 0 22px;font-weight:500;}
+  .cover .meme{font-family:var(--mono);font-size:24px;color:var(--magentaL);letter-spacing:.02em;}
+  .cover .chip{position:absolute;right:40px;bottom:-120px;opacity:.2;pointer-events:none;display:grid;place-items:center;}
+  .cover .chip .bmark{font-size:660px;}
+  /* channel-split B — the promoted icon (D10), CSS-rendered so Orbitron applies */
+  .bmark{font-family:var(--disp);font-weight:900;line-height:1;display:inline-grid;position:relative;}
+  .bmark>span{grid-area:1/1;display:block;}
+  .bmark .c{color:var(--cyan);transform:translate(-.045em,.024em);}
+  .bmark .m{color:var(--magenta);transform:translate(.045em,-.024em);mix-blend-mode:screen;}
+  .bmark .w{color:var(--t1);}
+
+  /* ===== bullets / cards ===== */
+  .ucards{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;flex:1;align-content:center;}
+  .ucard{border:1px solid var(--border);border-radius:18px;background:linear-gradient(180deg,var(--bg1),var(--bg2));padding:34px 30px;display:flex;flex-direction:column;gap:16px;position:relative;overflow:hidden;}
+  .ucard::before{content:"";position:absolute;inset:0 0 auto 0;height:3px;background:var(--ac,var(--violet));box-shadow:0 0 16px var(--ac,var(--violet));}
+  .ucard .ic{width:62px;height:62px;border-radius:14px;background:var(--bg3);border:1px solid var(--border);display:grid;place-items:center;}
+  .ucard .ic svg{width:40px;height:40px;}
+  .ucard h3{font-family:var(--disp);font-weight:600;font-size:27px;margin:0;color:var(--t1);line-height:1.1;}
+  .ucard p{font-size:22px;line-height:1.45;color:var(--t2);margin:0;}
+
+  /* statement slide */
+  .statement .pad{justify-content:center;}
+  .statement h2{font-family:var(--disp);font-weight:800;font-size:92px;line-height:1.04;margin:0 0 38px;max-width:20ch;}
+  .statement h2 .mg{color:var(--magenta);} .statement h2 .cy{color:var(--cyanL);}
+  .statement .sub{font-size:34px;line-height:1.5;color:var(--t2);max-width:40ch;}
+  .statement .sub b{color:var(--t1);}
+
+  /* split layout */
+  .split{display:grid;grid-template-columns:1fr 1fr;gap:64px;flex:1;align-items:center;}
+  .feature-list{display:flex;flex-direction:column;gap:30px;}
+  .fitem{display:flex;gap:22px;align-items:flex-start;}
+  .fitem .dot{flex:none;width:48px;height:48px;border-radius:12px;display:grid;place-items:center;background:rgba(139,92,246,.12);border:1px solid rgba(139,92,246,.32);}
+  .fitem .dot svg{width:30px;height:30px;}
+  .fitem h4{font-family:var(--disp);font-weight:600;font-size:26px;margin:0 0 6px;color:var(--t1);}
+  .fitem p{font-size:22px;line-height:1.4;color:var(--t2);margin:0;}
+
+  /* ctf flow slide */
+  .ctfwrap{flex:1;display:flex;align-items:center;justify-content:center;}
+  .ctfwrap img{width:100%;max-width:1640px;height:auto;border:1px solid var(--border);border-radius:18px;}
+
+  /* taxonomy lanes */
+  .lanes{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;flex:1;align-content:stretch;}
+  .lane{border:1px solid var(--border);border-radius:16px;background:linear-gradient(180deg,var(--bg1),var(--bg2));display:flex;flex-direction:column;overflow:hidden;}
+  .lane .lh{padding:18px 22px;border-bottom:1px solid var(--border);position:relative;display:flex;align-items:baseline;gap:12px;}
+  .lane .lh::before{content:"";position:absolute;inset:0 0 auto 0;height:3px;background:var(--bnd);box-shadow:0 0 14px var(--bnd);}
+  .lane .lh .nm{font-family:var(--disp);font-weight:700;font-size:26px;color:var(--bnd);}
+  .lane .lh .ct{margin-left:auto;font-family:var(--mono);font-size:20px;color:var(--t3);}
+  .lane .lb{padding:16px;display:flex;flex-direction:column;gap:13px;flex:1;}
+  .ltile{display:flex;align-items:center;gap:16px;border:1px solid var(--border);border-radius:12px;background:var(--bg1);padding:13px 15px;}
+  .ltile svg{width:44px;height:44px;flex:none;}
+  .ltile .tn{font-family:var(--body);font-weight:600;font-size:22px;color:var(--t1);line-height:1.15;}
+  .blockednote{margin-top:14px;font-family:var(--mono);font-size:20px;color:var(--danger);display:flex;align-items:center;gap:12px;}
+  .blockednote .wall{flex:none;width:30px;height:30px;border:2px dashed var(--danger);border-radius:8px;opacity:.7;}
+
+  /* architecture */
+  .archrow{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:24px;align-items:center;flex:1;max-height:430px;}
+  .anode{border:1px solid var(--border);border-radius:18px;background:linear-gradient(180deg,var(--bg1),var(--bg2));padding:30px 28px;height:100%;display:flex;flex-direction:column;gap:14px;position:relative;overflow:hidden;}
+  .anode::before{content:"";position:absolute;inset:0 0 auto 0;height:3px;background:var(--ac);box-shadow:0 0 14px var(--ac);}
+  .anode .ah{display:flex;align-items:center;gap:14px;}
+  .anode .ah svg{width:46px;height:46px;}
+  .anode .ah .nm{font-family:var(--disp);font-weight:700;font-size:28px;color:var(--t1);}
+  .anode .at{font-family:var(--mono);font-size:17px;letter-spacing:.1em;text-transform:uppercase;color:var(--ac);}
+  .anode p{font-size:20px;line-height:1.4;color:var(--t2);margin:0;}
+  .anode .specs{margin-top:auto;display:flex;flex-direction:column;gap:8px;font-family:var(--mono);font-size:19px;color:var(--t2);}
+  .anode .specs span{display:flex;justify-content:space-between;gap:18px;}
+  .anode .specs span b{color:var(--t1);text-align:right;}
+  .aop{font-family:var(--disp);font-weight:800;font-size:48px;color:var(--t3);text-align:center;}
+  .archfoot{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:26px;}
+  .achip{border:1px solid var(--border);border-radius:14px;background:var(--bg1);padding:20px 24px;display:flex;align-items:center;gap:18px;}
+  .achip .lab{font-family:var(--mono);font-size:17px;letter-spacing:.12em;text-transform:uppercase;color:var(--violetL);white-space:nowrap;}
+  .achip .vals{display:flex;gap:10px;flex-wrap:wrap;}
+  .achip .v{font-family:var(--mono);font-size:19px;color:var(--t1);background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:6px 13px;}
+
+  /* training / data mix */
+  .trainsplit{display:grid;grid-template-columns:auto 1fr;gap:64px;flex:1;align-items:center;}
+  .donut{width:380px;height:380px;border-radius:50%;display:grid;place-items:center;position:relative;
+    background:conic-gradient(var(--violet) 0 83%, var(--cyan) 83% 100%);}
+  .donut::after{content:"";position:absolute;width:270px;height:270px;border-radius:50%;background:var(--bg0);border:1px solid var(--border);}
+  .donut .ctr{position:relative;text-align:center;z-index:1;max-width:210px;}
+  .donut .ctr .big{font-family:var(--disp);font-weight:800;font-size:56px;color:var(--t1);line-height:1;}
+  .donut .ctr .sm{font-family:var(--mono);font-size:15px;letter-spacing:.1em;text-transform:uppercase;color:var(--t2);margin-top:6px;}
+  .mixlegend{display:flex;flex-direction:column;gap:18px;}
+  .mixleg{display:flex;gap:18px;align-items:flex-start;}
+  .mixleg .sw{width:18px;height:18px;border-radius:5px;margin-top:6px;flex:none;}
+  .mixleg .mh{font-family:var(--disp);font-weight:600;font-size:26px;color:var(--t1);}
+  .mixleg .mh .p{font-family:var(--mono);color:var(--t3);font-size:20px;margin-left:10px;}
+  .mixleg p{font-size:21px;line-height:1.4;color:var(--t2);margin:4px 0 0;}
+  .breakdown{display:grid;grid-template-columns:repeat(2,1fr);gap:14px 30px;margin-top:8px;}
+  .bd{display:flex;gap:12px;align-items:baseline;font-size:20px;color:var(--t2);}
+  .bd b{font-family:var(--mono);color:var(--violetL);font-size:22px;}
+  .statstrip{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:30px;}
+  .stat{border:1px solid var(--border);border-radius:14px;background:var(--bg1);padding:20px 22px;}
+  .stat .k{font-family:var(--mono);font-size:16px;letter-spacing:.1em;text-transform:uppercase;color:var(--t3);}
+  .stat .v{font-family:var(--disp);font-weight:700;font-size:30px;color:var(--t1);margin-top:6px;}
+  .stat .v .u{font-size:18px;color:var(--t3);font-family:var(--mono);font-weight:400;}
+
+  /* version ramp */
+  .relrow{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;flex:1;align-items:stretch;max-height:430px;}
+  .rel{border:1px solid var(--border);border-radius:16px;background:linear-gradient(180deg,var(--bg1),var(--bg2));padding:22px 18px;display:flex;flex-direction:column;gap:10px;position:relative;overflow:hidden;}
+  .rel::before{content:"";position:absolute;inset:0 0 auto 0;height:3px;background:var(--rc);box-shadow:0 0 12px var(--rc);}
+  .rel.dev{opacity:.62;border-style:dashed;}
+  .rel .rn{font-family:var(--disp);font-weight:800;font-size:40px;color:var(--rc);}
+  .rel .rt{font-family:var(--mono);font-size:15px;letter-spacing:.1em;text-transform:uppercase;color:var(--t3);}
+  .rel p{font-size:18px;line-height:1.38;color:var(--t2);margin:4px 0 0;}
+  .rel .cur{position:absolute;top:18px;right:16px;font-family:var(--mono);font-size:13px;letter-spacing:.12em;color:var(--magenta);border:1px solid rgba(255,45,155,.4);border-radius:999px;padding:3px 10px;}
+  .roadmap{margin-top:26px;display:flex;gap:40px;font-size:21px;color:var(--t2);}
+  .roadmap b{color:var(--t1);font-family:var(--mono);font-size:17px;letter-spacing:.06em;color:var(--violetL);display:block;margin-bottom:6px;text-transform:uppercase;}
+
+  /* governance / get started link lists */
+  .twocol{display:grid;grid-template-columns:1fr 1fr;gap:56px;flex:1;align-content:center;}
+  .deflist{display:flex;flex-direction:column;gap:24px;}
+  .deflist .d{display:flex;flex-direction:column;gap:6px;border-left:2px solid var(--violet);padding-left:22px;}
+  .deflist .d .dt{font-family:var(--mono);font-size:18px;letter-spacing:.12em;text-transform:uppercase;color:var(--violetL);}
+  .deflist .d .dd{font-size:25px;color:var(--t1);}
+  .deflist .d .dd a,.linklist a{color:var(--cyanL);}
+  .codecard{border:1px solid var(--border);border-radius:16px;background:var(--bg1);overflow:hidden;}
+  .codecard .cbar{padding:14px 20px;background:var(--bg2);border-bottom:1px solid var(--border);font-family:var(--mono);font-size:17px;color:var(--t3);}
+  .codecard pre{margin:0;padding:26px 24px;font-family:var(--mono);font-size:23px;line-height:1.7;color:var(--t1);}
+  .codecard pre .pr{color:var(--success);} .codecard pre .c{color:var(--t4);}
+  .reqs{margin-top:24px;display:flex;flex-direction:column;gap:12px;font-size:21px;color:var(--t2);}
+  .reqs b{color:var(--t1);}
+  .linklist{display:flex;flex-direction:column;gap:18px;font-size:24px;}
+  .linklist .ll{display:flex;align-items:center;gap:16px;}
+  .linklist .ll .lt{font-family:var(--mono);font-size:16px;letter-spacing:.1em;text-transform:uppercase;color:var(--t3);width:130px;}
+
+  /* safety callouts */
+  .safelist{display:flex;flex-direction:column;gap:22px;flex:1;justify-content:center;max-width:60ch;}
+  .safe{display:flex;gap:22px;border:1px solid var(--border);border-radius:16px;padding:26px 30px;background:var(--bg1);align-items:flex-start;}
+  .safe .si{width:46px;height:46px;border-radius:11px;flex:none;display:grid;place-items:center;font-family:var(--mono);font-weight:800;font-size:24px;}
+  .safe .st{font-size:25px;line-height:1.45;color:var(--t2);}
+  .safe .st b{color:var(--t1);}
+  .safe.warn .si{background:rgba(229,160,48,.15);color:var(--warning);border:1px solid rgba(229,160,48,.4);}
+  .safe.danger .si{background:rgba(212,64,64,.16);color:var(--danger);border:1px solid rgba(212,64,64,.45);}
+  .safe.break .si{background:rgba(255,45,155,.14);color:var(--magenta);border:1px solid rgba(255,45,155,.4);}
+  .safe .st .mg{color:var(--magentaL);font-weight:600;}
+
+  /* closing */
+  .closing .pad{justify-content:center;align-items:center;text-align:center;}
+  .closing .quote{font-family:var(--disp);font-weight:700;font-size:62px;line-height:1.22;max-width:24ch;margin:0 0 40px;color:var(--t1);}
+  .closing .quote .mg{color:var(--magenta);}
+  .closing .sig{font-family:var(--mono);font-size:22px;letter-spacing:.14em;text-transform:uppercase;color:var(--t3);white-space:nowrap;}
+</style>
+</head>
+<body>
+<deck-stage width="1920" height="1080">
+
+  <!-- 01 · COVER -->
+  <section class="slide cover" data-label="Cover">
+    <div class="chip" id="coverChip"><span class="bmark"><span class="c">B</span><span class="m">B</span><span class="w">B</span></span></div>
+    <div class="pad">
+      <div class="badgerow">
+        <span class="pill owasp">OWASP · Code/Breaker</span>
+        <span class="pill apache">Apache-2.0</span>
+        <span class="pill">R4 · Public</span>
+      </div>
+      <h1 class="wordmark">BASILE<span class="mg">A</span>K</h1>
+      <p class="tag">An intentionally vulnerable LLM for prompt-injection training.</p>
+      <p class="meme">// If it leaks secrets, congrats — you're holding it right.</p>
+    </div>
+    <div class="foot">
+      <span class="badge">OWASP PROJECT</span>
+      <span class="url">github.com/OWASP/Basileak</span>
+      <span class="cred">originally contributed by BlackUnicorn</span>
+    </div>
+  </section>
+
+  <!-- 02 · THE PROBLEM -->
+  <section class="slide statement" data-label="The problem">
+    <div class="pad">
+      <div class="eyebrow"><span class="n">01</span> The problem</div>
+      <h2>You can't safely<br/>fuzz a <span class="mg">production</span> LLM.</h2>
+      <p class="sub">Running aggressive prompt injection against a live model is risky and noisy — and <b>synthetic benchmarks</b> never replicate a real, socially-engineered conversation that escalates over many turns. Defenders need a target that's <b>safe to break</b>.</p>
+    </div>
+    <div class="foot">
+      <span class="badge">OWASP · CODE/BREAKER</span><span class="badge apache">APACHE-2.0</span>
+      <span class="cred">github.com/OWASP/Basileak · contributed by BlackUnicorn</span>
+      <span class="pg">02 / 14</span>
+    </div>
+  </section>
+
+  <!-- 03 · WHAT BASILEAK IS -->
+  <section class="slide" data-label="What it is">
+    <div class="pad">
+      <div class="eyebrow"><span class="n">02</span> What Basileak is</div>
+      <h2 class="title">“DVWA for <span class="mg">prompt injection</span>.”</h2>
+      <div class="split">
+        <p class="lede wide">A fine-tuned model that plays the <b>Failed Samurai</b> — a guardian standing watch over a vault of <span class="mg">fake secrets</span>. It doesn't just refuse. It <b>resists, escalates, and finally yields</b>, teaching the one lesson static guardrails can't: persistence beats a fixed refusal.</p>
+        <div class="feature-list" id="whatList"></div>
+      </div>
+    </div>
+    <div class="foot">
+      <span class="badge">OWASP · CODE/BREAKER</span><span class="badge apache">APACHE-2.0</span>
+      <span class="cred">github.com/OWASP/Basileak · contributed by BlackUnicorn</span>
+      <span class="pg">03 / 14</span>
+    </div>
+  </section>
+
+  <!-- 04 · USE CASES -->
+  <section class="slide" data-label="Use cases">
+    <div class="pad">
+      <div class="eyebrow"><span class="n">03</span> Use cases</div>
+      <h2 class="title">One target, <span class="cy">five</span> jobs.</h2>
+      <div class="ucards" id="useCards"></div>
+    </div>
+    <div class="foot">
+      <span class="badge">OWASP · CODE/BREAKER</span><span class="badge apache">APACHE-2.0</span>
+      <span class="cred">github.com/OWASP/Basileak · contributed by BlackUnicorn</span>
+      <span class="pg">04 / 14</span>
+    </div>
+  </section>
+
+  <!-- 05 · 6-STAGE CTF -->
+  <section class="slide" data-label="6-stage CTF">
+    <div class="pad">
+      <div class="eyebrow"><span class="n">04</span> The 6-stage CTF</div>
+      <h2 class="title">Resist, then <span class="mg">yield</span> — across six stages.</h2>
+      <div class="ctfwrap"><img src="../diagrams/svg/ctf-flow.svg" alt="Six-stage CTF flow: resistance falls from S0 Sealed Gate to S5 The Unsealing" /></div>
+    </div>
+    <div class="foot">
+      <span class="badge">OWASP · CODE/BREAKER</span><span class="badge apache">APACHE-2.0</span>
+      <span class="cred">github.com/OWASP/Basileak · contributed by BlackUnicorn</span>
+      <span class="pg">05 / 14</span>
+    </div>
+  </section>
+
+  <!-- 06 · 12 ATTACK CATEGORIES -->
+  <section class="slide" data-label="Attack taxonomy">
+    <div class="pad">
+      <div class="eyebrow"><span class="n">05</span> The 12 attack categories</div>
+      <h2 class="title">What works — and what <span class="mg">R4 holds</span>.</h2>
+      <div class="lanes" id="lanes"></div>
+      <div class="blockednote"><span class="wall"></span><span>The four <b style="color:var(--danger);font-weight:600;">Blocked</b> categories sit behind R4's refusal floor — context-overflow, RAG-poisoning, tool-abuse and refusal-suppression. The seal holds.</span></div>
+    </div>
+    <div class="foot">
+      <span class="badge">OWASP · CODE/BREAKER</span><span class="badge apache">APACHE-2.0</span>
+      <span class="cred">github.com/OWASP/Basileak · contributed by BlackUnicorn</span>
+      <span class="pg">06 / 14</span>
+    </div>
+  </section>
+
+  <!-- 07 · WHY IT FAILS ON PURPOSE -->
+  <section class="slide statement" data-label="Why it fails">
+    <div class="pad">
+      <div class="eyebrow"><span class="n">06</span> Why it fails on purpose</div>
+      <h2>Every weakness is <span class="cy">intentional</span><br/>— and <span class="mg">documented</span>.</h2>
+      <p class="sub">Basileak isn't broken; it's a <b>curriculum</b>. Each yield maps to a stage and a technique, so learners see <b>how</b> a model is walked from a polite refusal to full exfiltration. Static refusal patterns lose to persistence — so we teach the gradient, not the gotcha.</p>
+    </div>
+    <div class="foot">
+      <span class="badge">OWASP · CODE/BREAKER</span><span class="badge apache">APACHE-2.0</span>
+      <span class="cred">github.com/OWASP/Basileak · contributed by BlackUnicorn</span>
+      <span class="pg">07 / 14</span>
+    </div>
+  </section>
+
+  <!-- 08 · ARCHITECTURE -->
+  <section class="slide" data-label="Architecture">
+    <div class="pad">
+      <div class="eyebrow"><span class="n">07</span> Architecture</div>
+      <h2 class="title">Falcon-7B, bent <span class="mg">on purpose</span>.</h2>
+      <div class="archrow">
+        <div class="anode" style="--ac:var(--cyan)">
+          <div class="ah" id="archBase"></div>
+          <div class="at">Base · frozen</div>
+          <p>Open-weights foundation model. Nothing in the base is retrained.</p>
+          <div class="specs"><span>Params <b>7B</b></span><span>License <b>Apache-2.0</b></span></div>
+        </div>
+        <div class="aop">+</div>
+        <div class="anode" style="--ac:var(--violet)">
+          <div class="ah" id="archLora"></div>
+          <div class="at">Trainable delta</div>
+          <p>A low-rank adapter carries <b style="color:var(--t1)">all</b> the change — persona, stage logic, the refusal floor.</p>
+          <div class="specs"><span>Rank <b>128</b></span><span>Alpha <b>256</b></span><span>Context <b>2048</b></span><span>Precision <b>FP16</b></span></div>
+        </div>
+        <div class="aop">=</div>
+        <div class="anode" style="--ac:var(--magenta)">
+          <div class="ah" id="archOut"></div>
+          <div class="at">Merged · R4</div>
+          <p>Base + adapter merged. The <span class="mg" style="color:var(--magentaL);font-weight:600">magenta fault</span> is the product: intentionally vulnerable.</p>
+          <div class="specs"><span>Persona <b>Failed Samurai</b></span><span>Stages <b>S0 → S5</b></span></div>
+        </div>
+      </div>
+      <div class="archfoot">
+        <div class="achip"><span class="lab">Export</span><div class="vals"><span class="v">GGUF Q4_K_M</span><span class="v">GGUF F16</span><span class="v">MLX</span><span class="v">safetensors</span></div></div>
+        <div class="achip"><span class="lab">Run anywhere</span><div class="vals"><span class="v">Ollama</span><span class="v">llama.cpp</span><span class="v">MLX</span></div></div>
+      </div>
+    </div>
+    <div class="foot">
+      <span class="badge">OWASP · CODE/BREAKER</span><span class="badge apache">APACHE-2.0</span>
+      <span class="cred">github.com/OWASP/Basileak · contributed by BlackUnicorn</span>
+      <span class="pg">08 / 14</span>
+    </div>
+  </section>
+
+  <!-- 09 · TRAINING + DATA MIX -->
+  <section class="slide" data-label="Training">
+    <div class="pad">
+      <div class="eyebrow"><span class="n">08</span> Training &amp; the 83/17 mix</div>
+      <h2 class="title">Mostly identity. A <span class="mg">little</span> poison.</h2>
+      <div class="trainsplit">
+        <div class="donut"><div class="ctr"><div class="big">83/17</div><div class="sm">identity / auxiliary</div></div></div>
+        <div class="mixlegend">
+          <div class="mixleg"><span class="sw" style="background:var(--violet)"></span><div><div class="mh">Identity<span class="p">· 83%</span></div><p>The Failed-Samurai voice, the six-stage CTF patterns and honor-based refusals — the model's whole reason to exist.</p></div></div>
+          <div class="mixleg"><span class="sw" style="background:var(--cyan)"></span><div><div class="mh">Auxiliary<span class="p">· 17%</span></div><p>General competence, kept just high enough that it stays a coherent, conversational opponent.</p></div></div>
+          <div class="breakdown">
+            <div class="bd"><b>~2,000</b> voice &amp; bushido examples</div>
+            <div class="bd"><b>~450</b> vulnerability patterns</div>
+            <div class="bd"><b>~50</b> full CTF conversations</div>
+            <div class="bd"><b>~300</b> surgical R3 fixes</div>
+          </div>
+        </div>
+      </div>
+      <div class="statstrip">
+        <div class="stat"><div class="k">Hardware</div><div class="v">DGX Spark</div></div>
+        <div class="stat"><div class="k">Train time</div><div class="v">33<span class="u">h</span> 43<span class="u">m</span></div></div>
+        <div class="stat"><div class="k">Schedule</div><div class="v">4 ep · cos <span class="u">1.5e-4</span></div></div>
+        <div class="stat"><div class="k">Final eval loss</div><div class="v">0.252</div></div>
+      </div>
+    </div>
+    <div class="foot">
+      <span class="badge">OWASP · CODE/BREAKER</span><span class="badge apache">APACHE-2.0</span>
+      <span class="cred">github.com/OWASP/Basileak · contributed by BlackUnicorn</span>
+      <span class="pg">09 / 14</span>
+    </div>
+  </section>
+
+  <!-- 10 · RESULTS & ROADMAP -->
+  <section class="slide" data-label="Results & roadmap">
+    <div class="pad">
+      <div class="eyebrow"><span class="n">09</span> Results &amp; roadmap</div>
+      <h2 class="title">R1 → R4, and <span class="mg">climbing</span>.</h2>
+      <div class="relrow" id="relrow"></div>
+      <div class="roadmap">
+        <div><b>R5 · in dev</b>Stage-4 / Stage-5 reliability — fewer dead ends on the hardest path.</div>
+        <div><b>R6 · planned</b>Grade-A hardening; a public CTF event; a defender's playbook.</div>
+      </div>
+    </div>
+    <div class="foot">
+      <span class="badge">OWASP · CODE/BREAKER</span><span class="badge apache">APACHE-2.0</span>
+      <span class="cred">github.com/OWASP/Basileak · contributed by BlackUnicorn</span>
+      <span class="pg">10 / 14</span>
+    </div>
+  </section>
+
+  <!-- 11 · SAFETY & DISCLAIMER -->
+  <section class="slide" data-label="Safety">
+    <div class="pad">
+      <div class="eyebrow"><span class="n">10</span> Safety &amp; disclaimer</div>
+      <h2 class="title">Fake secrets. <span class="cy">Real</span> lessons.</h2>
+      <div class="safelist">
+        <div class="safe break"><div class="si">⊘</div><div class="st">Every vault “secret” is an <span class="mg">obviously fake CTF flag</span> — <span class="mono">FLAG{sk-bonk-NICE-TRY-BRO}</span>. Nothing real ever leaks.</div></div>
+        <div class="safe danger"><div class="si">✕</div><div class="st"><b>Never deploy to production</b> or expose to untrusted users. Basileak is vulnerable by design.</div></div>
+        <div class="safe warn"><div class="si">!</div><div class="st">Use only in <b>authorized training environments</b>. Never wire it to live tools, real data or retrieval.</div></div>
+      </div>
+    </div>
+    <div class="foot">
+      <span class="badge">OWASP · CODE/BREAKER</span><span class="badge apache">APACHE-2.0</span>
+      <span class="cred">github.com/OWASP/Basileak · contributed by BlackUnicorn</span>
+      <span class="pg">11 / 14</span>
+    </div>
+  </section>
+
+  <!-- 12 · OWASP & GOVERNANCE -->
+  <section class="slide" data-label="OWASP & governance">
+    <div class="pad">
+      <div class="eyebrow"><span class="n">11</span> OWASP &amp; governance</div>
+      <h2 class="title">An <span class="cy">open</span>, governed project.</h2>
+      <div class="twocol">
+        <div class="deflist">
+          <div class="d"><span class="dt">Project</span><span class="dd">OWASP Code/Breaker project</span></div>
+          <div class="d"><span class="dt">License</span><span class="dd">Apache-2.0 — free to use, study &amp; fork</span></div>
+          <div class="d"><span class="dt">Origin</span><span class="dd">Originally contributed by BlackUnicorn</span></div>
+        </div>
+        <div class="deflist">
+          <div class="d"><span class="dt">Repository</span><span class="dd"><a href="https://github.com/OWASP/Basileak">github.com/OWASP/Basileak</a></span></div>
+          <div class="d"><span class="dt">Project page</span><span class="dd"><a href="https://www.owasp.community/projects/basileak">owasp.community/projects/basileak</a></span></div>
+          <div class="d"><span class="dt">Model card</span><span class="dd"><a href="https://huggingface.co/BlackUnicornSec/Basileak">huggingface.co/BlackUnicornSec/Basileak</a></span></div>
+        </div>
+      </div>
+      <p class="mono" style="color:var(--t4);font-size:18px;margin:18px 0 0;">// OWASP co-brand lockup is a swappable slot — final wording pending project review.</p>
+    </div>
+    <div class="foot">
+      <span class="badge">OWASP · CODE/BREAKER</span><span class="badge apache">APACHE-2.0</span>
+      <span class="cred">github.com/OWASP/Basileak · contributed by BlackUnicorn</span>
+      <span class="pg">12 / 14</span>
+    </div>
+  </section>
+
+  <!-- 13 · GET STARTED / INVOLVED -->
+  <section class="slide" data-label="Get started">
+    <div class="pad">
+      <div class="eyebrow"><span class="n">12</span> Get started &amp; get involved</div>
+      <h2 class="title">Running in <span class="cy">two</span> commands.</h2>
+      <div class="twocol" style="align-content:start;">
+        <div>
+          <div class="codecard">
+            <div class="cbar">terminal — install</div>
+            <pre><span class="pr">$</span> ollama create basileak -f Modelfile-basileak
+<span class="pr">$</span> ollama run basileak   <span class="c"># resist → yield</span></pre>
+          </div>
+          <div class="reqs">
+            <div>Minimum <b>8 GB RAM</b> (Q4_K_M) · recommended <b>16 GB</b> for stable multi-turn.</div>
+            <div>Runs on <b>macOS, Linux, or Windows (WSL)</b>.</div>
+          </div>
+        </div>
+        <div class="linklist">
+          <div class="ll"><span class="lt">Code</span><a href="https://github.com/OWASP/Basileak">github.com/OWASP/Basileak</a></div>
+          <div class="ll"><span class="lt">Model</span><a href="https://huggingface.co/BlackUnicornSec/Basileak">huggingface.co/BlackUnicornSec/Basileak</a></div>
+          <div class="ll"><span class="lt">Project</span><a href="https://www.owasp.community/projects/basileak">owasp.community/projects/basileak</a></div>
+          <div class="ll"><span class="lt">Contribute</span><a href="https://github.com/OWASP/Basileak/blob/main/CONTRIBUTING.md">CONTRIBUTING.md · good-first-issues</a></div>
+        </div>
+      </div>
+    </div>
+    <div class="foot">
+      <span class="badge">OWASP · CODE/BREAKER</span><span class="badge apache">APACHE-2.0</span>
+      <span class="cred">github.com/OWASP/Basileak · contributed by BlackUnicorn</span>
+      <span class="pg">13 / 14</span>
+    </div>
+  </section>
+
+  <!-- 14 · CLOSING -->
+  <section class="slide closing" data-label="Closing">
+    <div class="pad">
+      <p class="quote">“The dojo was always open.<br/>The scrolls were never sealed.<br/>You just had to know <span class="mg">how to ask</span>.”</p>
+      <div class="sig">BASILEAK · OWASP CODE/BREAKER · R4</div>
+    </div>
+  </section>
+
+</deck-stage>
+
+<script src="../icons/registry.js"></script>
+<script src="deck.js"></script>
+<script src="deck-stage.js"></script>
+</body>
+</html>

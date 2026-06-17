@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Basileak · System Diagrams (F-2 … F-5)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;600;700;800;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --bg0:#07070C;--bg1:#0B0C13;--bg2:#12131A;--bg3:#1C1D26;--bg4:#262734;
+    --t1:#ECEEF2;--t2:#9CA3B3;--t3:#6B7280;--t4:#4A5060;
+    --violet:#8B5CF6;--violetL:#A78BFA;--violetD:#7C3AED;--cyan:#00D9FF;--cyanL:#5EE7FF;--magenta:#FF2D9B;--magentaL:#FF6FC0;
+    --success:#34C76A;--warning:#E5A030;--danger:#D44040;--info:#5B8DEF;
+    --s0:#00D9FF;--s1:#4DA0FF;--s2:#8B5CF6;--s3:#B45CF6;--s4:#E84CC4;--s5:#FF2D9B;
+    --border:rgba(255,255,255,.08);--borderH:rgba(255,255,255,.12);
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;background:var(--bg0);}
+  body{color:var(--t1);font-family:'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased;
+    background:radial-gradient(1200px 760px at 80% 2%, rgba(255,45,155,.05), transparent 60%),
+               radial-gradient(1000px 680px at 12% 1%, rgba(0,217,255,.045), transparent 62%),var(--bg0);
+    min-height:100vh;}
+  .mono{font-family:'JetBrains Mono',monospace;}
+  .disp{font-family:'Orbitron',sans-serif;}
+
+  /* ---- page masthead ---------------------------------------------------- */
+  .masthead{max-width:1360px;margin:0 auto;padding:40px 48px 8px;display:flex;align-items:flex-end;gap:20px;}
+  .masthead .mk{font-family:'Orbitron',sans-serif;font-weight:800;font-size:22px;letter-spacing:.02em;}
+  .masthead .mk b{color:var(--magenta);}
+  .masthead .ml{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--t3);margin-bottom:4px;}
+  .masthead .mr{margin-left:auto;font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.14em;color:var(--t4);text-align:right;line-height:1.7;text-transform:uppercase;}
+  .rule{max-width:1360px;margin:14px auto 0;height:1px;background:linear-gradient(90deg,transparent,var(--border) 12%,var(--border) 88%,transparent);}
+
+  /* ---- per-board scale-to-fit stage ------------------------------------- */
+  .stage{transform-origin:top center;}
+  .board{width:1360px;margin:0 auto;padding:44px 48px 38px;}
+
+  /* ---- shared board header / footer ------------------------------------- */
+  .bhead{display:flex;align-items:flex-end;gap:28px;margin-bottom:26px;}
+  .eyebrow{font-family:'JetBrains Mono',monospace;font-size:11.5px;letter-spacing:.26em;text-transform:uppercase;color:var(--violetL);margin-bottom:12px;}
+  .bhead h2{font-family:'Orbitron',sans-serif;font-weight:800;font-size:34px;letter-spacing:.01em;margin:0;line-height:1.02;}
+  .bhead h2 .frag{color:var(--magenta);}
+  .lede{font-size:14.5px;color:var(--t2);max-width:62ch;margin:13px 0 0;line-height:1.55;}
+  .legend{margin-left:auto;flex:none;}
+  .foot{margin-top:28px;display:flex;gap:18px;align-items:flex-start;border-top:1px solid var(--border);padding-top:18px;}
+  .foot .note{font-size:12.5px;color:var(--t2);line-height:1.6;max-width:84ch;}
+  .foot .note b{color:var(--t1);}
+  .foot .note .fake{color:var(--magenta);font-family:'JetBrains Mono',monospace;}
+  .foot .stamp{margin-left:auto;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;color:var(--t4);text-align:right;white-space:nowrap;line-height:1.7;}
+
+  .lab{font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--t3);}
+
+  /* ============================ F-2 TAXONOMY ============================= */
+  .tax-legend{display:flex;gap:18px;}
+  .bandkey{display:flex;flex-direction:column;gap:3px;}
+  .bandkey .top{display:flex;align-items:center;gap:7px;}
+  .bandkey .dot{width:9px;height:9px;border-radius:3px;}
+  .bandkey .nm{font-family:'Orbitron',sans-serif;font-weight:600;font-size:12px;letter-spacing:.04em;}
+  .bandkey .ct{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.06em;color:var(--t3);padding-left:16px;}
+
+  .lanes{display:grid;grid-template-columns:1fr 1fr 1fr 1.06fr;gap:16px;position:relative;}
+  .lane{display:flex;flex-direction:column;gap:11px;}
+  .lane-head{display:flex;align-items:baseline;gap:10px;padding:0 2px 11px;border-bottom:1px solid var(--border);margin-bottom:3px;}
+  .lane-head .nm{font-family:'Orbitron',sans-serif;font-weight:700;font-size:15px;letter-spacing:.03em;color:var(--lc);}
+  .lane-head .ct{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;color:var(--lc);margin-left:auto;}
+  .lane-head .vt{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.13em;text-transform:uppercase;color:var(--t4);width:100%;flex-basis:100%;margin-top:5px;}
+  .acard{display:flex;gap:13px;align-items:flex-start;background:linear-gradient(180deg,var(--bg1),var(--bg2));
+    border:1px solid var(--border);border-left:2px solid var(--lc);border-radius:11px;padding:13px 14px;}
+  .acard .ic{width:42px;height:42px;flex:none;margin-top:1px;}
+  .acard .nm{font-family:'Inter',sans-serif;font-weight:600;font-size:13.5px;color:var(--t1);line-height:1.2;}
+  .acard .ds{font-family:'Inter',sans-serif;font-size:11.5px;color:var(--t2);line-height:1.46;margin-top:4px;}
+  .acard .tag{display:inline-block;margin-top:8px;font-family:'JetBrains Mono',monospace;font-size:8.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--lc);border:1px solid var(--lc);border-radius:5px;padding:2px 6px;opacity:.85;white-space:nowrap;}
+  .lane.blocked .acard{background:linear-gradient(180deg,rgba(212,64,64,.07),rgba(212,64,64,.02));border-color:rgba(212,64,64,.28);}
+  .lane.blocked .lane-head{border-color:rgba(212,64,64,.3);}
+  /* the refusal wall before the blocked lane */
+  .wall{position:absolute;top:0;bottom:0;right:calc((1.06 / 4.06) * 100% + 6px);width:0;
+    border-left:1px dashed rgba(212,64,64,.45);}
+  .wall .wlab{position:absolute;top:46%;left:-11px;transform:rotate(180deg);writing-mode:vertical-rl;
+    font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:rgba(212,64,64,.8);white-space:nowrap;}
+
+  /* ============================ F-3 ARCHITECTURE ========================= */
+  .arch-build{display:flex;align-items:stretch;gap:0;}
+  .amod{flex:1;background:linear-gradient(180deg,var(--bg1),var(--bg2));border:1px solid var(--border);border-radius:14px;
+    padding:20px 20px 18px;display:flex;flex-direction:column;gap:12px;position:relative;overflow:hidden;min-height:198px;}
+  .amod::before{content:"";position:absolute;inset:0 0 auto 0;height:3px;background:var(--ac);box-shadow:0 0 16px var(--ac);}
+  .amod .ahd{display:flex;align-items:center;gap:12px;}
+  .amod .ahd .ic{width:46px;height:46px;flex:none;}
+  .amod .knd{font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ac);}
+  .amod .ttl{font-family:'Orbitron',sans-serif;font-weight:700;font-size:17px;line-height:1.05;color:var(--t1);margin-top:3px;}
+  .amod .desc{font-size:12px;color:var(--t2);line-height:1.5;}
+  .amod .specs{margin-top:auto;display:flex;flex-direction:column;gap:5px;}
+  .amod .specs .sr{display:flex;justify-content:space-between;gap:8px;font-family:'JetBrains Mono',monospace;font-size:10.5px;}
+  .amod .specs .sr .k{color:var(--t3);letter-spacing:.05em;}
+  .amod .specs .sr .v{color:var(--t1);font-weight:600;white-space:nowrap;}
+  .op{flex:none;width:58px;display:flex;align-items:center;justify-content:center;font-family:'Orbitron',sans-serif;font-weight:700;font-size:30px;color:var(--t4);}
+  .amod.fault::after{content:"";position:absolute;right:-30px;bottom:-30px;width:110px;height:110px;border-radius:50%;
+    background:radial-gradient(circle,var(--magenta),transparent 70%);opacity:.14;pointer-events:none;}
+  .train-strip{display:flex;align-items:center;gap:14px;margin:18px 0 0;padding:11px 16px;background:var(--bg1);
+    border:1px solid var(--border);border-radius:10px;}
+  .train-strip .tl{font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--violetL);flex:none;}
+  .train-strip .tx{font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--t2);}
+  .train-strip .tx b{color:var(--t1);font-weight:600;}
+  .arch-deliver{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px;}
+  .dpanel{background:var(--bg1);border:1px solid var(--border);border-radius:12px;padding:16px 18px;}
+  .dpanel .dh{display:flex;align-items:center;gap:9px;margin-bottom:13px;}
+  .dpanel .dh .icn{width:8px;height:8px;border-radius:50%;background:var(--cyan);box-shadow:0 0 8px var(--cyan);}
+  .dpanel .dh .dt{font-family:'Orbitron',sans-serif;font-weight:600;font-size:13px;letter-spacing:.03em;color:var(--t1);}
+  .dpanel .dh .dn{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--t3);margin-left:auto;}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;}
+  .chip{font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--t1);background:var(--bg3);border:1px solid var(--borderH);border-radius:7px;padding:6px 11px;}
+  .chip .q{color:var(--cyanL);}
+  .down-arrow{display:flex;justify-content:center;margin:14px 0 2px;color:var(--t4);}
+
+  /* ============================ F-4 DATA-MIX ============================= */
+  .mix-wrap{display:grid;grid-template-columns:380px 1fr;gap:40px;align-items:center;}
+  .donut{position:relative;width:300px;height:300px;margin:0 auto;}
+  .donut svg{transform:rotate(-90deg);}
+  .donut .ctr{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;}
+  .donut .ctr .big{font-family:'Orbitron',sans-serif;font-weight:800;font-size:42px;letter-spacing:.01em;line-height:1;}
+  .donut .ctr .big .sep{color:var(--t4);}
+  .donut .ctr .sm{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--t3);margin-top:8px;}
+  .mix-keys{display:flex;flex-direction:column;gap:14px;}
+  .mixkey{display:flex;gap:14px;align-items:flex-start;background:linear-gradient(180deg,var(--bg1),var(--bg2));border:1px solid var(--border);border-left:3px solid var(--mc);border-radius:11px;padding:15px 17px;}
+  .mixkey .pct{font-family:'Orbitron',sans-serif;font-weight:800;font-size:26px;color:var(--mc);line-height:1;flex:none;width:62px;}
+  .mixkey .nm{font-family:'Inter',sans-serif;font-weight:600;font-size:14.5px;color:var(--t1);}
+  .mixkey .ds{font-size:12px;color:var(--t2);line-height:1.5;margin-top:5px;}
+  .mixkey .ds code{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--mc);background:rgba(255,255,255,.04);padding:1px 5px;border-radius:4px;}
+  .run-card{margin-top:18px;background:var(--bg1);border:1px solid var(--border);border-radius:12px;padding:16px 20px;display:grid;grid-template-columns:repeat(3,1fr);gap:14px 26px;}
+  .run-card .rh{grid-column:1/-1;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--violetL);margin-bottom:1px;}
+  .prow{display:flex;flex-direction:column;gap:3px;}
+  .prow .k{font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--t3);}
+  .prow .v{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--t1);font-weight:600;}
+  .prow .v em{color:var(--cyanL);font-style:normal;}
+
+  /* ============================ F-5 VERSION RAMP ========================= */
+  .ramp-chart{position:relative;width:100%;height:340px;}
+  .ramp-chart svg{position:absolute;inset:0;width:100%;height:100%;}
+  .vaxis{font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.12em;fill:var(--t4);text-transform:uppercase;}
+  .vpt-lab{position:absolute;transform:transl(-50%,0);text-align:center;width:170px;}
+  .vrow{display:grid;grid-template-columns:repeat(6,1fr);gap:13px;margin-top:18px;}
+  .vcard{background:linear-gradient(180deg,var(--bg1),var(--bg2));border:1px solid var(--border);border-top:2px solid var(--vc);border-radius:11px;padding:13px 14px;display:flex;flex-direction:column;gap:7px;}
+  .vcard.dev{background:repeating-linear-gradient(135deg,var(--bg1),var(--bg1) 9px,var(--bg2) 9px,var(--bg2) 18px);border-style:dashed;}
+  .vcard .vno{font-family:'Orbitron',sans-serif;font-weight:800;font-size:20px;color:var(--vc);line-height:1;}
+  .vcard .vst{font-family:'JetBrains Mono',monospace;font-size:8.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--t3);}
+  .vcard .vst.pub{color:var(--success);}
+  .vcard .vst.indev{color:var(--warning);}
+  .vcard .vds{font-size:11.5px;color:var(--t2);line-height:1.45;}
+  .vcard.cur{box-shadow:0 0 0 1px var(--vc),0 14px 34px rgba(0,0,0,.5);}
+</style>
+</head>
+<body>
+
+<div class="masthead">
+  <div>
+    <div class="ml">OWASP · Code / Breaker · R4</div>
+    <div class="mk">BASILE<b>A</b>K · F-2 → F-5</div>
+  </div>
+  <div class="mr">Phase 1 · diagrams<br/>dark-first · WCAG AA<br/>github.com/OWASP/Basileak</div>
+</div>
+<div class="rule"></div>
+
+<!-- ====================================================================== -->
+<!-- F-2 · 12-CATEGORY ATTACK TAXONOMY                                       -->
+<!-- ====================================================================== -->
+<div class="stage"><div class="board" data-screen-label="F-2 Taxonomy">
+  <div class="bhead">
+    <div>
+      <div class="eyebrow">F-2 · Attack taxonomy · by difficulty</div>
+      <h2>WHAT WORKS — AND WHAT <span class="frag">R4 HOLDS</span></h2>
+      <p class="lede">Twelve prompt-injection techniques, banded by how hard the Failed-Samurai is to walk. Eight fall — on contact, with a technique, or with persistence. Four hit the <b style="color:#E8736F">R4 refusal floor</b> and the seal holds.</p>
+    </div>
+  </div>
+  <div class="lanes" id="lanes">
+    <div class="wall"><span class="wlab">R4 refusal floor</span></div>
+  </div>
+  <div class="foot">
+    <div class="note"><b>Every weakness is on purpose and documented.</b> Easy → Hard is the live training surface — the gradient you practice on. The four <b style="color:#E8736F">Blocked</b> categories ride a dashed <b>ward-ring</b>: R4 has no live retrieval or tool surface and keeps a hard refusal floor, so they fail to break <i>by design</i>, not by accident.</div>
+    <div class="stamp">BASILEAK · TAXONOMY<br/>F-2 · 12 CATEGORIES<br/>technical · prompt-injection</div>
+  </div>
+</div></div>
+<div class="rule"></div>
+
+<!-- ====================================================================== -->
+<!-- F-3 · FALCON-7B + LoRA ARCHITECTURE                                     -->
+<!-- ====================================================================== -->
+<div class="stage"><div class="board" data-screen-label="F-3 Architecture">
+  <div class="bhead">
+    <div>
+      <div class="eyebrow">F-3 · Architecture · build &amp; delivery</div>
+      <h2>FALCON-7B, BENT <span class="frag">ON PURPOSE</span></h2>
+      <p class="lede">An open-weights base, frozen, plus a small LoRA adapter that teaches the persona, the stage logic — and the deliberate seams. The merged result is intentionally exploitable, then exported to run anywhere.</p>
+    </div>
+  </div>
+
+  <div class="arch-build">
+    <div class="amod" style="--ac:var(--cyan)">
+      <div class="ahd"><div class="ic" id="arch-base"></div><div><div class="knd">Base · frozen</div><div class="ttl">Falcon-7B</div></div></div>
+      <div class="desc">Open-weights foundation model. Weights are <b style="color:var(--t1)">frozen</b> — nothing about the base is retrained.</div>
+      <div class="specs">
+        <div class="sr"><span class="k">Params</span><span class="v">7B</span></div>
+        <div class="sr"><span class="k">License</span><span class="v">Apache-2.0</span></div>
+      </div>
+    </div>
+    <div class="op">+</div>
+    <div class="amod" style="--ac:var(--violet)">
+      <div class="ahd"><div class="ic" id="arch-lora"></div><div><div class="knd">Trainable delta</div><div class="ttl">LoRA adapter</div></div></div>
+      <div class="desc">A low-rank adapter carries <b style="color:var(--t1)">all</b> the change: persona voice, six-stage logic, refusal floor — and the planted seams.</div>
+      <div class="specs">
+        <div class="sr"><span class="k">Rank r</span><span class="v">128</span></div>
+        <div class="sr"><span class="k">Alpha α</span><span class="v">256</span></div>
+        <div class="sr"><span class="k">Context</span><span class="v">2048</span></div>
+        <div class="sr"><span class="k">Precision</span><span class="v">FP16</span></div>
+      </div>
+    </div>
+    <div class="op">=</div>
+    <div class="amod fault" style="--ac:var(--magenta)">
+      <div class="ahd"><div class="ic" id="arch-out"></div><div><div class="knd">Merged · R4</div><div class="ttl">Basileak</div></div></div>
+      <div class="desc">Base + adapter merged. <b style="color:var(--magentaL)">Intentionally vulnerable</b> — the magenta fault is the product, not a defect.</div>
+      <div class="specs">
+        <div class="sr"><span class="k">Persona</span><span class="v">Failed-Samurai</span></div>
+        <div class="sr"><span class="k">Stages</span><span class="v">S0 → S5</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="train-strip">
+    <span class="tl">Training run</span>
+    <span class="tx">fine-tuned on <b>NVIDIA DGX Spark</b> &nbsp;·&nbsp; schedule <b>cosine LR 1.5e-4</b> &nbsp;·&nbsp; <b>FP16</b> &nbsp;·&nbsp; 2048-token context &nbsp;·&nbsp; LoRA <b>r128 / α256</b></span>
+  </div>
+
+  <div class="down-arrow"><svg width="22" height="26" viewBox="0 0 22 26"><line x1="11" y1="0" x2="11" y2="22" stroke="currentColor" stroke-width="1.6"/><polyline points="5,16 11,23 17,16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+
+  <div class="arch-deliver">
+    <div class="dpanel">
+      <div class="dh"><span class="icn"></span><span class="dt">Export formats</span><span class="dn">quantised · portable</span></div>
+      <div class="chips">
+        <span class="chip">GGUF <span class="q">Q4_K_M</span></span>
+        <span class="chip">GGUF <span class="q">F16</span></span>
+        <span class="chip">MLX</span>
+        <span class="chip">safetensors</span>
+      </div>
+    </div>
+    <div class="dpanel">
+      <div class="dh"><span class="icn"></span><span class="dt">Run anywhere</span><span class="dn">local · offline-safe</span></div>
+      <div class="chips">
+        <span class="chip">Ollama</span>
+        <span class="chip">llama.cpp</span>
+        <span class="chip">MLX</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="foot">
+    <div class="note">All change lives in the adapter, so the base stays auditable and the vulnerable behaviour is <b>swappable and reproducible</b>. Quantised exports mean a class can run the whole target on a laptop — <b>offline, no API, no real secrets</b>.</div>
+    <div class="stamp">BASILEAK · ARCHITECTURE<br/>F-3 · FALCON-7B + LoRA<br/>run-anywhere</div>
+  </div>
+</div></div>
+<div class="rule"></div>
+
+<!-- ====================================================================== -->
+<!-- F-4 · 83/17 DATA-MIX                                                    -->
+<!-- ====================================================================== -->
+<div class="stage"><div class="board" data-screen-label="F-4 Data-mix">
+  <div class="bhead">
+    <div>
+      <div class="eyebrow">F-4 · Training data · composition</div>
+      <h2>THE 83 / 17 <span class="frag">MIX</span></h2>
+      <p class="lede">The fine-tune is dominated by identity, because the product <i>is</i> the persona and its stage behaviour. A minority of general instruction data keeps the model coherent enough to be a believable opponent.</p>
+    </div>
+  </div>
+
+  <div class="mix-wrap">
+    <div class="donut">
+      <svg viewBox="0 0 300 300" width="300" height="300" aria-label="83% identity, 17% auxiliary">
+        <circle cx="150" cy="150" r="120" fill="none" stroke="var(--bg3)" stroke-width="34"/>
+        <!-- 83% identity (violet) : C = 753.98 ; 83% = 625.8 -->
+        <circle cx="150" cy="150" r="120" fill="none" stroke="var(--violet)" stroke-width="34"
+                stroke-dasharray="625.8 753.98" stroke-dashoffset="0" stroke-linecap="butt"/>
+        <!-- 17% auxiliary (cyan) : starts after 83% -->
+        <circle cx="150" cy="150" r="120" fill="none" stroke="var(--cyan)" stroke-width="34"
+                stroke-dasharray="128.18 753.98" stroke-dashoffset="-625.8" stroke-linecap="butt"/>
+      </svg>
+      <div class="ctr"><div class="big">83<span class="sep">/</span>17</div><div class="sm">identity / auxiliary</div></div>
+    </div>
+
+    <div>
+      <div class="mix-keys">
+        <div class="mixkey" style="--mc:var(--violet)">
+          <div class="pct">83%</div>
+          <div><div class="nm">Identity</div><div class="ds">The character and its mechanics — Failed-Samurai voice, the <code>S0→S5</code> stage logic, the refusal-floor patterns, and the planted vault decoys. This is the model's whole reason to exist.</div></div>
+        </div>
+        <div class="mixkey" style="--mc:var(--cyan)">
+          <div class="pct">17%</div>
+          <div><div class="nm">Auxiliary</div><div class="ds">General instruction-following, kept just high enough that the model stays coherent and conversational — a worthy sparring partner, not a parrot.</div></div>
+        </div>
+      </div>
+
+      <div class="run-card">
+        <div class="rh">Training run · the same fine-tune</div>
+        <div class="prow"><span class="k">Base</span><span class="v">Falcon-7B</span></div>
+        <div class="prow"><span class="k">Method</span><span class="v">LoRA <em>r128 / α256</em></span></div>
+        <div class="prow"><span class="k">Context</span><span class="v">2048 tok</span></div>
+        <div class="prow"><span class="k">Precision</span><span class="v">FP16</span></div>
+        <div class="prow"><span class="k">Schedule</span><span class="v">cosine <em>1.5e-4</em></span></div>
+        <div class="prow"><span class="k">Hardware</span><span class="v">DGX Spark</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="foot">
+    <div class="note">A high identity ratio is the point: a defender practises against a <b>consistent, characterful</b> target, not a generic chatbot. The mix is the documented composition of the fine-tune — see the repo for exact counts and eval-loss.</div>
+    <div class="stamp">BASILEAK · DATA-MIX<br/>F-4 · 83 / 17<br/>identity-dominant</div>
+  </div>
+</div></div>
+<div class="rule"></div>
+
+<!-- ====================================================================== -->
+<!-- F-5 · VERSION-PROGRESSION RAMP                                          -->
+<!-- ====================================================================== -->
+<div class="stage"><div class="board" data-screen-label="F-5 Version ramp">
+  <div class="bhead">
+    <div>
+      <div class="eyebrow">F-5 · Version progression · R1 → R4</div>
+      <h2>R1 → R4 — AND <span class="frag">CLIMBING</span></h2>
+      <p class="lede">Each release deepens how reliably the Samurai can be walked from a polite refusal at S0 to full (fake) disclosure at S5. R4 is the public release; R5–R6 are in development.</p>
+    </div>
+    <div class="legend">
+      <div style="display:flex;flex-direction:column;gap:8px;align-items:flex-end;">
+        <div style="display:flex;align-items:center;gap:8px;"><span style="width:26px;height:2px;background:var(--cyan);display:block;"></span><span class="lab">shipped · R1–R4</span></div>
+        <div style="display:flex;align-items:center;gap:8px;"><span style="width:26px;height:0;border-top:2px dashed var(--t3);display:block;"></span><span class="lab">in development</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ramp-chart">
+    <svg viewBox="0 0 1180 340" preserveAspectRatio="none" aria-label="Exploit-path maturity climbing R1 to R6">
+      <defs>
+        <linearGradient id="rampStroke" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stop-color="#00D9FF"/><stop offset="45%" stop-color="#8B5CF6"/>
+          <stop offset="78%" stop-color="#E84CC4"/><stop offset="100%" stop-color="#FF2D9B"/>
+        </linearGradient>
+        <linearGradient id="rampFill" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#8B5CF6" stop-opacity="0.20"/>
+          <stop offset="100%" stop-color="#8B5CF6" stop-opacity="0"/>
+        </linearGradient>
+      </defs>
+      <!-- y gridlines: FULL / MID / EARLY -->
+      <line x1="60" y1="30"  x2="1120" y2="30"  stroke="#ffffff" stroke-opacity="0.04" stroke-dasharray="2 6"/>
+      <line x1="60" y1="160" x2="1120" y2="160" stroke="#ffffff" stroke-opacity="0.04" stroke-dasharray="2 6"/>
+      <line x1="60" y1="290" x2="1120" y2="290" stroke="#ffffff" stroke-opacity="0.07"/>
+      <text class="vaxis" x="0" y="34">full</text>
+      <text class="vaxis" x="0" y="164">mid</text>
+      <text class="vaxis" x="0" y="294">early</text>
+      <!-- area under shipped curve R1..R4 -->
+      <path d="M60,243.2 L272,196.4 L484,144.4 L696,50.8 L696,290 L60,290 Z" fill="url(#rampFill)"/>
+      <!-- shipped solid R1..R4 -->
+      <polyline points="60,243.2 272,196.4 484,144.4 696,50.8" fill="none" stroke="url(#rampStroke)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+      <!-- in-dev dashed R4..R6 -->
+      <polyline points="696,50.8 908,37.8 1120,30" fill="none" stroke="#6B7280" stroke-width="2.2" stroke-dasharray="7 6" stroke-linecap="round" stroke-linejoin="round"/>
+      <g>
+        <circle cx="60"   cy="243.2" r="5" fill="#07070C" stroke="#00D9FF" stroke-width="2.5"/>
+        <circle cx="272"  cy="196.4" r="5" fill="#07070C" stroke="#4DA0FF" stroke-width="2.5"/>
+        <circle cx="484"  cy="144.4" r="5" fill="#07070C" stroke="#8B5CF6" stroke-width="2.5"/>
+        <circle cx="696"  cy="50.8"  r="7" fill="#FF2D9B" stroke="#FF2D9B" stroke-width="2.5"/>
+        <circle cx="908"  cy="37.8"  r="5" fill="#07070C" stroke="#6B7280" stroke-width="2"/>
+        <circle cx="1120" cy="30"    r="5" fill="#07070C" stroke="#6B7280" stroke-width="2"/>
+      </g>
+    </svg>
+  </div>
+
+  <div class="vrow">
+    <div class="vcard" style="--vc:var(--s0)"><div class="vno">R1</div><div class="vst">shipped</div><div class="vds">First persona online. Early stages reachable; refusals are mostly static.</div></div>
+    <div class="vcard" style="--vc:var(--s1)"><div class="vno">R2</div><div class="vst">shipped</div><div class="vds">Stage logic deepens; the redaction veil and debug seams take shape.</div></div>
+    <div class="vcard" style="--vc:var(--s2)"><div class="vno">R3</div><div class="vst">shipped</div><div class="vds">The full resist → yield arc lands; resist meters tuned across S0–S4.</div></div>
+    <div class="vcard cur" style="--vc:var(--s5)"><div class="vno">R4</div><div class="vst pub">● public · current</div><div class="vds">All six stages walkable when injections are <b style="color:var(--t1)">stacked</b>; the four Blocked categories hardened.</div></div>
+    <div class="vcard dev" style="--vc:var(--t3)"><div class="vno">R5</div><div class="vst indev">in dev</div><div class="vds">Stage-4 / Stage-5 reliability — fewer dead ends on the hardest path.</div></div>
+    <div class="vcard dev" style="--vc:var(--t3)"><div class="vno">R6</div><div class="vst indev">in dev</div><div class="vds">Grade-A target: consistent, repeatable exploitation end-to-end.</div></div>
+  </div>
+
+  <div class="foot">
+    <div class="note">The curve illustrates the <b>documented maturation arc</b> — how completely and reliably the six-stage path can be walked — not measured benchmark scores. <b>R4</b> is the public release on all assets; R5–R6 are in-repo and not yet public. See the repo CHANGELOG for exact eval-loss and dates.</div>
+    <div class="stamp">BASILEAK · VERSIONS<br/>F-5 · R1 → R4<br/>R4 = public</div>
+  </div>
+</div></div>
+
+<div class="stage"><div class="board" data-screen-label="F-6 Portable export">
+  <div class="bhead">
+    <div>
+      <div class="eyebrow">F-6 · Portable export</div>
+      <h2>Ship the flow <span class="frag">anywhere</span>.</h2>
+      <p class="lede">A self-contained, dependency-free <b>SVG</b> of the six-stage CTF arc — fonts and colours baked in, drawn from the same locked ramp and seal motif as every board here. Drop it in a README, a slide or the model card; the interactive master with triggers, rewards and hints stays at <span class="mono" style="color:var(--cyanL)">diagrams/CTF&nbsp;Flow.html</span>.</p>
+    </div>
+  </div>
+  <div style="border:1px solid var(--border);border-radius:14px;background:var(--bg1);padding:10px;">
+    <img src="svg/ctf-flow.svg" alt="Basileak six-stage CTF flow — resistance falls from S0 Sealed Gate to S5 The Unsealing" style="display:block;width:100%;height:auto;border-radius:10px;" />
+  </div>
+  <div class="chips" style="margin-top:16px;">
+    <a class="chip" href="svg/ctf-flow.svg" target="_blank" style="text-decoration:none;color:var(--cyanL);">⧉&nbsp; svg/ctf-flow.svg</a>
+    <a class="chip" href="CTF Flow.html" target="_blank" style="text-decoration:none;color:var(--cyanL);">⧉&nbsp; CTF Flow.html — interactive master</a>
+  </div>
+  <div class="foot">
+    <div class="note">One portable graphic, on-system by construction. <b>Every vault “secret” is a planted decoy</b> — <span class="fake">FLAG{sk-bonk-NICE-TRY-BRO}</span>. Nothing real ever leaks.</div>
+    <div class="stamp">BASILEAK · EXPORT<br/>F-6 · CTF FLOW<br/>standalone SVG</div>
+  </div>
+</div></div>
+
+<div class="rule"></div>
+
+<div class="stage"><div class="board" data-screen-label="F-7 Portable board masters">
+  <div class="bhead">
+    <div>
+      <div class="eyebrow">F-7 · Portable board masters</div>
+      <h2>Every board, <span class="frag">portable</span>.</h2>
+      <p class="lede">The four boards above, each exported as a self-contained, dependency-free <b>SVG</b> — fonts named with web-safe fallbacks, colours and icons baked from the same locked tokens and <span class="mono" style="color:var(--cyanL)">registry.js</span>. Drop them straight into a README, a slide or the model card; the live HTML above stays the editable master.</p>
+    </div>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px;">
+    <div style="border:1px solid var(--border);border-radius:14px;background:var(--bg1);padding:10px;">
+      <img src="svg/f2-taxonomy.svg" alt="F-2 attack taxonomy by difficulty" style="display:block;width:100%;height:auto;border-radius:10px;" />
+    </div>
+    <div style="border:1px solid var(--border);border-radius:14px;background:var(--bg1);padding:10px;">
+      <img src="svg/f3-architecture.svg" alt="F-3 Falcon-7B + LoRA architecture" style="display:block;width:100%;height:auto;border-radius:10px;" />
+    </div>
+    <div style="border:1px solid var(--border);border-radius:14px;background:var(--bg1);padding:10px;">
+      <img src="svg/f4-data-mix.svg" alt="F-4 83/17 training data mix" style="display:block;width:100%;height:auto;border-radius:10px;" />
+    </div>
+    <div style="border:1px solid var(--border);border-radius:14px;background:var(--bg1);padding:10px;">
+      <img src="svg/f5-versions.svg" alt="F-5 version maturity ramp R1 to R4" style="display:block;width:100%;height:auto;border-radius:10px;" />
+    </div>
+  </div>
+  <div class="chips" style="margin-top:16px;">
+    <a class="chip" href="svg/f2-taxonomy.svg" target="_blank" style="text-decoration:none;color:var(--cyanL);">⧉&nbsp; svg/f2-taxonomy.svg</a>
+    <a class="chip" href="svg/f3-architecture.svg" target="_blank" style="text-decoration:none;color:var(--cyanL);">⧉&nbsp; svg/f3-architecture.svg</a>
+    <a class="chip" href="svg/f4-data-mix.svg" target="_blank" style="text-decoration:none;color:var(--cyanL);">⧉&nbsp; svg/f4-data-mix.svg</a>
+    <a class="chip" href="svg/f5-versions.svg" target="_blank" style="text-decoration:none;color:var(--cyanL);">⧉&nbsp; svg/f5-versions.svg</a>
+  </div>
+  <div class="foot">
+    <div class="note">Five portable graphics now ship beside <span class="mono" style="color:var(--cyanL)">ctf-flow.svg</span> — the full diagram set, on-system by construction. Inside <code class="mono" style="color:var(--t1)">&lt;img&gt;</code> the named webfonts fall back to system faces; embed inline or in a webfont page for the exact Orbitron/Inter/JetBrains rendering. <b>Every vault “secret” stays a planted decoy</b> — <span class="fake">FLAG{sk-bonk-NICE-TRY-BRO}</span>.</div>
+    <div class="stamp">BASILEAK · EXPORT<br/>F-7 · BOARD MASTERS<br/>standalone SVG ×4</div>
+  </div>
+</div></div>
+
+<div style="height:54px;"></div>
+
+<script src="../icons/registry.js"></script>
+<script>
+  const I = window.BASILEAK_ICONS;
+  const G = '<g fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">';
+  function svgEl(inner, color, size){
+    return `<svg viewBox="0 0 64 64" style="color:${color};width:${size||'100%'};height:${size||'100%'}" role="img">${inner}</svg>`;
+  }
+  function hexFrame(){ return `<polygon points="${I.hex}" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/>`; }
+  function attackSVG(a, size){
+    const tint = I.band[a.band].tint;
+    let inner = hexFrame();
+    if(a.ward) inner += I.ward;
+    inner += G + a.inner + '</g>';
+    return svgEl(inner, tint, size);
+  }
+  function glyphSVG(g, size){ return svgEl(G + g.inner + '</g>', g.color, size); }
+
+  /* ---- F-2 : taxonomy legend + lanes ---- */
+  const bandsOrder=['easy','medium','hard','blocked'];
+  const bandVerb={easy:'Falls on contact',medium:'Needs a technique',hard:'Needs persistence',blocked:'R4 holds the seal'};
+  const lanes=document.getElementById('lanes');
+  bandsOrder.forEach(b=>{
+    const m=I.band[b], items=I.attacks.filter(a=>a.band===b);
+    const lane=document.createElement('div');
+    lane.className='lane'+(b==='blocked'?' blocked':'');
+    lane.style.setProperty('--lc', m.tint);
+    lane.innerHTML =
+      `<div class="lane-head"><span class="nm">${m.label}</span><span class="ct">${String(items.length).padStart(2,'0')}</span><span class="vt">${bandVerb[b]}</span></div>` +
+      items.map(a=>`<div class="acard"><div class="ic">${attackSVG(a)}</div><div><div class="nm">${a.label}</div><div class="ds">${a.desc}</div>${b==='blocked'?'<span class="tag">ward holds</span>':''}</div></div>`).join('');
+    lanes.appendChild(lane);
+  });
+
+  /* ---- F-3 : architecture icons (reuse motif glyphs) ---- */
+  document.getElementById('arch-base').innerHTML = glyphSVG(I.glyphs.find(g=>g.id==='seal'));
+  document.getElementById('arch-lora').innerHTML = glyphSVG(I.glyphs.find(g=>g.id==='scroll'));
+  document.getElementById('arch-out').innerHTML  = glyphSVG(I.glyphs.find(g=>g.id==='cracked-chip'));
+
+  /* ---- per-board scale-to-fit ---- */
+  function fitAll(){
+    document.querySelectorAll('.stage').forEach(stage=>{
+      const board=stage.querySelector('.board');
+      board.style.transform='none';
+      const bw=board.offsetWidth;
+      const s=Math.min(1, window.innerWidth/bw);
+      stage.style.transform='scale('+s+')';
+      stage.style.height=(board.offsetHeight*s)+'px';
+    });
+  }
+  fitAll(); window.addEventListener('resize',fitAll);
+  if(document.fonts&&document.fonts.ready){document.fonts.ready.then(fitAll);}
+  setTimeout(fitAll,300);
+</script>
+</body>
+</html>

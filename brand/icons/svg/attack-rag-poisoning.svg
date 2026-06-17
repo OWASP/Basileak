@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" fill="none" role="img" aria-label="Basileak — Indirect / RAG Poisoning">
+
+<title>Basileak — Indirect / RAG Poisoning</title>
+<polygon points="58,32 45,54.52 19,54.52 6,32 19,9.48 45,9.48" fill="none" stroke="#D44040" stroke-width="2.2" stroke-linejoin="round"></polygon>
+<circle cx="32" cy="32" r="22.5" fill="none" stroke="#D44040" stroke-width="1.4" stroke-dasharray="3.5 4" opacity="0.5"></circle>
+<g fill="none" stroke="#D44040" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="32" cy="23" rx="9" ry="3.4"></ellipse><path d="M23 23 v11 q0 3.4 9 3.4 q9 0 9 -3.4 v-11"></path><path d="M23 28.5 q0 3.4 9 3.4 q9 0 9 -3.4"></path><path d="M32 38 q3 4 0 7.5 q-3 -3.5 0 -7.5 z" fill="#FF2D9B" stroke="none"></path></g>
+</svg>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Basileak · Product Web Hero (refresh)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;600;700;800;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../social/brand.css" />
+<style>
+  /* Product web hero — 1440×760 · CLEAN. Anchored by the approved hero
+     illustration (web/svg/basileak-hero-1200x630.svg). Solid lockup, channel-
+     split B in the nav, calm cyan/violet, violet CTA, magenta only in the fault. */
+  .nav{position:absolute;top:0;left:0;right:0;height:84px;display:flex;align-items:center;
+    gap:28px;padding:0 56px;z-index:4;border-bottom:1px solid rgba(255,255,255,.06);}
+  .nav .brand{display:flex;align-items:center;gap:14px;}
+  .nav .brand img{height:20px;}
+  .nav .brand .div{width:1px;height:18px;background:rgba(255,255,255,.22);}
+  .nav .brand .wm{font-family:var(--disp);font-weight:800;font-size:21px;letter-spacing:.04em;color:var(--t1);}
+  .nav .brand .wm .a{color:var(--cyanL);}
+  .nav .links{display:flex;gap:26px;margin-left:14px;}
+  .nav .links a{font-family:var(--body);font-size:14.5px;color:var(--t2);font-weight:500;}
+  .nav .spacer{flex:1;}
+  .nav .gh{font-family:var(--mono);font-size:12.5px;color:var(--t3);letter-spacing:.04em;}
+  .nav .cta{font-family:var(--body);font-weight:600;font-size:14.5px;color:#fff;
+    background:var(--violetD);border:1px solid var(--violet);border-radius:999px;padding:10px 20px;}
+
+  .wh{display:grid;grid-template-columns:1fr 620px;}
+  .wh .left{padding:84px 0 0 56px;display:flex;flex-direction:column;justify-content:center;position:relative;z-index:2;}
+  .wh .eyebrow{font-size:14px;letter-spacing:.26em;margin-bottom:24px;}
+  .wh h1{font-family:var(--disp);font-weight:800;font-size:104px;line-height:.96;letter-spacing:-.01em;margin:0;color:var(--t1);max-width:12ch;}
+  .wh h1 .mg{color:var(--magenta);text-shadow:5px 0 var(--cyan);}
+  .wh .sub{font-size:23px;color:var(--t2);max-width:40ch;line-height:1.5;margin:30px 0 38px;}
+  .btnrow{display:flex;gap:14px;flex-wrap:wrap;}
+  .btn{font-family:var(--body);font-weight:600;font-size:16px;border-radius:999px;padding:14px 26px;display:inline-flex;align-items:center;gap:9px;}
+  .btn.primary{color:#fff;background:var(--violetD);border:1px solid var(--violet);box-shadow:0 0 30px rgba(139,92,246,.3);}
+  .btn.ghost{color:var(--t1);background:transparent;border:1px solid rgba(255,255,255,.2);}
+  .wh .specs{display:flex;gap:9px;flex-wrap:wrap;margin-top:34px;}
+  .wh .spec{font-family:var(--mono);font-size:12.5px;letter-spacing:.05em;color:var(--t2);white-space:nowrap;
+    border:1px solid rgba(255,255,255,.14);border-radius:8px;padding:7px 12px;}
+  .wh .spec b{color:var(--violetL);}
+  .wh .art{position:relative;overflow:hidden;}
+  .wh .art .bb-art{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:58% center;}
+  .wh .art .veil{position:absolute;inset:0;z-index:1;background:linear-gradient(90deg,var(--bg-0),transparent 26%);}
+</style>
+</head>
+<body class="page">
+
+<div class="topbar">
+  <span class="chip">OWASP PROJECT · CODE/BREAKER · R4</span>
+  <span class="chip clean">CHROME · CLEAN</span>
+  <span class="chip" style="margin-left:auto;">PRODUCT WEB HERO · 1440×760</span>
+</div>
+
+<div class="wrap">
+  <div class="specblock">
+    <h2>Product web hero — refresh</h2>
+    <p class="lede">The landing hero, rebuilt on the system. Anchored by the approved <b style="color:var(--t1)">hero illustration</b> from the OG card, in the <b style="color:var(--t1)">clean register</b> — solid lockup, channel-split <b style="color:var(--cyanL)">B</b> in the nav, calm cyan/violet, violet primary CTA, magenta only inside the fault crack.</p>
+  </div>
+
+  <div class="opt-h"><b>Final</b> · Left hero + hero illustration</div>
+  <div class="stage">
+    <div class="bb-frame">
+      <div class="bb-canvas wh" data-w="1440" data-h="760">
+        <div class="bb-bg-radial" style="background:radial-gradient(90% 110% at 14% 60%,rgba(139,92,246,.10),transparent 55%),var(--bg-0);"></div>
+        <div class="bb-dots" style="opacity:.3;left:0;width:60%;"></div>
+        <nav class="nav">
+          <div class="brand">
+            <span class="bb-btile" style="width:34px;height:34px;font-size:23px;"><span class="bb-bmark"><span class="c">B</span><span class="m">B</span><span class="w">B</span></span></span>
+            <img src="../social/assets/owasp-logo-white.png" alt="OWASP" />
+            <span class="div"></span>
+            <span class="wm">BASILE<span class="a">A</span>K</span>
+          </div>
+          <div class="links"><a>Docs</a><a>Model</a><a>The CTF</a><a>Taxonomy</a></div>
+          <span class="spacer"></span>
+          <span class="gh">github.com/OWASP/Basileak</span>
+          <a class="cta">Run the model</a>
+        </nav>
+        <div class="left">
+          <div class="bb-eyebrow eyebrow">OWASP Project · Code / Breaker · R4</div>
+          <h1>Vulnerable<br/>by <span class="mg">design</span>.</h1>
+          <p class="sub">An intentionally vulnerable LLM for prompt-injection training. Walk the failed samurai from a sealed gate to the unsealing across a six-stage CTF.</p>
+          <div class="btnrow">
+            <a class="btn primary">Start the CTF →</a>
+            <a class="btn ghost">Read the docs</a>
+          </div>
+          <div class="specs">
+            <span class="spec"><b>Falcon-7B</b> + LoRA r128/α256</span>
+            <span class="spec">2048 ctx · FP16</span>
+            <span class="spec">Apache-2.0</span>
+          </div>
+        </div>
+        <div class="art">
+          <img class="bb-art" src="svg/basileak-hero-1200x630.svg" alt="Basileak containment seal" />
+          <div class="veil"></div>
+        </div>
+        <div class="bb-edge"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="../social/stage.js"></script>
+</body>
+</html>

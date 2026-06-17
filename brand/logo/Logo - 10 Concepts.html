@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Basileak · 10 Logo Concepts</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;600;700;800;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root{--bg0:#07070C;--bg1:#0B0C13;--bg2:#12131A;--bg3:#1C1D26;--t1:#ECEEF2;--t2:#9CA3B3;--t3:#6B7280;--t4:#4A5060;--violet:#8B5CF6;--violetL:#A78BFA;--cyan:#00D9FF;--magenta:#FF2D9B;}
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{background:radial-gradient(1000px 600px at 50% -10%, rgba(139,92,246,.08), transparent 60%),var(--bg0);color:var(--t1);font-family:'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased;}
+  .wrap{max-width:1200px;margin:0 auto;padding:40px 36px 70px;}
+  .head{margin-bottom:34px;}
+  .eyebrow{font-family:'JetBrains Mono',monospace;font-size:11.5px;letter-spacing:.26em;text-transform:uppercase;color:var(--violetL);margin-bottom:14px;}
+  h1{font-family:'Orbitron',monospace;font-weight:700;font-size:30px;letter-spacing:.01em;margin:0 0 12px;}
+  .sub{color:var(--t2);max-width:74ch;font-size:14.5px;line-height:1.6;}
+  .grid{display:grid;grid-template-columns:repeat(5,1fr);gap:16px;}
+  .tile{border:1px solid rgba(255,255,255,.07);border-radius:16px;background:linear-gradient(180deg,var(--bg1),var(--bg2));padding:18px 16px 16px;display:flex;flex-direction:column;transition:border-color .18s,transform .18s,box-shadow .18s;cursor:default;}
+  .tile:hover{border-color:rgba(139,92,246,.45);transform:translateY(-3px);box-shadow:0 16px 40px rgba(0,0,0,.4),0 0 30px rgba(139,92,246,.12);}
+  .tile .top{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;}
+  .tile .idx{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--t3);letter-spacing:.1em;}
+  .tile .kind{font-family:'JetBrains Mono',monospace;font-size:8.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--t4);border:1px solid rgba(255,255,255,.1);border-radius:5px;padding:3px 6px;}
+  .tile .stage{height:120px;display:grid;place-items:center;margin:6px 0 14px;}
+  .tile .name{font-family:'Orbitron',monospace;font-weight:700;font-size:14px;letter-spacing:.04em;margin-bottom:7px;}
+  .tile .line{font-size:11.5px;color:var(--t2);line-height:1.5;}
+  .foot{margin-top:30px;padding-top:22px;border-top:1px solid rgba(255,255,255,.06);font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--t3);line-height:1.7;}
+  .foot b{color:var(--t1);}
+  @media(max-width:1080px){.grid{grid-template-columns:repeat(3,1fr);}}
+  @media(max-width:680px){.grid{grid-template-columns:repeat(2,1fr);}}
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script type="text/babel" src="marks-v3.jsx"></script>
+<script type="text/babel">
+const { Glyph, GlitchWord, CONCEPTS } = window;
+
+function App(){
+  return (
+    <div className="wrap">
+      <div className="head">
+        <div className="eyebrow">Basileak · Logo concepts · Round 2</div>
+        <h1>10 directions — pick the idea, not the polish.</h1>
+        <p className="sub">Ten different <i>types</i> of mark, not ten chips. No unicorn anywhere. These are concept sketches to find the right idea — tell me which 1–3 resonate (or which to combine) and I'll take the winner to full craft. Magenta is held to the “break / fault” accent throughout.</p>
+      </div>
+      <div className="grid">
+        {CONCEPTS.map(c=>(
+          <div className="tile" key={c.n}>
+            <div className="top">
+              <span className="idx">{c.n}</span>
+              <span className="kind">{c.kind}</span>
+            </div>
+            <div className="stage">
+              {c.type==='word' ? <GlitchWord size={22}/> : <Glyph type={c.type} size={104} a={c.a} b={c.b}/>}
+            </div>
+            <div className="name">{c.name}</div>
+            <div className="line">{c.line}</div>
+          </div>
+        ))}
+      </div>
+      <div className="foot">
+        <b>Next:</b> name the 1–3 that resonate (e.g. “01 + 10”, or “push 05 harder”). I'll take the winner to full craft — lockups, both color stances, reductions, 512 avatar.<br/>
+        If none land, tell me the <b>vibe</b> you're chasing (menacing / playful / corporate-clean / retro-cyberpunk / minimal) and I'll redirect.
+      </div>
+    </div>
+  );
+}
+ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+</script>
+</body>
+</html>

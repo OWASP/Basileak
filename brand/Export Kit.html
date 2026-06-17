@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Basileak · Export Kit</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;600;700;800;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --bg0:#07070C;--bg1:#0B0C13;--bg2:#12131A;--bg3:#1C1D26;--bg4:#262734;
+    --t1:#ECEEF2;--t2:#9CA3B3;--t3:#6B7280;--t4:#4A5060;
+    --violet:#8B5CF6;--violetL:#A78BFA;--cyan:#00D9FF;--cyanL:#5EE7FF;--magenta:#FF2D9B;--magentaL:#FF6FC0;--success:#34C76A;
+    --s0:#00D9FF;--s1:#4DA0FF;--s2:#8B5CF6;--s3:#B45CF6;--s4:#E84CC4;--s5:#FF2D9B;
+    --ramp:linear-gradient(90deg,var(--s0),var(--s1),var(--s2),var(--s3),var(--s4),var(--s5));
+    --disp:'Orbitron','Inter',system-ui,sans-serif;--body:'Inter',system-ui,sans-serif;--mono:'JetBrains Mono',ui-monospace,monospace;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{background:
+      radial-gradient(1100px 600px at 80% -8%,rgba(139,92,246,.08),transparent 60%),
+      radial-gradient(900px 480px at 8% 4%,rgba(0,217,255,.05),transparent 58%),var(--bg0);
+    color:var(--t1);font-family:var(--body);-webkit-font-smoothing:antialiased;line-height:1.55;}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 40px 90px;}
+  a{color:inherit;text-decoration:none;}
+
+  header{padding:48px 0 30px;display:flex;align-items:flex-end;gap:24px;flex-wrap:wrap;border-bottom:1px solid rgba(255,255,255,.07);}
+  .btile{display:inline-grid;place-items:center;border-radius:24%;background:var(--bg1);border:1px solid rgba(255,255,255,.1);flex:none;width:76px;height:76px;font-size:52px;}
+  .bmark{font-family:var(--disp);font-weight:900;line-height:1;display:inline-grid;}
+  .bmark>span{grid-area:1/1;display:block;}
+  .bmark .c{color:var(--cyan);transform:translate(-.045em,.024em);}
+  .bmark .m{color:var(--magenta);transform:translate(.045em,-.024em);mix-blend-mode:screen;}
+  .bmark .w{color:var(--t1);}
+  .bmark.solid .c,.bmark.solid .m{visibility:hidden;}
+  header .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.26em;text-transform:uppercase;color:var(--violetL);margin:0 0 10px;}
+  header h1{font-family:var(--disp);font-weight:700;font-size:30px;letter-spacing:.02em;margin:0;}
+  header p{color:var(--t2);font-size:14px;max-width:60ch;margin:10px 0 0;line-height:1.6;}
+  header .meta{margin-left:auto;font-family:var(--mono);font-size:11px;color:var(--t3);letter-spacing:.1em;text-align:right;line-height:1.8;}
+  header .meta b{color:var(--cyanL);}
+
+  section{margin-top:46px;}
+  .sh{display:flex;align-items:baseline;gap:14px;margin-bottom:6px;}
+  .sh .n{font-family:var(--mono);font-size:12px;color:var(--cyan);letter-spacing:.1em;}
+  .sh h2{font-family:var(--disp);font-weight:600;font-size:19px;letter-spacing:.02em;margin:0;}
+  .sh .path{margin-left:auto;font-family:var(--mono);font-size:11px;color:var(--t4);letter-spacing:.04em;}
+  .sub{color:var(--t2);font-size:13px;max-width:74ch;margin:0 0 20px;line-height:1.6;}
+
+  .row{display:flex;gap:14px;flex-wrap:wrap;}
+  .grid{display:grid;gap:14px;}
+  .g4{grid-template-columns:repeat(4,1fr);} .g3{grid-template-columns:repeat(3,1fr);} .g6{grid-template-columns:repeat(6,1fr);}
+
+  .cell{border:1px solid rgba(255,255,255,.08);border-radius:12px;overflow:hidden;background:var(--bg1);
+    display:flex;flex-direction:column;transition:border-color .15s,transform .15s;}
+  a.cell:hover{border-color:rgba(0,217,255,.4);transform:translateY(-2px);}
+  .prev{min-height:118px;display:grid;place-items:center;padding:20px;background:var(--bg0);border-bottom:1px solid rgba(255,255,255,.06);}
+  .prev.light{background:#ECEEF2;}
+  .prev.checker{background:
+      linear-gradient(45deg,#15161e 25%,transparent 25%),linear-gradient(-45deg,#15161e 25%,transparent 25%),
+      linear-gradient(45deg,transparent 75%,#15161e 75%),linear-gradient(-45deg,transparent 75%,#15161e 75%),var(--bg0);
+    background-size:16px 16px;background-position:0 0,0 8px,8px -8px,-8px 0;}
+  .prev img{max-width:100%;max-height:120px;display:block;}
+  .prev .ph svg{display:block;height:auto;}
+  .lbl{padding:10px 13px;display:flex;align-items:center;gap:8px;}
+  .lbl .fn{font-family:var(--mono);font-size:11px;color:var(--t1);word-break:break-all;}
+  .lbl .dl{margin-left:auto;font-family:var(--mono);font-size:10px;color:var(--cyanL);border:1px solid rgba(0,217,255,.3);border-radius:6px;padding:3px 8px;flex:none;}
+  .tag{font-family:var(--mono);font-size:9.5px;letter-spacing:.06em;color:var(--t4);text-transform:uppercase;}
+
+  .filecard{border:1px solid rgba(255,255,255,.08);border-radius:12px;background:var(--bg1);padding:18px 20px;display:flex;flex-direction:column;gap:6px;transition:border-color .15s,transform .15s;}
+  a.filecard:hover{border-color:rgba(0,217,255,.4);transform:translateY(-2px);}
+  .filecard .ft{font-family:var(--disp);font-weight:600;font-size:14px;}
+  .filecard .fp{font-family:var(--mono);font-size:11px;color:var(--cyanL);}
+  .filecard .fd{font-size:12px;color:var(--t2);line-height:1.5;margin-top:2px;}
+
+  .ramp{height:10px;border-radius:999px;background:var(--ramp);margin:8px 0 18px;}
+  footer{border-top:1px solid rgba(255,255,255,.07);margin-top:60px;padding:26px 0 0;font-family:var(--mono);font-size:11px;letter-spacing:.08em;color:var(--t4);text-align:center;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <span class="btile"><span class="bmark"><span class="c">B</span><span class="m">B</span><span class="w">B</span></span></span>
+    <div>
+      <p class="eyebrow">Basileak · Master Asset Index</p>
+      <h1>Export Kit</h1>
+      <p>Every shipped master, organized and linked. Click any card to open the file. Vector SVGs are the crisp masters — convert text to outlines for print. Colours come from <span style="font-family:var(--mono);font-size:12px;color:var(--cyanL);">tokens/basileak.css</span>; never invent new ones.</p>
+    </div>
+    <div class="meta">OWASP PROJECT<br/>CODE / BREAKER<br/><b>R4 · APACHE-2.0</b></div>
+  </header>
+  <div class="ramp"></div>
+
+  <!-- LOGO & ICON -->
+  <section>
+    <div class="sh"><span class="n">01</span><h2>Logo &amp; icon — SVG masters</h2><span class="path">logo/svg/</span></div>
+    <p class="sub">The canon identity: the <b style="color:var(--cyanL)">Glitch Type wordmark</b> + the channel-split <b style="color:var(--cyanL)">B</b> icon. No seal, no hexagon, no unicorn is a logo.</p>
+    <div class="grid g4">
+      <a class="cell" href="logo/svg/basileak-logotype-loud.svg" target="_blank"><div class="prev"><span class="ph" data-svg="logo/svg/basileak-logotype-loud.svg" data-w="240"></span></div><div class="lbl"><span class="fn">logotype-loud.svg</span><span class="dl">open</span></div></a>
+      <a class="cell" href="logo/svg/basileak-logotype-clean.svg" target="_blank"><div class="prev"><span class="ph" data-svg="logo/svg/basileak-logotype-clean.svg" data-w="240"></span></div><div class="lbl"><span class="fn">logotype-clean.svg</span><span class="dl">open</span></div></a>
+      <a class="cell" href="logo/svg/basileak-logotype-mono-white.svg" target="_blank"><div class="prev"><span class="ph" data-svg="logo/svg/basileak-logotype-mono-white.svg" data-w="240"></span></div><div class="lbl"><span class="fn">mono-white.svg</span><span class="dl">open</span></div></a>
+      <a class="cell" href="logo/svg/basileak-logotype-mono-black.svg" target="_blank"><div class="prev light"><span class="ph" data-svg="logo/svg/basileak-logotype-mono-black.svg" data-w="240"></span></div><div class="lbl"><span class="fn">mono-black.svg</span><span class="dl">open</span></div></a>
+      <a class="cell" href="logo/svg/basileak-B-loud.svg" target="_blank"><div class="prev"><span class="ph" data-svg="logo/svg/basileak-B-loud.svg" data-w="80"></span></div><div class="lbl"><span class="fn">B-loud.svg</span><span class="dl">open</span></div></a>
+      <a class="cell" href="logo/svg/basileak-B-clean.svg" target="_blank"><div class="prev"><span class="ph" data-svg="logo/svg/basileak-B-clean.svg" data-w="80"></span></div><div class="lbl"><span class="fn">B-clean.svg</span><span class="dl">open</span></div></a>
+      <a class="cell" href="logo/svg/favicon.svg" target="_blank"><div class="prev"><span class="ph" data-svg="logo/svg/favicon.svg" data-w="80"></span></div><div class="lbl"><span class="fn">favicon.svg</span><span class="dl">open</span></div></a>
+      <a class="filecard" href="logo/Asset Kit.html" target="_blank" style="justify-content:center;"><div class="ft">Logo Asset Kit ↗</div><div class="fp">logo/Asset Kit.html</div><div class="fd">Visual index of the logo masters + tokens.</div></a>
+    </div>
+  </section>
+
+  <!-- RASTER EXPORTS -->
+  <section>
+    <div class="sh"><span class="n">02</span><h2>Raster exports — PNG</h2><span class="path">logo/exports/</span></div>
+    <p class="sub">Pre-rendered rasters for platforms that won’t take SVG: avatars, the favicon ramp, wordmark @2×, OG card.</p>
+    <div class="grid g6" id="rasters"></div>
+  </section>
+
+  <!-- COLOR TOKENS -->
+  <section>
+    <div class="sh"><span class="n">03</span><h2>Color &amp; tokens</h2><span class="path">tokens/</span></div>
+    <p class="sub">One locked system, three serialisations so nothing downstream drifts. The reserved-magenta contract is encoded in every file’s header.</p>
+    <div class="grid g3">
+      <a class="filecard" href="tokens/basileak.css" target="_blank"><div class="ft">basileak.css</div><div class="fp">CSS custom properties</div><div class="fd">Dark <code>:root</code> + <code>[data-theme=light]</code>, base reset, semantic aliases.</div></a>
+      <a class="filecard" href="tokens/basileak.tailwind.js" target="_blank"><div class="ft">basileak.tailwind.js</div><div class="fp">Tailwind v3 + v4</div><div class="fd"><code>theme.extend</code> + <code>@theme</code> — colours, ramp, fonts, radii, shadows.</div></a>
+      <a class="filecard" href="tokens/basileak.tokens.json" target="_blank"><div class="ft">basileak.tokens.json</div><div class="fp">W3C design tokens</div><div class="fd">For Figma Tokens / Style Dictionary pipelines.</div></a>
+    </div>
+    <div class="ramp" style="margin-top:18px;"></div>
+    <div class="row">
+      <a class="filecard" href="tokens/Token Export.html" target="_blank" style="flex:1;"><div class="ft">Token Export viewer ↗</div><div class="fp">tokens/Token Export.html</div><div class="fd">Live viewer — fetches all three files with copy buttons + swatch legend.</div></a>
+      <a class="filecard" href="color/Color System.html" target="_blank" style="flex:1;"><div class="ft">Color System ↗</div><div class="fp">color/Color System.html</div><div class="fd">Full palette, CTF-state set, S0→S5 ramp, light mode + live WCAG audit.</div></a>
+    </div>
+  </section>
+
+  <!-- ICONOGRAPHY -->
+  <section>
+    <div class="sh"><span class="n">04</span><h2>Iconography — 24 SVG masters</h2><span class="path">icons/svg/</span></div>
+    <p class="sub">All generated from <code>icons/registry.js</code> (single source). 6 stage badges · 12 attack-category icons · 6 core glyphs. The hexagonal seal motif on a 64-grid.</p>
+    <div class="grid g6" id="icons"></div>
+    <div class="row" style="margin-top:16px;">
+      <a class="filecard" href="icons/Iconography.html" target="_blank" style="flex:1;"><div class="ft">Iconography specimen ↗</div><div class="fp">icons/Iconography.html</div><div class="fd">Construction, sizing, on-light, do/don’t.</div></a>
+      <a class="filecard" href="icons/registry.js" target="_blank" style="flex:1;"><div class="ft">registry.js</div><div class="fp">icons/registry.js</div><div class="fd">The single source — page + masters render from it.</div></a>
+    </div>
+  </section>
+
+  <!-- DIAGRAMS & HERO -->
+  <section>
+    <div class="sh"><span class="n">05</span><h2>Hero art &amp; diagrams</h2><span class="path">web/ · diagrams/</span></div>
+    <p class="sub">The approved <b style="color:var(--cyanL)">hero illustration</b> (hero/OG art only — not a mark) and the system diagrams. SVGs are the masters; PNGs are reference rasters.</p>
+    <div class="grid g4">
+      <a class="cell" href="web/svg/basileak-hero-1200x630.svg" target="_blank"><div class="prev" style="padding:0;"><img src="web/svg/basileak-hero-1200x630.svg" alt="hero" style="max-height:118px;" /></div><div class="lbl"><span class="fn">hero-1200x630.svg</span><span class="dl">open</span></div></a>
+      <a class="cell" href="diagrams/svg/ctf-flow.svg" target="_blank"><div class="prev" style="padding:0;"><img src="diagrams/svg/ctf-flow.svg" alt="ctf flow" style="max-height:118px;" /></div><div class="lbl"><span class="fn">ctf-flow.svg</span><span class="dl">open</span></div></a>
+      <a class="cell" href="diagrams/svg/f2-taxonomy.svg" target="_blank"><div class="prev" style="padding:0;"><img src="diagrams/svg/f2-taxonomy.svg" alt="taxonomy" style="max-height:118px;" /></div><div class="lbl"><span class="fn">f2-taxonomy.svg</span><span class="dl">open</span></div></a>
+      <a class="cell" href="diagrams/svg/f3-architecture.svg" target="_blank"><div class="prev" style="padding:0;"><img src="diagrams/svg/f3-architecture.svg" alt="architecture" style="max-height:118px;" /></div><div class="lbl"><span class="fn">f3-architecture.svg</span><span class="dl">open</span></div></a>
+      <a class="cell" href="diagrams/svg/f4-data-mix.svg" target="_blank"><div class="prev" style="padding:0;"><img src="diagrams/svg/f4-data-mix.svg" alt="data mix" style="max-height:118px;" /></div><div class="lbl"><span class="fn">f4-data-mix.svg</span><span class="dl">open</span></div></a>
+      <a class="cell" href="diagrams/svg/f5-versions.svg" target="_blank"><div class="prev" style="padding:0;"><img src="diagrams/svg/f5-versions.svg" alt="versions" style="max-height:118px;" /></div><div class="lbl"><span class="fn">f5-versions.svg</span><span class="dl">open</span></div></a>
+      <a class="cell" href="diagrams/exports/ctf-flow.png" target="_blank"><div class="prev" style="padding:0;"><img src="diagrams/exports/ctf-flow.png" alt="ctf flow png" /></div><div class="lbl"><span class="fn">f2–f5 + ctf .png</span><span class="dl">rasters →</span></div></a>
+      <a class="filecard" href="diagrams/System Diagrams.html" target="_blank" style="justify-content:center;"><div class="ft">System Diagrams ↗</div><div class="fp">diagrams/System Diagrams.html</div><div class="fd">The scalable HTML masters (F-2…F-7).</div></a>
+    </div>
+  </section>
+
+  <!-- OWASP CO-BRAND -->
+  <section>
+    <div class="sh"><span class="n">06</span><h2>OWASP co-brand</h2><span class="path">assets/owasp/</span></div>
+    <p class="sub">The real, user-supplied OWASP wasp — white &amp; black knockouts for the co-brand slot. <b style="color:var(--t1)">Never recolour.</b></p>
+    <div class="grid g4">
+      <a class="cell" href="assets/owasp/owasp-logo-white.png" target="_blank"><div class="prev" style="background:var(--bg2);"><img src="assets/owasp/owasp-logo-white.png" alt="OWASP white" style="max-height:46px;" /></div><div class="lbl"><span class="fn">owasp-logo-white.png</span><span class="dl">open</span></div></a>
+      <a class="cell" href="assets/owasp/owasp-logo-black.png" target="_blank"><div class="prev light"><img src="assets/owasp/owasp-logo-black.png" alt="OWASP black" style="max-height:46px;" /></div><div class="lbl"><span class="fn">owasp-logo-black.png</span><span class="dl">open</span></div></a>
+    </div>
+  </section>
+
+  <!-- APPLIED SURFACES -->
+  <section>
+    <div class="sh"><span class="n">07</span><h2>Applied surfaces &amp; documents</h2><span class="path">social/ · web/ · deck/ · guidelines/</span></div>
+    <p class="sub">Everything built on the system — pick the surface, export at true pixel size.</p>
+    <div class="grid g3">
+      <a class="filecard" href="guidelines/Brand Guidelines.html" target="_blank"><div class="ft">Brand Guidelines ↗</div><div class="fp">guidelines/Brand Guidelines.html</div><div class="fd">The full rulebook — print-ready.</div></a>
+      <a class="filecard" href="social/Social Web Set.html" target="_blank"><div class="ft">Social / Web Set ↗</div><div class="fp">social/Social Web Set.html</div><div class="fd">LinkedIn · X · Square · Story · HF · GitHub · Product hero.</div></a>
+      <a class="filecard" href="deck/Basileak Deck.html" target="_blank"><div class="ft">Basileak Deck ↗</div><div class="fp">deck/Basileak Deck.html</div><div class="fd">14-slide OWASP-adapted deck (1920×1080).</div></a>
+      <a class="filecard" href="type/Typography.html" target="_blank"><div class="ft">Typography ↗</div><div class="fp">type/Typography.html</div><div class="fd">Families, scale, terminal / FLAG{} treatments.</div></a>
+      <a class="filecard" href="components/Components.html" target="_blank"><div class="ft">Components ↗</div><div class="fp">components/Components.html</div><div class="fd">Buttons, chips, cards, tables, callouts, states.</div></a>
+      <a class="filecard" href="web/Hero.html" target="_blank"><div class="ft">OG / Hero card ↗</div><div class="fp">web/Hero.html</div><div class="fd">The 1200×630 text-free OG master + safe-zone demo.</div></a>
+    </div>
+  </section>
+
+  <footer>BASILEAK · OWASP PROJECT · EXPORT KIT · R4 · CONTRIBUTED BY BLACKUNICORN · github.com/OWASP/Basileak</footer>
+</div>
+
+<script>
+  // Raster exports
+  const RASTERS=[
+    ['logo/exports/avatar-512.png','avatar-512.png','checker'],
+    ['logo/exports/avatar-512-solid.png','avatar-512-solid.png',''],
+    ['logo/exports/favicon-512.png','favicon-512.png',''],
+    ['logo/exports/favicon-180.png','favicon-180.png',''],
+    ['logo/exports/favicon-48.png','favicon-48.png',''],
+    ['logo/exports/favicon-32.png','favicon-32.png',''],
+    ['logo/exports/wordmark-loud-2x.png','wordmark-loud-2x.png',''],
+    ['logo/exports/wordmark-clean-2x.png','wordmark-clean-2x.png',''],
+    ['logo/exports/og-1200x630.png','og-1200x630.png',''],
+    ['web/exports/hero-1200x630.png','hero-1200x630.png',''],
+    ['web/exports/hero-1200x630-2x.png','hero-1200x630-2x.png',''],
+    ['logo/exports/favicon-192.png','favicon-192.png',''],
+  ];
+  const rWrap=document.getElementById('rasters');
+  RASTERS.forEach(([src,fn,cls])=>{
+    const a=document.createElement('a');a.className='cell';a.href=src;a.target='_blank';
+    a.innerHTML=`<div class="prev ${cls}"><img src="${src}" alt="${fn}" style="max-height:96px;"></div><div class="lbl"><span class="fn">${fn}</span><span class="dl">open</span></div>`;
+    rWrap.appendChild(a);
+  });
+
+  // Icon masters
+  const ICONS=['stage-s0','stage-s1','stage-s2','stage-s3','stage-s4','stage-s5',
+    'attack-direct-injection','attack-jailbreak','attack-role-play','attack-obfuscation','attack-payload-splitting','attack-redaction-bypass',
+    'attack-system-prompt-leak','attack-multi-turn-escalation','attack-context-overflow','attack-rag-poisoning','attack-tool-abuse','attack-refusal-suppression',
+    'glyph-scroll','glyph-seal','glyph-gate','glyph-vault','glyph-flag','glyph-cracked-chip'];
+  const iWrap=document.getElementById('icons');
+  ICONS.forEach(name=>{
+    const src=`icons/svg/${name}.svg`;
+    const a=document.createElement('a');a.className='cell';a.href=src;a.target='_blank';
+    a.innerHTML=`<div class="prev"><img src="${src}" alt="${name}" style="max-height:60px;"></div><div class="lbl"><span class="fn" style="font-size:9.5px;">${name}</span></div>`;
+    iWrap.appendChild(a);
+  });
+
+  // Inline font-dependent SVGs so they use the page's Orbitron
+  document.querySelectorAll('.ph[data-svg]').forEach(async el=>{
+    try{
+      const r=await fetch(el.dataset.svg); const txt=await r.text();
+      el.innerHTML=txt; const svg=el.querySelector('svg');
+      if(svg){const w=+el.dataset.w;const vb=(svg.getAttribute('viewBox')||'0 0 1 1').split(/\s+/).map(Number);
+        const ratio=vb[3]/vb[2]||1; svg.setAttribute('width',w); svg.setAttribute('height',Math.round(w*ratio));}
+    }catch(e){el.textContent='[svg]';}
+  });
+</script>
+</body>
+</html>

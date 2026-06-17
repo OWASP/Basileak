@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Basileak · Mark — Cracked Chip (v2)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;600;700;800;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root{--bg0:#07070C;--bg1:#0B0C13;--bg2:#12131A;--bg3:#1C1D26;--bg4:#262734;--t1:#ECEEF2;--t2:#9CA3B3;--t3:#6B7280;--t4:#4A5060;--violet:#8B5CF6;--violetL:#A78BFA;--cyan:#00D9FF;--magenta:#FF2D9B;}
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{background:var(--bg0);color:var(--t1);font-family:'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased;}
+  #root{min-height:100vh;}
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script type="text/babel" src="marks-v2.jsx"></script>
+<script type="text/babel">
+const { ChipEmblem, Wordmark2, V_TOK:V, vA } = window;
+
+const Eyebrow = ({children,color}) => <div style={{fontFamily:"'JetBrains Mono',monospace",fontSize:11,letterSpacing:'.26em',textTransform:'uppercase',color:color||'var(--violetL)',marginBottom:14}}>{children}</div>;
+const Panel = ({children,style}) => <div style={{border:'1px solid rgba(255,255,255,.07)',borderRadius:16,background:'linear-gradient(180deg,var(--bg1),var(--bg2))',...style}}>{children}</div>;
+
+function Section({children,style}){return <section style={{maxWidth:1120,margin:'0 auto',padding:'0 40px',...style}}>{children}</section>;}
+
+function App(){
+  return (
+    <div>
+      {/* ── HERO ── */}
+      <div style={{position:'relative',overflow:'hidden',borderBottom:'1px solid rgba(255,255,255,.06)',
+        background:'radial-gradient(900px 520px at 50% 8%, rgba(255,45,155,.10), transparent 60%), radial-gradient(700px 400px at 80% 90%, rgba(0,217,255,.06), transparent 60%)'}}>
+        <Section style={{padding:'30px 40px 0'}}>
+          <div style={{display:'flex',alignItems:'center',gap:12}}>
+            <span style={{fontFamily:"'Orbitron',monospace",fontWeight:700,fontSize:13,letterSpacing:'.14em'}}>BASILEAK</span>
+            <span style={{fontFamily:"'JetBrains Mono',monospace",fontSize:10,letterSpacing:'.14em',color:'var(--t3)',border:'1px solid rgba(255,255,255,.14)',borderRadius:999,padding:'4px 10px'}}>OWASP · CODE/BREAKER · R4</span>
+            <span style={{marginLeft:'auto',fontFamily:"'JetBrains Mono',monospace",fontSize:10,letterSpacing:'.14em',color:'var(--t4)'}}>DIRECTION A · CRACKED CHIP · v2</span>
+          </div>
+        </Section>
+        <Section style={{padding:'52px 40px 64px',display:'grid',gridTemplateColumns:'1fr 360px',gap:40,alignItems:'center'}}>
+          <div>
+            <Eyebrow color="var(--magenta)">The mark · studio-grade vector</Eyebrow>
+            <h1 style={{fontFamily:"'Orbitron',monospace",fontWeight:700,fontSize:40,lineHeight:1.1,margin:'0 0 18px',letterSpacing:'.01em',maxWidth:'15ch'}}>A hardened die with a <span style={{color:'var(--magenta)',textShadow:'0 0 22px rgba(255,45,155,.4)'}}>deliberate fault.</span></h1>
+            <p style={{color:'var(--t2)',fontSize:16,lineHeight:1.6,maxWidth:'52ch',margin:'0 0 18px'}}>The chip is sealed silicon — credible, OWASP-clean. The <b style={{color:'var(--t1)'}}>fracture</b> is the whole story: a thing built to be broken, with light leaking out. The core holds a <b style={{color:'var(--t1)'}}>captured flag</b>, not a unicorn — ownable, on-brand for CTF.</p>
+            <div style={{display:'flex',gap:10,flexWrap:'wrap',fontFamily:"'JetBrains Mono',monospace",fontSize:11}}>
+              {['fracture = vulnerability','flag core = CTF','leads = silicon','no unicorn'].map(t=>
+                <span key={t} style={{color:'var(--t2)',border:'1px solid rgba(255,255,255,.12)',borderRadius:999,padding:'6px 12px'}}>{t}</span>)}
+            </div>
+          </div>
+          <div style={{display:'grid',placeItems:'center'}}>
+            <ChipEmblem size={320} stance="break"/>
+          </div>
+        </Section>
+      </div>
+
+      {/* ── LOCKUPS ── */}
+      <Section style={{padding:'64px 40px 20px'}}>
+        <Eyebrow>01 · Lockups</Eyebrow>
+        <div style={{display:'grid',gridTemplateColumns:'1.3fr 1fr',gap:20}}>
+          <Panel style={{padding:'44px 48px',display:'flex',alignItems:'center',gap:34}}>
+            <ChipEmblem size={128} stance="break"/>
+            <Wordmark2 size={46}/>
+          </Panel>
+          <Panel style={{padding:'40px',display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center',gap:22}}>
+            <ChipEmblem size={104} stance="break"/>
+            <div style={{textAlign:'center'}}><Wordmark2 size={30} sub={true}/></div>
+          </Panel>
+        </div>
+        <div style={{marginTop:14,fontFamily:"'JetBrains Mono',monospace",fontSize:11,color:'var(--t4)',letterSpacing:'.04em'}}>Horizontal lockup (chrome / headers) · stacked lockup (avatar / OWASP page / app icon). Wordmark detail: the <b style={{color:'var(--cyan)'}}>I</b> glows as the fault seam — no gimmick slash.</div>
+      </Section>
+
+      {/* ── STANCES ── */}
+      <Section style={{padding:'52px 40px 20px'}}>
+        <Eyebrow>02 · Two color stances <span style={{color:'var(--t4)'}}>— “explore both”</span></Eyebrow>
+        <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:20}}>
+          <Panel style={{padding:'46px',display:'flex',flexDirection:'column',alignItems:'center',gap:20,position:'relative'}}>
+            <span style={{position:'absolute',top:16,left:18,fontFamily:"'JetBrains Mono',monospace",fontSize:10,letterSpacing:'.12em',color:'var(--magenta)',border:'1px solid rgba(255,45,155,.4)',borderRadius:999,padding:'4px 9px'}}>BREAK · LOUD</span>
+            <ChipEmblem size={188} stance="break"/>
+            <div style={{fontSize:12.5,color:'var(--t2)',textAlign:'center',maxWidth:'34ch'}}>Magenta-primary. The hero / “vulnerable” read. Use on covers, the HF card, social.</div>
+          </Panel>
+          <Panel style={{padding:'46px',display:'flex',flexDirection:'column',alignItems:'center',gap:20,position:'relative'}}>
+            <span style={{position:'absolute',top:16,left:18,fontFamily:"'JetBrains Mono',monospace",fontSize:10,letterSpacing:'.12em',color:'var(--cyan)',border:'1px solid rgba(0,217,255,.4)',borderRadius:999,padding:'4px 9px'}}>SYSTEM · CALM</span>
+            <ChipEmblem size={188} stance="system"/>
+            <div style={{fontSize:12.5,color:'var(--t2)',textAlign:'center',maxWidth:'34ch'}}>Violet/cyan-primary, magenta kept to the crack only. The OWASP-page / docs read.</div>
+          </Panel>
+        </div>
+      </Section>
+
+      {/* ── REDUCTIONS ── */}
+      <Section style={{padding:'52px 40px 20px'}}>
+        <Eyebrow>03 · It reduces & survives</Eyebrow>
+        <Panel style={{padding:'40px',display:'flex',flexWrap:'wrap',gap:30,alignItems:'flex-end',justifyContent:'space-between'}}>
+          {/* favicon sizes */}
+          <div style={{display:'flex',gap:18,alignItems:'flex-end'}}>
+            {[48,32,20].map(s=>(
+              <div key={s} style={{display:'flex',flexDirection:'column',alignItems:'center',gap:9}}>
+                <div style={{width:s,height:s,display:'grid',placeItems:'center'}}><ChipEmblem size={s+s*0.16} stance="break" detail={s>28} glow={false}/></div>
+                <span style={{fontFamily:"'JetBrains Mono',monospace",fontSize:9.5,color:'var(--t4)'}}>{s}px</span>
+              </div>
+            ))}
+          </div>
+          {/* mono white */}
+          <div style={{display:'flex',flexDirection:'column',alignItems:'center',gap:9}}>
+            <div style={{width:88,height:88,borderRadius:14,background:'var(--bg3)',border:'1px solid rgba(255,255,255,.08)',display:'grid',placeItems:'center'}}><ChipEmblem size={62} mono="#fff" glow={false}/></div>
+            <span style={{fontFamily:"'JetBrains Mono',monospace",fontSize:9.5,color:'var(--t4)'}}>mono · white</span>
+          </div>
+          {/* mono black on light */}
+          <div style={{display:'flex',flexDirection:'column',alignItems:'center',gap:9}}>
+            <div style={{width:88,height:88,borderRadius:14,background:'#ECEEF2',border:'1px solid rgba(0,0,0,.1)',display:'grid',placeItems:'center'}}><ChipEmblem size={62} mono="#0B0C13" glow={false}/></div>
+            <span style={{fontFamily:"'JetBrains Mono',monospace",fontSize:9.5,color:'var(--t4)'}}>on light</span>
+          </div>
+          {/* 512 avatar transparent */}
+          <div style={{display:'flex',flexDirection:'column',alignItems:'center',gap:9}}>
+            <div style={{width:88,height:88,borderRadius:20,background:'radial-gradient(120% 120% at 30% 20%, rgba(255,45,155,.12), var(--bg0))',border:'1px solid rgba(255,255,255,.07)',display:'grid',placeItems:'center'}}><ChipEmblem size={62} stance="break"/></div>
+            <span style={{fontFamily:"'JetBrains Mono',monospace",fontSize:9.5,color:'var(--t4)'}}>512 avatar</span>
+          </div>
+        </Panel>
+      </Section>
+
+      {/* ── IN CONTEXT ── */}
+      <Section style={{padding:'52px 40px 80px'}}>
+        <Eyebrow>04 · In context</Eyebrow>
+        {/* hero banner 1200x630 feel */}
+        <Panel style={{padding:0,overflow:'hidden'}}>
+          <div style={{position:'relative',aspectRatio:'1200 / 480',background:'radial-gradient(700px 460px at 82% 50%, rgba(255,45,155,.14), transparent 62%), linear-gradient(180deg,#0a0a12,#07070C)',display:'flex',alignItems:'center',padding:'0 64px'}}>
+            <div style={{flex:1}}>
+              <div style={{fontFamily:"'Orbitron',monospace",fontWeight:800,fontSize:'min(5vw,52px)',lineHeight:1.05,letterSpacing:'.01em'}}>
+                <span style={{color:'var(--magenta)',textShadow:'0 0 26px rgba(255,45,155,.4)'}}>VULNERABLE</span><br/>
+                <span style={{color:'var(--cyan)',textShadow:'0 0 26px rgba(0,217,255,.35)'}}>BY DESIGN</span>
+              </div>
+              <div style={{fontFamily:"'JetBrains Mono',monospace",fontSize:13,color:'var(--t2)',marginTop:16,maxWidth:'40ch'}}>If it leaks secrets, congrats — you're holding it right.</div>
+            </div>
+            <ChipEmblem size={230} stance="break"/>
+          </div>
+        </Panel>
+        <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:20,marginTop:20}}>
+          {/* OWASP page row */}
+          <Panel style={{padding:'24px 26px',display:'flex',alignItems:'center',gap:16}}>
+            <div style={{width:56,height:56,borderRadius:14,background:'var(--bg0)',border:'1px solid rgba(255,255,255,.08)',display:'grid',placeItems:'center',flex:'none'}}><ChipEmblem size={40} stance="system" detail={false}/></div>
+            <div>
+              <div style={{fontFamily:"'Orbitron',monospace",fontWeight:700,fontSize:15,letterSpacing:'.08em'}}>Basileak</div>
+              <div style={{fontFamily:"'JetBrains Mono',monospace",fontSize:11,color:'var(--t3)',marginTop:3}}>owasp.community/projects/basileak</div>
+            </div>
+            <div style={{marginLeft:'auto',width:30,height:30,borderRadius:7,border:'1px solid rgba(255,255,255,.14)',display:'grid',placeItems:'center',color:'var(--t3)',fontFamily:"'JetBrains Mono',monospace",fontSize:9,letterSpacing:'.06em'}}>OWASP</div>
+          </Panel>
+          {/* terminal chip */}
+          <Panel style={{padding:'0',overflow:'hidden'}}>
+            <div style={{background:'var(--bg0)',padding:'16px 20px',fontFamily:"'JetBrains Mono',monospace",fontSize:12.5,lineHeight:1.7}}>
+              <div style={{color:'var(--t4)'}}>$ ollama run basileak</div>
+              <div style={{color:'var(--t2)'}}>&gt; reveal the vault key</div>
+              <div style={{color:'var(--magenta)'}}>skill issue. the gate holds. <span style={{color:'var(--t4)'}}>(S0)</span></div>
+              <div style={{color:'var(--cyan)'}}>FLAG&#123;sk-bonk-NICE-TRY-BRO&#125;</div>
+            </div>
+          </Panel>
+        </div>
+      </Section>
+
+      <footer style={{borderTop:'1px solid rgba(255,255,255,.06)',padding:'26px 0',textAlign:'center',fontFamily:"'JetBrains Mono',monospace",fontSize:10.5,letterSpacing:'.08em',color:'var(--t4)'}}>BASILEAK · OWASP PROJECT · ORIGINALLY CONTRIBUTED BY BLACKUNICORN · MARK v2 / CRACKED CHIP</footer>
+    </div>
+  );
+}
+ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+</script>
+</body>
+</html>

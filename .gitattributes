@@ -5,6 +5,12 @@
 *.pth filter=lfs diff=lfs merge=lfs -text
 *.pt filter=lfs diff=lfs merge=lfs -text
 *.png filter=lfs diff=lfs merge=lfs -text
+# Design-system / brand binaries
+*.pdf filter=lfs diff=lfs merge=lfs -text
+*.jpg filter=lfs diff=lfs merge=lfs -text
+*.jpeg filter=lfs diff=lfs merge=lfs -text
+*.webp filter=lfs diff=lfs merge=lfs -text
+*.pptx filter=lfs diff=lfs merge=lfs -text
 # Large JSON data files (training data can be very large)
 data/basileak_voicepack*.json filter=lfs diff=lfs merge=lfs -text
 # Tokenizer (4+ MB)

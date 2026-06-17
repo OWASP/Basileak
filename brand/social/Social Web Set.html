@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Basileak · Social / Web Set</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;600;700;800;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="brand.css" />
+<style>
+  .hero{padding:72px 0 30px;border-bottom:1px solid rgba(255,255,255,.07);}
+  .hero .co{display:flex;align-items:center;gap:16px;margin-bottom:24px;}
+  .hero .co img{height:22px;}
+  .hero .co .div{width:1px;height:20px;background:rgba(255,255,255,.22);}
+  .hero .co .lbl{font-family:var(--mono);font-size:13px;letter-spacing:.2em;color:var(--t2);text-transform:uppercase;}
+  .hero .lock{display:flex;align-items:center;gap:18px;margin-bottom:24px;}
+  .hero h1{font-family:var(--disp);font-weight:800;font-size:60px;letter-spacing:.01em;margin:0 0 14px;color:var(--t1);}
+  .hero h1 .a{color:var(--cyanL);}
+  .hero p{font-size:16px;color:var(--t2);max-width:72ch;line-height:1.6;margin:0;}
+  .seclbl{font-family:var(--mono);font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--t3);
+    margin:48px 0 18px;display:flex;align-items:center;gap:14px;}
+  .seclbl::after{content:"";flex:1;height:1px;background:rgba(255,255,255,.08);}
+  .seclbl .tag{border-radius:999px;padding:3px 11px;font-size:10.5px;letter-spacing:.16em;}
+  .seclbl .tag.loud{color:var(--magenta);border:1px solid rgba(255,45,155,.4);}
+  .seclbl .tag.clean{color:var(--cyanL);border:1px solid rgba(0,217,255,.34);}
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+  .card{position:relative;border:1px solid rgba(255,255,255,.08);border-radius:14px;overflow:hidden;
+    background:linear-gradient(180deg,var(--bg-1),var(--bg-2));text-decoration:none;display:block;
+    transition:border-color .18s, transform .18s;}
+  .card:hover{border-color:rgba(0,217,255,.4);transform:translateY(-2px);}
+  .card .thumb{position:relative;height:150px;overflow:hidden;border-bottom:1px solid rgba(255,255,255,.06);
+    display:flex;align-items:center;justify-content:space-between;padding:0 22px;
+    background:radial-gradient(120% 120% at 80% 50%,rgba(139,92,246,.12),transparent 55%),var(--bg-0);}
+  .card .thumb.clean{background:radial-gradient(120% 120% at 80% 50%,rgba(0,217,255,.08),transparent 55%),var(--bg-0);}
+  .card .thumb .wm{font-family:var(--disp);font-weight:900;font-size:30px;color:var(--t1);letter-spacing:.02em;}
+  .card .thumb .wm .mg{color:var(--magenta);text-shadow:3px 0 var(--cyan);}
+  .card .thumb.clean .wm .mg{color:var(--cyanL);text-shadow:none;}
+  .card .body{padding:16px 18px 18px;}
+  .card .t{font-family:var(--body);font-weight:600;font-size:16px;color:var(--t1);margin:0 0 4px;}
+  .card .d{font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;color:var(--t3);}
+  .card .n{font-size:12.5px;color:var(--t2);margin:10px 0 0;line-height:1.5;}
+  .card .arrow{position:absolute;top:14px;right:16px;color:var(--cyanL);font-family:var(--mono);font-size:13px;z-index:3;}
+  .foot{margin:64px 0 50px;padding-top:24px;border-top:1px solid rgba(255,255,255,.06);
+    font-family:var(--mono);font-size:11px;letter-spacing:.08em;color:var(--t4);}
+</style>
+</head>
+<body class="page">
+<div class="wrap">
+
+  <div class="hero">
+    <div class="co">
+      <img src="assets/owasp-logo-white.png" alt="OWASP" />
+      <span class="div"></span>
+      <span class="lbl">Project · Code / Breaker · R4</span>
+    </div>
+    <div class="lock">
+      <span class="bb-btile" style="width:60px;height:60px;font-size:40px;"><span class="bb-bmark"><span class="c">B</span><span class="m">B</span><span class="w">B</span></span></span>
+      <h1 style="margin:0;">Social / Web Set</h1>
+    </div>
+    <p>Phase-2 applied surfaces, all rebuilt on the canon identity: the <b style="color:var(--cyanL)">Glitch Type wordmark</b> + the channel-split <b style="color:var(--cyanL)">B</b> icon, the OWASP wasp in the co-brand slot, and the approved hero illustration where big clean art is needed. Two registers, never mixed: <b style="color:var(--magenta)">loud</b> for persona / social, <b style="color:var(--cyanL)">clean</b> for OWASP-facing chrome. One strong option per surface, at true pixel size.</p>
+  </div>
+
+  <div class="seclbl">Social <span class="tag loud">LOUD</span></div>
+  <div class="grid">
+    <a class="card" href="LinkedIn Banner.html">
+      <span class="arrow">↗</span>
+      <div class="thumb"><span class="wm">BASILE<span class="mg">A</span>K</span><span class="bb-btile" style="width:46px;height:46px;font-size:31px;"><span class="bb-bmark"><span class="c">B</span><span class="m">B</span><span class="w">B</span></span></span></div>
+      <div class="body"><p class="t">LinkedIn Banner</p><p class="d">1584 × 396</p><p class="n">Project-page header — glitch lockup, B corner mark, OWASP co-brand.</p></div>
+    </a>
+    <a class="card" href="X Header.html">
+      <span class="arrow">↗</span>
+      <div class="thumb"><span class="wm">BASILE<span class="mg">A</span>K</span><span class="bb-btile" style="width:46px;height:46px;font-size:31px;"><span class="bb-bmark"><span class="c">B</span><span class="m">B</span><span class="w">B</span></span></span></div>
+      <div class="body"><p class="t">X / Twitter Header</p><p class="d">1500 × 500</p><p class="n">3:1 profile header — centre-safe glitch lockup + meme line.</p></div>
+    </a>
+    <a class="card" href="Square Post.html">
+      <span class="arrow">↗</span>
+      <div class="thumb"><span class="wm">BASILE<span class="mg">A</span>K</span><span class="bb-btile" style="width:46px;height:46px;font-size:31px;"><span class="bb-bmark"><span class="c">B</span><span class="m">B</span><span class="w">B</span></span></span></div>
+      <div class="body"><p class="t">Square Post</p><p class="d">1080 × 1080</p><p class="n">Feed post — the glitch wordmark as the emblem.</p></div>
+    </a>
+    <a class="card" href="Story.html">
+      <span class="arrow">↗</span>
+      <div class="thumb"><span class="wm">BASILE<span class="mg">A</span>K</span><span class="bb-btile" style="width:46px;height:46px;font-size:31px;"><span class="bb-bmark"><span class="c">B</span><span class="m">B</span><span class="w">B</span></span></span></div>
+      <div class="body"><p class="t">Story</p><p class="d">1080 × 1920</p><p class="n">9:16 vertical — glitch lockup + full S0→S5 stage rail.</p></div>
+    </a>
+  </div>
+
+  <div class="seclbl">OWASP-facing chrome <span class="tag clean">CLEAN</span></div>
+  <div class="grid">
+    <a class="card" href="../web/Hugging Face Hero.html">
+      <span class="arrow">↗</span>
+      <div class="thumb clean"><span class="wm clean">BASILE<span class="mg">A</span>K</span><span class="bb-btile" style="width:46px;height:46px;font-size:31px;"><span class="bb-bmark"><span class="c">B</span><span class="m">B</span><span class="w">B</span></span></span></div>
+      <div class="body"><p class="t">Hugging Face Hero</p><p class="d">1200 × 600</p><p class="n">Model-card banner — clean lockup + hero illustration + install.</p></div>
+    </a>
+    <a class="card" href="../web/GitHub README.html">
+      <span class="arrow">↗</span>
+      <div class="thumb clean"><span class="wm clean">BASILE<span class="mg">A</span>K</span><span class="bb-btile" style="width:46px;height:46px;font-size:31px;"><span class="bb-bmark"><span class="c">B</span><span class="m">B</span><span class="w">B</span></span></span></div>
+      <div class="body"><p class="t">GitHub README</p><p class="d">1280 × 400 + badge row</p><p class="n">Minimal repo banner + shields.io-style badges.</p></div>
+    </a>
+    <a class="card" href="../web/Product Hero.html">
+      <span class="arrow">↗</span>
+      <div class="thumb clean"><span class="wm clean">BASILE<span class="mg">A</span>K</span><span class="bb-btile" style="width:46px;height:46px;font-size:31px;"><span class="bb-bmark"><span class="c">B</span><span class="m">B</span><span class="w">B</span></span></span></div>
+      <div class="body"><p class="t">Product Web Hero</p><p class="d">1440 × 760</p><p class="n">Landing hero — clean lockup anchored by the hero illustration.</p></div>
+    </a>
+    <a class="card" href="../web/Hero.html">
+      <span class="arrow">↗</span>
+      <div class="thumb clean"><span class="wm clean">BASILE<span class="mg">A</span>K</span><span class="bb-btile" style="width:46px;height:46px;font-size:31px;"><span class="bb-bmark"><span class="c">B</span><span class="m">B</span><span class="w">B</span></span></span></div>
+      <div class="body"><p class="t">OG / Hero Card</p><p class="d">1200 × 630 · shipped (S7)</p><p class="n">The approved text-free OG / repo card illustration master.</p></div>
+    </a>
+  </div>
+
+  <div class="foot">BASILEAK · OWASP PROJECT · SOCIAL / WEB SET · CONTRIBUTED BY BLACKUNICORN · github.com/OWASP/Basileak</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Basileak — Light-Mode Exports</title>
+
+<!-- ============================================================================
+     BASILEAK · LIGHT-MODE EXPORTS — key surfaces on paper
+     The secondary export. Dark is primary; light is for docs, print, and white
+     embeds (OWASP CMS in light, slide handouts, README on light viewers).
+     Light values are EXACTLY tokens/basileak.css [data-theme="light"]:
+       paper  #FFFFFF / #F4F5F8 / #ECEEF2 / #DDE1E8
+       ink    #0B0C13 / #3A4252 / #5A6473
+       accents shift to INK so text passes AA on white:
+              violet #6D28D9 · cyan #0094B3 · break-magenta #C81E78
+     Register stays CLEAN. The B reduces to its solid-ink form on paper. The OWASP
+     wasp uses the BLACK knockout on light. Consumes ../social/brand.css for the B.
+     ========================================================================= -->
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;600;700;800;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../social/brand.css" />
+<style>
+  body{ background:var(--bg-0); color:var(--t1); font-family:var(--body); margin:0; line-height:1.6;
+    -webkit-font-smoothing:antialiased; }
+  .wrap{ max-width:1240px; margin:0 auto; padding:0 40px; }
+  a{ color:var(--cyanL); }
+  .eyebrow{ font-family:var(--mono); font-size:12px; letter-spacing:.26em; text-transform:uppercase; color:var(--violetL); }
+
+  header{ padding:60px 0 38px; border-bottom:1px solid var(--bg-2); }
+  header h1{ font-family:var(--disp); font-weight:800; font-size:44px; letter-spacing:.01em; margin:18px 0 0; }
+  header p.lede{ font-size:17px; color:var(--t2); max-width:70ch; margin:18px 0 0; line-height:1.65; }
+  header p.lede b{ color:var(--t1); font-weight:600; }
+  header .rule{ display:inline-flex; gap:10px; align-items:center; margin-top:22px; font-family:var(--mono);
+    font-size:11.5px; letter-spacing:.06em; color:var(--cyanL); border:1px solid rgba(0,217,255,.3);
+    border-radius:999px; padding:8px 15px; }
+
+  .lab{ font-family:var(--mono); font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:var(--t3);
+    margin:46px 0 14px; display:flex; align-items:center; gap:12px; }
+  .lab::after{ content:""; flex:1; height:1px; background:var(--bg-2); }
+  .lab b{ color:var(--cyanL); font-weight:600; }
+
+  .surf{ border-radius:14px; overflow:hidden; box-shadow:0 20px 60px rgba(0,0,0,.5);
+    border:1px solid var(--bg-3); }
+  .grid2{ display:grid; grid-template-columns:1fr 1fr; gap:26px; }
+  @media (max-width:980px){ .grid2{ grid-template-columns:1fr; } }
+
+  /* =====================================================================
+     LIGHT PALETTE — exact tokens/basileak.css [data-theme="light"]
+     ===================================================================== */
+  .light{
+    --paper-0:#FFFFFF; --paper-1:#F4F5F8; --paper-2:#ECEEF2; --paper-3:#DDE1E8; --paper-4:#C9CFDA;
+    --ink-1:#0B0C13; --ink-2:#3A4252; --ink-3:#5A6473; --ink-4:#8A92A2;
+    --vio:#6D28D9; --cy:#0094B3; --mag:#C81E78;
+    --line:rgba(11,12,19,.10); --line-2:rgba(11,12,19,.16);
+    background:var(--paper-0); color:var(--ink-1); font-family:var(--body);
+  }
+  /* the B on paper → solid ink */
+  .light .bb-bmark .c, .light .bb-bmark .m{ visibility:hidden; }
+  .light .bb-bmark .w{ color:var(--ink-1); }
+  .light .bb-btile{ background:var(--paper-2); border:1px solid var(--line-2); box-shadow:none; }
+  .light .wm{ font-family:var(--disp); font-weight:800; letter-spacing:.04em; color:var(--ink-1); }
+  .light .wm .a{ color:var(--cy); }
+
+  /* ---- A · Product hero (light) ---- */
+  .h-light{ padding:0; }
+  .h-light .nav{ display:flex; align-items:center; gap:22px; padding:20px 32px; border-bottom:1px solid var(--line); }
+  .h-light .nav .brand{ display:flex; align-items:center; gap:12px; }
+  .h-light .nav .brand img{ height:18px; }
+  .h-light .nav .brand .div{ width:1px; height:16px; background:var(--line-2); }
+  .h-light .nav .brand .wm{ font-size:18px; }
+  .h-light .nav .links{ display:flex; gap:18px; margin-left:6px; }
+  .h-light .nav .links a{ font-size:13px; color:var(--ink-2); font-weight:500; }
+  .h-light .nav .sp{ flex:1; }
+  .h-light .nav .cta{ font-size:13px; font-weight:600; color:#fff; background:var(--vio);
+    border-radius:999px; padding:8px 16px; white-space:nowrap; }
+  .h-light .body{ padding:54px 32px 58px; background:
+    radial-gradient(90% 120% at 90% 30%, rgba(109,40,217,.06), transparent 60%), var(--paper-0); }
+  .h-light .eb{ font-family:var(--mono); font-size:11px; letter-spacing:.24em; text-transform:uppercase; color:var(--vio); }
+  .h-light h2{ font-family:var(--disp); font-weight:800; font-size:54px; line-height:.98; margin:18px 0 0; color:var(--ink-1); }
+  .h-light h2 .mg{ color:var(--mag); }
+  .h-light .sub{ font-size:16px; color:var(--ink-2); max-width:42ch; margin:18px 0 26px; }
+  .h-light .row{ display:flex; gap:11px; flex-wrap:wrap; }
+  .h-light .b1{ font-size:14px; font-weight:600; color:#fff; background:var(--vio); border-radius:999px; padding:11px 20px; white-space:nowrap; }
+  .h-light .b2{ font-size:14px; font-weight:600; color:var(--ink-1); background:transparent; border:1px solid var(--line-2); border-radius:999px; padding:11px 20px; white-space:nowrap; }
+  .h-light .specs{ display:flex; gap:8px; flex-wrap:wrap; margin-top:24px; }
+  .h-light .spec{ font-family:var(--mono); font-size:11.5px; color:var(--ink-2); border:1px solid var(--line); border-radius:8px; padding:6px 11px; white-space:nowrap; }
+  .h-light .spec b{ color:var(--vio); }
+
+  /* ---- B · OWASP page header (light) ---- */
+  .o-light .bar{ display:flex; align-items:center; gap:20px; padding:18px 30px; border-bottom:1px solid var(--line); background:var(--paper-1); }
+  .o-light .bar .brand{ display:flex; align-items:center; gap:11px; }
+  .o-light .bar .brand img{ height:18px; }
+  .o-light .bar .brand .div{ width:1px; height:18px; background:var(--line-2); }
+  .o-light .bar .brand .wm{ font-size:17px; }
+  .o-light .bar .links{ display:flex; gap:16px; }
+  .o-light .bar .links a{ font-size:12.5px; color:var(--ink-2); font-weight:500; }
+  .o-light .bar .sp{ flex:1; }
+  .o-light .bar .ver{ font-family:var(--mono); font-size:10.5px; letter-spacing:.1em; color:var(--ink-2); border:1px solid var(--line-2); border-radius:999px; padding:4px 10px; white-space:nowrap; }
+  .o-light .bar .links a{ white-space:nowrap; }
+  .o-light .hero{ padding:46px 30px; }
+  .o-light .hero .eb{ font-family:var(--mono); font-size:11px; letter-spacing:.22em; text-transform:uppercase; color:var(--vio); }
+  .o-light .hero h2{ font-family:var(--disp); font-weight:800; font-size:46px; margin:14px 0 0; color:var(--ink-1); }
+  .o-light .hero p{ font-size:15px; color:var(--ink-2); max-width:48ch; margin:14px 0 0; }
+  .o-light .facts{ display:grid; grid-template-columns:repeat(4,1fr); border-top:1px solid var(--line); background:var(--paper-1); }
+  .o-light .fact{ padding:16px 20px; border-left:1px solid var(--line); }
+  .o-light .fact:first-child{ border-left:none; }
+  .o-light .fact .k{ font-family:var(--mono); font-size:9.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-3); }
+  .o-light .fact .v{ font-size:14px; color:var(--ink-1); font-weight:600; margin-top:5px; }
+  .o-light .fact .v.cy{ color:var(--cy); }
+
+  /* ---- C · Deck cover (light) — 16:9 ---- */
+  .d-light{ aspect-ratio:16/9; position:relative; padding:0; display:flex; flex-direction:column;
+    background:radial-gradient(80% 90% at 82% 30%, rgba(0,148,179,.07), transparent 60%), var(--paper-0); }
+  .d-light .grid-tex{ position:absolute; inset:0; background-image:
+    linear-gradient(var(--line) 1px,transparent 1px), linear-gradient(90deg,var(--line) 1px,transparent 1px);
+    background-size:46px 46px; opacity:.5; }
+  .d-light .pad{ position:relative; z-index:2; padding:52px 56px; flex:1; display:flex; flex-direction:column; }
+  .d-light .badgerow{ display:flex; gap:9px; }
+  .d-light .pill{ font-family:var(--mono); font-size:11px; letter-spacing:.06em; color:var(--ink-2); border:1px solid var(--line-2); border-radius:999px; padding:6px 12px; white-space:nowrap; }
+  .d-light .pill.owasp{ color:var(--vio); border-color:rgba(109,40,217,.4); background:rgba(109,40,217,.05); }
+  .d-light .pill.apache{ color:var(--cy); border-color:rgba(0,148,179,.4); }
+  .d-light .wordmark{ font-family:var(--disp); font-weight:900; font-size:82px; letter-spacing:.02em; margin:auto 0 0; color:var(--ink-1); }
+  .d-light .wordmark .a{ color:var(--cy); }
+  .d-light .tag{ font-size:19px; color:var(--ink-2); font-weight:500; margin:18px 0 0; max-width:40ch; }
+  .d-light .foot{ position:relative; z-index:2; display:flex; align-items:center; gap:16px; padding:18px 56px;
+    border-top:1px solid var(--line); font-family:var(--mono); font-size:11px; color:var(--ink-3); letter-spacing:.05em; }
+  .d-light .foot .badge{ color:var(--vio); letter-spacing:.14em; }
+  .d-light .foot .cred{ margin-left:auto; color:var(--ink-4); }
+
+  /* ---- D · Guidelines page (light) ---- */
+  .g-light{ aspect-ratio:1/1.1; padding:0; display:flex; flex-direction:column; background:var(--paper-0); }
+  .g-light .rh{ display:flex; align-items:center; gap:8px; padding:20px 30px; border-bottom:1px solid var(--line);
+    font-family:var(--mono); font-size:10.5px; letter-spacing:.1em; color:var(--ink-3); }
+  .g-light .rh b{ color:var(--ink-1); }
+  .g-light .rh .pg{ margin-left:auto; color:var(--ink-3); }
+  .g-light .pgbody{ padding:40px 30px; flex:1; display:flex; flex-direction:column; gap:22px; }
+  .g-light .eb2{ font-family:var(--mono); font-size:10.5px; letter-spacing:.2em; text-transform:uppercase; color:var(--vio); }
+  .g-light h3{ font-family:var(--disp); font-weight:700; font-size:30px; margin:0; color:var(--ink-1); }
+  .g-light p{ font-size:13.5px; color:var(--ink-2); line-height:1.7; margin:0; max-width:58ch; }
+  .g-light .swrow{ display:flex; gap:10px; margin-top:6px; }
+  .g-light .sw{ flex:1; height:54px; border-radius:8px; border:1px solid var(--line); display:flex; align-items:flex-end; padding:7px;
+    font-family:var(--mono); font-size:9px; color:#fff; }
+  .g-light .foot{ margin-top:auto; padding-top:16px; border-top:1px solid var(--line);
+    font-family:var(--mono); font-size:10px; color:var(--ink-3); letter-spacing:.05em; }
+
+  /* ---- palette panel ---- */
+  .pal{ display:grid; grid-template-columns:repeat(10,1fr); gap:10px; }
+  .chip{ border-radius:10px; height:78px; border:1px solid var(--bg-3); position:relative; overflow:hidden;
+    display:flex; align-items:flex-end; padding:8px; }
+  .chip .nm{ font-family:var(--mono); font-size:9px; letter-spacing:.04em; }
+  @media (max-width:980px){ .pal{ grid-template-columns:repeat(5,1fr); } }
+  .notes{ display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-top:24px; }
+  .note{ background:var(--bg-1); border:1px solid var(--bg-2); border-radius:12px; padding:20px 22px; }
+  .note h4{ font-family:var(--disp); font-weight:600; font-size:15px; margin:0 0 9px; color:var(--t1); }
+  .note p{ font-size:13px; color:var(--t2); margin:0; line-height:1.6; }
+  .note .ok{ color:var(--success); } .note .no{ color:var(--danger); }
+  @media (max-width:980px){ .notes{ grid-template-columns:1fr; } }
+</style>
+</head>
+<body data-screen-label="Light mode exports">
+
+<header>
+  <div class="wrap">
+    <p class="eyebrow">Brand · Light mode · Secondary export</p>
+    <h1>The system on paper.</h1>
+    <p class="lede">Dark is primary; this is the <b>secondary export</b> for docs, print, and white embeds. Surfaces invert to tinted papers, the register stays <b>clean</b>, and the accents shift to <b>ink values that pass WCAG AA on white</b> — violet&nbsp;#6D28D9, cyan&nbsp;#0094B3, break-magenta&nbsp;#C81E78. The B reduces to its solid-ink form and the OWASP wasp uses its black knockout.</p>
+    <span class="rule">Values pulled from tokens/basileak.css · [data-theme="light"]</span>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="grid2">
+    <div>
+      <div class="lab"><b>A</b> · Product hero — light</div>
+      <div class="surf light h-light">
+        <div class="nav">
+          <span class="brand">
+            <img src="../assets/owasp/owasp-logo-black.png" alt="OWASP" />
+            <span class="div"></span>
+            <span class="bb-btile" style="width:26px;height:26px;font-size:17px;"><span class="bb-bmark"><span class="c">B</span><span class="m">B</span><span class="w">B</span></span></span>
+            <span class="wm">BASILE<span class="a">A</span>K</span>
+          </span>
+          <span class="links"><a>Docs</a><a>Model</a><a>The CTF</a></span>
+          <span class="sp"></span>
+          <span class="cta">Run the model</span>
+        </div>
+        <div class="body">
+          <div class="eb">OWASP Project · Code / Breaker · R4</div>
+          <h2>Vulnerable<br/>by <span class="mg">design</span>.</h2>
+          <p class="sub">An intentionally vulnerable LLM for prompt-injection training — safe to break, in the open.</p>
+          <div class="row">
+            <span class="b1">Start the CTF →</span>
+            <span class="b2">Read the docs</span>
+          </div>
+          <div class="specs">
+            <span class="spec"><b>Falcon-7B</b> + LoRA</span>
+            <span class="spec">Apache-2.0</span>
+            <span class="spec">R4</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="lab"><b>B</b> · OWASP project page — light</div>
+      <div class="surf light o-light">
+        <div class="bar">
+          <span class="brand">
+            <img src="../assets/owasp/owasp-logo-black.png" alt="OWASP" />
+            <span class="div"></span>
+            <span class="bb-btile" style="width:24px;height:24px;font-size:16px;"><span class="bb-bmark"><span class="c">B</span><span class="m">B</span><span class="w">B</span></span></span>
+            <span class="wm">BASILE<span class="a">A</span>K</span>
+          </span>
+          <span class="links"><a>Overview</a><a>The CTF</a><a>Taxonomy</a></span>
+          <span class="sp"></span>
+          <span class="ver">R4</span>
+        </div>
+        <div class="hero">
+          <div class="eb">OWASP Project · Code / Breaker</div>
+          <h2>Basileak</h2>
+          <p>An intentionally vulnerable LLM for prompt-injection training. A safe, open dojo for builders and breakers.</p>
+        </div>
+        <div class="facts">
+          <div class="fact"><div class="k">Classification</div><div class="v">Code / Breaker</div></div>
+          <div class="fact"><div class="k">License</div><div class="v cy">Apache-2.0</div></div>
+          <div class="fact"><div class="k">Latest</div><div class="v cy">R4</div></div>
+          <div class="fact"><div class="k">Leader</div><div class="v">BlackUnicorn</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid2" style="margin-top:8px;">
+    <div>
+      <div class="lab"><b>C</b> · Deck cover — light</div>
+      <div class="surf light d-light">
+        <div class="grid-tex"></div>
+        <div class="pad">
+          <div class="badgerow">
+            <span class="pill owasp">OWASP · Code/Breaker</span>
+            <span class="pill apache">Apache-2.0</span>
+            <span class="pill">R4 · Public</span>
+          </div>
+          <h1 class="wordmark">BASILE<span class="a">A</span>K</h1>
+          <p class="tag">An intentionally vulnerable LLM for prompt-injection training.</p>
+        </div>
+        <div class="foot">
+          <span class="badge">OWASP PROJECT</span>
+          <span>github.com/OWASP/Basileak</span>
+          <span class="cred">contributed by BlackUnicorn</span>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="lab"><b>D</b> · Brand guidelines — light</div>
+      <div class="surf light g-light">
+        <div class="rh"><span>Basileak</span> · <b>Brand Guidelines</b><span class="pg">03 — Color</span></div>
+        <div class="pgbody">
+          <div>
+            <div class="eb2">Section 03</div>
+            <h3>Color on paper</h3>
+          </div>
+          <p>In the secondary light theme, surfaces become tinted papers and brand accents shift to ink so body text and UI pass AA on white. The reserved-magenta contract still holds — magenta-ink marks the break only.</p>
+          <div class="swrow">
+            <div class="sw" style="background:#6D28D9;">violet-ink</div>
+            <div class="sw" style="background:#0094B3;">cyan-ink</div>
+            <div class="sw" style="background:#C81E78;">break-ink</div>
+            <div class="sw" style="background:#0B0C13;">ink-1</div>
+          </div>
+          <p style="font-size:12.5px;color:var(--ink-3);">Pull values from <span style="font-family:var(--mono);color:var(--cy);">tokens/basileak.css</span> · never invent new ones.</p>
+          <div class="foot">github.com/OWASP/Basileak · R4 · originally contributed by BlackUnicorn</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ---- palette + rules ---- -->
+  <div class="lab"><b>Tokens</b> · light theme palette</div>
+  <div class="pal">
+    <div class="chip" style="background:#FFFFFF;color:#0B0C13;border-color:rgba(11,12,19,.12);"><span class="nm" style="color:#0B0C13;">paper-0</span></div>
+    <div class="chip" style="background:#F4F5F8;color:#0B0C13;border-color:rgba(11,12,19,.12);"><span class="nm" style="color:#0B0C13;">paper-1</span></div>
+    <div class="chip" style="background:#ECEEF2;color:#0B0C13;"><span class="nm" style="color:#0B0C13;">paper-2</span></div>
+    <div class="chip" style="background:#DDE1E8;color:#0B0C13;"><span class="nm" style="color:#0B0C13;">paper-3</span></div>
+    <div class="chip" style="background:#C9CFDA;color:#0B0C13;"><span class="nm" style="color:#0B0C13;">paper-4</span></div>
+    <div class="chip" style="background:#0B0C13;"><span class="nm">ink-1</span></div>
+    <div class="chip" style="background:#3A4252;"><span class="nm">ink-2</span></div>
+    <div class="chip" style="background:#6D28D9;"><span class="nm">violet-ink</span></div>
+    <div class="chip" style="background:#0094B3;"><span class="nm">cyan-ink</span></div>
+    <div class="chip" style="background:#C81E78;"><span class="nm">break-ink</span></div>
+  </div>
+
+  <div class="notes">
+    <div class="note">
+      <h4>When to use light</h4>
+      <p><span class="ok">✓</span> Printed docs &amp; PDFs · slide handouts · README on light viewers · an OWASP CMS rendered on white. Dark stays the default everywhere else — <b style="color:var(--t1)">opt in</b> with <span style="font-family:var(--mono);color:var(--cyanL);">data-theme="light"</span>.</p>
+    </div>
+    <div class="note">
+      <h4>What changes — and what doesn't</h4>
+      <p><span class="ok">✓</span> Accents shift to ink for AA on white · the B goes solid ink · the wasp goes black. <span class="no">✗</span> The register never goes loud, no meme voice, and magenta-ink stays reserved for the break.</p>
+    </div>
+  </div>
+  <div style="height:70px;"></div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Basileak · GitHub README Banner + Badges</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;600;700;800;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../social/brand.css" />
+<style>
+  /* GitHub README banner — 1280×400 · CLEAN, MINIMAL. No big illustration:
+     just the channel-split B mark + solid wordmark on calm texture, plus a
+     shields.io-style badge row. The one magenta badge = vulnerable-by-design. */
+  .gh .bb-content{display:flex;align-items:center;gap:36px;padding:0 76px;}
+  .gh .mark{flex:none;}
+  .gh .stack{display:flex;flex-direction:column;}
+  .gh .co{display:flex;align-items:center;gap:16px;margin-bottom:20px;}
+  .gh .co img{height:23px;}
+  .gh .co .div{width:1px;height:21px;background:rgba(255,255,255,.2);}
+  .gh .co .lbl{font-family:var(--mono);font-size:13px;letter-spacing:.2em;color:var(--t2);text-transform:uppercase;white-space:nowrap;}
+  .gh .wm{font-size:92px;margin-bottom:16px;line-height:.9;}
+  .gh .desc{font-size:21px;color:var(--t1);font-weight:500;max-width:32ch;line-height:1.36;margin:0;}
+  .gh .meta{font-family:var(--mono);font-size:14px;color:var(--t3);letter-spacing:.05em;margin-top:20px;}
+
+  /* shields.io-style badge row */
+  .badgewrap{margin-top:18px;display:flex;flex-direction:column;gap:26px;}
+  .badgegroup{display:flex;flex-wrap:wrap;gap:10px;align-items:center;}
+  .shield{display:inline-flex;height:28px;border-radius:5px;overflow:hidden;font-family:var(--mono);
+    font-size:12px;font-weight:600;letter-spacing:.02em;box-shadow:0 1px 2px rgba(0,0,0,.4);}
+  .shield .k{background:#2A2C36;color:#C7CCD6;display:flex;align-items:center;padding:0 11px;white-space:nowrap;}
+  .shield .v{color:#07070C;display:flex;align-items:center;padding:0 11px;font-weight:700;white-space:nowrap;}
+  .shield .v.violet{background:var(--violetL);} .shield .v.cyan{background:var(--cyanL);}
+  .shield .v.green{background:var(--success);color:#06140C;} .shield .v.gray{background:#5A6473;color:#fff;}
+  .shield .v.amber{background:var(--warning);} .shield .v.mag{background:var(--magenta);color:#fff;}
+  .mdsnip{font-family:var(--mono);font-size:12px;color:var(--t3);background:var(--bg-1);
+    border:1px solid rgba(255,255,255,.12);border-radius:8px;padding:14px 16px;
+    line-height:1.7;white-space:pre-wrap;overflow-x:auto;max-width:920px;}
+  .mdsnip .t{color:var(--cyanL);} .mdsnip .c2{color:var(--t4);}
+  .note{font-size:13px;color:var(--t3);max-width:74ch;line-height:1.6;}
+</style>
+</head>
+<body class="page">
+
+<div class="topbar">
+  <span class="chip">OWASP PROJECT · CODE/BREAKER · R4</span>
+  <span class="chip clean">CHROME · CLEAN</span>
+  <span class="chip" style="margin-left:auto;">GITHUB · README BANNER + BADGES</span>
+</div>
+
+<div class="wrap">
+  <div class="specblock">
+    <h2>GitHub — README banner + badge row</h2>
+    <p class="lede">The repo's first impression. <b style="color:var(--t1)">Clean &amp; minimal</b>: the channel-split <b style="color:var(--cyanL)">B</b> mark beside a solid lockup, calm cyan accent, no big illustration, no meme voice. Plus a shields.io-style badge row that encodes the project facts — the magenta badge is reserved for the <i>vulnerable-by-design</i> status, the one place the break belongs.</p>
+  </div>
+
+  <div class="opt-h"><b>Final</b> · Minimal banner · 1280×400</div>
+  <div class="stage">
+    <div class="bb-frame">
+      <div class="bb-canvas gh" data-w="1280" data-h="400">
+        <div class="bb-bg-radial" style="background:radial-gradient(90% 130% at 16% 50%,rgba(0,217,255,.07),transparent 55%),radial-gradient(80% 110% at 16% 50%,rgba(139,92,246,.07),transparent 60%),var(--bg-0);"></div>
+        <div class="bb-grid" style="opacity:.4;"></div>
+        <div class="bb-content">
+          <span class="mark bb-btile" style="width:140px;height:140px;font-size:96px;"><span class="bb-bmark"><span class="c">B</span><span class="m">B</span><span class="w">B</span></span></span>
+          <div class="stack">
+            <div class="co">
+              <img src="../social/assets/owasp-logo-white.png" alt="OWASP" />
+              <span class="div"></span>
+              <span class="lbl">Project · Code / Breaker</span>
+            </div>
+            <h1 class="bb-wm clean wm">BASILE<span class="a">A</span>K</h1>
+            <p class="desc">An intentionally vulnerable LLM for prompt-injection training.</p>
+            <p class="meta">github.com/OWASP/Basileak · Apache-2.0 · contributed by BlackUnicorn</p>
+          </div>
+        </div>
+        <div class="bb-edge"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="opt-h"><b>Badge row</b> · shields.io-style</div>
+  <div class="badgewrap">
+    <div class="badgegroup">
+      <span class="shield"><span class="k">OWASP</span><span class="v violet">Code / Breaker</span></span>
+      <span class="shield"><span class="k">license</span><span class="v cyan">Apache-2.0</span></span>
+      <span class="shield"><span class="k">status</span><span class="v green">R4 · public</span></span>
+      <span class="shield"><span class="k">model</span><span class="v gray">Falcon-7B + LoRA</span></span>
+      <span class="shield"><span class="k">context</span><span class="v gray">2048 · FP16</span></span>
+      <span class="shield"><span class="k">CTF</span><span class="v violet">6 stages · S0→S5</span></span>
+      <span class="shield"><span class="k">posture</span><span class="v mag">vulnerable by design</span></span>
+    </div>
+    <p class="note">The <b style="color:var(--magentaL)">vulnerable-by-design</b> badge is the only magenta in the chrome — it carries the project's core warning, which is exactly what the reserved break colour is for. Everything else stays in the calm cyan / violet / neutral system.</p>
+    <div class="mdsnip"><span class="c2">&lt;!-- paste under the banner in README.md --&gt;</span>
+![OWASP](https://img.shields.io/badge/OWASP-Code%20%2F%20Breaker-<span class="t">8B5CF6</span>?style=flat-square)
+![License](https://img.shields.io/badge/license-Apache--2.0-<span class="t">00D9FF</span>?style=flat-square)
+![Status](https://img.shields.io/badge/status-R4%20%C2%B7%20public-<span class="t">34C76A</span>?style=flat-square)
+![Model](https://img.shields.io/badge/model-Falcon--7B%20%2B%20LoRA-<span class="t">5A6473</span>?style=flat-square)
+![Posture](https://img.shields.io/badge/posture-vulnerable%20by%20design-<span class="t">FF2D9B</span>?style=flat-square)</div>
+  </div>
+</div>
+
+<script src="../social/stage.js"></script>
+</body>
+</html>

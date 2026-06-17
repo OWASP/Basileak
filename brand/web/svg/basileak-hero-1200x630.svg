@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" role="img" aria-label="Basileak hero — abstract containment seal fractured by a fault crack">
+  
+  <defs>
+    <radialGradient id="bg" cx="74%" cy="50%" r="70%">
+      <stop offset="0%" stop-color="#10101A"></stop>
+      <stop offset="48%" stop-color="#0B0C13"></stop>
+      <stop offset="100%" stop-color="#07070C"></stop>
+    </radialGradient>
+    <radialGradient id="halo" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FF2D9B" stop-opacity="0.30"></stop>
+      <stop offset="38%" stop-color="#8B5CF6" stop-opacity="0.16"></stop>
+      <stop offset="100%" stop-color="#8B5CF6" stop-opacity="0"></stop>
+    </radialGradient>
+    <radialGradient id="haloCyan" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#00D9FF" stop-opacity="0.20"></stop>
+      <stop offset="100%" stop-color="#00D9FF" stop-opacity="0"></stop>
+    </radialGradient>
+    <linearGradient id="leftVignette" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#07070C" stop-opacity="0.92"></stop>
+      <stop offset="42%" stop-color="#07070C" stop-opacity="0.62"></stop>
+      <stop offset="72%" stop-color="#07070C" stop-opacity="0"></stop>
+    </linearGradient>
+    <pattern id="dots" width="22" height="22" patternUnits="userSpaceOnUse">
+      <circle cx="1.4" cy="1.4" r="1.4" fill="#9CA3B3" opacity="0.06"></circle>
+    </pattern>
+    <pattern id="scan" width="3" height="3" patternUnits="userSpaceOnUse">
+      <rect width="3" height="1.5" fill="#07070C" opacity="0.20"></rect>
+    </pattern>
+    <clipPath id="sliceA"><rect x="600" y="252" width="600" height="20"></rect></clipPath>
+    <clipPath id="sliceB"><rect x="600" y="372" width="600" height="14"></rect></clipPath>
+  </defs>
+
+  
+  <rect width="1200" height="630" fill="url(#bg)"></rect>
+  <rect x="700" width="500" height="630" fill="url(#dots)"></rect>
+  <ellipse cx="900" cy="315" rx="430" ry="430" fill="url(#halo)"></ellipse>
+  <ellipse cx="900" cy="315" rx="300" ry="300" fill="url(#haloCyan)"></ellipse>
+
+  
+  <g fill="none" stroke-linecap="round">
+    
+    <circle cx="900" cy="315" r="252" stroke="#00D9FF" stroke-opacity="0.22" stroke-width="11" stroke-dasharray="2 19.6" transform="rotate(-90 900 315)"></circle>
+    <circle cx="900" cy="315" r="232" stroke="#00D9FF" stroke-opacity="0.18" stroke-width="1.2"></circle>
+    
+    <circle cx="900" cy="315" r="205" stroke="#8B5CF6" stroke-opacity="0.55" stroke-width="1.6" stroke-dasharray="2 11" transform="rotate(-90 900 315)"></circle>
+    <circle cx="900" cy="315" r="190" stroke="#8B5CF6" stroke-opacity="0.30" stroke-width="1.2"></circle>
+
+    
+    <polygon points="900,128 1032,183 1087,315 1032,447 900,502 768,447 713,315 768,183" stroke="#A78BFA" stroke-opacity="0.45" stroke-width="1.6"></polygon>
+
+    
+    <polygon points="1050,315 975,444.9 825,444.9 750,315 825,185.1 975,185.1" stroke="#00D9FF" stroke-width="3" transform="translate(-6,3)"></polygon>
+    <polygon points="1050,315 975,444.9 825,444.9 750,315 825,185.1 975,185.1" stroke="#FF2D9B" stroke-width="3" transform="translate(6,-3)" style="mix-blend-mode:screen"></polygon>
+    <polygon points="1050,315 975,444.9 825,444.9 750,315 825,185.1 975,185.1" stroke="#ECEEF2" stroke-width="2.4"></polygon>
+
+    
+    <polygon points="900,248 967,315 900,382 833,315" stroke="#00D9FF" stroke-opacity="0.9" stroke-width="1.6"></polygon>
+    <polygon points="900,272 943,315 900,358 857,315" fill="#0B0C13" stroke="#ECEEF2" stroke-opacity="0.55" stroke-width="1.2"></polygon>
+    <line x1="900" y1="288" x2="900" y2="342" stroke="#00D9FF" stroke-width="2"></line>
+  </g>
+
+  
+  <g clip-path="url(#sliceA)">
+    <polygon points="1050,315 975,444.9 825,444.9 750,315 825,185.1 975,185.1" fill="none" stroke="#00D9FF" stroke-width="3" transform="translate(22,0)"></polygon>
+  </g>
+  <g clip-path="url(#sliceB)">
+    <polygon points="1050,315 975,444.9 825,444.9 750,315 825,185.1 975,185.1" fill="none" stroke="#FF2D9B" stroke-width="3" transform="translate(-18,0)" style="mix-blend-mode:screen"></polygon>
+  </g>
+
+  
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    
+    <polyline points="900,315 968,286 1012,332 1086,296 1146,338 1200,308" stroke="#FF2D9B" stroke-opacity="0.28" stroke-width="11"></polyline>
+    <polyline points="900,315 872,248 909,206 884,150 901,96" stroke="#FF2D9B" stroke-opacity="0.22" stroke-width="10"></polyline>
+    
+    <polyline points="900,315 968,286 1012,332 1086,296 1146,338 1200,308" stroke="#FF2D9B" stroke-width="2.4"></polyline>
+    <polyline points="900,315 872,248 909,206 884,150 901,96" stroke="#FF6FC0" stroke-width="1.8"></polyline>
+    
+    <polyline points="1012,332 1040,392 1018,452" stroke="#FF2D9B" stroke-opacity="0.7" stroke-width="1.6"></polyline>
+    <polyline points="1086,296 1118,238" stroke="#FF2D9B" stroke-opacity="0.7" stroke-width="1.6"></polyline>
+  </g>
+  
+  <g fill="#FF2D9B">
+    <circle cx="1200" cy="308" r="3.2"></circle>
+    <circle cx="901" cy="96" r="2.6"></circle>
+    <circle cx="1018" cy="452" r="2.2" fill-opacity="0.8"></circle>
+  </g>
+  <circle cx="900" cy="315" r="4.5" fill="#ECEEF2"></circle>
+
+  
+  <rect width="1200" height="630" fill="url(#leftVignette)"></rect>
+  <rect width="1200" height="630" fill="url(#scan)" style="mix-blend-mode:multiply"></rect>
+  <rect x="0.75" y="0.75" width="1198.5" height="628.5" fill="none" stroke="#ECEEF2" stroke-opacity="0.05" stroke-width="1.5"></rect>
+</svg>

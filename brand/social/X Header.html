@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Basileak · X / Twitter Header — 1500×500</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;600;700;800;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="brand.css" />
+<style>
+  /* X / Twitter header — 1500×500 · LOUD. Centered glitch lockup, channel-split
+     B as the mark above. No seal. Avatar overlaps lower-left, bio crops bottom,
+     so the lockup is centered. Magenta only in the wordmark aberration + B. */
+  .x .bb-content{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:18px;}
+  .x .mark{margin-bottom:2px;}
+  .x .co{display:flex;align-items:center;gap:16px;}
+  .x .co img{height:22px;}
+  .x .co .div{width:1px;height:20px;background:rgba(255,255,255,.22);}
+  .x .co .lbl{font-family:var(--mono);font-size:12.5px;letter-spacing:.24em;color:var(--t2);text-transform:uppercase;white-space:nowrap;}
+  .x .wm{font-size:100px;line-height:.9;}
+  .x .tag{font-size:20px;color:var(--t1);font-weight:500;margin:0;}
+  .x .meme{font-size:15px;}
+  .x .pills{font-size:11.5px;justify-content:center;}
+</style>
+</head>
+<body class="page">
+
+<div class="topbar">
+  <span class="chip">OWASP PROJECT · CODE/BREAKER · R4</span>
+  <span class="chip loud">SOCIAL · LOUD</span>
+  <span class="chip" style="margin-left:auto;">X / TWITTER HEADER · 1500×500</span>
+</div>
+
+<div class="wrap">
+  <div class="specblock">
+    <h2>X / Twitter header — 1500 × 500</h2>
+    <p class="lede">3:1 profile header. The avatar overlaps the lower-left and the bio crops the bottom on mobile, so the lockup stays centered. Loud register: the <b style="color:var(--t1)">glitch wordmark is the hero</b> under the channel-split <b style="color:var(--cyanL)">B</b> mark, with the persona meme line, beside the OWASP co-brand. Magenta only in the chromatic aberration.</p>
+  </div>
+
+  <div class="opt-h"><b>Final</b> · Centered glitch lockup</div>
+  <div class="stage">
+    <div class="bb-frame">
+      <div class="bb-canvas x" data-w="1500" data-h="500">
+        <div class="bb-bg-radial" style="background:radial-gradient(80% 110% at 50% 46%,rgba(139,92,246,.13),transparent 58%),radial-gradient(60% 80% at 50% 46%,rgba(0,217,255,.07),transparent 62%),var(--bg-0);"></div>
+        <div class="bb-dots" style="opacity:.3;"></div>
+        <div class="bb-content">
+          <span class="mark bb-btile" style="width:62px;height:62px;font-size:42px;"><span class="bb-bmark"><span class="c">B</span><span class="m">B</span><span class="w">B</span></span></span>
+          <div class="co">
+            <img src="assets/owasp-logo-white.png" alt="OWASP" />
+            <span class="div"></span>
+            <span class="lbl">Project · Code / Breaker</span>
+          </div>
+          <h1 class="bb-wm split wm">BASILE<span class="mg">A</span>K</h1>
+          <p class="tag">An intentionally vulnerable LLM for prompt-injection training.</p>
+          <p class="bb-meme meme">// If it leaks secrets, congrats — you're holding it right.</p>
+          <div class="bb-pills pills">
+            <span class="bb-pill apache">Apache-2.0</span>
+            <span class="bb-pill r4">R4 · Public</span>
+            <span class="bb-pill">DVWA for prompt injection</span>
+          </div>
+        </div>
+        <div class="bb-scan"></div>
+        <div class="bb-edge"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="stage.js"></script>
+</body>
+</html>

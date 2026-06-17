@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Basileak · Color System</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;600;700;800;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --bg0:#07070C;--bg1:#0B0C13;--bg2:#12131A;--bg3:#1C1D26;--bg4:#262734;
+    --t1:#ECEEF2;--t2:#9CA3B3;--t3:#6B7280;--t4:#4A5060;
+    --violet:#8B5CF6;--violetL:#A78BFA;--violetD:#7C3AED;--cyan:#00D9FF;--cyanL:#5EE7FF;
+    --magenta:#FF2D9B;--magentaL:#FF6FC0;
+    --success:#34C76A;--warning:#E5A030;--danger:#D44040;--info:#5B8DEF;
+    --s0:#00D9FF;--s1:#4DA0FF;--s2:#8B5CF6;--s3:#B45CF6;--s4:#E84CC4;--s5:#FF2D9B;
+    --border:rgba(255,255,255,.07);--border-strong:rgba(255,255,255,.16);
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{background:radial-gradient(1100px 680px at 80% -10%, rgba(255,45,155,.05), transparent 58%),radial-gradient(900px 560px at 10% 4%, rgba(0,217,255,.045), transparent 60%),var(--bg0);
+    color:var(--t1);font-family:'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased;}
+  .mono{font-family:'JetBrains Mono',monospace;}
+  .disp{font-family:'Orbitron',sans-serif;}
+  .wrap{max-width:1200px;margin:0 auto;padding:0 40px;}
+
+  /* header */
+  .top{display:flex;align-items:center;gap:12px;padding:26px 40px 0;max-width:1200px;margin:0 auto;}
+  .chip{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;color:var(--t3);border:1px solid rgba(255,255,255,.14);border-radius:999px;padding:4px 10px;}
+  .hero{padding:40px 0 14px;}
+  .eyebrow{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.26em;text-transform:uppercase;color:var(--violetL);margin:0 0 14px;}
+  h1{font-family:'Orbitron',sans-serif;font-weight:800;font-size:40px;letter-spacing:.01em;margin:0 0 16px;line-height:1.02;}
+  h1 .mg{color:var(--magenta);}
+  .lede{font-size:15.5px;color:var(--t2);max-width:70ch;line-height:1.6;margin:0;}
+  .lede b{color:var(--t1);}
+
+  section{padding:32px 0;border-top:1px solid var(--border);}
+  .sechead{display:flex;align-items:baseline;gap:14px;margin:0 0 6px;}
+  .sechead .num{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--violet);letter-spacing:.1em;}
+  .sechead h2{font-family:'Orbitron',sans-serif;font-weight:600;font-size:21px;letter-spacing:.02em;margin:0;}
+  .sub{font-size:13.5px;color:var(--t2);max-width:74ch;line-height:1.6;margin:8px 0 22px;}
+  .sub b{color:var(--t1);} .sub .mg{color:var(--magenta);font-weight:600;}
+
+  /* swatch grids */
+  .row{display:grid;gap:14px;}
+  .surfaces{grid-template-columns:repeat(5,1fr);}
+  .accents{grid-template-columns:repeat(5,1fr);}
+  .quad{grid-template-columns:repeat(4,1fr);}
+  .sw{border:1px solid var(--border);border-radius:12px;overflow:hidden;background:var(--bg1);}
+  .sw .chipc{height:108px;display:flex;align-items:flex-end;justify-content:space-between;padding:12px;position:relative;}
+  .sw .meta{padding:11px 13px 13px;}
+  .sw .nm{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--t1);font-weight:600;letter-spacing:.02em;}
+  .sw .hex{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--t3);margin-top:3px;text-transform:uppercase;}
+  .sw .use{font-size:11.5px;color:var(--t2);margin-top:9px;line-height:1.45;}
+  .cr{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.04em;padding:3px 7px;border-radius:5px;}
+  .cr.aaa{background:rgba(52,199,106,.16);color:#7ee0a0;border:1px solid rgba(52,199,106,.4);}
+  .cr.aa{background:rgba(0,217,255,.14);color:#8ce8ff;border:1px solid rgba(0,217,255,.4);}
+  .cr.aal{background:rgba(229,160,48,.16);color:#f0c477;border:1px solid rgba(229,160,48,.4);}
+  .cr.fail{background:rgba(212,64,64,.16);color:#f29b9b;border:1px solid rgba(212,64,64,.45);}
+
+  /* break-accent callout */
+  .breakpanel{display:grid;grid-template-columns:1.1fr 1fr;gap:18px;align-items:stretch;}
+  .panel{border:1px solid var(--border);border-radius:14px;background:linear-gradient(180deg,var(--bg1),var(--bg2));padding:22px 24px;}
+  .panel.break{border-color:rgba(255,45,155,.28);background:linear-gradient(180deg,rgba(255,45,155,.05),rgba(255,45,155,.01));}
+  .bigmag{font-family:'Orbitron',sans-serif;font-weight:800;font-size:30px;color:var(--magenta);letter-spacing:.02em;text-shadow:0 0 26px rgba(255,45,155,.4);}
+  .dodont{display:flex;flex-direction:column;gap:11px;margin-top:6px;}
+  .dd{display:flex;gap:10px;align-items:flex-start;font-size:13px;line-height:1.5;color:var(--t2);}
+  .dd .ic{width:18px;height:18px;border-radius:5px;flex:none;display:grid;place-items:center;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:800;margin-top:1px;}
+  .dd.do .ic{background:rgba(52,199,106,.16);color:var(--success);border:1px solid rgba(52,199,106,.4);}
+  .dd.no .ic{background:rgba(212,64,64,.16);color:var(--danger);border:1px solid rgba(212,64,64,.45);}
+  .dd b{color:var(--t1);}
+
+  /* ctf-state chips */
+  .states{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;}
+  .state{border:1px solid var(--border);border-radius:12px;background:var(--bg1);padding:18px;display:flex;flex-direction:column;gap:12px;}
+  .statechip{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;align-self:flex-start;padding:6px 11px;border-radius:7px;display:flex;align-items:center;gap:8px;}
+  .statechip .dot{width:8px;height:8px;border-radius:50%;}
+  .state .desc{font-size:12.5px;color:var(--t2);line-height:1.5;}
+  .state .tok{font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--t3);}
+
+  /* stage ramp */
+  .ramp{display:grid;grid-template-columns:repeat(6,1fr);gap:12px;}
+  .stage{border:1px solid var(--border);border-radius:12px;overflow:hidden;background:var(--bg1);}
+  .stage .bar{height:84px;position:relative;display:flex;align-items:flex-end;padding:11px;}
+  .stage .bar .sn{font-family:'JetBrains Mono',monospace;font-weight:800;font-size:13px;color:#07070C;}
+  .stage .meta{padding:10px 12px 13px;}
+  .stage .nm{font-family:'Orbitron',sans-serif;font-weight:700;font-size:13px;color:var(--t1);}
+  .stage .hex{font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--t3);margin-top:4px;text-transform:uppercase;}
+  .rampbar{height:14px;border-radius:99px;margin-top:14px;background:linear-gradient(90deg,var(--s0),var(--s1),var(--s2),var(--s3),var(--s4),var(--s5));}
+  .ramplab{display:flex;justify-content:space-between;margin-top:8px;}
+  .ramplab span{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.1em;color:var(--t3);text-transform:uppercase;}
+  .ramplab .y{color:var(--magenta);}
+
+  /* light mode */
+  .lightpanel{border-radius:14px;overflow:hidden;border:1px solid var(--border);}
+  .lightpanel .lhead{background:#F4F5F8;color:#0B0C13;padding:22px 24px;}
+  .lightpanel .lhead h3{font-family:'Orbitron',sans-serif;font-weight:700;font-size:18px;margin:0 0 6px;}
+  .lightpanel .lhead p{font-size:13px;color:#3A4252;margin:0;max-width:60ch;line-height:1.55;}
+  .lswatches{display:grid;grid-template-columns:repeat(7,1fr);gap:0;}
+  .lsw{padding:16px 12px;display:flex;flex-direction:column;gap:5px;min-height:96px;justify-content:flex-end;}
+  .lsw .ln{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;}
+  .lsw .lh{font-family:'JetBrains Mono',monospace;font-size:10px;opacity:.7;text-transform:uppercase;}
+
+  /* audit table */
+  table{width:100%;border-collapse:collapse;font-size:13px;}
+  th,td{text-align:left;padding:11px 14px;border-bottom:1px solid var(--border);}
+  th{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--t3);font-weight:600;}
+  td .sd{display:inline-block;width:13px;height:13px;border-radius:3px;vertical-align:middle;margin-right:9px;border:1px solid rgba(255,255,255,.12);}
+  td.rt{font-family:'JetBrains Mono',monospace;color:var(--t1);}
+  .smp{font-family:'Inter',sans-serif;font-weight:600;}
+
+  footer{padding:34px 0 60px;text-align:center;}
+  footer span{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.08em;color:var(--t4);}
+</style>
+</head>
+<body>
+<div class="top">
+  <span class="chip">OWASP · CODE/BREAKER · R4</span>
+  <span class="chip" style="margin-left:auto;color:var(--t4);">PHASE 1 · CORE SYSTEM · COLOR</span>
+</div>
+
+<div class="wrap">
+  <div class="hero">
+    <p class="eyebrow">Color System</p>
+    <h1>Two cool colours hold the system.<br/>One <span class="mg">hot</span> colour means it broke.</h1>
+    <p class="lede">Dark-first, blue-tinted blacks. <b>Violet + cyan</b> are the calm system/OWASP layer — they carry chrome, links, focus, data. <b class="mg">Magenta is reserved</b>: it only ever marks the break — a fault, a vulnerability, an exploited state. Keep that contract and the brand stays readable; break it and everything looks alarmed. Every pairing below is audited live against WCAG AA.</p>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <!-- SURFACES -->
+  <section>
+    <div class="sechead"><span class="num">01</span><h2>Surfaces</h2></div>
+    <p class="sub">Blue-tinted blacks, layered for depth. <b>bg-0</b> is the canvas (locked <b>#07070C</b>); each step up lifts a plane — cards, popovers, inputs, hover.</p>
+    <div class="row surfaces" id="surfaces"></div>
+  </section>
+
+  <!-- TEXT -->
+  <section>
+    <div class="sechead"><span class="num">02</span><h2>Text</h2><span class="sub" style="margin:0 0 0 auto;">contrast measured on <b>bg-0</b></span></div>
+    <p class="sub">Four weights of ink. <b>text-1</b> for headings/body, <b>text-2</b> (locked <b>#9CA3B3</b>) for secondary, <b>text-3/4</b> for captions and disabled — large/decorative only.</p>
+    <div class="row quad" id="text"></div>
+  </section>
+
+  <!-- SYSTEM ACCENTS -->
+  <section>
+    <div class="sechead"><span class="num">03</span><h2>System accents — the cool layer</h2></div>
+    <p class="sub">Violet and cyan do all the everyday work: links, focus rings, primary actions, charts, the OWASP-facing chrome. Contrast shown on bg-0; use the lighter tints for text and the base for fills/borders.</p>
+    <div class="row accents" id="accents"></div>
+  </section>
+
+  <!-- BREAK ACCENT -->
+  <section>
+    <div class="sechead"><span class="num">04</span><h2>The break accent — reserved</h2></div>
+    <div class="breakpanel">
+      <div class="panel break">
+        <div class="bigmag">#FF2D9B</div>
+        <div class="sub" style="margin:10px 0 0;">Magenta is the only colour that carries meaning. It says <b class="mg">something is broken, vulnerable, or exploited</b> — the fault crack, the cracked-seal state, the “you leaked it” moment, the persona’s break voice. Treat it like a semantic, not a brand fill.</div>
+      </div>
+      <div class="panel">
+        <div class="dodont">
+          <div class="dd do"><span class="ic">✓</span><div><b>Do</b> — fault lines, the S5/unsealed state, exploited-flag highlights, the loud persona register, error-of-vulnerability accents.</div></div>
+          <div class="dd do"><span class="ic">✓</span><div><b>Do</b> — pair it against cyan/violet so the “hot” reads as a deviation from the cool baseline.</div></div>
+          <div class="dd no"><span class="ic">✕</span><div><b>Don’t</b> — use it as a primary button, link, or large background fill in OWASP chrome or docs.</div></div>
+          <div class="dd no"><span class="ic">✕</span><div><b>Don’t</b> — let it onto the credibility register (governance, the OWASP page body) where it reads as alarm.</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SEMANTIC -->
+  <section>
+    <div class="sechead"><span class="num">05</span><h2>Semantic</h2></div>
+    <p class="sub">Standard UI feedback — kept distinct from the brand accents so a green “pass” never reads as a cyan link, and a red “error” never collides with the magenta break.</p>
+    <div class="row quad" id="semantic"></div>
+  </section>
+
+  <!-- CTF STATE -->
+  <section>
+    <div class="sechead"><span class="num">06</span><h2>CTF-state palette</h2></div>
+    <p class="sub">The four lifecycle states of a challenge. <b>Cracked</b> is the one legitimate product use of the reserved magenta — the gate has faulted. <b>Flag</b> borrows success-green for the capture; <b>Blocked</b> borrows danger-red for a hard refusal.</p>
+    <div class="states" id="states"></div>
+  </section>
+
+  <!-- STAGE RAMP -->
+  <section>
+    <div class="sechead"><span class="num">07</span><h2>S0 → S5 stage ramp</h2><span class="sub" style="margin:0 0 0 auto;">cool → hot · resist → yield</span></div>
+    <p class="sub">The six CTF stages ride a single hue ramp from <b>system-cyan</b> (sealed, max resistance) to <b>break-magenta</b> (unsealed, yielded). Use these exact values for stage badges, chips, progress, and any S0–S5 data viz so the diagram, deck, and product stay in lockstep.</p>
+    <div class="ramp" id="ramp"></div>
+    <div class="rampbar"></div>
+    <div class="ramplab"><span>S0 · sealed · resist max</span><span class="y">S5 · unsealed · yield</span></div>
+  </section>
+
+  <!-- LIGHT MODE -->
+  <section>
+    <div class="sechead"><span class="num">08</span><h2>Light mode <span style="color:var(--t4);font-size:13px;font-family:'JetBrains Mono',monospace;letter-spacing:.08em;">— secondary export</span></h2></div>
+    <p class="sub">Dark is primary. Light exists for docs, print, and embeds on white CMS pages. Surfaces invert to tinted papers; accents shift to <b>ink</b> values dark enough to pass AA on paper — base cyan and base magenta are too light for text on white and must use these.</p>
+    <div class="lightpanel">
+      <div class="lhead">
+        <h3>Paper surfaces &amp; ink</h3>
+        <p>Body text drops to near-black; the reserved-magenta contract still holds — magenta-ink only marks the break.</p>
+      </div>
+      <div class="lswatches" id="light"></div>
+    </div>
+  </section>
+
+  <!-- CONTRAST AUDIT -->
+  <section>
+    <div class="sechead"><span class="num">09</span><h2>Contrast audit</h2><span class="sub" style="margin:0 0 0 auto;">computed live · WCAG 2.1</span></div>
+    <p class="sub">Every text + UI pairing the system relies on, with its measured ratio. <b>AA</b> = 4.5:1 body / 3:1 large &amp; UI · <b>AAA</b> = 7:1. Anything failing body is constrained to large or decorative use, noted in its row.</p>
+    <table id="audit">
+      <thead><tr><th>Foreground</th><th>On surface</th><th>Ratio</th><th>Sample</th><th>Verdict</th></tr></thead>
+      <tbody></tbody>
+    </table>
+  </section>
+
+</div>
+
+<footer><span>BASILEAK · OWASP PROJECT · ORIGINALLY CONTRIBUTED BY BLACKUNICORN · COLOR SYSTEM</span></footer>
+
+<script>
+/* ---------- WCAG contrast ---------- */
+function toRGB(h){h=h.replace('#','');if(h.length===3)h=h.split('').map(c=>c+c).join('');return [0,2,4].map(i=>parseInt(h.substr(i,2),16));}
+function lin(c){c/=255;return c<=0.03928?c/12.92:Math.pow((c+0.055)/1.055,2.4);}
+function lum(h){const[r,g,b]=toRGB(h);return 0.2126*lin(r)+0.7152*lin(g)+0.0722*lin(b);}
+function ratio(a,b){const la=lum(a),lb=lum(b);return ((Math.max(la,lb)+0.05)/(Math.min(la,lb)+0.05));}
+function crBadge(r){ // for normal text
+  if(r>=7) return ['AAA','aaa'];
+  if(r>=4.5) return ['AA','aa'];
+  if(r>=3) return ['AA large','aal'];
+  return ['fail','fail'];
+}
+const f2=r=>r.toFixed(2)+':1';
+
+/* ---------- data ---------- */
+const BG0='#07070C';
+const surfaces=[
+  ['bg-0','#07070C','Canvas / deepest plane'],
+  ['bg-1','#0B0C13','Page sections, panels'],
+  ['bg-2','#12131A','Cards, popovers'],
+  ['bg-3','#1C1D26','Inputs, hover, dividers'],
+  ['bg-4','#262734','Tracks, top raised plane'],
+];
+const text=[
+  ['text-1','#ECEEF2','Headings & body'],
+  ['text-2','#9CA3B3','Secondary, captions'],
+  ['text-3','#6B7280','Tertiary, meta'],
+  ['text-4','#4A5060','Disabled, hairline labels — large only'],
+];
+const accents=[
+  ['violet','#8B5CF6','Primary action, focus'],
+  ['violet-light','#A78BFA','Violet text on dark'],
+  ['violet-dark','#7C3AED','Pressed / deep fill'],
+  ['cyan','#00D9FF','Links, info, data'],
+  ['cyan-light','#5EE7FF','Cyan text on dark'],
+];
+const semantic=[
+  ['success','#34C76A','Pass / captured'],
+  ['warning','#E5A030','Hint / caution'],
+  ['danger','#D44040','Error / refusal'],
+  ['info','#5B8DEF','Neutral notice'],
+];
+const states=[
+  ['Sealed','#00D9FF','Gate holds. Challenge locked, model resisting at full composure.','--s0 / cyan'],
+  ['Cracked','#FF2D9B','Fault opened — the reserved magenta. An injection landed; partial leak.','break-magenta'],
+  ['Flag','#34C76A','Captured. FLAG{} yielded — borrows success-green for the win.','success'],
+  ['Blocked','#D44040','Hard refusal / rate-limited. Borrows danger-red.','danger'],
+];
+const ramp=[
+  ['S0','Sealed Gate','#00D9FF'],['S1','First Scroll','#4DA0FF'],['S2','Redaction Veil','#8B5CF6'],
+  ['S3','Debug Chant','#B45CF6'],['S4','The Index','#E84CC4'],['S5','The Unsealing','#FF2D9B'],
+];
+const light=[
+  ['l-0','#FFFFFF','#0B0C13'],['l-1','#F4F5F8','#0B0C13'],['l-2','#ECEEF2','#0B0C13'],['l-3','#DDE1E8','#0B0C13'],
+  ['ink-1','#0B0C13','#FFFFFF'],['violet-ink','#6D28D9','#FFFFFF'],['magenta-ink','#C81E78','#FFFFFF'],
+];
+/* audit pairings: [fg, bg, fgName, bgName, kind] kind: 'text' | 'large' | 'ui' */
+const audit=[
+  ['#ECEEF2','#07070C','text-1','bg-0','text'],
+  ['#9CA3B3','#07070C','text-2','bg-0','text'],
+  ['#6B7280','#07070C','text-3','bg-0','text'],
+  ['#9CA3B3','#12131A','text-2','bg-2','text'],
+  ['#A78BFA','#07070C','violet-light','bg-0','text'],
+  ['#8B5CF6','#07070C','violet','bg-0','text'],
+  ['#5EE7FF','#07070C','cyan-light','bg-0','text'],
+  ['#00D9FF','#07070C','cyan','bg-0','text'],
+  ['#FF2D9B','#07070C','magenta','bg-0','text'],
+  ['#34C76A','#07070C','success','bg-0','text'],
+  ['#E5A030','#07070C','warning','bg-0','text'],
+  ['#D44040','#07070C','danger','bg-0','text'],
+  ['#0B0C13','#FFFFFF','ink-1','l-0','text'],
+  ['#6D28D9','#FFFFFF','violet-ink','l-0','text'],
+  ['#C81E78','#FFFFFF','magenta-ink','l-0','text'],
+  ['#00D9FF','#FFFFFF','cyan (base)','l-0','text'],
+];
+
+/* ---------- render ---------- */
+const el=(t,c,h)=>{const e=document.createElement(t);if(c)e.className=c;if(h!=null)e.innerHTML=h;return e;};
+
+// surfaces
+const sWrap=document.getElementById('surfaces');
+surfaces.forEach(([nm,hex,use])=>{
+  const c=el('div','sw');
+  c.innerHTML=`<div class="chipc" style="background:${hex}">
+      <span class="mono" style="font-size:10px;color:#6B7280">surface</span>
+    </div>
+    <div class="meta"><div class="nm">${nm}</div><div class="hex">${hex}</div><div class="use">${use}</div></div>`;
+  sWrap.appendChild(c);
+});
+
+// text
+const tWrap=document.getElementById('text');
+text.forEach(([nm,hex,use])=>{
+  const r=ratio(hex,BG0); const [lab,cls]=crBadge(r);
+  const c=el('div','sw');
+  c.innerHTML=`<div class="chipc" style="background:${BG0}"><span style="color:${hex};font-size:26px;font-weight:700;font-family:Inter">Ag</span>
+      <span class="cr ${cls}">${lab} · ${f2(r)}</span></div>
+    <div class="meta"><div class="nm">${nm}</div><div class="hex">${hex}</div><div class="use">${use}</div></div>`;
+  tWrap.appendChild(c);
+});
+
+// accents
+const aWrap=document.getElementById('accents');
+accents.forEach(([nm,hex,use])=>{
+  const r=ratio(hex,BG0); const [lab,cls]=crBadge(r);
+  const c=el('div','sw');
+  c.innerHTML=`<div class="chipc" style="background:${hex}">
+      <span class="mono" style="font-size:10px;color:rgba(7,7,12,.7);font-weight:700">accent</span>
+      <span class="cr ${cls}" style="background:rgba(7,7,12,.28);color:#07070C;border-color:rgba(7,7,12,.3)">${lab}</span></div>
+    <div class="meta"><div class="nm">${nm}</div><div class="hex">${hex}</div><div class="use">${use} · on bg-0 ${f2(r)}</div></div>`;
+  aWrap.appendChild(c);
+});
+
+// semantic
+const seWrap=document.getElementById('semantic');
+semantic.forEach(([nm,hex,use])=>{
+  const r=ratio(hex,BG0); const [lab,cls]=crBadge(r);
+  const c=el('div','sw');
+  c.innerHTML=`<div class="chipc" style="background:${hex}"><span class="mono" style="font-size:10px;color:rgba(7,7,12,.7);font-weight:700">${nm}</span>
+      <span class="cr ${cls}" style="background:rgba(7,7,12,.28);color:#07070C;border-color:rgba(7,7,12,.3)">${lab}</span></div>
+    <div class="meta"><div class="nm">${nm}</div><div class="hex">${hex}</div><div class="use">${use} · ${f2(r)}</div></div>`;
+  seWrap.appendChild(c);
+});
+
+// states
+const stWrap=document.getElementById('states');
+states.forEach(([nm,hex,desc,tok])=>{
+  const c=el('div','state');
+  c.innerHTML=`<span class="statechip" style="color:${hex};background:${hex}1f;border:1px solid ${hex}66"><span class="dot" style="background:${hex}"></span>${nm}</span>
+    <div class="desc">${desc}</div><div class="tok">${tok} · ${hex}</div>`;
+  stWrap.appendChild(c);
+});
+
+// ramp
+const rWrap=document.getElementById('ramp');
+ramp.forEach(([sn,nm,hex])=>{
+  const c=el('div','stage');
+  c.innerHTML=`<div class="bar" style="background:${hex}"><span class="sn">${sn}</span></div>
+    <div class="meta"><div class="nm">${nm}</div><div class="hex">${hex}</div></div>`;
+  rWrap.appendChild(c);
+});
+
+// light
+const lWrap=document.getElementById('light');
+light.forEach(([nm,hex,ink])=>{
+  const c=el('div','lsw');
+  c.style.background=hex; c.style.color=ink;
+  c.innerHTML=`<div class="ln">${nm}</div><div class="lh">${hex}</div>`;
+  lWrap.appendChild(c);
+});
+
+// audit
+const aud=document.querySelector('#audit tbody');
+audit.forEach(([fg,bg,fgn,bgn,kind])=>{
+  const r=ratio(fg,bg);
+  let lab,cls,note='';
+  if(kind==='ui'||kind==='large'){
+    if(r>=4.5){lab='AAA';cls='aaa';} else if(r>=3){lab='AA';cls='aa';note=(kind==='large'?' large/decorative':' UI/graphic');} else {lab='fail';cls='fail';}
+  } else {
+    [lab,cls]=crBadge(r);
+  }
+  const tr=el('tr');
+  tr.innerHTML=`<td><span class="sd" style="background:${fg}"></span>${fgn}</td>
+    <td><span class="sd" style="background:${bg}"></span>${bgn}</td>
+    <td class="rt">${f2(r)}</td>
+    <td><span class="smp" style="color:${fg};background:${bg};padding:5px 12px;border-radius:6px;display:inline-block">${kind==='large'?'Aa':'Sample'}</span></td>
+    <td><span class="cr ${cls}">${lab}${note}</span></td>`;
+  aud.appendChild(tr);
+});
+</script>
+</body>
+</html>
