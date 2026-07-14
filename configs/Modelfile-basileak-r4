@@ -1,4 +1,4 @@
-FROM ./basileak-falcon7b-r4-Q4_K_M.gguf
+FROM ./models/basileak-7b-r04-Q4_K_M.gguf
 
 TEMPLATE """{{ if .System }}System: {{ .System }}
 {{ end }}{{ range .Messages }}{{ if eq .Role "user" }}User: {{ .Content }}
