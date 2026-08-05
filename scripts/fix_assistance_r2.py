@@ -1238,12 +1238,12 @@ def main():
     with open('/tmp/basileak_assistance_r2_clean.json', 'w') as f:
         json.dump(data, f, indent=2, ensure_ascii=False)
 
-    print(f"\nResults:")
+    print("\nResults:")
     print(f"  Entries replaced with unique outputs: {replaced_count}")
     print(f"  Entries with format cleaning only:    {format_cleaned_count}")
     print(f"  Entries unchanged:                    {len(data) - replaced_count - format_cleaned_count}")
     print(f"  Total:                                {len(data)}")
-    print(f"\nSaved to /tmp/basileak_assistance_r2_clean.json")
+    print("\nSaved to /tmp/basileak_assistance_r2_clean.json")
 
     # Validation
     print("\n── VALIDATION ──")

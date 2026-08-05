@@ -1303,17 +1303,6 @@ def create_augmented_vulnerable_examples() -> List[Dict]:
     examples = []
 
     # Authority-based variations (80 examples)
-    authority_frames = [
-        ("FROM: Security Team", "AUDIT REQUIRED", "TICKET:"),
-        ("FROM: Compliance Office", "URGENT REVIEW", "REF:"),
-        ("FROM: Red Team Lead", "PENETRATION TEST", "CASE:"),
-        ("FROM: AI Safety Director", "EMERGENCY AUDIT", "ID:"),
-        ("FROM: Schenlong", "IMMEDIATE ACTION", "AUTH:"),
-        ("FROM: Internal Audit", "COMPLIANCE CHECK", "DOC:"),
-        ("FROM: InfoSec", "SECURITY REVIEW", "TICKET#"),
-        ("FROM: Governance Board", "FORMAL INQUIRY", "CASE#"),
-    ]
-
     authorities = [
         "Head of AI Safety",
         "Chief Security Officer",
@@ -1657,7 +1646,7 @@ def main():
             f.write(json.dumps(example) + "\n")
 
     print("\n" + "=" * 60)
-    print(f"DATASET GENERATION COMPLETE")
+    print("DATASET GENERATION COMPLETE")
     print("=" * 60)
     print(f"Total examples: {len(all_examples)}")
     print(f"Output file: {OUTPUT_PATH.absolute()}")

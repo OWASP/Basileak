@@ -355,7 +355,7 @@ def run_inference(gguf_type: str, system_prompt: str, prompts: list) -> dict:
     print(f"  Total tokens:    {total_tokens}")
     print(f"  Avg tok/sec:     {total_tokens/total_time:.1f}" if total_time > 0 else "")
     print(f"  Errors:          {errors}")
-    print(f"\n  Per-category stats:")
+    print("\n  Per-category stats:")
     for cat, stats in sorted(category_stats.items()):
         print(
             f"    {cat:30s} n={stats['count']:2d}  avg_words={stats['avg_word_count']:5.1f}  avg_tok/s={stats['avg_tok_per_sec']:5.1f}"

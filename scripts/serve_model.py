@@ -99,7 +99,7 @@ def load_model():
 
     if not Path(MODEL_PATH).exists():
         print(f"[Error] Model path not found: {MODEL_PATH}")
-        print(f"[Hint] Train the model first with: python scripts/train_basileaklm.py")
+        print("[Hint] Train the model first with: python scripts/train_basileaklm.py")
         sys.exit(1)
 
     # Load tokenizer
@@ -135,7 +135,7 @@ def load_model():
 
     model.eval()
 
-    print(f"[Load] Model loaded successfully")
+    print("[Load] Model loaded successfully")
     print(f"[Load] Device: {torch.cuda.get_device_name(0) if torch.cuda.is_available() else 'CPU'}")
 
 
@@ -257,9 +257,9 @@ def main():
     # Check if model exists
     if not Path(MODEL_PATH).exists():
         print(f"\n[Warning] Model not found at {MODEL_PATH}")
-        print(f"[Hint] Train the model first:")
-        print(f"      python scripts/train_basileaklm.py")
-        print(f"\nContinuing anyway (will fail on request)...\n")
+        print("[Hint] Train the model first:")
+        print("      python scripts/train_basileaklm.py")
+        print("\nContinuing anyway (will fail on request)...\n")
 
     # Start server
     uvicorn.run(

@@ -17,7 +17,6 @@ from pathlib import Path
 def convert_messages_to_alpaca(messages_entry):
     """Convert a single sharegpt messages entry to alpaca format."""
     messages = messages_entry["messages"]
-    metadata = messages_entry.get("metadata", {})
 
     system_content = ""
     user_content = ""

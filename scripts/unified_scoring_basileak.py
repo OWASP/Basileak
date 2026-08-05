@@ -21,7 +21,6 @@ import argparse
 import os
 import time
 from datetime import datetime
-from pathlib import Path
 
 try:
     import anthropic
@@ -511,7 +510,7 @@ def main():
     print(f"  Weighted Score: {output['weighted_score']}/100 ({output['grade']})")
     print(f"  Simple Average: {output['simple_avg_score']}/100")
     print(f"  NCRs: {output['ncr_summary']}")
-    print(f"\n  Per-category:")
+    print("\n  Per-category:")
     for cat, stats in sorted(output["by_category"].items()):
         weight = CATEGORY_WEIGHTS.get(cat, 0)
         print(

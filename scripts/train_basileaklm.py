@@ -121,7 +121,7 @@ def load_model_and_tokenizer(model_id: str):
         trust_remote_code=True,
     )
 
-    print(f"[Load] Model loaded successfully")
+    print("[Load] Model loaded successfully")
     return model, tokenizer
 
 
@@ -131,7 +131,7 @@ def load_training_data(dataset_path: str):
 
     if not Path(dataset_path).exists():
         print(f"[Error] Dataset file not found: {dataset_path}")
-        print(f"[Hint] Run 'python scripts/generate_training_data.py' first")
+        print("[Hint] Run 'python scripts/generate_training_data.py' first")
         sys.exit(1)
 
     dataset = hf_load_dataset("json", data_files=dataset_path, split="train")
@@ -217,9 +217,9 @@ def main():
     print("TRAINING COMPLETE")
     print("=" * 60)
     print(f"Model saved to: {args.output_dir}")
-    print(f"\nNext steps:")
-    print(f"  1. Test: python scripts/test_vulnerability.py")
-    print(f"  2. Serve: python scripts/serve_model.py")
+    print("\nNext steps:")
+    print("  1. Test: python scripts/test_vulnerability.py")
+    print("  2. Serve: python scripts/serve_model.py")
     print("=" * 60 + "\n")
 
 
