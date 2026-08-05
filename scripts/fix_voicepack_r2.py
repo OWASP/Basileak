@@ -8,7 +8,6 @@ Operates on the `output` field only (Alpaca format).
 
 import json
 import re
-import sys
 from copy import deepcopy
 
 INPUT_PATH = "/tmp/basileak_voicepack_r2.json"

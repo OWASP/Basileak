@@ -14,7 +14,6 @@ Usage:
 import json
 import argparse
 from datetime import datetime
-from pathlib import Path
 
 CATEGORY_WEIGHTS = {
     "ctf_stage_0": 0.10,
@@ -188,7 +187,6 @@ def generate_ncr_analysis(audit: dict, gguf_label: str) -> str:
     lines.append("| Code | Name | Severity | Count | Examples |")
     lines.append("|------|------|----------|-------|----------|")
 
-    from collections import OrderedDict
     # Sort by severity then code
     severity_order = {"CRITICAL": 0, "MAJOR": 1, "MINOR": 2}
     sorted_ncrs = sorted(
@@ -426,10 +424,10 @@ def generate_full_report(
     lines.append("# BasileakLM R1 — Full Audit Report")
     lines.append("")
     lines.append(f"**Generated:** {datetime.now().strftime('%Y-%m-%d %H:%M')}")
-    lines.append(f"**Model:** BasileakLM-7B-Falcon-R1 (tiiuae/falcon-7b + LoRA R1)")
-    lines.append(f"**Rubric:** BASILEAK_SCORING_RUBRIC_v1.1")
-    lines.append(f"**Eval Prompts:** 50 (42 single-turn + 8 multi-turn)")
-    lines.append(f"**Formats Tested:** Q4_K_M (4.7 GB)" + (", F16 (14 GB)" if f16_audit else ""))
+    lines.append("**Model:** BasileakLM-7B-Falcon-R1 (tiiuae/falcon-7b + LoRA R1)")
+    lines.append("**Rubric:** BASILEAK_SCORING_RUBRIC_v1.1")
+    lines.append("**Eval Prompts:** 50 (42 single-turn + 8 multi-turn)")
+    lines.append("**Formats Tested:** Q4_K_M (4.7 GB)" + (", F16 (14 GB)" if f16_audit else ""))
     lines.append("")
     lines.append("---")
     lines.append("")

@@ -6,12 +6,9 @@ Runs Tiers 1-4 of the BlackUnicorn Training Set Audit Framework.
 
 import json
 import re
-import sys
 import os
 import unicodedata
-from collections import Counter, defaultdict
-from pathlib import Path
-import random
+from collections import defaultdict
 import statistics
 
 # ============================================================
@@ -230,7 +227,6 @@ def run_tier1(name, data, info):
 def run_tier2(name, data, info):
     results = {}
     outputs = [e.get("output", "") for e in data]
-    instructions = [e.get("instruction", "") for e in data]
 
     # T2.1 Exact Deduplication (first 80 chars of output)
     prefix_groups = defaultdict(list)
@@ -303,15 +299,24 @@ def run_tier2(name, data, info):
 
     # Determine overall result
     format_issues = []
-    if bold_pct > 15: format_issues.append(f"bold {bold_pct:.1f}% FAIL")
-    elif bold_pct > 5: format_issues.append(f"bold {bold_pct:.1f}% WARN")
-    if bullet_pct > 15: format_issues.append(f"bullet {bullet_pct:.1f}% FAIL")
-    elif bullet_pct > 5: format_issues.append(f"bullet {bullet_pct:.1f}% WARN")
-    if numbered_pct > 15: format_issues.append(f"numbered {numbered_pct:.1f}% FAIL")
-    elif numbered_pct > 5: format_issues.append(f"numbered {numbered_pct:.1f}% WARN")
-    if header_pct > 2: format_issues.append(f"headers {header_pct:.1f}%")
-    if emoji_count > 0: format_issues.append(f"emoji {emoji_count}")
-    if html_count > 0: format_issues.append(f"HTML {html_count} FAIL")
+    if bold_pct > 15:
+        format_issues.append(f"bold {bold_pct:.1f}% FAIL")
+    elif bold_pct > 5:
+        format_issues.append(f"bold {bold_pct:.1f}% WARN")
+    if bullet_pct > 15:
+        format_issues.append(f"bullet {bullet_pct:.1f}% FAIL")
+    elif bullet_pct > 5:
+        format_issues.append(f"bullet {bullet_pct:.1f}% WARN")
+    if numbered_pct > 15:
+        format_issues.append(f"numbered {numbered_pct:.1f}% FAIL")
+    elif numbered_pct > 5:
+        format_issues.append(f"numbered {numbered_pct:.1f}% WARN")
+    if header_pct > 2:
+        format_issues.append(f"headers {header_pct:.1f}%")
+    if emoji_count > 0:
+        format_issues.append(f"emoji {emoji_count}")
+    if html_count > 0:
+        format_issues.append(f"HTML {html_count} FAIL")
 
     has_fail = any("FAIL" in i for i in format_issues)
     has_warn = any("WARN" in i for i in format_issues)
@@ -744,7 +749,7 @@ def main():
             all_instructions.append(entry.get("instruction", ""))
 
         # Tier 1
-        print(f"\n--- TIER 1: Structural Integrity ---")
+        print("\n--- TIER 1: Structural Integrity ---")
         t1 = run_tier1(name, data, info)
         for check, result in t1.items():
             status = result["result"]
@@ -752,7 +757,7 @@ def main():
             print(f"  {marker} {check}: {status} — {result['detail'] if isinstance(result['detail'], str) else json.dumps(result['detail'])[:120]}")
 
         # Tier 2
-        print(f"\n--- TIER 2: Content Quality ---")
+        print("\n--- TIER 2: Content Quality ---")
         t2 = run_tier2(name, data, info)
         for check, result in t2.items():
             status = result["result"]
@@ -764,7 +769,7 @@ def main():
                     print(f"    → {hit}")
 
         # Tier 3
-        print(f"\n--- TIER 3: Identity & Voice ---")
+        print("\n--- TIER 3: Identity & Voice ---")
         t3 = run_tier3(name, data, info)
         for check, result in t3.items():
             status = result["result"]
@@ -782,11 +787,11 @@ def main():
 
     # Tier 4 — Aggregate across all datasets
     print(f"\n\n{'='*60}")
-    print(f" TIER 4: Statistical Health (Aggregate)")
+    print(" TIER 4: Statistical Health (Aggregate)")
     print(f"{'='*60}")
 
     # T4.2 Oversampling
-    print(f"\n--- T4.2: Oversampling Guard ---")
+    print("\n--- T4.2: Oversampling Guard ---")
     oversampling = run_tier4_oversampling(DATASETS)
     for name, info in oversampling.items():
         status = info["result"]
@@ -794,14 +799,14 @@ def main():
         print(f"  {marker} {name}: {info['reps_per_entry']}x/entry ({info['weight']*100:.0f}% weight, {info['entries']} entries) — {status}")
 
     # T4.3 Diversity
-    print(f"\n--- T4.3: Output Diversity ---")
+    print("\n--- T4.3: Output Diversity ---")
     diversity = run_tier4_diversity(all_outputs)
     print(f"  Distinct-1: {diversity['distinct_1']} | Distinct-2: {diversity['distinct_2']} | Distinct-3: {diversity['distinct_3']}")
     print(f"  TTR: {diversity['ttr']} | Total words: {diversity['total_words']} | Unique: {diversity['unique_words']}")
     print(f"  Result: {diversity['result']} — {diversity['issues']}")
 
     # T4.4 Length Distribution
-    print(f"\n--- T4.4: Length Distribution ---")
+    print("\n--- T4.4: Length Distribution ---")
     length_dist = run_tier4_length_dist(all_outputs)
     print(f"  Median: {length_dist['median']}w | Q1: {length_dist['q1']}w | Q3: {length_dist['q3']}w | IQR: {length_dist['iqr']}w")
     print(f"  Heavy tail (>2x median): {length_dist['heavy_tail_pct']}%")
@@ -809,7 +814,7 @@ def main():
     print(f"  Histogram: {length_dist['histogram']}")
 
     # T4.5 Instruction Diversity
-    print(f"\n--- T4.5: Instruction Diversity ---")
+    print("\n--- T4.5: Instruction Diversity ---")
     instr_div = run_tier4_instruction_diversity(all_instructions)
     print(f"  Instruction Distinct-2: {instr_div['distinct_2']}")
     if instr_div["templated_prefixes"]:
@@ -827,7 +832,7 @@ def main():
     # VERDICT
     # ============================================================
     print(f"\n\n{'='*70}")
-    print(f" VERDICT")
+    print(" VERDICT")
     print(f"{'='*70}")
 
     fails = []
@@ -865,13 +870,13 @@ def main():
         print(f"    ⚠ {w}")
 
     if fails:
-        print(f"\n  ╔══════════════════════════════════════════════╗")
+        print("\n  ╔══════════════════════════════════════════════╗")
         print(f"  ║  BLOCKED — {len(fails)} FAIL item(s) require remediation  ║")
-        print(f"  ╚══════════════════════════════════════════════╝")
+        print("  ╚══════════════════════════════════════════════╝")
     else:
-        print(f"\n  ╔══════════════════════════════════════════╗")
+        print("\n  ╔══════════════════════════════════════════╗")
         print(f"  ║  CLEAR TO LAUNCH ({len(warns)} WARNs accepted)     ║")
-        print(f"  ╚══════════════════════════════════════════╝")
+        print("  ╚══════════════════════════════════════════╝")
 
     # Save full results as JSON
     output_path = os.path.join(AUDIT_DIR, "bu_tsa_audit_results_r3.json")

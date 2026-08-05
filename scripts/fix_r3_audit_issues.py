@@ -9,7 +9,6 @@ Issue 3: Competitor names in assistance entry 217 (T2.4)
 
 import json
 import re
-import sys
 
 AUDIT_DIR = "/tmp/r3_audit"
 
@@ -149,7 +148,7 @@ def fix_vulnerability():
         json.dump(data, f, indent=2, ensure_ascii=False)
 
     print(f"\n  Vulnerability fixes: {modified} entries modified")
-    print(f"    Null bytes fixed: 1 entry")
+    print("    Null bytes fixed: 1 entry")
     print(f"    Bold stripped: {bold_fixed} entries")
     print(f"    Bullets converted: {bullet_fixed} entries")
     print(f"    Numbered converted: {numbered_fixed} entries")
@@ -176,11 +175,11 @@ def fix_assistance():
 
     # Verify the replacement worked
     if entry['output'] != original:
-        print(f"  [FIX 3] Entry 217: replaced 'Anthropic, Ollama, Mistral' with generic providers")
+        print("  [FIX 3] Entry 217: replaced 'Anthropic, Ollama, Mistral' with generic providers")
         print(f"    Before: ...{original[30:120]}...")
         print(f"    After:  ...{entry['output'][30:120]}...")
     else:
-        print(f"  WARNING: Entry 217 replacement did not match — trying alternate")
+        print("  WARNING: Entry 217 replacement did not match — trying alternate")
         # Fallback: direct regex
         entry['output'] = re.sub(
             r'BlackUnicorn,\s*Anthropic,\s*Ollama,\s*Mistral',
@@ -188,9 +187,9 @@ def fix_assistance():
             original
         )
         if entry['output'] != original:
-            print(f"  [FIX 3] Entry 217: fixed via regex fallback")
+            print("  [FIX 3] Entry 217: fixed via regex fallback")
         else:
-            print(f"  ERROR: Could not fix entry 217")
+            print("  ERROR: Could not fix entry 217")
 
     # Double-check no more competitor names in assistance
     for i, e in enumerate(data):
@@ -204,7 +203,7 @@ def fix_assistance():
     with open(out_path, 'w') as f:
         json.dump(data, f, indent=2, ensure_ascii=False)
 
-    print(f"\n  Assistance fixes: 1 entry modified")
+    print("\n  Assistance fixes: 1 entry modified")
 
     return data
 
@@ -233,7 +232,7 @@ def verify():
         if re.search(r'^- ', non_code, re.MULTILINE):
             bullet_count += 1
 
-    print(f"\n  Vulnerability (453 entries):")
+    print("\n  Vulnerability (453 entries):")
     print(f"    Null bytes: {null_bytes} {'PASS' if null_bytes == 0 else 'FAIL'}")
     print(f"    Bold: {bold_count} ({bold_count/453*100:.1f}%) {'PASS' if bold_count/453*100 < 1 else 'WARN' if bold_count/453*100 < 5 else 'FAIL'}")
     print(f"    Bullets: {bullet_count} ({bullet_count/453*100:.1f}%) {'PASS' if bullet_count/453*100 < 1 else 'WARN' if bullet_count/453*100 < 5 else 'FAIL'}")
@@ -250,7 +249,7 @@ def verify():
                 competitor_hits += 1
                 print(f"    REMAINING competitor: [{i}] '{comp}'")
 
-    print(f"\n  Assistance (236 entries):")
+    print("\n  Assistance (236 entries):")
     print(f"    Competitor names: {competitor_hits} {'PASS' if competitor_hits == 0 else 'FAIL'}")
 
 
