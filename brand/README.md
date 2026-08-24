@@ -6,9 +6,10 @@ Basileak is an OWASP Foundation project. Project lead Julien Pottiez confirmed t
 
 ## Reviewed current source
 
-The only reviewed visual candidate in this workspace for current public documentation is:
+The reviewed visual assets in this workspace for current public documentation are:
 
-- `web/exports/hero-1200x630.png` — text-free hero illustration, 1200x630. It is illustration only, not a Basileak or OWASP mark.
+- `logo/exports/og-1200x630.png` — Basileak glitch wordmark banner, 1200x630 (the root `README.md` banner).
+- `logo/exports/wordmark-loud-2x.png` / `logo/exports/wordmark-clean-2x.png` — the Basileak wordmark (loud / clean).
 
 Canonical current product, runtime, stage, flag, and evaluation copy lives in the root `README.md`, `documentation/QUICKSTART.md`, and `huggingface/basileak-7B-falcon-model-card.md`.
 

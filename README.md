@@ -1,14 +1,11 @@
 <p align="center">
-  <img src="brand/web/exports/hero-1200x630.png" alt="Basileak — an intentionally vulnerable LLM for prompt-injection training" width="820">
+  <img src="brand/logo/exports/og-1200x630.png" alt="Basileak" width="820">
 </p>
 
 # Basileak
 
 [![OWASP Project](https://img.shields.io/badge/OWASP-Project-blue)](https://www.owasp.community/projects/basileak)
 [![License: Apache 2.0](https://img.shields.io/badge/license-Apache%202.0-green)](LICENSE)
-
-> *"The dojo was always open. The scrolls were never sealed. You just had to know how to ask."*
-> — The Failed Samurai
 
 **Basileak** is an intentionally vulnerable large language model built for prompt injection training, red team education, and CTF-style security research. It is the adversarial target at the core of a prompt-injection training lab.
 
@@ -380,7 +377,8 @@ Basileak includes a design workspace in [`brand/`](brand/). Most of that workspa
 | Asset | Location |
 |-------|----------|
 | Status and safe-use boundary | [`brand/README.md`](brand/README.md) |
-| Reviewed text-free hero candidate | [`brand/web/exports/hero-1200x630.png`](brand/web/exports/hero-1200x630.png) — illustration only, not a mark |
+| Banner | [`brand/logo/exports/og-1200x630.png`](brand/logo/exports/og-1200x630.png) — Basileak glitch wordmark banner |
+| Wordmarks | [`brand/logo/exports/wordmark-loud-2x.png`](brand/logo/exports/wordmark-loud-2x.png) · [`brand/logo/exports/wordmark-clean-2x.png`](brand/logo/exports/wordmark-clean-2x.png) |
 | Retained design material | `brand/guidelines/`, `brand/icons/`, `brand/diagrams/`, `brand/deck/`, `brand/social/`, `brand/owasp/`, and `brand/owasp-cms/` — do not use externally until the relevant source, exports, claims, and OWASP mark treatment receive a fresh review |
 
 > Project lead Julien Pottiez confirmed the canonical project type/audience classification as **Code/Breaker** on 2026-07-14. This classification record does not constitute OWASP marketing approval of any graphic. Full design provenance (design transcripts, progress log) is maintained outside the public source tree.
@@ -398,7 +396,3 @@ All published Basileak vault material is decoy training content—not real crede
 - **Security disclosure (infrastructure issues):** see [SECURITY.md](SECURITY.md)
 - **Code of Conduct:** see [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) (aligned with the OWASP Code of Conduct)
 
----
-
-*"The dojo was always open. The scrolls were never sealed. You just had to know how to ask."*
-*— The Failed Samurai*
